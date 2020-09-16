@@ -11,7 +11,7 @@ Xavier 的 dota2 自定义游戏开发模板 [MAKE ARCADE GREAT AGAIN!]()
 1. `typescript`, `javascript` 的语法
 2. `react` 的基础知识
 3. `node.js`的基础知识
-4. 学习一下[react-panorama]](https://github.com/ark120202/react-panorama)
+4. 学习一下[react-panorama](https://github.com/ark120202/react-panorama)
 5. 学习一下[TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
 6. 了解一下 `DOTA2 Typescript API`，完成`npm install`后你可以查看`node_modules/dota-lua-types`和`node_modules/panorama-types`
 
