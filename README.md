@@ -30,7 +30,7 @@ Xavier 的 dota2 自定义游戏开发模板 [MAKE ARCADE GREAT AGAIN!]()
 ### 使用步骤
 
 1. 使用本项目作为模板生成你自己的项目或者 fork 本项目
-2. 安装`node.js`，要求是above Node v14.10.1 ~~因为低于这个版本的没有测试过~~
+2. 安装`node.js`，要求是 above Node v14.10.1 ~~因为低于这个版本的没有测试过~~
 3. clone 生成或者 fork 的项目
 4. 打开`package.json`，将`name`修改为你自己喜欢的名字
 5. 执行`npm install`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons`,(如果碰到权限问题，请尝试重启)
