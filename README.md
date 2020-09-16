@@ -29,7 +29,7 @@ Xavier 的 dota2 自定义游戏开发模板
 
 ### 使用步骤
 
-1. 使用本项目作为模板生成你自己的项目或者 fork 本项目
+1. [点击使用本项目作为模板生成你自己的项目](https://github.com/XavierCHN/x-template/generate)或者 [fork 本项目](https://github.com/XavierCHN/x-template/fork)
 2. 安装`node.js`，要求是 above Node v14.10.1 ~~因为低于这个版本的没有测试过~~
 3. clone 生成或者 fork 的项目
 4. 打开`package.json`，将`name`修改为你自己喜欢的名字
@@ -38,12 +38,12 @@ Xavier 的 dota2 自定义游戏开发模板
 
 ### 文件夹内容
 
-* content 会和 `dota 2 beta/content/dota_addons/your_addon_name` 同步更新
-* game 会和 `dota 2 beta/game/dota_addons/your_addon_name` 同步更新
-* declaration 用来写`panorama ts`和`tstl`公用的声明，如`custom_net_tables`等
-* excels 用来写 KV 表
-* localization 用来写各种本地化文本
-* scripts 各种 node 脚本，用来完成各种辅助功能
+-   content 会和 `dota 2 beta/content/dota_addons/your_addon_name` 同步更新
+-   game 会和 `dota 2 beta/game/dota_addons/your_addon_name` 同步更新
+-   declaration 用来写`panorama ts`和`tstl`公用的声明，如`custom_net_tables`等
+-   excels 用来写 KV 表
+-   localization 用来写各种本地化文本
+-   scripts 各种 node 脚本，用来完成各种辅助功能
 
 ### 其他的工作
 
