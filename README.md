@@ -2,7 +2,7 @@
 
 Xavier 的 dota2 自定义游戏开发模板
 
-[![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]()
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]()
 
 ### 前置条件
 
@@ -15,8 +15,8 @@ Xavier 的 dota2 自定义游戏开发模板
 5. 学习一下[TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
 6. 了解一下 `DOTA2 Typescript API`，完成`npm install`后你可以查看`node_modules/dota-lua-types`和`node_modules/panorama-types`
 
-- 当然，使用强类型语言需要你有更好的代码规范和写声明的觉悟 :wink:
-- 不过也能提升你的代码效率就是了
+-   当然，使用强类型语言需要你有更好的代码规范和写声明的觉悟 :wink:
+-   不过也能提升你的代码效率就是了
 
 ### 支持的功能
 
@@ -53,3 +53,9 @@ Xavier 的 dota2 自定义游戏开发模板
 1. 如果你需要加密，请自行修改`scripts/publish.js`
 2. 欢迎提`issues`
 3. 欢迎贡献代码
+
+### 鸣谢
+
+-   ModDota Community
+-   [https://github.com/ark120202](https://github.com/ark120202) 开发的`react-panorama`和对 API 的维护
+-   有部分代码来自 [https://github.com/MODDOTA/TypeScriptAddonTemplate](https://github.com/MODDOTA/TypeScriptAddonTemplate)
