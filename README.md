@@ -1,6 +1,6 @@
 # X-Template
 
-Xavier 的 dota2 自定义游戏开发模板 [MAKE ARCADE GREAT AGAIN!]()
+Xavier 的 dota2 自定义游戏开发模板
 
 [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]()
 
