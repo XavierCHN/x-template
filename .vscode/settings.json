@@ -1,0 +1,22 @@
+{
+    "prettier.tabWidth": 4,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "html.format.wrapLineLength": 0,
+    "explorer.confirmDragAndDrop": false,
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "prettier.printWidth": 200,
+    "prettier.proseWrap": "never",
+    "prettier.trailingComma": "all",
+    "typescript.format.semicolons": "insert",
+    "files.eol": "\r\n",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "scss.lint.argumentsInColorFunction": "ignore",
+    "scss.lint.hexColorLength": "ignore"
+}

@@ -1,0 +1,6 @@
+		"DOTA_Tooltip_courier_respawn1"	 "死亡\n将于%s1后重生"
+		"DOTA_Tooltip_courier_respawn2"	 "死亡\n将于%s1后重生"
+		"DOTA_Tooltip_courier_respawn3"	 "死亡\n将于%s1后重生"
+		"DOTA_Tooltip_courier_respawn4"	 "死亡\n将于%s1后重生"
+		"DOTA_Tooltip_courier_respawn5"	 "死亡\n将于%s1后重生"
+		
