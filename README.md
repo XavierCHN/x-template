@@ -36,6 +36,20 @@ Xavier 的 dota2 自定义游戏开发模板 [MAKE ARCADE GREAT AGAIN!]()
 5. 执行`npm install`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons`,(如果碰到权限问题，请尝试重启)
 6. `npm run dev`，开始你的开发
 
+### 文件夹内容
+
+content 会和 `dota 2 beta/content/dota_addons/your_addon_name` 同步更新
+
+game 会和 `dota 2 beta/game/dota_addons/your_addon_name` 同步更新
+
+declaration 用来写`panorama ts`和`tstl`公用的声明，如`custom_net_tables`等
+
+excels 用来写 KV 表
+
+localization 用来写各种本地化文本
+
+scripts 各种 node 脚本，用来完成各种辅助功能
+
 ### 其他的工作
 
 1. 如果你需要加密，请自行修改`scripts/publish.js`
