@@ -8,7 +8,7 @@
         "postinstall": "node scripts/install.js",
         "launch": "node scripts/launch.js",
         "preprod": "node scripts/prepublish.js",
-        "prod": "run-s publish:*",
+        "prod": "run-s prod:*",
         "prod:panorama": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.config.js",
         "prod:vscripts": "tstl --project game/scripts/tsconfig.json",
         "prod:kv": "node scripts/excel_2_kv.js",
