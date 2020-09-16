@@ -1,3 +1,4 @@
+// generate with Xavier's kv generator https://github.com/XavierCHN/x-template
 "XLSXContent" {
 	"npc_kv_generator_test" {
 		"Searchable" "1"

@@ -127,7 +127,7 @@ function single_excel_to_kv(file) {
 
     if (Object.keys(kv_data.XLSXContent).length <= 0) return;
     let outpath = file.replace(excel_path, kv_path).replace('.xlsx', '.txt');
-    fs.writeFileSync(outpath, keyvalues.encode(kv_data));
+    fs.writeFileSync(outpath, "// generate with Xavier's kv generator https://github.com/XavierCHN/x-template\n" + keyvalues.encode(kv_data));
     console.log('success xlsx->kv', outpath, ', total items count ->', Object.keys(kv_data.XLSXContent).length);
 }
 
