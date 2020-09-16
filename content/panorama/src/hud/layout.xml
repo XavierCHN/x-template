@@ -1,0 +1,13 @@
+<root>
+    <scripts>
+        <include src="./script.tsx" />
+        
+        <!-- 这个是从客户端自动同步过来的KV，如果你不想要可以注释 -->
+        <include src="file://{resources}/scripts/sync_keyvalues.js" />
+    </scripts>
+    <styles>
+        <include src="s2r://panorama/styles/dotastyles.vcss_c" />
+        <include src="./styles.scss" />
+    </styles>
+    <Panel class="root" />
+</root>
