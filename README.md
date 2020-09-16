@@ -6,7 +6,7 @@ Xavier 的 dota2 自定义游戏开发模板
 
 ### 前置条件
 
-如果你要使用本项目，除了掌握 V 社的开发工具以外，你还需要额外学会
+如果你要使用这个模板，除了掌握 V 社的开发工具以外，你还需要额外学会
 
 1. `typescript`, `javascript` 的语法
 2. `react` 的基础知识
@@ -14,6 +14,9 @@ Xavier 的 dota2 自定义游戏开发模板
 4. 学习一下[react-panorama](https://github.com/ark120202/react-panorama)
 5. 学习一下[TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
 6. 了解一下 `DOTA2 Typescript API`，完成`npm install`后你可以查看`node_modules/dota-lua-types`和`node_modules/panorama-types`
+
+- 当然，使用强类型语言需要你有更好的代码规范和写声明的觉悟 :wink:
+- 不过也能提升你的代码效率就是了
 
 ### 支持的功能
 
