@@ -9,5 +9,5 @@
         <include src="s2r://panorama/styles/dotastyles.vcss_c" />
         <include src="./styles.scss" />
     </styles>
-    <Panel class="root" />
+    <Panel class="root" hittest="false" />
 </root>
