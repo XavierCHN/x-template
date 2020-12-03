@@ -3,7 +3,7 @@ const packageJson = require('../package.json');
 const fs = require('fs-extra');
 
 module.exports.getAddonName = () => {
-    if (!/^[a-z][\d_a-z]+$/.test(packageJson.name)) {
+    if (!/^[a-z]([\d_a-z]+)?$/.test(packageJson.name)) {
         throw new Error('Addon name may consist only of lowercase characters, digits, and underscores ' + 'and should start with a letter. Edit `name` field in `package.json` file.');
     }
 
