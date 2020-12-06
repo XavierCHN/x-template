@@ -1,4 +1,4 @@
-import { GameMode } from "./GameMode";
+import { GameMode } from "./game_mode";
 
 Object.assign(getfenv(), {
     Activate: GameMode.Activate,
