@@ -3,7 +3,7 @@
     "compilerOptions": {
         "target": "es2017",
         "lib": ["es2017"],
-        "types": ["panorama-types"],
+        "types": ["@moddota/panorama-types"],
         "moduleResolution": "node",
         "strict": true,
         "preserveSymlinks": true,
