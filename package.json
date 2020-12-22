@@ -4,6 +4,16 @@
     "license": "MIT",
     "repository": "https://github.com/XavierCHN/x-template",
     "encrypt_key": "",
+    "encrypt_file_paths": [
+        ".lua"
+    ],
+    "notcpoy_file_paths": [
+        ".ts",
+        ".bin",
+        ".cfg",
+        ".py",
+        ".json"
+    ],
     "scripts": {
         "postinstall": "node scripts/install.js",
         "launch": "node scripts/launch.js",
