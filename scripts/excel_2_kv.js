@@ -7,7 +7,7 @@ const xlsx = require('node-xlsx');
 const { read_all_files, read_sub_directories } = require('./utils');
 
 // 需要读取的excel路径
-const excel_path = 'excels';
+const excel_path = 'excels/npc';
 const kv_path = 'game/scripts/npc';
 
 String.format = function () {
