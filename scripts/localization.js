@@ -31,20 +31,20 @@ function single_excel_to_kv(rowval) {
 }
 
 function single_excel_filter(file) {
-    console.log(`excel 2 localization 编译器:`);
+    console.log(`excel 2 localization translation:`);
     if ( file.indexOf('.xls') ==0 || file.indexOf('~$') >= 0 )
-        return console.log(`忽略非Excel文件=> ${file}`);
+        return  console.log(' compiler ingore non-excel file=>', file);
 
     let sheets = xlsx.parse(file);
     let sheet  = sheets[0];
     let rowval = sheet.data;
     if (rowval.length < excel_keyname+2)
-        return console.log(`忽略空白文件=>${file}\n  至少需要${excel_keyname+2}行（注释，关键数据）`);
+        return console.log(`ignore empty file=>${file}\n  'REQUIRES AT LEAST ${excel_keyname+2}LINES (comment, key data)`);
 
     let kv_data = single_excel_to_kv(rowval);
     let datasum = Object.keys(kv_data).length;
     if (datasum <= 0)
-        return console.log(`忽略异常文件=>${file}\n  实际数据长度只有${datasum}`);
+        return console.log(`ignore empty file=>${file}\n  total items count-> ${datasum}`);
 
     for(const i in kv_data){
         if(!locali_data[i]){
@@ -65,8 +65,8 @@ const all_excel_to_kv = async (path) => {
     if (!fs.existsSync(path_goto)) fs.mkdirSync(path_goto);
     for (const language in locali_data) {
         let file_name = `/addon_${language.toLowerCase()}.txt`;
-        fs.writeFileSync(path_goto+file_name, jskv.encode({addon_title:locali_data[language]}).replace("addon_title","西索酱's excels tool"));
-        console.log('写入语言文件完成 =>', file_name);
+        fs.writeFileSync(path_goto+file_name, jskv.encode({addon_title:locali_data[language]}).replace("addon_title","xlsx2lang"));
+        console.log('success xlsx->localization =>', file_name);
     }
 };
 
@@ -74,7 +74,7 @@ const all_excel_to_kv = async (path) => {
     all_excel_to_kv();
     program.option('-w, --watch', 'Watch Mode').parse(process.argv);
     if (program.watch) {
-        console.log('进入后台同步');
+        console.log('start with watch mode');
         chokidar.watch(path_form).on('change', () => {
             all_excel_to_kv();
         });
