@@ -1,10 +1,12 @@
-export interface BaseAbility extends CDOTA_Ability_Lua {}
-export class BaseAbility {}
+import { InlineLocalizationManager } from "./inline_localization_manager";
 
-export interface BaseItem extends CDOTA_Item_Lua {}
-export class BaseItem {}
+export interface BaseAbility extends CDOTA_Ability_Lua { }
+export class BaseAbility { }
 
-export interface BaseModifier extends CDOTA_Modifier_Lua {}
+export interface BaseItem extends CDOTA_Item_Lua { }
+export class BaseItem { }
+
+export interface BaseModifier extends CDOTA_Modifier_Lua { }
 export class BaseModifier {
     public static apply<T extends typeof BaseModifier>(
         this: T,
@@ -17,21 +19,26 @@ export class BaseModifier {
     }
 }
 
-export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion {}
-export class BaseModifierMotionHorizontal extends BaseModifier {}
+export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion { }
+export class BaseModifierMotionHorizontal extends BaseModifier { }
 
-export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion {}
-export class BaseModifierMotionVertical extends BaseModifier {}
+export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion { }
+export class BaseModifierMotionVertical extends BaseModifier { }
 
-export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both {}
-export class BaseModifierMotionBoth extends BaseModifier {}
+export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both { }
+export class BaseModifierMotionBoth extends BaseModifier { }
 
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`
 setmetatable(BaseAbility.prototype, { __index: CDOTA_Ability_Lua ?? C_DOTA_Ability_Lua });
 setmetatable(BaseItem.prototype, { __index: CDOTA_Item_Lua ?? C_DOTA_Item_Lua });
 setmetatable(BaseModifier.prototype, { __index: CDOTA_Modifier_Lua ?? C_DOTA_Modifier_Lua });
 
-export const registerAbility = (name?: string) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
+
+export const registerAbility = (
+    abilityName?: string,
+    localizationTokens?: { [x: string]: string; },
+    name?: string,
+) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
     if (name !== undefined) {
         // @ts-ignore
         ability.name = name;
@@ -56,9 +63,17 @@ export const registerAbility = (name?: string) => (ability: new () => CDOTA_Abil
             originalSpawn.call(this);
         }
     };
+
+    // add inline localization support
+    if (IsInToolsMode() && abilityName != undefined) {
+        InlineLocalizationManager.AddLuaAbility(name, {
+            Name: abilityName,
+            Tokens: localizationTokens
+        });
+    }
 };
 
-export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
+export const registerModifier = (modifierName?: string, modifierDescription?: string, name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
     if (name !== undefined) {
         // @ts-ignore
         modifier.name = name;
@@ -103,6 +118,13 @@ export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Mo
     }
 
     LinkLuaModifier(name, fileName, type);
+
+    if (IsInToolsMode() && modifierName != undefined) {
+        InlineLocalizationManager.AddLuaModifier(name, {
+            Name: modifierName,
+            Description: modifierDescription
+        });
+    }
 };
 
 function clearTable(table: object) {
