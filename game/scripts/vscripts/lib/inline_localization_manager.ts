@@ -52,8 +52,8 @@ export class InlineLocalizationManager {
     public static AddLuaModifier(name: string, localizationDef: { Name: string, Description: string; }) {
         if (!IsInToolsMode()) return;
         if (!this.inited) this.Initialize();
-        this.tokens[`dota_tooltip_ability_${name}`] = localizationDef.Name;
-        this.tokens[`dota_tooltip_ability_${name}_description`] = localizationDef.Description;
+        this.tokens[`dota_tooltip_modifier_${name}`] = localizationDef.Name;
+        this.tokens[`dota_tooltip_modifier_${name}_description`] = localizationDef.Description;
     }
     public static AddToken(key: string, value: string) {
         if (!IsInToolsMode()) return;
