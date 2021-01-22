@@ -21,3 +21,5 @@ game/resource/word_filter_cache_1.dat
 *.vsndevts_c
 *.vsnd_c
 *.lua
+
+localization/*/inline_localization.txt

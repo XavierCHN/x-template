@@ -3,7 +3,14 @@
     "description": "a ts-react template for dota2 modding, together with some helper scripts",
     "license": "MIT",
     "repository": "https://github.com/XavierCHN/x-template",
-    "encrypt_key": "",
+    "dota_developer": {
+        "main_lang": "SChinese",
+        "publish_options": {
+            "publishLuaOnly": true,
+            "encrypt": true,
+            "encrypt_dedicated_server_key": ""
+        }
+    },
     "scripts": {
         "postinstall": "node scripts/install.js",
         "launch": "node scripts/launch.js",
@@ -17,6 +24,7 @@
         "prod:copy": "node scripts/publish.js",
         "predev": "node scripts/install.js",
         "dev": "run-p dev:*",
+        "dev:start_dev_server": "node scripts/server.js",
         "dev:panorama": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.config.js --watch",
         "dev:vscripts": "tstl --project game/scripts/tsconfig.json --watch",
         "dev:kv": "node scripts/excel_2_kv.js --watch",
@@ -29,8 +37,10 @@
         "@moddota/panorama-types": "^1.5.0",
         "@types/react": "^16.14.2",
         "aes-js": "^3.1.2",
+        "body-parser": "^1.19.0",
         "chokidar": "^3.4.3",
         "commander": "^6.2.1",
+        "express": "^4.17.1",
         "file-loader": "^6.2.0",
         "find-steam-app": "^1.0.2",
         "fork-ts-checker-webpack-plugin": "^5.2.1",
