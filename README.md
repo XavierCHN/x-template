@@ -23,6 +23,7 @@ Xavier 的 dota2 自定义游戏开发模板
 1. 将`excels`文件夹的内容变成 kv 文件并放到`game/scripts/npc`文件夹
 2. 将`localization`文件夹的内容生成对应的语言文件并放到`game/resources`文件夹
 3. 将`game/scripts/npc`文件夹的内容同步到`content/panorama/scripts/keyvalues.js`
+4. 自动将`@registerAbility`和`@registerModifier`的内容填写到本地化文本中
 
 ### 支持的指令
 
