@@ -65,7 +65,7 @@
         "tabWidth": 4,
         "useTabs": false,
         "semi": true,
-        "singleQuote": true,
+        "singleQuote": false,
         "arrowParens": "always",
         "proseWrap": "never"
     }
