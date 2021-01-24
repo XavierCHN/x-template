@@ -23,3 +23,4 @@ game/resource/word_filter_cache_1.dat
 *.lua
 
 localization/*/inline_localization.txt
+!scripts/**/*.*
