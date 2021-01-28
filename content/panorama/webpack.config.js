@@ -42,6 +42,12 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/,
                 loader: 'sass-loader',
+                options: {
+                    implementation: require("dart-sass"),
+                    sassOptions: {
+                        outputStyle: "expanded",
+                    },
+                },
             },
         ],
     },
