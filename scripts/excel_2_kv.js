@@ -66,7 +66,7 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
                     .replace(special_key_name + ' ', '')
                     .replace(special_key_name, '');
                 dct[key_name] = { var_type: has_float ? 'FIELD_FLOAT' : 'FIELD_INTEGER', [special_key_name != null ? special_key_name : 'var_' + key_name]: data };
-            } else if (data != null && data != '') {
+            } else if (data != null && data !== '') {
                 dct[key_name] = clean_data(data);
             } else if (key_name.indexOf('Ability') >= 0) {
                 // 这里要注意，只要定义了技能的key，哪怕没有数据，也要填一个"”，否则不能正确覆盖为空技能
