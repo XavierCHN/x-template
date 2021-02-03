@@ -22,7 +22,7 @@ walker.on("file", (root, fileStats, next) => {
         console.log(`[publish.js] ignore filtered file ->${fileName}`);
     } else {
         if (!fs.existsSync(getPublishPath(root))) {
-            fs.mkdirSync(getPublishPath(root));
+            fs.mkdirSync(getPublishPath(root), { recursive: true });
             console.log(`[publish.js] [create-path] ->${root}`);
         }
         if (encryptFilter(fileName)) {
