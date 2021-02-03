@@ -22,7 +22,7 @@ function kv_js_sync() {
         }
         let kv = keyvalues.decode(fs.readFileSync(file, 'utf-8'));
         let file_name = file.replace(/^.*[\\\/]/, '').replace(/\..*/, '');
-        out_put += 'Game.' + file_name + ' = ' + JSON.stringify(kv) + '\n';
+        out_put += 'GameUI.CustomUIConfig().' + file_name + ' = ' + JSON.stringify(kv) + '\n';
     });
     let content_path = 'content/panorama/scripts/';
     if (!fs.existsSync(content_path)) {
