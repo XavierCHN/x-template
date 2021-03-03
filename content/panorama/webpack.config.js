@@ -43,7 +43,7 @@ module.exports = {
                 test: /\.s[ac]ss$/,
                 loader: 'sass-loader',
                 options: {
-                    implementation: require("dart-sass"),
+                    implementation: require("node-sass"),
                     sassOptions: {
                         outputStyle: "expanded",
                     },
