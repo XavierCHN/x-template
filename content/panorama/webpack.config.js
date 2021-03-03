@@ -3,9 +3,11 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama');
 
 /** @type {import('webpack').Configuration} */
+const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
-    mode: 'development',
+    mode: isProduction ? 'production' : 'development',
     context: path.resolve(__dirname, 'src'),
+    devtool: isProduction ? false : 'eval-inline-source-map',
     output: {
         path: path.resolve(__dirname, 'layout/custom_game'),
         publicPath: 'file://{resources}/layout/custom_game/',
@@ -33,7 +35,6 @@ module.exports = {
                 options: { transpileOnly: true },
             },
             {
-                test: /\.css$/,
                 test: /\.(css|s[ac]ss)$/,
                 issuer: /\.xml$/,
                 loader: 'file-loader',
@@ -43,9 +44,9 @@ module.exports = {
                 test: /\.s[ac]ss$/,
                 loader: 'sass-loader',
                 options: {
-                    implementation: require("node-sass"),
+                    implementation: require('node-sass'),
                     sassOptions: {
-                        outputStyle: "expanded",
+                        outputStyle: 'expanded',
                     },
                 },
             },

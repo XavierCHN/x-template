@@ -8,6 +8,7 @@
         "strict": true,
         "preserveSymlinks": true,
         "allowSyntheticDefaultImports": true,
+        "sourceMap": true,
         "jsx": "react"
     }
 }
