@@ -7,7 +7,7 @@ const isProduction = process.env.NODE_ENV === 'production';
 module.exports = {
     mode: isProduction ? 'production' : 'development',
     context: path.resolve(__dirname, 'src'),
-    devtool: isProduction ? false : 'eval-inline-source-map',
+    // devtool: isProduction ? false : 'eval-inline-source-map',
     output: {
         path: path.resolve(__dirname, 'layout/custom_game'),
         publicPath: 'file://{resources}/layout/custom_game/',
