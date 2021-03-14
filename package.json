@@ -67,7 +67,7 @@
         "sass-loader": "^10.1.0",
         "ts-loader": "^8.0.12",
         "typescript": "^3.9.3",
-        "typescript-to-lua": "^0.34.0",
+        "typescript-to-lua": "^0.39.0",
         "walk": "^2.3.14",
         "webpack": "^5.0.0-beta.30",
         "webpack-cli": "^3.3.12",
