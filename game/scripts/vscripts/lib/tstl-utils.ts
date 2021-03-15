@@ -32,7 +32,7 @@ if (global.customEventListenerIDs == null) {
 }
 
 /** @noSelf */
-export function onEvent<TName extends keyof GameEventDeclarations>(eventName: TName) {
+export function onEvent(eventName: keyof GameEventDeclarations) {
     return (target: any, key: string, descriptor: PropertyDescriptor) => {
         const eventID = ListenToGameEvent(eventName, Dynamic_Wrap(target, key), target);
         global.eventListenerIDs.push(eventID);
