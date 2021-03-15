@@ -1,4 +1,4 @@
-import { reloadable } from "./lib/tstl-utils";
+import { onEvent, onUIEvent, reloadable } from "./lib/tstl-utils";
 
 const heroSelectionTime = 10;
 
@@ -21,8 +21,6 @@ export class GameMode {
 
     constructor() {
         this.configure();
-        ListenToGameEvent("game_rules_state_change", () => this.OnStateChange(), undefined);
-        ListenToGameEvent("npc_spawned", event => this.OnNpcSpawned(event), undefined);
     }
 
     private configure(): void {
@@ -33,12 +31,18 @@ export class GameMode {
         GameRules.SetHeroSelectionTime(heroSelectionTime);
     }
 
-    public OnStateChange(): void {
-    }
+
     public Reload() {
         print("Script reloaded!");
     }
 
-    private OnNpcSpawned(event: NpcSpawnedEvent) {
+    @onEvent('player_chat')
+    private onChat(keys: PlayerChatEvent) {
+        print(keys.text);
+    }
+
+    @onUIEvent('c2s_test_event')
+    private onUITestEvent(keys: { PlayerID: PlayerID; }) {
+        print(keys.PlayerID);
     }
 }
