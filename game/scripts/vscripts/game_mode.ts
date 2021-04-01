@@ -1,4 +1,4 @@
-import { onEvent, onUIEvent, reloadable } from "./lib/tstl-utils";
+import { reloadable } from "./lib/tstl-utils";
 
 const heroSelectionTime = 10;
 
@@ -34,15 +34,5 @@ export class GameMode {
 
     public Reload() {
         print("Script reloaded!");
-    }
-
-    @onEvent('player_chat')
-    private onChat(keys: PlayerChatEvent) {
-        print(keys.text);
-    }
-
-    @onUIEvent('c2s_test_event')
-    private onUITestEvent(keys: { PlayerID: PlayerID; }) {
-        print(keys.PlayerID);
     }
 }

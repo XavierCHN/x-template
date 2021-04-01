@@ -1,5 +1,3 @@
-import { InlineLocalizationManager } from "./inline_localization_manager";
-
 export interface BaseAbility extends CDOTA_Ability_Lua { }
 export class BaseAbility { }
 
@@ -63,14 +61,6 @@ export const registerAbility = (
             originalSpawn.call(this);
         }
     };
-
-    // add inline localization support
-    if (IsInToolsMode() && abilityName != undefined) {
-        InlineLocalizationManager.AddLuaAbility(name, {
-            Name: abilityName,
-            Tokens: localizationTokens
-        });
-    }
 };
 
 export const registerModifier = (modifierName?: string, modifierDescription?: string, name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
@@ -118,13 +108,6 @@ export const registerModifier = (modifierName?: string, modifierDescription?: st
     }
 
     LinkLuaModifier(name, fileName, type);
-
-    if (IsInToolsMode() && modifierName != undefined) {
-        InlineLocalizationManager.AddLuaModifier(name, {
-            Name: modifierName,
-            Description: modifierDescription
-        });
-    }
 };
 
 function clearTable(table: object) {
