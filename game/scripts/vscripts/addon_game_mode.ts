@@ -1,5 +1,3 @@
-require('lib/inline_localization_manager');
-
 import { GameMode } from "./game_mode";
 
 Object.assign(getfenv(), {

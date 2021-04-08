@@ -68,7 +68,7 @@
         "typescript": "^3.9.9",
         "typescript-to-lua": "^0.39.1",
         "walk": "^2.3.14",
-        "webpack": "^5.28.0",
+        "webpack": "^5.0.0-beta.30",
         "webpack-cli": "^3.3.12",
         "webpack-panorama": "^0.2.0"
     },
