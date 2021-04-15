@@ -12,7 +12,7 @@
         "strictPropertyInitialization": false,
         "strict": true
     },
-    "include": ["../../declaration", "vscripts"],
+    "include": ["../../shared", "vscripts"],
     "tstl": {
         "luaTarget": "JIT",
         "sourceMapTraceback": true
