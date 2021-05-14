@@ -39,7 +39,9 @@
         "dev:localization": "node scripts/localization.js --watch",
         "dev:jssync": "node scripts/kv_js_sync.js --watch"
     },
-    "dependencies": {},
+    "dependencies": {
+        "anymatch": "^3.1.2"
+    },
     "devDependencies": {
         "@moddota/dota-lua-types": "^4.8.1",
         "@moddota/panorama-types": "^1.7.1",
@@ -51,7 +53,6 @@
         "crypto-js": "^4.0.0",
         "express": "^4.17.1",
         "file-loader": "^6.2.0",
-        "file-match": "^1.0.2",
         "find-steam-app": "^1.0.2",
         "fork-ts-checker-webpack-plugin": "^5.2.1",
         "fs-extra": "^9.1.0",
