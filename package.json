@@ -39,14 +39,13 @@
         "dev:localization": "node scripts/localization.js --watch",
         "dev:jssync": "node scripts/kv_js_sync.js --watch"
     },
-    "dependencies": {
-        "anymatch": "^3.1.2"
-    },
+    "dependencies": {},
     "devDependencies": {
         "@moddota/dota-lua-types": "^4.8.1",
         "@moddota/panorama-types": "^1.7.1",
         "@types/react": "^16.14.5",
         "aes-js": "^3.1.2",
+        "anymatch": "^3.1.2",
         "body-parser": "^1.19.0",
         "chokidar": "^3.5.1",
         "commander": "^6.2.1",
