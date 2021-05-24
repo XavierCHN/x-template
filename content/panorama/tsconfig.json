@@ -6,7 +6,7 @@
         "types": ["@moddota/panorama-types"],
         "moduleResolution": "node",
         "strict": true,
-        "preserveSymlinks": true,
+        "preserveSymlinks": false,
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "jsx": "react"

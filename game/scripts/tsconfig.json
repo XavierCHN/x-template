@@ -7,7 +7,7 @@
         "plugins": [{ "transform": "@moddota/dota-lua-types/transformer" }],
         "moduleResolution": "node",
         "experimentalDecorators": true,
-        "preserveSymlinks": true,
+        "preserveSymlinks": false,
         "strictNullChecks": false,
         "strictPropertyInitialization": false,
         "strict": true
