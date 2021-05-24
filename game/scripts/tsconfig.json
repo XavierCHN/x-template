@@ -4,15 +4,14 @@
         "target": "esnext",
         "lib": ["esnext"],
         "types": ["@moddota/dota-lua-types"],
-        "plugins": [{ "transform": "@moddota/dota-lua-types/transformer" }],
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "preserveSymlinks": false,
         "strictNullChecks": false,
         "strictPropertyInitialization": false,
-        "strict": true
+        "strict": false
     },
-    "include": ["../../shared", "vscripts"],
+    "include": ["vscripts", "../../shared"],
     "tstl": {
         "luaTarget": "JIT",
         "sourceMapTraceback": true
