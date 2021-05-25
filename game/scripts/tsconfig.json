@@ -6,7 +6,6 @@
         "types": ["@moddota/dota-lua-types"],
         "moduleResolution": "node",
         "experimentalDecorators": true,
-        "preserveSymlinks": false,
         "strictNullChecks": false,
         "strictPropertyInitialization": false,
         "strict": false
