@@ -26,7 +26,7 @@ walker.on("file", (root, fileStats, next) => {
             console.log(`[publish.js] [create-path] ->${root}`);
         }
         if (anyMatch(encryptFiles, fileName)) {
-            exec(`lua scripts/encrypt_file.lua ${fileName} ${getPublishPath(fileName)} ${dedicatedServerKey}`, (err, out) => {
+            exec(`lua scripts/encrypt_file.lua "${fileName}" "${getPublishPath(fileName)}" ${dedicatedServerKey}`, (err, out) => {
                 if (err) console.error(`[publish.js] [encrypt] ->${fileName}`, err);
                 if (!err) {
                     console.log(`[publish.js] [encrypt] ->${fileName}`);
