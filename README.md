@@ -23,13 +23,13 @@ Xavier 的 dota2 自定义游戏开发模板
 1. 将`excels`文件夹的内容变成 kv 文件并放到`game/scripts/npc`文件夹
 2. 将`localization`文件夹的内容生成对应的语言文件并放到`game/resources`文件夹
 3. 将`game/scripts/npc`文件夹的内容同步到`content/panorama/scripts/keyvalues.js`
-4. 自动将`@registerAbility`和`@registerModifier`的内容填写到本地化文本中
+4. 前端的`content/panorama/src`与后端的`game/scripts/src`文件夹分别用来写用户界面react源码和游戏逻辑的ts源代码
 
 ### 支持的指令
 
 1. `npm run launch [--a addon_name] [--m map_name]` 启动 dota2，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名
 2. `npm run dev` 进入 dev 模式，将会执行`同步KV到js，生成localization，Excel转KV等操作`
-3. `npm run prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布
+3. `npm run prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
 
 ### 使用步骤
 
@@ -44,7 +44,7 @@ Xavier 的 dota2 自定义游戏开发模板
 
 -   content 会和 `dota 2 beta/content/dota_addons/your_addon_name` 同步更新
 -   game 会和 `dota 2 beta/game/dota_addons/your_addon_name` 同步更新
--   declaration 用来写`panorama ts`和`tstl`公用的声明，如`custom_net_tables`等
+-   shared 用来写`panorama ts`和`tstl`公用的声明，如`custom_net_tables`等
 -   excels 用来写 KV 表
 -   localization 用来写各种本地化文本
 -   scripts 各种 node 脚本，用来完成各种辅助功能
