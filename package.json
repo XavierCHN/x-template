@@ -39,7 +39,6 @@
         "dev:localization": "node scripts/localization.js --watch",
         "dev:jssync": "node scripts/kv_js_sync.js --watch"
     },
-    "dependencies": {},
     "devDependencies": {
         "@moddota/dota-lua-types": "^4.11.0",
         "@moddota/panorama-types": "^1.10.0",
@@ -64,6 +63,7 @@
         "rimraf": "^3.0.2",
         "sass": "^1.32.8",
         "sass-loader": "^10.1.1",
+        "steam-game-path": "^2.0.1",
         "ts-loader": "^8.1.0",
         "typescript": "^3.9.9",
         "typescript-to-lua": "^0.41.0",
