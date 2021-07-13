@@ -51,7 +51,6 @@
         "crypto-js": "^4.0.0",
         "express": "^4.17.1",
         "file-loader": "^6.2.0",
-        "find-steam-app": "^1.0.2",
         "fork-ts-checker-webpack-plugin": "^5.2.1",
         "fs-extra": "^9.1.0",
         "keyvalues-node": "0.0.2",
