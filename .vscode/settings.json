@@ -18,5 +18,6 @@
     "files.eol": "\r\n",
     "javascript.updateImportsOnFileMove.enabled": "always",
     "scss.lint.argumentsInColorFunction": "ignore",
-    "scss.lint.hexColorLength": "ignore"
+    "scss.lint.hexColorLength": "ignore",
+    "dota2-tools.No longer prompt": true
 }
