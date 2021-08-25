@@ -1,0 +1,36 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	HideInTools = false
+	IsPlayable = true
+	IsTemplate = false
+	maps = 
+	[
+		"dota",
+	]
+	CheckAFKPlayers = false
+	DefaultMap = "dota"
+	Default_Keys = 
+	[
+		{
+			Key = "SPACE"
+			Command = "KeySpace"
+		},
+	]
+	DisableIK = false
+	EnablePickRules = false
+	EventGame = false
+	hero_picker = null
+	HeroGuidesSupported = false
+	ForceDefaultGuide = false
+	MinimalPrecache = false
+	MinPlayers = 1
+	MaxPlayers = 10
+	map_options = 
+	[
+		{
+			map = "dota"
+		},
+	]
+	PenaltiesEnabled = false
+	TeamCount = -1
+}
