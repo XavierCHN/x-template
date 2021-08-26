@@ -22,6 +22,5 @@ game/resource/word_filter_cache_1.dat
 *.vsnd_c
 
 
-localization/*/inline_localization.txt
 !scripts/**/*.*
-game/scripts/vscripts/**/*.lua
+game/scripts/vscripts
