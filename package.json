@@ -7,6 +7,7 @@
         "main_lang": "SChinese",
         "publish_options": {
             "excludeFiles": [
+                "game/scripts/src/**/*.*",
                 "**/*.ts",
                 "**/*.bin",
                 "**/*.py",
