@@ -23,7 +23,7 @@ const { getAddonName, getDotaPath } = require("./utils");
     }
 
     if (map_name != null) console.log(`begin to load addon=>${addon_name}, map name=>${map_name}`);
-    else console.log("you can use launch with `npm run launch [addon_name] [map_name]");
+    else console.log("you can use launch with `npm run launch [[addon_name] map_name]");
 
     const args = ["-novid", "-tools", "-addon", addon_name];
     if (map_name) args.push(`+dota_launch_custom_game ${addon_name} ${map_name}`);
