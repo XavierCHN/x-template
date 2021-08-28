@@ -41,8 +41,8 @@
         "dev:jssync": "node scripts/kv_js_sync.js --watch"
     },
     "devDependencies": {
-        "@moddota/dota-lua-types": "^4.11.0",
-        "@moddota/panorama-types": "^1.10.0",
+        "@moddota/dota-lua-types": "^4.12.1",
+        "@moddota/panorama-types": "^1.11.0",
         "@types/react": "^16.14.5",
         "aes-js": "^3.1.2",
         "anymatch": "^3.1.2",
