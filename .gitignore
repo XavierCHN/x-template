@@ -15,7 +15,6 @@ game/resource/word_filter_cache_1.dat
 *.vjs_c
 *.vpcf_c
 *.vmat_c
-*.vpk
 *.vmdl_c
 *.vmesh_c
 *.vsndevts_c
