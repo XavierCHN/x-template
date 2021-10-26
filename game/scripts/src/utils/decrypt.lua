@@ -1,3 +1,6 @@
+-- 目前这个解密模块只在服务器端运行
+if not IsServer() then return end
+
 function string.fromhex(str)
     return (str:gsub(
         "..",
