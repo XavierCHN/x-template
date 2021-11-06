@@ -16,7 +16,8 @@
             ],
             "encryptFiles": [
                 "**/*.lua",
-                "!game/scripts/vscripts/addon_init.lua"
+                "!game/scripts/vscripts/addon_init.lua",
+                "!game/scripts/vscripts/addon_game_mode.lua"
             ],
             "encryptDedicatedServerKey": "Invalid_NotDedicatedServer"
         }
