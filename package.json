@@ -70,7 +70,8 @@
         "walk": "^2.3.14",
         "webpack": "^5.0.0-beta.30",
         "webpack-cli": "^3.3.12",
-        "webpack-panorama": "^0.2.0"
+        "webpack-panorama": "^0.2.0",
+        "json-to-ts": "^1.7.0"
     },
     "prettier": {
         "printWidth": 200,
