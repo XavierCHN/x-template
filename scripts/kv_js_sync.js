@@ -7,6 +7,7 @@ const { read_all_files, read_sub_directories } = require('./utils');
 const JsonToTS = require("json-to-ts");
 
 let npc_path = 'game/scripts/npc';
+const typeNameReg = new RegExp("declare\\s+interface\\s+(\\w*)");
 function kv_js_sync() {
 
     const checkAndCreateDir = (dirPath) =>
@@ -52,23 +53,23 @@ function kv_js_sync() {
             return `${dd} ${src}`;
         }
 
-        const capitalize  = (name) => {
-            return name.charAt(0).toUpperCase() + name.slice(1);
+        const getTypeName = (typeCode) =>
+        {
+            return typeNameReg.exec(typeCode)[1];
         }
 
         const firstType = addDeclare(types[0]);
         checkAndCreateDir(path.dirname(declare_content_path));
         checkAndCreateDir(path.dirname(declare_kv_type_content_path));
 
-        let p = fs.writeFileSync(declare_content_path, firstType + "\n");
+        fs.writeFileSync(declare_content_path, firstType + "\n");
 
-        //使用的json-to-ts库会进行首字母大写转换为类型名
         fs.appendFileSync(declare_content_path, "declare interface CustomUIConfig"
                                                 +"\n{"
-                                                +`\n\t${file_name}:${capitalize(file_name)}`
+                                                +`\n\t${file_name}:${getTypeName(firstType)};`
                                                 +"\n}");
 
-        fs.writeFileSync(declare_kv_type_content_path, "");
+        fs.writeFileSync(declare_kv_type_content_path, "//@ts-nocheck\n");
 
         for (let i = 1; i < types.length; i++){
             const type = addDeclare(types[i]) + "\n";
