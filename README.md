@@ -1,3 +1,4 @@
+[Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
 # X-Template
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]()
 Xavier's dota2 custom game development template (English translated with [DeepL](https://www.deepl.com))
