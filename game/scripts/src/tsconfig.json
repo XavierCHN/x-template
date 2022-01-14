@@ -1,17 +1,20 @@
 {
     "compilerOptions": {
-        "rootDir": "src",
-        "outDir": "vscripts",
+        "rootDir": ".",
+        "outDir": "../vscripts",
         "target": "esnext",
         "lib": ["esnext"],
-        "types": ["@moddota/dota-lua-types"],
-        "moduleResolution": "node",
         "experimentalDecorators": true,
+        "types": ["@moddota/dota-lua-types", "dota_ability_transformer"],
+        "plugins": [{ 
+            "transform": "dota_ability_transformer/transform"
+        }],
+        "moduleResolution": "node",
         "strictNullChecks": false,
         "strictPropertyInitialization": false,
         "strict": false
     },
-    "include": ["src", "../../shared"],
+    "include": ["../../../shared"],
     "tstl": {
         "luaTarget": "JIT",
         "sourceMapTraceback": true
