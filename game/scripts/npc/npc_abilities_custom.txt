@@ -1,0 +1,7 @@
+#base "abilities/generatedAbilities.kv"
+
+#base "heroes/meepo.kv"
+
+"DOTAAbilities"
+{
+}
