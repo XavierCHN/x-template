@@ -6,7 +6,7 @@ export class antimage_mana_break_ts extends BaseAbility {
     BaseProperties: AbilityBaseProperties = {
         FightRecapLevel: 1,
         MaxLevel: 4,
-        Behavior: AbilityBehavior.PASSIVE,
+        Behavior: [AbilityBehavior.PASSIVE, AbilityBehavior.HIDDEN], // it is not a hidden ability actually, for test purpose only here
         UnitDamageType: DamageTypes.PHYSICAL,
         SpellImmunityType: SpellImmunityTypes.ENEMIES_NO,
     };
