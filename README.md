@@ -76,7 +76,15 @@ Xavier 的 dota2 自定义游戏开发模板
 1. `npm run launch [[addon_name] map_name]` 启动 dota2，两个参数为可选参数，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名（若未提供addon_name则默认载入当前addon）
 2. `npm run dev` 进入 dev 模式，将会执行`同步KV到js，生成localization，Excel转KV等操作`
 3. `npm run prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
+> 加密发布流程
 
+> 将packages.json里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密
+
+> 将`encryptDedicatedServerKey`修改成你的图的DedicatedServerKey
+
+> 执行`npm run prod`来完成加密流程
+
+> 执行`npm run launch your_addon_name_publish`来启动加密后的图，之后执行上传操作
 
 ### 使用步骤
 1. [点击使用本项目作为模板生成你自己的项目](https://github.com/XavierCHN/x-template/generate)或者 [fork 本项目](https://github.com/XavierCHN/x-template/fork)
