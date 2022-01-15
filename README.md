@@ -84,7 +84,10 @@ Xavier 的 dota2 自定义游戏开发模板
 
 > 执行`npm run prod`来完成加密流程
 
+> 可以保持现有的Invalid_NotDedicatedServer密钥进行加密，之后在本地启动publish文件夹看看加密是否正确运行，正式发布再改成正式的key
+
 > 执行`npm run launch your_addon_name_publish`来启动加密后的图，之后执行上传操作
+
 
 ### 使用步骤
 1. [点击使用本项目作为模板生成你自己的项目](https://github.com/XavierCHN/x-template/generate)或者 [fork 本项目](https://github.com/XavierCHN/x-template/fork)
