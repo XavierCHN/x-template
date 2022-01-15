@@ -29,6 +29,7 @@
         "prod": "run-s prod:*",
         "prod:panorama": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.config.js",
         "prod:vscripts": "tstl --project game/scripts/tsconfig.json",
+        "prod:jssync": "node scripts/kv_js_sync.js",
         "prod:kv": "node scripts/excel_2_kv.js",
         "prod:localization": "node scripts/localization.js",
         "prod:copy": "node scripts/publish.js",
