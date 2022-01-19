@@ -1,7 +1,8 @@
-import { GameMode } from "./game_mode";
-
 require('utils/aeslua');
 require('utils/decrypt');
+
+//@ts-ignore
+let GameMode = require('game_mode').GameMode
 
 Object.assign(getfenv(), {
     Activate: GameMode.Activate,

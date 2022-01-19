@@ -23,7 +23,7 @@
                 "!game/scripts/vscripts/utils/aeslua.lua",
                 "!game/scripts/vscripts/utils/aeslua/**/*.lua"
             ],
-            "encryptDedicatedServerKey": "Invalid_NotDedicatedServer"
+            "encryptDedicatedServerKey": "Invalid_NotOnDedicatedServer"
         }
     },
     "scripts": {
