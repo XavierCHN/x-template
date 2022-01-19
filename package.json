@@ -16,6 +16,7 @@
             ],
             "encryptFiles": [
                 "**/*.lua",
+                "!game/scripts/vscripts/lualib_bundle.lua",
                 "!game/scripts/vscripts/addon_init.lua",
                 "!game/scripts/vscripts/addon_game_mode.lua",
                 "!game/scripts/vscripts/utils/decrypt.lua",
