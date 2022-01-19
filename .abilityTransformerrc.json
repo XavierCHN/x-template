@@ -1,0 +1,6 @@
+{
+    "modularization": "folder",
+    "strict": "warn",
+    "debug": false,
+    "disable": false
+}
