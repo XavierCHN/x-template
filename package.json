@@ -55,7 +55,6 @@
         "body-parser": "^1.19.0",
         "chokidar": "^3.5.1",
         "commander": "^6.2.1",
-        "dota_ability_transformer": "^1.0.1",
         "express": "^4.17.1",
         "file-loader": "^6.2.0",
         "fork-ts-checker-webpack-plugin": "^5.2.1",

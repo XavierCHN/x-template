@@ -28,6 +28,3 @@ game/scripts/vscripts
 # kv 生成
 content/panorama/src/declares
 shared/kv
-
-# generated kv files with dota_ability_transformer
-game/scripts/npc/abilities/generatedAbilities
