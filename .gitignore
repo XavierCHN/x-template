@@ -1,7 +1,9 @@
 node_modules
 content/panorama/layout
 content/panorama/scripts
-game/resource
+game/resource/**/*.*
+!game/resource/flash3/**/*.*
+!game/resource/overviews/**/*.*
 publish
 ~$*.xlsx
 custom_game_whitelist.txt
