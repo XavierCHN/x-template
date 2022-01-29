@@ -36,7 +36,7 @@ local text = '-- ' .. string.gsub(source_path, './game/scripts/vscripts', '') ..
 local cipher = aeslua.encrypt(key, text, aeslua.AES128, aeslua.CBCMODE)
 local hexstring = string.tohex(cipher)
 local wf = io.open(target_path, "w")
-wf:write('return (decrypt("' .. hexstring .. '", ...))')
+wf:write('return (GameRules.XDecrypt("' .. hexstring .. '", ...))')
 file:close()
 wf:flush()
 wf:close()

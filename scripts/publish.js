@@ -29,7 +29,7 @@ walker.on("file", (root, fileStats, next) => {
             exec(`lua scripts/encrypt_file.lua "${fileName}" "${getPublishPath(fileName)}" ${dedicatedServerKey}`, (err, out) => {
                 if (err) console.error(`[publish.js] [encrypt] ->${fileName}`, err);
                 if (!err) {
-                    console.log(`[publish.js] [encrypt] ->${fileName}`);
+                    console.log(`[publish.js] [encrypt] ->${fileName} successed with key ${dedicatedServerKey}`);
                 }
             });
         } else {
