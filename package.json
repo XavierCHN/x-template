@@ -44,7 +44,8 @@
         "dev:kv": "node scripts/excel_2_kv.js --watch",
         "dev:localization": "node scripts/localization.js --watch",
         "jssync": "node scripts/kv_js_sync.js",
-		"dev:cssMerge": "ts-node scripts/ic_tools/ic_css_merge.ts --watch"
+		"dev:cssMerge": "ts-node scripts/ic_tools/ic_css_merge.ts --watch",
+        "imgc": "ts-node -T scripts/ic_tools/ImageCompile/images_preLoad.ts watch"
     },
     "devDependencies": {
         "@demon673/react-panorama": "^0.2.2",
@@ -84,7 +85,8 @@
 		"gulp": "^4.0.2",
 		"gulp-concat": "^2.6.1",
 		"gulp-sass": "^5.0.0",
-		"gulp-strip-css-comments": "^2.0.0"
+		"gulp-strip-css-comments": "^2.0.0",
+        "ejs": "^3.1.6"
     },
     "prettier": {
         "printWidth": 200,
