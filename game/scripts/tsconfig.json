@@ -12,7 +12,7 @@
         "strictPropertyInitialization": false,
         "strict": false
     },
-    "include": ["src", "../../shared", "../../anti_gugugu.ts"],
+    "include": ["src", "../../shared"],
     "tstl": {
         "luaTarget": "JIT",
         "sourceMapTraceback": true
