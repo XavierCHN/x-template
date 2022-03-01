@@ -4,15 +4,15 @@
         "outDir": "vscripts",
         "target": "esnext",
         "lib": ["esnext"],
-        "types": ["@moddota/dota-lua-types/normalized"], // enum简洁模式API
-        // "types": ["@moddota/dota-lua-types"], // enum完整模式API
+        // "types": ["@moddota/dota-lua-types/normalized"], // enum简洁模式API
+        "types": ["@moddota/dota-lua-types"], // enum完整模式API
         "moduleResolution": "node",
         "experimentalDecorators": true,
         "strictNullChecks": false,
         "strictPropertyInitialization": false,
         "strict": false
     },
-    "include": ["src", "../../shared"],
+    "include": ["src", "../../shared", "../../anti_gugugu.ts"],
     "tstl": {
         "luaTarget": "JIT",
         "sourceMapTraceback": true
