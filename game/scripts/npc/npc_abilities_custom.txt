@@ -1,4 +1,4 @@
-#base "abilities/generatedAbilities.kv"
+#base "lua_abilities.txt"
 
 "DOTAAbilities"
 {
