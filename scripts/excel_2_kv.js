@@ -53,19 +53,15 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
             // 处理AttachWearables
             if (parent_name == "AttachWearables" && data != "" && data != null) {
                 dct[key_name] = { ItemDef: clean_data(data) };
-            } else if (parent_name == "AbilitySpecial" && data != "" && data != null) {
+            } else if (parent_name == "AbilityValues" && data != "" && data != null) {
                 // 写入ability specials
-                let datas = data.toString().split(" ");
-                let has_float = false;
                 let special_key_name;
-                datas.forEach((d) => {
-                    if (isNaN(d)) special_key_name = d;
-                    else if (parseFloat(d) % 1 != 0) has_float = true;
-                });
+                let datas = data.toString().split(" ");
+                if (isNaN(datas[0])) special_key_name = datas[0];
                 data = clean_data(data)
                     .replace(special_key_name + " ", "")
                     .replace(special_key_name, "");
-                dct[key_name] = { var_type: has_float ? "FIELD_FLOAT" : "FIELD_INTEGER", [special_key_name != null ? special_key_name : "var_" + key_name]: data };
+                dct[special_key_name != null ? special_key_name : "var_" + key_name] = data;
             } else if (data != null && data !== "") {
                 dct[key_name] = clean_data(data);
             } else if (key_name.indexOf("Ability") >= 0) {

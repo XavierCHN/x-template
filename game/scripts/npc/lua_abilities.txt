@@ -2,22 +2,10 @@
 "XLSXContent" {
 	"item_kv_generator_test" {
 		"BaseClass" "ability_lua"
-		"AbilitySpecial" {
-			"01" {
-				"var_type" "FIELD_FLOAT"
-				"var_01" "0.1 0.2 0.3 0.4"
-
-			}
-			"02" {
-				"var_type" "FIELD_INTEGER"
-				"var_02" "1 1 2 3 4"
-
-			}
-			"03" {
-				"var_type" "FIELD_INTEGER"
-				"var_03" "1000 2000 30000 40000"
-
-			}
+		"AbilityValues" {
+			"damage" "0.1 0.2 0.3 0.4"
+			"var_2" "1 1 2 3 4"
+			"var_3" "1000 2000 30000 40000"
 
 		}
 		"MaxLevel" "2"
