@@ -5,6 +5,11 @@ const rimraf = require('rimraf');
 const { getAddonName, getDotaPath } = require('./utils');
 
 (async () => {
+    if (process.platform !== 'win32') {
+        console.log('This script runs on windows only, Addon Linking is skipped.');
+        return;
+    }
+
     const dotaPath = await getDotaPath();
     if (dotaPath === undefined) {
         console.log('No Dota 2 installation found. Addon linking is skipped.');
