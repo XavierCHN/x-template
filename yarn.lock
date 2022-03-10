@@ -30,18 +30,25 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@moddota/dota-lua-types@^4.13.0":
-  version "4.14.0"
-  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/download/@moddota/dota-lua-types-4.14.0.tgz#222139e322f91b59af81b6e33dba84759845eeeb"
-  integrity sha512-HbhO7EEL2WJnwiflfHimabHU3qhSmE2SSsDr+PHBcHuLE8v3VJliAAHPXl29nY3ZUmwg58atbbYBes9QM73bXg==
+"@demon673/react-panorama@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.npmmirror.com/@demon673/react-panorama/-/react-panorama-0.2.2.tgz#0691fc1732d31540fa496bb0725e83bfd7d2e26d"
+  integrity sha512-gQTMKBaniNIMqnUmKoRH9mthy/eXBMm7aMk9Az4k6wSsPC3Hhz0bunCVo0xusIKXcV9RQshvQmoZrUFZ2hcYrQ==
+  dependencies:
+    panorama-polyfill "^0.1.0"
+
+"@moddota/dota-lua-types@^4.17.0":
+  version "4.17.0"
+  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.17.0.tgz#50e918aef2d74d7ebb558cc7d75b0b455d919064"
+  integrity sha512-CWCrTyky7kuzFHWxtGDLOrb0F37393eNB38SpDsXWP6IAKwJX10QA+TcXtmx8o80tbejL82RfZ2Abqnf7wgiRg==
   dependencies:
     lua-types "^2.10.1"
     tslib "^2.0.3"
 
-"@moddota/panorama-types@^1.12.0":
-  version "1.15.0"
-  resolved "https://registry.npmmirror.com/@moddota/panorama-types/download/@moddota/panorama-types-1.15.0.tgz#99be4a993ece8851cd305b9417cf471e274c5c80"
-  integrity sha512-pjNnfcpuHN84ThiavKI0LNrqM+kq2yujvzzKA08Kfn1QKv9TmUJJvz6fqeYJGDNUkkdqqLVGbQWHIFmByPPUgA==
+"@moddota/panorama-types@^1.18.0":
+  version "1.18.0"
+  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.18.0.tgz#959c5c0a67d943b6923c3045a48d035da3c6e95b"
+  integrity sha512-ztvfK4FjSeCNsyNYP/43DvXKrcmoVxQlY7uDDDt2kOD+ANzbva+FEI9B0l/s7WzggvuDUMdQSQyPlic1hMzuiA==
   dependencies:
     tslib "^2.0.3"
 
@@ -994,8 +1001,8 @@ decode-uri-component@^0.2.0:
 
 decompress-response@^4.2.0:
   version "4.2.1"
-  resolved "https://registry.npmmirror.com/decompress-response/download/decompress-response-4.2.1.tgz#414023cc7a302da25ce2ec82d0d5238ccafd8986"
-  integrity sha1-QUAjzHowLaJc4uyC0NUjjMr9iYY=
+  resolved "https://registry.yarnpkg.com/decompress-response/-/decompress-response-4.2.1.tgz#414023cc7a302da25ce2ec82d0d5238ccafd8986"
+  integrity sha512-jOSne2qbyE+/r8G1VU+G/82LBs2Fs4LAsTiLSHOCOMZQl2OKZ6i8i4IyHemTe+/yIXOtTcRQMzPcgyhoFlqPkw==
   dependencies:
     mimic-response "^2.0.0"
 
@@ -2652,8 +2659,8 @@ mime@1.6.0:
 
 mimic-response@^2.0.0:
   version "2.1.0"
-  resolved "https://registry.nlark.com/mimic-response/download/mimic-response-2.1.0.tgz?cache=0&sync_timestamp=1628692524926&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fmimic-response%2Fdownload%2Fmimic-response-2.1.0.tgz#d13763d35f613d09ec37ebb30bac0469c0ee8f43"
-  integrity sha1-0Tdj019hPQnsN+uzC6wEacDuj0M=
+  resolved "https://registry.yarnpkg.com/mimic-response/-/mimic-response-2.1.0.tgz#d13763d35f613d09ec37ebb30bac0469c0ee8f43"
+  integrity sha512-wXqjST+SLt7R009ySCglWBCFpjUygmCIfD790/kVbiGmUgfYGuB14PiTd5DwVxSV4NcYHjzMkoj5LjQZwTQLEA==
 
 minimalistic-assert@^1.0.1:
   version "1.0.1"
@@ -3357,13 +3364,6 @@ react-is@^16.13.1:
   resolved "https://registry.npmmirror.com/react-is/download/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
 
-"react-panorama@npm:@demon673/react-panorama@^0.2.0":
-  version "0.2.2"
-  resolved "https://registry.npmmirror.com/@demon673/react-panorama/download/@demon673/react-panorama-0.2.2.tgz#0691fc1732d31540fa496bb0725e83bfd7d2e26d"
-  integrity sha512-gQTMKBaniNIMqnUmKoRH9mthy/eXBMm7aMk9Az4k6wSsPC3Hhz0bunCVo0xusIKXcV9RQshvQmoZrUFZ2hcYrQ==
-  dependencies:
-    panorama-polyfill "^0.1.0"
-
 react@^16.14.0:
   version "16.14.0"
   resolved "https://registry.npmmirror.com/react/download/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
@@ -3776,13 +3776,13 @@ signal-exit@^3.0.0:
 
 simple-concat@^1.0.0:
   version "1.0.1"
-  resolved "https://registry.npm.taobao.org/simple-concat/download/simple-concat-1.0.1.tgz#f46976082ba35c2263f1c8ab5edfe26c41c9552f"
-  integrity sha1-9Gl2CCujXCJj8cirXt/ibEHJVS8=
+  resolved "https://registry.yarnpkg.com/simple-concat/-/simple-concat-1.0.1.tgz#f46976082ba35c2263f1c8ab5edfe26c41c9552f"
+  integrity sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==
 
 simple-get@^3.0.3:
-  version "3.1.0"
-  resolved "https://registry.npm.taobao.org/simple-get/download/simple-get-3.1.0.tgz#b45be062435e50d159540b576202ceec40b9c6b3"
-  integrity sha1-tFvgYkNeUNFZVAtXYgLO7EC5xrM=
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/simple-get/-/simple-get-3.1.1.tgz#cc7ba77cfbe761036fbfce3d021af25fc5584d55"
+  integrity sha512-CQ5LTKGfCpvE1K0n2us+kuMPbk/q0EKl82s4aheV9oXjFEz6W/Y7oQFVJuU6QG77hRT4Ghb5RURteF5vnWjupA==
   dependencies:
     decompress-response "^4.2.0"
     once "^1.3.1"
@@ -4298,10 +4298,10 @@ type-is@~1.6.18:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
-typescript-to-lua@^1.0.1:
-  version "1.3.0"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/download/typescript-to-lua-1.3.0.tgz#f5b8212e951e1788e4aaabd16c97ca3541e0906e"
-  integrity sha512-hFjZ7+Cv08WUql2VJChOEb1JH2nqYspyjw+9Og0cDLkP0QaEmM+Eh/slO2exdngDyQye/rrQysLy3zVzJe+PVg==
+typescript-to-lua@^1.3.3:
+  version "1.3.4"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.3.4.tgz#1cb5c90578d6396b1dd678ac2e873c04ca90005a"
+  integrity sha512-9NkUOSUd9tufvwCGiWJ6Z1edizYcECUfjdZJZfDRKTEXKIddbAdV3IFR6u5gxvYYRfXhfNV6IKvqHS2HxHFs6w==
   dependencies:
     enhanced-resolve "^5.8.2"
     resolve "^1.15.1"
@@ -4558,7 +4558,7 @@ wrap-ansi@^5.1.0:
 
 wrappy@1:
   version "1.0.2"
-  resolved "https://registry.nlark.com/wrappy/download/wrappy-1.0.2.tgz?cache=0&sync_timestamp=1619133505879&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fwrappy%2Fdownload%2Fwrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
+  resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
 
 xlsx@^0.17.0:
