@@ -41,11 +41,7 @@ setmetatable(BaseItem.prototype, { __index: CDOTA_Item_Lua ?? C_DOTA_Item_Lua })
 setmetatable(BaseModifier.prototype, { __index: CDOTA_Modifier_Lua ?? C_DOTA_Modifier_Lua });
 
 
-export const registerAbility = (
-    abilityName?: string,
-    localizationTokens?: { [x: string]: string; },
-    name?: string,
-) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
+export const registerAbility = (name?: string,) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
     if (name !== undefined) {
         // @ts-ignore
         ability.name = name;
@@ -72,7 +68,7 @@ export const registerAbility = (
     };
 };
 
-export const registerModifier = (modifierName?: string, modifierDescription?: string, name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
+export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
     if (name !== undefined) {
         // @ts-ignore
         modifier.name = name;
