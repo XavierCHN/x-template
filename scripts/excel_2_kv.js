@@ -4,6 +4,7 @@ const program = require("commander");
 const chokidar = require("chokidar");
 const path = require("path");
 const xlsx = require("node-xlsx");
+const { pinyin } = require("pinyin-pro");
 const { read_all_files, read_sub_directories } = require("./utils");
 
 // 需要读取的excel路径
@@ -22,6 +23,14 @@ String.format = function () {
     });
 };
 
+function convert_chinese_to_pinyin(da) {
+    let s = da;
+    if (/[\u4e00-\u9fa5]/g.test(s)) {
+        s = pinyin(da, { toneType: "none", type: "array", nonZh: "consecutive" }).join("_");
+    }
+    return s;
+}
+
 function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
     if (parent_name == null) parent_name = "";
     while (i < row_data.length && i < key_names.length) {
@@ -30,7 +39,7 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
             i++;
             continue;
         }
-        key_name = key_name.toString();
+        key_name = convert_chinese_to_pinyin(key_name).toString();
         if (key_name.indexOf("[{]") >= 0) {
             i++;
             let pn = key_name.replace("[{]", "");
@@ -43,10 +52,14 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
             data = row_data[i];
 
             const clean_data = (da) => {
-                if (!isNaN(data)) {
+                if (!isNaN(da)) {
                     let number = parseFloat(da);
                     if (number % 1 != 0) da = number.toFixed(4);
                 }
+
+                // 判断da是否包含中文，如果包含中文，将其转换为拼音，中间用下划线连接
+                da = convert_chinese_to_pinyin(da);
+
                 return da.toString();
             };
 
@@ -61,7 +74,7 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
                 data = clean_data(data)
                     .replace(special_key_name + " ", "")
                     .replace(special_key_name, "");
-                dct[special_key_name != null ? special_key_name : "var_" + key_name] = data;
+                dct[special_key_name != null ? special_key_name : key_name] = data;
             } else if (data != null && data !== "") {
                 dct[key_name] = clean_data(data);
             } else if (key_name.indexOf("Ability") >= 0) {
@@ -95,6 +108,7 @@ function xy_excel_to_kv(sheet) {
         let main_key = row_data[0];
         if (main_key == null) continue;
         let ret_val = row_data_to_dict({}, key_row, row_data, 1);
+        main_key = convert_chinese_to_pinyin(main_key).toString();
         kv_data.XLSXContent[main_key] = ret_val.dct;
     }
     return kv_data;
