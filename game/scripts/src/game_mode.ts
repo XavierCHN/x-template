@@ -3,7 +3,7 @@ import { reloadable } from "./lib/tstl-utils";
 const heroSelectionTime = 10;
 
 declare global {
-    interface CDOTAGamerules {
+    interface CDOTAGameRules {
         Addon: GameMode;
     }
 }
