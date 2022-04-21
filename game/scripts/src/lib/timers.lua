@@ -149,7 +149,8 @@ function Timers:Think()
 			Timers:HandleEventError(result)
 		end
 	end
-	if GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then
+
+	if GameRules:State_Get() > DOTA_GAMERULES_STATE_POST_GAME then
 		return
 	end
 
