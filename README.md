@@ -103,7 +103,7 @@ Xavier 的 dota2 自定义游戏开发模板
 2. 安装`node.js`，要求是 above Node v14.10.1 ~~因为低于这个版本的没有测试过~~
 3. clone 生成或者 fork 的项目
 4. 打开`package.json`，将`name`修改为你自己喜欢的名字
-5. 执行`npm install`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons`,(如果碰到权限问题，请尝试重启)
+5. 执行`npm install`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons`,(如果碰到权限问题，请关闭代码编辑器后使用控制台来执行`npm install`，或者重启一下电脑再试)
 6. `npm run dev`，开始你的开发
 
 ### 文件夹内容
