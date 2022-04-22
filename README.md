@@ -127,9 +127,9 @@ Xavier 的 dota2 自定义游戏开发模板
 > 只推荐使用`steam`启动dota2的形式来完成modding，如果尚未安装，请[点此下载](https://store.steampowered.com/about/)
 
 ##### 需要安装的软件包括：
-1. 代码编辑器 [Visual Studio Code](https://code.visualstudio.com) [Sublime Text 3](http://www.sublimetext.com/3) （推荐都安装）
-2. 反编译工具 [ValveResourceFormat](https://github.com/SteamDatabase/ValveResourceFormat/releases) [GCFScape(已略过时，某些格式反编译不了，但是速度比较快)](https://nemstools.github.io/pages/GCFScape-Download.html)
+1. 代码编辑器 [Visual Studio Code](https://code.visualstudio.com) 或者 [Sublime Text 3](http://www.sublimetext.com/3) （推荐都安装）
+2. 反编译工具 [ValveResourceFormat](https://github.com/SteamDatabase/ValveResourceFormat/releases)（推荐）或者 [GCFScape](https://nemstools.github.io/pages/GCFScape-Download.html)(已略过时，某些格式反编译不了，但是速度比较快，推荐都安装)
 3. Adobe系列工具, 如PhotoShop（必须）, Audition（选装）等，请到 [官网](https://www.adobe.com/) 下载或自行使用搜索引擎获取
-4. 版本控制 [Github Desktop](https://desktop.github.com/) 或 [SourceTree](https://www.sourcetreeapp.com/) 或 [TortoiseSVN](https://tortoisesvn.net/index.zh.html)
+4. 代码版本控制 [Github Desktop](https://desktop.github.com/)（推荐，和github的配合比较好） 或 [SourceTree](https://www.sourcetreeapp.com/) 或 [TortoiseSVN](https://tortoisesvn.net/index.zh.html)
 5. 模型编辑器Blender [Steam直接安装](steam://install/365670) [Steam商店页面](https://store.steampowered.com/app/365670/Blender/) （用自己顺手的就行，如果不涉及模型编辑可略过）
 6. 其他实用工具： [文件搜索工具Everything](https://www.voidtools.com/zh-cn/) [Deepl翻译](https://www.deepl.com/translator) [Node版本控制nvm-windows](https://github.com/coreybutler/nvm-windows/releases)
