@@ -43,7 +43,7 @@
         "dev:vscripts": "tstl --project game/scripts/tsconfig.json --watch",
         "dev:kv": "node scripts/excel_2_kv.js --watch",
         "dev:localization": "node scripts/localization.js --watch",
-        "jssync": "node scripts/kv_js_sync.js"
+        "dev:jssync": "node scripts/kv_js_sync.js"
     },
     "devDependencies": {
         "@demon673/react-panorama": "^0.2.2",
