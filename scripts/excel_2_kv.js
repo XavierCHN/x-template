@@ -26,7 +26,9 @@ String.format = function () {
 function convert_chinese_to_pinyin(da) {
     let s = da;
     if (/[\u4e00-\u9fa5]/g.test(s)) {
-        s = pinyin(da, { toneType: "none", type: "array", nonZh: "consecutive" }).join("_");
+        s = pinyin(da, { toneType: "none", type: "array", nonZh: "consecutive" })
+            .map((s) => s.replace("ü", "v"))
+            .join("_");
     }
     return s;
 }
