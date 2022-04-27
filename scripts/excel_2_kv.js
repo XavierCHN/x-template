@@ -72,7 +72,10 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
                 // 写入ability specials
                 let special_key_name;
                 let datas = data.toString().split(" ");
-                if (isNaN(datas[0])) special_key_name = datas[0];
+                if (isNaN(datas[0])) {
+                    special_key_name = convert_chinese_to_pinyin(datas[0]);
+                    data = datas[1];
+                }
                 data = clean_data(data)
                     .replace(special_key_name + " ", "")
                     .replace(special_key_name, "");
