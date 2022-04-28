@@ -24,11 +24,14 @@ String.format = function () {
 };
 
 function convert_chinese_to_pinyin(da) {
+    if (da == null || da.match == null) return da;
     let s = da;
-    if (/[\u4e00-\u9fa5]/g.test(s)) {
-        s = pinyin(da, { toneType: "none", type: "array", nonZh: "consecutive" })
-            .map((s) => s.replace("ü", "v"))
-            .join("_");
+    let reg = /[\u4e00-\u9fa5]+/g;
+    let match = s.match(reg);
+    if (match != null) {
+        match.forEach((m) => {
+            s = s.replace(m, pinyin(m, { toneType: "none", type: "array" }).join("_")).replace("ü", "v");
+        });
     }
     return s;
 }
