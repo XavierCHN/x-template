@@ -77,11 +77,9 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
                 let datas = data.toString().split(" ");
                 if (isNaN(datas[0])) {
                     special_key_name = convert_chinese_to_pinyin(datas[0]);
-                    data = datas[1];
+                    data = data.replace(`${datas[0]} `, "");
                 }
                 data = clean_data(data)
-                    .replace(special_key_name + " ", "")
-                    .replace(special_key_name, "");
                 dct[special_key_name != null ? special_key_name : key_name] = data;
             } else if (data != null && data !== "") {
                 dct[key_name] = clean_data(data);
