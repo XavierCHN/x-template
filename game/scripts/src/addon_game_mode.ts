@@ -1,5 +1,6 @@
 require('utils/aeslua');
 require('utils/decrypt');
+require('lib/timers');
 
 //@ts-ignore
 let GameMode = require('game_mode').GameMode

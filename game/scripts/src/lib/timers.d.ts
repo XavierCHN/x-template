@@ -34,4 +34,8 @@ declare interface Timers {
     RemoveTimers(killAll: boolean): void;
 }
 
+declare global {
+    var Timers: Timers;
+}
+
 export var Timers: Timers;
