@@ -1,9 +1,9 @@
-const path = require('path');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama');
+const path = require("path");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require("webpack-panorama");
 
 /** @type {import('webpack').Configuration} */
-const isProduction = process.env.NODE_ENV === 'production';
+const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
     mode: isProduction ? "production" : "development",
     context: path.resolve(__dirname, "src"),
@@ -43,6 +43,15 @@ module.exports = {
             {
                 test: /\.less$/i,
                 loader: "less-loader",
+                options: {
+                    additionalData: (content) => {
+                        content = content.replace(/@keyframes ([a-zA-Z_]+\w+)/g, (match, name) => {
+                            // add apostrophe to satisfy valve
+                            return match.replace(name, `'${name}'`);
+                        });
+                        return content;
+                    },
+                },
             },
         ],
     },
