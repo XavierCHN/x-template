@@ -45,7 +45,7 @@ module.exports = {
                 loader: "less-loader",
                 options: {
                     additionalData: (content) => {
-                        content = content.replace(/@keyframes\s*(-?[_a-zA-Z]+[_a-zA-Z0-9-]*\s*)/g, (match, name) => {
+                        content = content.replace(/@keyframes\s*(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g, (match, name) => {
                             // add apostrophe to satisfy valve
                             return match.replace(name, `'${name}'`);
                         });
