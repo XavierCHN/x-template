@@ -6,7 +6,7 @@
         <include src="file://{resources}/scripts/sync_keyvalues.js" />
     </scripts>
     <styles>
-        <include src="./styles.scss" />
+        <include src="./styles.less" />
     </styles>
     <Panel class="root" hittest="false" />
 </root>
