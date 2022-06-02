@@ -13,8 +13,14 @@ export class BaseModifier {
         ability?: CDOTABaseAbility,
         modifierTable?: object,
     ): InstanceType<T> {
-        if (caster == null) caster = target;
-        return target.AddNewModifier(caster, ability, this.name, modifierTable) as any;
+        return target.AddNewModifier(caster, ability, this.name, modifierTable) as unknown as InstanceType<T>;
+    }
+    public static find_on<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC): InstanceType<T> {
+        return target.FindModifierByName(this.name) as unknown as InstanceType<T>;
+    }
+
+    public static remove<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC): void {
+        target.RemoveModifierByName(this.name);
     }
 }
 
