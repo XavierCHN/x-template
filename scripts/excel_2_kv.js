@@ -79,7 +79,7 @@ function row_data_to_dict(dct, key_names, row_data, i, parent_name) {
                     special_key_name = convert_chinese_to_pinyin(datas[0]);
                     data = data.replace(`${datas[0]} `, "");
                 }
-                data = clean_data(data)
+                data = clean_data(data);
                 dct[special_key_name != null ? special_key_name : key_name] = data;
             } else if (data != null && data !== "") {
                 dct[key_name] = clean_data(data);
@@ -128,27 +128,39 @@ function single_excel_to_kv(file) {
     }
     let sheets = xlsx.parse(file);
 
-    let sheet = sheets[0];
-    let rows = sheet.data;
-    let nrows = rows.length;
-    if (nrows < 3) {
-        console.log("ignore empty file=>", file, "REQUIRES AT LEAST 3 LINES(comment, key data)");
-        return;
-    }
+    let out_kvfile_path = file.replace(excel_path, kv_path).replace(ext, ".txt");
+    let out_dir = path.dirname(out_kvfile_path);
+    const file_name = path.basename(out_kvfile_path);
 
-    if (sheet.data[1][0] == "vertical_keys") {
-        kv_data = col_excel_to_kv(sheet);
-    } else {
-        kv_data = xy_excel_to_kv(sheet);
-    }
+    sheets.forEach((sheet) => {
+        let sheet_name = sheet.name;
 
-    if (Object.keys(kv_data.XLSXContent).length <= 0) return;
-    let outpath = file.replace(excel_path, kv_path).replace(".xlsx", ".txt");
-    let parent_i = outpath.lastIndexOf("/");
-    let out_dir = outpath.substr(0, parent_i);
-    if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir);
-    fs.writeFileSync(outpath, "// generate with Xavier's kv generator https://github.com/XavierCHN/x-template\n" + keyvalues.encode(kv_data));
-    console.log("success xlsx->kv", outpath, ", total items count ->", Object.keys(kv_data.XLSXContent).length);
+        if (sheet_name.startsWith(`__`)) return; // 以__开头的表会被忽略
+
+        let outpath = out_kvfile_path;
+        if (sheets.length > 1) {
+            outpath = outpath.replace(file_name, sheet_name) + ".txt";
+        }
+
+        let rows = sheet.data;
+        let nrows = rows.length;
+        if (nrows < 3) {
+            console.log("ignore empty file=>", file, "REQUIRES AT LEAST 3 LINES(comment, key data)");
+            return;
+        }
+
+        if (sheet.data[1][0] == "vertical_keys") {
+            kv_data = col_excel_to_kv(sheet);
+        } else {
+            kv_data = xy_excel_to_kv(sheet);
+        }
+
+        if (Object.keys(kv_data.XLSXContent).length <= 0) return;
+
+        if (!fs.existsSync(out_dir)) fs.mkdirSync(out_dir);
+        fs.writeFileSync(outpath, "// generate with Xavier's kv generator https://github.com/XavierCHN/x-template\n" + keyvalues.encode(kv_data));
+        console.log("success xlsx->kv", outpath, ", total items count ->", Object.keys(kv_data.XLSXContent).length);
+    });
 }
 
 const all_excel_to_kv = async (path) => {

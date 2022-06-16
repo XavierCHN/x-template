@@ -1,7 +1,7 @@
 // generate with Xavier's kv generator https://github.com/XavierCHN/x-template
 "XLSXContent" {
-	"item_kv_generator_test" {
-		"BaseClass" "ability_lua"
+	"item_kv_generator_test2" {
+		"BaseClass" "item_lua"
 		"AbilityValues" {
 			"2" "1 1 2 3 4"
 			"3" "1000 2000 30000 40000"
