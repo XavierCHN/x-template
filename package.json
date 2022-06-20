@@ -59,6 +59,7 @@
         "file-loader": "^6.2.0",
         "fork-ts-checker-webpack-plugin": "^5.2.1",
         "fs-extra": "^9.1.0",
+        "gulp-dotax": "^1.0.20",
         "json-to-ts": "^1.7.0",
         "keyvalues-node": "0.0.2",
         "less": "^4.1.2",
@@ -86,5 +87,6 @@
         "singleQuote": false,
         "arrowParens": "always",
         "proseWrap": "never"
-    }
+    },
+    "dependencies": {}
 }
