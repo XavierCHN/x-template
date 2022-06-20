@@ -28,7 +28,5 @@ game/scripts/vscripts
 
 
 # kv 生成
-content/panorama/src/declares
-shared/kv
 content/panorama/src/utils/sync_keyvalues.js.d.ts
 content/panorama/src/utils/sync_keyvalues.js
