@@ -2,6 +2,7 @@ node_modules
 content/panorama/layout
 content/panorama/scripts
 game/resource/**/*.*
+!game/resource/addon.csv
 !game/resource/flash3/**/*.*
 !game/resource/overviews/**/*.*
 publish
