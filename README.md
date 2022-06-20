@@ -1,5 +1,7 @@
 [Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
 
+<a href="#x-template-1">中文说明</a>
+
 # X-Template
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]() Xavier's dota2 custom game development template (English translated with [DeepL](https://www.deepl.com))
@@ -17,16 +19,18 @@ If you want to use this template, in addition to mastering the Valve's developme
 
 ### Supported features
 
-1. convert the contents of the files in `excels` into a kv file and put it in the `game/scripts/npc`
-2. convert the contents of the `localization` folder into a corresponding language file and put it in the `game/resources`
-3. sync the contents of the `game/scripts/npc` to `content/panorama/scripts/keyvalues.js`
-4. use typescript to write game logic and panorama UI in `content/panorama/src` and `game/scripts/src` respectively
+1. convert the xlsx, xls kv files into a kv file and put it in the `game/scripts/npc`,
+2. convert `addon.csv` to `addon_*.txt`, (also you can convert them back to `addon.csv`),
+3. convert kv files to `sync_keyvalues.js` for you to fetch kv data in panorama UI, and generates `sync_keyvalues.js.d.ts` for you to use in your typescript code,
+4. use typescript to write game logic and panorama UI in `content/panorama/src` and `game/scripts/src`.
+
+- please check `gulpfile.ts` for more details.
 
 ### Supported commands
 
 1. `npm run launch [[addon_name] map_name]` launches dota2, all parameters are optional, if `addon_name` is provided then the specified addon will be loaded (default to launch this project), if `map_name` is provided then the corresponding map name will be loaded automatically (if addon_name is not provided then the current addon will be loaded by default)
 2. `npm run dev` enter dev mode to compile the ts source code and watch the changes of the files.
-3. `npm run prod` to run `publish` operation, it will automatically generate `publish` folder and automatically link to `dota_addons/you_addon_name_publish` folder, then you can choose this folder to publish (you can set some settings for publishing in `package.json -> dota_ developer` to make some settings for publishing).
+3. `npm run test` and `npm run prod` to run `publish` operation, it will automatically generate `publish` folder and automatically link to `dota_addons/you_addon_name_publish` folder, then you can choose this folder to publish (you can set some settings for publishing in `package.json -> dota_ developer` to make some settings for publishing).
 
 ### Usage
 
@@ -73,25 +77,29 @@ Xavier 的 dota2 自定义游戏开发模板
 
 ### 支持的功能
 
-1. 将`excels`文件夹的内容变成 kv 文件并放到`game/scripts/npc`文件夹
-2. 将`localization`文件夹的内容生成对应的语言文件并放到`game/resources`文件夹
-3. 将`game/scripts/npc`文件夹的内容同步到`content/panorama/scripts/keyvalues.js`
-4. 前端的`content/panorama/src`与后端的`game/scripts/src`文件夹分别用来写用户界面 react 源码和游戏逻辑的 ts 源代码
+
+1. 前端的`content/panorama/src`与后端的`game/scripts/src`文件夹分别用来写用户界面 react 源码和游戏逻辑的 ts 源代码
+2. 将你的 excel 文件变成 kv 文件并放到`game/scripts/npc`文件夹
+3. 将 `addon.csv` 变成 `addon_*.txt`，(也可以把 `addon_*.txt` 变成 `addon.csv`)
+4. 将`game/scripts/npc`文件夹的内容同步到`content/panorama/src/utils/sync_keyvalues.js`, 同时生成 `sync_keyvalues.js.d.ts` 用于你的 typescript 代码
+
 
 ### 支持的指令
 
 1. `npm run launch [[addon_name] map_name]` 启动 dota2，两个参数为可选参数，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名（若未提供 addon_name 则默认载入当前 addon）
 2. `npm run dev` 进入 dev 模式，将会执行`同步KV到js，生成localization，Excel转KV等操作`
-3. `npm run prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
+3. `npm run test` 和 `npm run prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
     > 加密发布流程
 
 > 将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密
 
 > 将`encryptDedicatedServerKey`修改成你的图的 DedicatedServerKey
 
-> 执行`npm run prod`来完成加密流程
+> 执行`npm run test` 来完成测试加密流程
 
-> 可以保持现有的 Invalid_NotDedicatedServer 密钥进行加密，之后在本地启动 publish 文件夹看看加密是否正确运行，正式发布再改成正式的 key
+> 可以保持现有的 Invalid_NotDedicatedServer 密钥进行加密，之后在本地启动 publish 文件夹看看加密是否正确运行
+
+> 执行 `npm run prod` 来完成正式发布加密流程
 
 > 执行`npm run launch your_addon_name_publish`来启动加密后的图，之后执行上传操作
 
@@ -111,9 +119,8 @@ Xavier 的 dota2 自定义游戏开发模板
 -   content 会和 `dota 2 beta/content/dota_addons/your_addon_name` 同步更新
 -   game 会和 `dota 2 beta/game/dota_addons/your_addon_name` 同步更新
 -   shared 用来写`panorama ts`和`tstl`公用的声明，如`custom_net_tables`等
--   excels 用来写 KV 表，其中以 `__` （两个下划线） 开头的表会被略过
--   localization 用来写各种本地化文本
 -   scripts 各种 node 脚本，用来完成各种辅助功能
+-   请仔细查阅 `gulpfile.ts` 来查看 gulp 的使用方法
 
 ### 注意事项
 
