@@ -1,4 +1,4 @@
-#base "lua_abilities.txt"
+#base "abilities.txt"
 
 "DOTAAbilities"
 {

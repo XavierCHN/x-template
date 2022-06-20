@@ -1,1 +1,2 @@
-#base "lua_items.txt"
+#base "item_list_1.txt"
+#base "item_list_2.txt"
