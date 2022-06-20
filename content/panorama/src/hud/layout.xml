@@ -1,9 +1,6 @@
 <root>
     <scripts>
         <include src="./script.tsx" />
-        
-        <!-- Synchronized file from kv files by sync_kv.js, if it is not used, please delete the following line -->
-        <include src="file://{resources}/scripts/sync_keyvalues.js" />
     </scripts>
     <styles>
         <include src="./styles.less" />

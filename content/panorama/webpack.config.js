@@ -60,6 +60,7 @@ module.exports = {
         new PanoramaTargetPlugin(),
         new PanoramaManifestPlugin({
             entries: [
+                { import: "./utils/sync_keyvalues.js" },
                 {
                     import: "./loading-screen/layout.xml",
                     filename: "custom_loading_screen.xml",
