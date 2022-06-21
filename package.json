@@ -1,5 +1,5 @@
 {
-    "name": "test",
+    "name": "",
     "description": "a ts-react template for dota2 modding, together with some helper scripts",
     "license": "MIT",
     "repository": "https://github.com/XavierCHN/x-template",
@@ -29,7 +29,7 @@
         }
     },
     "scripts": {
-        "postinstall": "node scripts/install.js",
+        "preinstall": "node scripts/install.js",
         "launch": "node scripts/launch.js",
         "preprod": "node scripts/prepublish.js",
         "pretest": "node scripts/prepublish.js",
