@@ -1,29 +1,42 @@
-const assert = require('assert');
-const fs = require('fs-extra');
-const path = require('path');
-const rimraf = require('rimraf');
-const { getAddonName, getDotaPath } = require('./utils');
+const assert = require("assert");
+const fs = require("fs-extra");
+const path = require("path");
+const rimraf = require("rimraf");
+const { getDotaPath } = require("./utils");
+const readlineSync = require("readline-sync");
+const { replace } = require("replace-json-property");
 
 (async () => {
-    if (process.platform !== 'win32') {
-        console.log('This script runs on windows only, Addon Linking is skipped.');
+    let originalName = require("../package.json").name;
+    let name = originalName;
+    while (!/^[a-z]([\d_a-z]+)?$/.test(name)) {
+        name = readlineSync.question("Please your addon name! should start with a \nletter and consist only of lowercase characters,\ndigits and underscores: ");
+        if (!/^[a-z]([\d_a-z]+)?$/.test(name)) {
+            console.log("Invalid name!");
+        }
+    }
+
+    if (name !== originalName) replace(path.resolve(__dirname, "..", "package.json"), "name", name, {spaces: 4});
+
+    if (process.platform !== "win32") {
+        console.log("This script runs on windows only, Addon Linking is skipped.");
         return;
     }
 
     const dotaPath = await getDotaPath();
     if (dotaPath === undefined) {
-        console.log('No Dota 2 installation found. Addon linking is skipped.');
+        console.log("No Dota 2 installation found. Addon linking is skipped.");
         return;
     }
 
-    for (const directoryName of ['game', 'content']) {
-        const sourcePath = path.resolve(__dirname, '..', directoryName);
+    for (const directoryName of ["game", "content"]) {
+        const sourcePath = path.resolve(__dirname, "..", directoryName);
         assert(fs.existsSync(sourcePath), `Could not find '${sourcePath}'`);
 
-        const targetRoot = path.join(dotaPath, directoryName, 'dota_addons');
+        const targetRoot = path.join(dotaPath, directoryName, "dota_addons");
         assert(fs.existsSync(targetRoot), `Could not find '${targetRoot}'`);
 
-        const targetPath = path.join(dotaPath, directoryName, 'dota_addons', getAddonName());
+        const targetPath = path.join(dotaPath, directoryName, "dota_addons", name);
         if (fs.existsSync(targetPath)) {
             const isCorrect = fs.lstatSync(sourcePath).isSymbolicLink() && fs.realpathSync(sourcePath) === targetPath;
             if (isCorrect) {
@@ -32,17 +45,17 @@ const { getAddonName, getDotaPath } = require('./utils');
             } else {
                 // 移除目标文件夹的所有内容，
                 console.log(`'${targetPath}' is already linked to another directory, removing`);
-                fs.chmodSync(targetPath, '0755');
+                fs.chmodSync(targetPath, "0755");
                 await rimraf(targetPath, () => {
-                    console.log('removed target path');
+                    console.log("removed target path");
                     fs.moveSync(sourcePath, targetPath);
-                    fs.symlinkSync(targetPath, sourcePath, 'junction');
+                    fs.symlinkSync(targetPath, sourcePath, "junction");
                     console.log(`Linked ${sourcePath} <==> ${targetPath}`);
                 });
             }
         } else {
             fs.moveSync(sourcePath, targetPath);
-            fs.symlinkSync(targetPath, sourcePath, 'junction');
+            fs.symlinkSync(targetPath, sourcePath, "junction");
             console.log(`Linked ${sourcePath} <==> ${targetPath}`);
         }
     }

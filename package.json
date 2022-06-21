@@ -1,5 +1,5 @@
 {
-    "name": "x_template",
+    "name": "test",
     "description": "a ts-react template for dota2 modding, together with some helper scripts",
     "license": "MIT",
     "repository": "https://github.com/XavierCHN/x-template",
@@ -87,6 +87,8 @@
         "pinyin-pro": "^3.8.3",
         "plugin-error": "^1.0.1",
         "react": "^16.14.0",
+        "readline-sync": "^1.4.10",
+        "replace-json-property": "^1.8.0",
         "rimraf": "^3.0.2",
         "steam-game-path": "^2.0.1",
         "through2": "^4.0.2",
