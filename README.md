@@ -64,16 +64,14 @@ If you want to use this template, in addition to mastering the Valve's developme
 
 Xavier 的 dota2 自定义游戏开发模板
 
-### 前置条件
+### 使用这个模板的好处
 
-如果你要使用这个模板，除了掌握 V 社的开发工具以外，你还需要额外学会
-
-1. `typescript`, `javascript` 的语法
-2. `react` 的基础知识
-3. `node.js`的基础知识
-4. 学习一下[react-panorama](https://github.com/ark120202/react-panorama)
-5. 学习一下[TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
-6. 了解一下 `DOTA2 Typescript API`，完成`npm install`后你可以查看`node_modules/dota-lua-types`和`node_modules/panorama-types`
+1. 可以使用更为`现代`的语言来进行开发，也就是`typescript`。
+2. 可以UI和游戏后端逻辑都使用`typescript`来开发，而不是需要分别学习`lua`和`javascript`。
+3. 使用表格工具来填写并管理你的`kv`文件，而无需掌握他们的结构。
+4. 使用`react`来开发UI可以更好地管理你的代码，而无需掌握`xml`的写法。
+5. 帮助解决了V社的工具中诸如`UI无法读取KV文件`，`UI图片不会自动编译`等问题。
+6. 加密发布代码的支持，可以帮助你保护一些关键代码。
 
 ### 支持的功能
 
@@ -91,7 +89,7 @@ Xavier 的 dota2 自定义游戏开发模板
 3. `npm run test` 和 `npm run prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
     > 加密发布流程
 
-> 将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密
+> 将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密（客户端会使用到的技能和Modifier代码建议不加密）
 
 > 将`encryptDedicatedServerKey`修改成你的图的 DedicatedServerKey
 
