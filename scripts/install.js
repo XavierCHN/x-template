@@ -10,13 +10,19 @@ const { replace } = require("replace-json-property");
     let originalName = require("../package.json").name;
     let name = originalName;
     while (!/^[a-z]([\d_a-z]+)?$/.test(name)) {
-        name = readlineSync.question("Please your addon name! should start with a \nletter and consist only of lowercase characters,\ndigits and underscores: ");
+        name = readlineSync.question(
+            "Please your addon name! should start with a \nletter and consist only of lowercase characters,\ndigits and underscores, or input N to skip addon linking (NOT recommended): "
+        );
+        if (name.toLocaleLowerCase() == `n`) {
+            console.log(`Skipping addon linking...`);
+            return;
+        }
         if (!/^[a-z]([\d_a-z]+)?$/.test(name)) {
             console.log("Invalid name!");
         }
     }
 
-    if (name !== originalName) replace(path.resolve(__dirname, "..", "package.json"), "name", name, {spaces: 4});
+    if (name !== originalName) replace(path.resolve(__dirname, "..", "package.json"), "name", name, { spaces: 4 });
 
     if (process.platform !== "win32") {
         console.log("This script runs on windows only, Addon Linking is skipped.");

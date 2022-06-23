@@ -1,6 +1,6 @@
 const path = require("path");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
-const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require("webpack-panorama");
+const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require("@demon673/webpack-panorama");
 
 /** @type {import('webpack').Configuration} */
 const isProduction = process.env.NODE_ENV === "production";
@@ -11,10 +11,11 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "layout/custom_game"),
         publicPath: "file://{resources}/layout/custom_game/",
+        chunkFormat: "commonjs"
     },
 
     resolve: {
-        extensions: [".ts", ".tsx", "..."],
+        extensions: [".ts", ".tsx", ".js", ".jsx", "..."],
         symlinks: false,
     },
 
@@ -22,12 +23,18 @@ module.exports = {
         rules: [
             {
                 test: /\.xml$/,
-                loader: "webpack-panorama/lib/layout-loader",
+                loader: "@demon673/webpack-panorama/lib/layout-loader",
+                options: {
+                    cacheable: true,
+                },
             },
             {
-                test: /\.[jt]sx?$/,
+                test: /\.[jt]sx$/,
                 issuer: /\.xml$/,
-                loader: "webpack-panorama/lib/entry-loader",
+                loader: "@demon673/webpack-panorama/lib/entry-loader",
+                options: {
+                    cacheable: true,
+                },
             },
             {
                 test: /\.tsx?$/,
@@ -35,13 +42,20 @@ module.exports = {
                 options: { transpileOnly: true },
             },
             {
+                test: /\.js?$|\.jsx?$/,
+                loader: "babel-loader",
+                exclude: [/node_modules/, /sync_keyvalues/],
+                options: { presets: ["@babel/preset-react", "@babel/preset-env"] },
+            },
+            {
+                test: /\.css$/,
                 test: /\.(css|less)$/,
                 issuer: /\.xml$/,
                 loader: "file-loader",
                 options: { name: "[path][name].css", esModule: false },
             },
             {
-                test: /\.less$/i,
+                test: /\.less$/,
                 loader: "less-loader",
                 options: {
                     additionalData: (content) => {
@@ -50,6 +64,9 @@ module.exports = {
                             return match.replace(name, `'${name}'`);
                         });
                         return content;
+                    },
+                    lessOptions: {
+                        relativeUrls: false,
                     },
                 },
             },
