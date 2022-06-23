@@ -1,6 +1,6 @@
-[Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
+## [Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
 
-<a href="#x-template-1">中文说明</a>
+## <a href="#x-template-1">中文说明</a>
 
 # X-Template
 
