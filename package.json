@@ -112,13 +112,14 @@
         "webpack-panorama": "^0.2.0"
     },
     "prettier": {
-        "printWidth": 200,
+        "printWidth": 100,
         "tabWidth": 4,
         "useTabs": false,
         "semi": true,
-        "singleQuote": false,
+        "singleQuote": true,
         "arrowParens": "always",
-        "proseWrap": "never"
+        "proseWrap": "never",
+        "trailingComma": "es5"
     },
     "dependencies": {}
 }
