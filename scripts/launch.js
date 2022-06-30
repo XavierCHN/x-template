@@ -4,6 +4,12 @@ const { getAddonName, getDotaPath } = require("./utils");
 
 (async () => {
     const dotaPath = await getDotaPath();
+
+    if (dotaPath === undefined) {
+        console.log(`no DOTA2 installation found, addon launch is skipped`);
+        return;
+    }
+
     const win64 = path.join(dotaPath, "game", "bin", "win64");
 
     // You can add any arguments there

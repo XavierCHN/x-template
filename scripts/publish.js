@@ -41,6 +41,14 @@ walker
                 console.log(`[publish.js] [copy] ->${fileName}`);
                 fs.copyFileSync(fileName, getPublishPath(fileName));
             }
+            if (/addon_game_mode\.lua$/.test(fileName)) {
+                const addonGameMode = fs.readFileSync(getPublishPath(fileName), "utf8");
+                const timeStamp = new Date();
+                // format to yyyy-mm-dd hh:mm
+                const timeStampString = `${timeStamp.getFullYear()}-${timeStamp.getMonth() + 1}-${timeStamp.getDate()} ${timeStamp.getHours()}:${timeStamp.getMinutes()}`;
+                const newAddonGameMode = `_G.PUBLISH_TIMESTAMP = "${timeStampString}"\n\n` + addonGameMode;
+                fs.writeFileSync(getPublishPath(fileName), newAddonGameMode);
+            }
         }
         next();
     })
