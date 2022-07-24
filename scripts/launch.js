@@ -33,9 +33,12 @@ const { getAddonName, getDotaPath } = require("./utils");
 
     const args = ["-novid", "-tools", "-addon", addon_name];
     if (map_name) args.push(`+dota_launch_custom_game ${addon_name} ${map_name}`);
-    
-    spawn(path.join(win64, "dota2.exe"), args, { detached: true, cwd: win64 });
-    spawn(path.join(win64, "vconsole2.exe"));
+
+    if (map_name == `dotaonly`) spawn(path.join(win64, "dota2.exe"), [`-novid`], { detached: true, cwd: win64 });
+    else {
+        spawn(path.join(win64, "dota2.exe"), args, { detached: true, cwd: win64 });
+        spawn(path.join(win64, "vconsole2.exe"));
+    }
 })().catch((error) => {
     console.error(error);
     process.exit(1);
