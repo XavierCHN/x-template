@@ -1,4 +1,2 @@
-import React from 'react';
-import { render } from '@demon673/react-panorama';
-
-render(<Panel />, $.GetContextPanel());
+import "panorama-polyfill/lib/console";
+import "panorama-polyfill/lib/timers";
