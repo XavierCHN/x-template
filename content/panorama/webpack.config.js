@@ -3,11 +3,9 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require("@demon673/webpack-panorama");
 
 /** @type {import('webpack').Configuration} */
-const isProduction = process.env.NODE_ENV === "production";
 module.exports = {
-    mode: isProduction ? "production" : "development",
+    mode: "development",
     context: path.resolve(__dirname, "src"),
-    // devtool: isProduction ? false : 'eval-inline-source-map',
     output: {
         path: path.resolve(__dirname, "layout/custom_game"),
         publicPath: "file://{resources}/layout/custom_game/",
