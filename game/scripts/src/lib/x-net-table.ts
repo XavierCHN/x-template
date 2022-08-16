@@ -230,7 +230,7 @@ export class XNetTable {
 
                 let data = this._data_queue.shift();
                 if (data == null) {
-                    print(`数据已经发完了，进入等待状态`);
+                    // print(`数据已经发完了，进入等待状态`);
                     return FrameTime();
                 }
                 let data_str = data.data;
