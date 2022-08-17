@@ -23,16 +23,13 @@ module.exports = {
                 test: /\.xml$/,
                 loader: "@demon673/webpack-panorama/lib/layout-loader",
                 options: {
-                    // cacheable: true,
+                    cacheable: true, // layout 启用了cache，避免xml文件重复加载，如果添加了新xml文件，请重新run webpack
                 },
             },
             {
                 test: /\.[jt]sx$/,
                 issuer: /\.xml$/,
                 loader: "@demon673/webpack-panorama/lib/entry-loader",
-                options: {
-                    // cacheable: true,
-                },
             },
             {
                 test: /\.tsx?$/,
