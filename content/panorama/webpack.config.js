@@ -23,7 +23,7 @@ module.exports = {
                 test: /\.xml$/,
                 loader: "@demon673/webpack-panorama/lib/layout-loader",
                 options: {
-                    cacheable: true,
+                    // cacheable: true,
                 },
             },
             {
@@ -31,7 +31,7 @@ module.exports = {
                 issuer: /\.xml$/,
                 loader: "@demon673/webpack-panorama/lib/entry-loader",
                 options: {
-                    cacheable: true,
+                    // cacheable: true,
                 },
             },
             {
