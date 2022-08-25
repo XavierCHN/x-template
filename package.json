@@ -81,7 +81,7 @@
         "fork-ts-checker-webpack-plugin": "^5.2.1",
         "fs-extra": "^9.1.0",
         "gulp": "^4.0.2",
-        "gulp-dotax": "^1.0.23",
+        "gulp-dotax": "^1.0.26",
         "json-to-ts": "^1.7.0",
         "json5": "^2.2.1",
         "keyvalues-node": "0.0.2",
