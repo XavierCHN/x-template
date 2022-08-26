@@ -119,15 +119,14 @@ end
 
 TIMERS_THINK = 0.01
 
-if Timers == nil then
+if _G.Timers == nil then
 	print ( '[Timers] creating Timers' )
-	Timers = {}
+	_G.Timers = {}
 	setmetatable(Timers, {
 		__call = function(t, ...)
 			return t:CreateTimer(...)
 		end
 	})
-	--Timers.__index = Timers
 end
 
 function Timers:start()
@@ -279,8 +278,4 @@ end
 
 if not Timers.started then Timers:start() end
 
-GameRules.Timers = Timers
-
-return {
-    Timers = GameRules.Timers
-}
+GameRules.Timers = GameRules.Timers or Timers

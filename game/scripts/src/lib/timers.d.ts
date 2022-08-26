@@ -14,21 +14,13 @@ declare interface Timers {
     CreateTimer<T>(callback: (this: T) => void | number, context: T): string;
 
     CreateTimer(name: string, options: CreateTimerOptions): string;
-    CreateTimer<T>(
-        name: string,
-        options: CreateTimerOptionsContext<T>,
-        context: T
-    ): string;
+    CreateTimer<T>(name: string, options: CreateTimerOptionsContext<T>, context: T): string;
 
     CreateTimer(options: CreateTimerOptions): string;
     CreateTimer<T>(options: CreateTimerOptionsContext<T>, context: T): string;
 
     CreateTimer(delay: number, callback: (this: void) => void | number): string;
-    CreateTimer<T>(
-        delay: number,
-        callback: (this: T) => void | number,
-        context: T
-    ): string;
+    CreateTimer<T>(delay: number, callback: (this: T) => void | number, context: T): string;
 
     RemoveTimer(name: string): void;
     RemoveTimers(killAll: boolean): void;
@@ -36,6 +28,9 @@ declare interface Timers {
 
 declare global {
     var Timers: Timers;
+    interface CDOTAGameRules {
+        Timers: Timers;
+    }
 }
 
-export var Timers: Timers;
+export {};
