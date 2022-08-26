@@ -5,7 +5,6 @@ require('lib/timers');
 
 // some helper lua modules, if it is not used, please comment it out
 // 一些辅助的lua模块，如果没有使用到的可以注释掉
-require('utils/date');
 require('utils/json');
 require('utils/md5');
 require('utils/popups');
