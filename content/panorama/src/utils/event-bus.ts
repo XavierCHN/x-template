@@ -1,24 +1,41 @@
-import { DependencyList, useEffect } from "react";
-import { LocalEvent } from "../def/local_event_def";
-import { EventEmitter } from "events";
+import { DependencyList, useEffect } from 'react';
+import { LocalEvent } from '../def/local_event_def';
+import { EventEmitter } from 'events';
 
-export function emitLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(eventName: EName, eventData: EData, ...args: any[]) {
-    bus.emit(eventName, eventData, ...args);
+export function emitLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(
+    eventName: EName,
+    eventData: EData,
+    ...args: any[]
+) {
+    GameUI.CustomUIConfig().EventBus.emit(eventName, eventData, ...args);
 }
 
-export function onLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(eventName: EName, listener: (evt: EData, ...arg: any[]) => void) {
-    bus.on(eventName, listener);
+export function onLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(
+    eventName: EName,
+    listener: (evt: EData, ...arg: any[]) => void
+) {
+    GameUI.CustomUIConfig().EventBus.on(eventName, listener);
 }
 
-export function onceLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(eventName: EName, listener: (evt: EData, ...arg: any[]) => void) {
-    bus.once(eventName, listener);
+export function onceLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(
+    eventName: EName,
+    listener: (evt: EData, ...arg: any[]) => void
+) {
+    GameUI.CustomUIConfig().EventBus.once(eventName, listener);
 }
 
-export function offLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(eventName: EName, listener: (evt: EData, ...arg: any[]) => void) {
-    bus.off(eventName, listener);
+export function offLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(
+    eventName: EName,
+    listener: (evt: EData, ...arg: any[]) => void
+) {
+    GameUI.CustomUIConfig().EventBus.off(eventName, listener);
 }
 
-export function useLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(eventName: EName, listener: (evt: EData, ...arg: any[]) => void, dependencies: DependencyList = []) {
+export function useLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(
+    eventName: EName,
+    listener: (evt: EData, ...arg: any[]) => void,
+    dependencies: DependencyList = []
+) {
     useEffect(() => {
         onLocalEvent(eventName, listener);
         return () => {
@@ -27,6 +44,15 @@ export function useLocalEvent<EName extends keyof LocalEvent, EData extends Loca
     }, dependencies);
 }
 
-const bus = new EventEmitter();
-bus.setMaxListeners(1000);
+declare global {
+    interface CustomUIConfig {
+        EventBus: EventEmitter;
+    }
+}
+
+GameUI.CustomUIConfig().EventBus = new EventEmitter();
+GameUI.CustomUIConfig().EventBus.setMaxListeners(1000);
+
+const bus = GameUI.CustomUIConfig().EventBus;
+
 export default bus;
