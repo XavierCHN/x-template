@@ -1,6 +1,6 @@
 
-local gf = require("utils.aeslua.gf");
-local util = require("utils.aeslua.util");
+local gf = require("gf");
+local util = require("util");
 
 --
 -- Implementation of AES with nearly pure lua (only bitlib is needed) 

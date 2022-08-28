@@ -1,6 +1,6 @@
-local aes = require("utils.aeslua.aes");
-local util = require("utils.aeslua.util");
-local buffer = require("utils.aeslua.buffer");
+local aes = require("aes");
+local util = require("util");
+local buffer = require("buffer");
 
 local public = {};
 

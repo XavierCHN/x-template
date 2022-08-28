@@ -2,8 +2,8 @@ local private = {};
 local public = {};
 aeslua = public;
 
-local ciphermode = require("utils.aeslua.ciphermode");
-local util = require("utils.aeslua.util");
+local ciphermode = require("aeslua.ciphermode");
+local util = require("aeslua.util");
 
 --
 -- Simple API for encrypting strings.
