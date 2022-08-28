@@ -80,6 +80,7 @@ module.exports = {
                 { import: "./hud/layout.xml", type: "Hud" },
                 { import: "./end_screen/layout.xml", type: "EndScreen" },
             ],
+            minify: false,
         }),
         new ForkTsCheckerWebpackPlugin({
             typescript: {

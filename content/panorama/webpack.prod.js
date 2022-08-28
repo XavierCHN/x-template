@@ -7,4 +7,6 @@ config.optimization = {
     minimizer: [new TerserPlugin()],
 };
 
+config.mode = 'production';
+
 module.exports = config;
