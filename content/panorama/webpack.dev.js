@@ -80,6 +80,7 @@ module.exports = {
                 { import: "./hud/layout.xml", type: "Hud" },
                 { import: "./end_screen/layout.xml", type: "EndScreen" },
             ],
+            // 这是一个临时的解决方案，应该作为一个永久性的变更放到webpack-panorama中
             minify: false,
         }),
         new ForkTsCheckerWebpackPlugin({
