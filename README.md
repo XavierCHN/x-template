@@ -15,7 +15,7 @@ If you want to use this template, in addition to mastering the Valve's developme
 3. the basics of `node.js`
 4. learn about [react-panorama](https://github.com/ark120202/react-panorama)
 5. learn about [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
-6. learn about the `DOTA2 Typescript API`, you can check out `node_modules/dota-lua-types` and `node_modules/panorama-types` after you finish `npm install`.
+6. learn about the `DOTA2 Typescript API`, you can check out `node_modules/dota-lua-types` and `node_modules/panorama-types` after you finish `yarn`.
 
 ### Supported features
 
@@ -28,9 +28,9 @@ If you want to use this template, in addition to mastering the Valve's developme
 
 ### Supported commands
 
-1. `npm run launch [[addon_name] map_name]` launches dota2, all parameters are optional, if `addon_name` is provided then the specified addon will be loaded (default to launch this project), if `map_name` is provided then the corresponding map name will be loaded automatically (if addon_name is not provided then the current addon will be loaded by default)
-2. `npm run dev` enter dev mode to compile the ts source code and watch the changes of the files.
-3. `npm run test` and `npm run prod` to run `publish` operation, it will automatically generate `publish` folder and automatically link to `dota_addons/you_addon_name_publish` folder, then you can choose this folder to publish (you can set some settings for publishing in `package.json -> dota_ developer` to make some settings for publishing).
+1. `yarn launch [[addon_name] map_name]` launches dota2, all parameters are optional, if `addon_name` is provided then the specified addon will be loaded (default to launch this project), if `map_name` is provided then the corresponding map name will be loaded automatically (if addon_name is not provided then the current addon will be loaded by default)
+2. `yarn dev` enter dev mode to compile the ts source code and watch the changes of the files.
+3. `yarn test` and `yarn prod` to run `publish` operation, it will automatically generate `publish` folder and automatically link to `dota_addons/you_addon_name_publish` folder, then you can choose this folder to publish (you can set some settings for publishing in `package.json -> dota_ developer` to make some settings for publishing).
 
 ### Usage
 
@@ -38,8 +38,8 @@ If you want to use this template, in addition to mastering the Valve's developme
 2. install `node.js`, require above Node v14.10.1 ~~ because versions below is not tested ~~
 3. clone the generated or fork project
 4. open `package.json` and change `name` to your preferred name
-5. execute `npm install` to install the dependencies, it should automatically link `content`,`game` folder to your `dota 2 beta/dota_addons/your_preferred_name`, (if you encounter permission problems, please try to restart)
-6. `npm run dev` and start your development
+5. execute `yarn` to install the dependencies, it should automatically link `content`,`game` folder to your `dota 2 beta/dota_addons/your_preferred_name`, (if you encounter permission problems, please try to restart)
+6. `yarn dev` and start your development
 
 ### Contents
 
@@ -84,22 +84,22 @@ Xavier 的 dota2 自定义游戏开发模板
 
 ### 支持的指令
 
-1. `npm run launch [[addon_name] map_name]` 启动 dota2，两个参数为可选参数，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名（若未提供 addon_name 则默认载入当前 addon）
-2. `npm run dev` 进入 dev 模式，将会执行`同步KV到js，生成localization，Excel转KV等操作`
-3. `npm run test` 和 `npm run prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
+1. `yarn launch [[addon_name] map_name]` 启动 dota2，两个参数为可选参数，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名（若未提供 addon_name 则默认载入当前 addon）
+2. `yarn dev` 进入 dev 模式，将会执行`同步KV到js，生成localization，Excel转KV等操作`
+3. `yarn test` 和 `yarn prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
     > 加密发布流程
 
 > 将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密（客户端会使用到的技能和Modifier代码建议不加密）
 
 > 将`encryptDedicatedServerKey`修改成你的图的 DedicatedServerKey
 
-> 执行`npm run test` 来完成测试加密流程
+> 执行`yarn test` 来完成测试加密流程
 
 > 可以保持现有的 Invalid_NotDedicatedServer 密钥进行加密，之后在本地启动 publish 文件夹看看加密是否正确运行
 
-> 执行 `npm run prod` 来完成正式发布加密流程
+> 执行 `yarn prod` 来完成正式发布加密流程
 
-> 执行`npm run launch your_addon_name_publish`来启动加密后的图，之后执行上传操作
+> 执行`yarn launch your_addon_name_publish`来启动加密后的图，之后执行上传操作
 
 > 如果要使用加密功能，需要安装 [Lua 命令行程序](http://luabinaries.sourceforge.net/)
 
@@ -109,8 +109,8 @@ Xavier 的 dota2 自定义游戏开发模板
 2. 安装`node.js`，要求是 above Node v14.10.1 ~~因为低于这个版本的没有测试过~~
 3. clone 生成或者 fork 的项目
 4. 打开`package.json`，将`name`修改为你自己喜欢的名字
-5. 执行`npm install`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons`,(如果碰到权限问题，请关闭代码编辑器后使用控制台来执行`npm install`，或者重启一下电脑再试)
-6. `npm run dev`，开始你的开发
+5. 执行`yarn`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons`,(如果碰到权限问题，请关闭代码编辑器后使用控制台来执行`yarn`，或者重启一下电脑再试)
+6. `yarn dev`，开始你的开发
 
 ### 文件夹内容
 
