@@ -1,12 +1,14 @@
-import gulp from "gulp";
-import * as dotax from "gulp-dotax";
-import path from "path";
+import gulp from 'gulp';
+import * as dotax from 'gulp-dotax';
+import path from 'path';
 
-const paths: { [key: string]: string; } = {
-    excels: "excels",
-    kv: "game/scripts/npc",
-    panorama: "content/panorama",
-    game_resource: "game/resource",
+const paths: { [key: string]: string } = {
+    excels: 'excels',
+    kv: 'game/scripts/npc',
+    src_json: 'game/scripts/src/json',
+    panorama_json: 'content/panorama/src/json',
+    panorama: 'content/panorama',
+    game_resource: 'game/resource',
 };
 
 /**
@@ -14,10 +16,11 @@ const paths: { [key: string]: string; } = {
  * @description Convert your excel file to kv file
  */
 const cSheetToKV = () => {
-    return gulp.src(`${paths.excels}/*.{xlsx,xls}`)
+    return gulp
+        .src(`${paths.excels}/*.{xlsx,xls}`)
         .pipe(
             dotax.sheetToKV({
-                sheetsIgnore: "^__", // 忽略以两个下划线开头的sheet
+                sheetsIgnore: '^__', // 忽略以两个下划线开头的sheet
                 indent: `	`, // 自定义缩进
             })
         )
@@ -29,13 +32,11 @@ const cSheetToKV = () => {
  * @description Convert your kv file to panorama js file, you need to configure the loader in webpack.config.js
  */
 const cKVToJS = () => {
-    return gulp.src(`${paths.kv}/**/*.{kv,txt}`)
-        .pipe(
-            dotax.kvToJS({
-                fileName: "sync_keyvalues.js",
-            })
-        )
-        .pipe(gulp.dest(`${paths.panorama}/src/utils`));
+    return gulp
+        .src(`${paths.kv}/**/*.{kv,txt}`)
+        .pipe(dotax.kvToJS())
+        .pipe(gulp.dest(paths.panorama_json))
+        .pipe(gulp.dest(paths.src_json));
 };
 
 /**
@@ -47,23 +48,25 @@ const cKVToLocal = () => {
         dotax.kvToLocalsCSV(`${paths.game_resource}/addon.csv`, {
             customPrefix: (key, data, path) => {
                 if (data.BaseClass && /ability_/.test(data.BaseClass)) {
-                    if (data.ScriptFile && data.ScriptFile.startsWith("abilities/combos/")) {
-                        return "dota_tooltip_ability_combo_";
+                    if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
+                        return 'dota_tooltip_ability_combo_';
                     } else if (data.ScriptFile && /^/.test(data.ScriptFile)) {
-                        return "dota_tooltip_ability_chess_ability_";
+                        return 'dota_tooltip_ability_chess_ability_';
                     } else {
-                        return "dota_tooltip_ability_";
+                        return 'dota_tooltip_ability_';
                     }
                 }
-                return "";
+                return '';
             },
             customSuffix: (key, data, path) => {
-                let suffix = [""];
-                if (data.ScriptFile && data.ScriptFile.startsWith("abilities/combos/")) {
-                    suffix = ["_description"];
+                let suffix = [''];
+                if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
+                    suffix = ['_description'];
                     let maxLevel = data.MaxLevel;
                     if (maxLevel) {
-                        suffix = suffix.concat(Array.from({ length: maxLevel }, (_, i) => `_level${i + 1}`));
+                        suffix = suffix.concat(
+                            Array.from({ length: maxLevel }, (_, i) => `_level${i + 1}`)
+                        );
                     }
                 }
                 return suffix;
@@ -79,7 +82,9 @@ const cKVToLocal = () => {
  *
  */
 const cCSVToLocalization = () => {
-    return gulp.src(`${paths.game_resource}/addon.csv`).pipe(dotax.csvToLocals(paths.game_resource));
+    return gulp
+        .src(`${paths.game_resource}/addon.csv`)
+        .pipe(dotax.csvToLocals(paths.game_resource));
 };
 
 /**
@@ -87,7 +92,10 @@ const cCSVToLocalization = () => {
  * @description Convert addon_*.txt file to addon.csv file, this task is for adapting your original development method, if you are re-developing, you don't need to run this task
  */
 const cLocalsToCSV = () => {
-    return dotax.localsToCSV(`${paths.game_resource}/addon_*.txt`, `${paths.game_resource}/addon.csv`);
+    return dotax.localsToCSV(
+        `${paths.game_resource}/addon_*.txt`,
+        `${paths.game_resource}/addon.csv`
+    );
 };
 
 /**
@@ -100,38 +108,38 @@ gulp.task(`img_pcache`, () => {
         .pipe(dotax.imagePrecacche(`content/panorama/images/`))
         .pipe(gulp.dest(path.join(paths.panorama, `src/utils`)));
 });
-gulp.task("img_pcache:watch", () => {
-    return gulp.watch(`content/panorama/images/**/*.{jpg,png,psd}`, gulp.series("img_pcache"));
+gulp.task('img_pcache:watch', () => {
+    return gulp.watch(`content/panorama/images/**/*.{jpg,png,psd}`, gulp.series('img_pcache'));
 });
 
 // 以下的task，顾名思义即可
-gulp.task("local", cLocalsToCSV);
+gulp.task('local', cLocalsToCSV);
 
-gulp.task("sheetToKV", cSheetToKV);
-gulp.task("sheetToKV:watch", () => {
+gulp.task('sheetToKV', cSheetToKV);
+gulp.task('sheetToKV:watch', () => {
     return gulp.watch(`${paths.excels}/*.{xlsx,xls,csv}`, cSheetToKV);
 });
 
-gulp.task("kvToJS", cKVToJS);
-gulp.task("kvToJS:watch", () => {
+gulp.task('kvToJS', cKVToJS);
+gulp.task('kvToJS:watch', () => {
     return gulp.watch(`${paths.kv}/**/*.{kv,txt}`, cKVToJS);
 });
 
-gulp.task("kvToLocal", cKVToLocal);
-gulp.task("kvToLocal:watch", () => {
+gulp.task('kvToLocal', cKVToLocal);
+gulp.task('kvToLocal:watch', () => {
     return gulp.watch(`${paths.kv}/**/*.{kv,txt}`, cKVToLocal);
 });
 
-gulp.task("csvToLocalization", cCSVToLocalization);
-gulp.task("csvToLocalization:watch", () => {
+gulp.task('csvToLocalization', cCSVToLocalization);
+gulp.task('csvToLocalization:watch', () => {
     return gulp.watch(`${paths.game_resource}/addon.csv`, cCSVToLocalization);
 });
 
-gulp.task("predev", gulp.series("sheetToKV", "kvToJS", "csvToLocalization", "img_pcache"));
-gulp.task("dev", gulp.parallel("sheetToKV:watch", "csvToLocalization:watch", "img_pcache:watch"));
-gulp.task("build", gulp.series("predev", "csvToLocalization"));
-gulp.task("jssync", gulp.series("sheetToKV", "kvToJS"));
-gulp.task("kvl", gulp.series("kvToLocal"));
+gulp.task('predev', gulp.series('sheetToKV', 'kvToJS', 'csvToLocalization', 'img_pcache'));
+gulp.task('dev', gulp.parallel('sheetToKV:watch', 'csvToLocalization:watch', 'img_pcache:watch'));
+gulp.task('build', gulp.series('predev', 'csvToLocalization'));
+gulp.task('jssync', gulp.series('sheetToKV', 'kvToJS'));
+gulp.task('kvl', gulp.series('kvToLocal'));
 
 // 编译发布版本
-gulp.task("prod", gulp.series("sheetToKV", "kvToJS", "csvToLocalization", "img_pcache"));
+gulp.task('prod', gulp.series('sheetToKV', 'kvToJS', 'csvToLocalization', 'img_pcache'));

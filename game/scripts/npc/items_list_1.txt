@@ -7,8 +7,8 @@
 		"BaseClass" "item_lua"
 		"AbilityValues" {
 			"damage" "0.1 0.2 0.3 0.4"
-			"" "1 1 2 3 4"
-			"" "1000 2000 30000 40000"
+			"unknown_var_0" "1 1 2 3 4"
+			"unknown_var_1" "1000 2000 30000 40000"
 		}
 		"MaxLevel" "2"
 		"AbilityCooldown" "1 2 3 4 "
