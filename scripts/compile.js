@@ -1,25 +1,30 @@
-const assert = require("assert");
-const { exec } = require("child_process");
-const fs = require("fs-extra");
-const path = require("path");
-const rimraf = require("rimraf");
-const { getAddonName, getDotaPath } = require("./utils");
+const assert = require('assert');
+const { exec } = require('child_process');
+const fs = require('fs-extra');
+const path = require('path');
+const rimraf = require('rimraf');
+const { getAddonName, getDotaPath } = require('./utils');
 
 (async () => {
-    if (process.platform !== "win32") {
-        console.log("Resource compiler runs on windows only, exiting...");
+    if (process.platform !== 'win32') {
+        console.log('Resource compiler runs on windows only, exiting...');
         return;
     }
 
     const dotaPath = await getDotaPath();
     if (dotaPath === undefined) {
-        console.log("No Dota 2 installation found, exiting...");
+        console.log('No Dota 2 installation found, exiting...');
         return;
     }
 
-
     // get the resourcecompiler.exe path
-    const resourceCompilerPath = path.join(dotaPath, "game", "bin", "win64", "resourcecompiler.exe");
+    const resourceCompilerPath = path.join(
+        dotaPath,
+        'game',
+        'bin',
+        'win64',
+        'resourcecompiler.exe'
+    );
 
     const addonContent = path.join(dotaPath, 'content', 'dota_addons', getAddonName());
 
@@ -29,15 +34,15 @@ const { getAddonName, getDotaPath } = require("./utils");
     let params = script.match(/"(?:\\?[\S\s])*?"/g);
     subDirs = ['materials', 'particles', 'soundevents', 'vscripts', 'scripts', 'maps']; // default compile targets
     if (params !== null) {
-        subDirs = params.map(p => p.replace(/"/g, ""));
+        subDirs = params.map((p) => p.replace(/"/g, ''));
     }
 
     let args = [];
-    args.push(`"${resourceCompilerPath}"`)
-    args.push(`-game "${gamePath}"`)
+    args.push(`"${resourceCompilerPath}"`);
+    args.push(`-game "${gamePath}"`);
     args.push(`-verbose`);
     args.push(`-r`);
-    subDirs.forEach(dir => {
+    subDirs.forEach((dir) => {
         let c = args.concat([`-i "${path.join(addonContent, dir, '*')}"`]);
         exec(c.join(` `), (err, stdout, stderr) => {
             if (err) {
@@ -45,8 +50,8 @@ const { getAddonName, getDotaPath } = require("./utils");
                 process.exit(1);
             }
             if (stdout) console.log(stdout);
-        })
-    })
+        });
+    });
 })().catch((error) => {
     console.error(error);
     process.exit(1);

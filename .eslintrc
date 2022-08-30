@@ -1,13 +1,11 @@
 {
     "parser": "@typescript-eslint/parser",
     "extends": ["plugin:prettier/recommended"],
-    "plugins": [
-        "@typescript-eslint",
-        "import",
-        "prettier",
-        "react",
-        "react-hooks"
-    ],
+    "settings": {
+        "import/resolver": { "node": { "extensions": [".js", ".ts", ".jsx", ".tsx"] } },
+        "import/extensions": [".js", ".ts", ".jsx", ".tsx"]
+    },
+    "plugins": ["@typescript-eslint", "import", "prettier", "react", "react-hooks"],
     "rules": {
         "no-use-before-define": "off",
         "prettier/prettier": "error",

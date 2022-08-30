@@ -28,8 +28,8 @@
         }
     },
     "scripts": {
-        "lint": "eslint --ext .js,.ts,.tsx \"./game/**/src/**/*.{js,ts,tsx}\" \"./content/**/panorama/src/**/*.{js,ts,tsx}\" --quiet --fix",
-        "prettier": "prettier --config ./.prettierrc.js --write --list-different \"./gulpfile.ts\" \"./game/**/src/**/*.{js,ts,tsx}\" \"./content/**/panorama/src/**/*.{js,ts,tsx}\"",
+        "lint": "eslint --ext .js,.ts,.tsx --quiet --fix \"./content/panorama/src/**/*.{js,ts,tsx}\" \"./game/scripts/src/**/*.{js,ts,tsx}\" \"./scripts/**/*.{js,ts,tsx}\" \"./shared/**/*.{js,ts,tsx}\" ",
+        "prettier": "prettier --config ./.prettierrc.js --write --list-different --ext .js,.ts,.tsx \"./content/panorama/src/**/*.{js,ts,tsx}\" \"./game/scripts/src/**/*.{js,ts,tsx}\" \"./scripts/**/*.{js,ts,tsx}\"",
         "postinstall": "node scripts/install.js",
         "launch": "node scripts/launch.js",
         "preprod": "node scripts/prepublish.js",
