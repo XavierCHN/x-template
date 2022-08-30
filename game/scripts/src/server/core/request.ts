@@ -2,8 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 import { ApiRequestOptions } from './ApiRequestOptions';
-import { Headers, NoSignatureURLs, OpenAPIConfig, ServerAuthKey, SpecailAuthKey } from './OpenAPI';
-import { URLs } from './urls';
+import { Headers, NoSignatureURLs, OpenAPIConfig } from './OpenAPI';
 
 const isDefined = <T>(value: T | null | undefined): boolean => {
     return value !== undefined && value !== null;
@@ -137,9 +136,6 @@ export const sendRequest = async (
     if (sign) {
         const signature = SHA.sha3_512(authKey + (body ?? `{}`));
         request.SetHTTPRequestHeaderValue(`dota-signature`, signature);
-    } else {
-        const signature = SHA.sha3_512(authKey + SpecailAuthKey);
-        request.SetHTTPRequestHeaderValue(`Dota-Signature`, signature);
     }
 
     if (body != undefined) request.SetHTTPRequestRawPostBody(options.mediaType ?? `application/json`, body);
@@ -169,7 +165,7 @@ export const request = <T>(config: OpenAPIConfig, options: ApiRequestOptions): P
             const body = getRequestBody(options);
             const headers = getHeaders(config, options);
 
-            const should_sign = !NoSignatureURLs.includes(options.url as URLs);
+            const should_sign = !NoSignatureURLs.includes(options.url);
             const response = await sendRequest(config, options, url, body, headers, should_sign, config.AUTHKEY);
 
             throwError(response);
