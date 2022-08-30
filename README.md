@@ -21,7 +21,7 @@ If you want to use this template, in addition to mastering the Valve's developme
 
 1. convert the xlsx, xls kv files into a kv file and put it in the `game/scripts/npc`,
 2. convert `addon.csv` to `addon_*.txt`, (also you can convert them back to `addon.csv`),
-3. convert kv files to `sync_keyvalues.js` for you to fetch kv data in panorama UI, and generates `sync_keyvalues.js.d.ts` for you to use in your typescript code,
+3. convert kv files to json files for you to fetch kv data in panorama UI,
 4. use typescript to write game logic and panorama UI in `content/panorama/src` and `game/scripts/src`.
 
 - please check `gulpfile.ts` for more details.
@@ -79,7 +79,7 @@ Xavier 的 dota2 自定义游戏开发模板
 1. 前端的`content/panorama/src`与后端的`game/scripts/src`文件夹分别用来写用户界面 react 源码和游戏逻辑的 ts 源代码
 2. 将你的 excel 文件变成 kv 文件并放到`game/scripts/npc`文件夹
 3. 将 `addon.csv` 变成 `addon_*.txt`，(也可以把 `addon_*.txt` 变成 `addon.csv`)
-4. 将`game/scripts/npc`文件夹的内容同步到`content/panorama/src/utils/sync_keyvalues.js`, 同时生成 `sync_keyvalues.js.d.ts` 用于你的 typescript 代码
+4. 将`game/scripts/npc`文件夹的内容同步panorama的的json文件夹，用来给你的UI获取kv数据
 
 
 ### 支持的指令
