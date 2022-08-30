@@ -1,21 +1,29 @@
-export interface BaseAbility extends CDOTA_Ability_Lua { }
-export class BaseAbility { }
+export interface BaseAbility extends CDOTA_Ability_Lua {}
+export class BaseAbility {}
 
-export interface BaseItem extends CDOTA_Item_Lua { }
-export class BaseItem { }
+export interface BaseItem extends CDOTA_Item_Lua {}
+export class BaseItem {}
 
-export interface BaseModifier extends CDOTA_Modifier_Lua { }
+export interface BaseModifier extends CDOTA_Modifier_Lua {}
 export class BaseModifier {
     public static apply<T extends typeof BaseModifier>(
         this: T,
         target: CDOTA_BaseNPC,
         caster?: CDOTA_BaseNPC,
         ability?: CDOTABaseAbility,
-        modifierTable?: object,
+        modifierTable?: object
     ): InstanceType<T> {
-        return target.AddNewModifier(caster, ability, this.name, modifierTable) as unknown as InstanceType<T>;
+        return target.AddNewModifier(
+            caster,
+            ability,
+            this.name,
+            modifierTable
+        ) as unknown as InstanceType<T>;
     }
-    public static find_on<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC): InstanceType<T> {
+    public static find_on<T extends typeof BaseModifier>(
+        this: T,
+        target: CDOTA_BaseNPC
+    ): InstanceType<T> {
         return target.FindModifierByName(this.name) as unknown as InstanceType<T>;
     }
 
@@ -24,43 +32,43 @@ export class BaseModifier {
     }
 }
 
-export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion { }
-export class BaseModifierMotionHorizontal extends BaseModifier { }
+export interface BaseModifierMotionHorizontal extends CDOTA_Modifier_Lua_Horizontal_Motion {}
+export class BaseModifierMotionHorizontal extends BaseModifier {}
 
-export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion { }
-export class BaseModifierMotionVertical extends BaseModifier { }
+export interface BaseModifierMotionVertical extends CDOTA_Modifier_Lua_Vertical_Motion {}
+export class BaseModifierMotionVertical extends BaseModifier {}
 
-export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both { }
-export class BaseModifierMotionBoth extends BaseModifier { }
+export interface BaseModifierMotionBoth extends CDOTA_Modifier_Lua_Motion_Both {}
+export class BaseModifierMotionBoth extends BaseModifier {}
 
 // Add standard base classes to prototype chain to make `super.*` work as `self.BaseClass.*`
 setmetatable(BaseAbility.prototype, { __index: CDOTA_Ability_Lua ?? C_DOTA_Ability_Lua });
 setmetatable(BaseItem.prototype, { __index: CDOTA_Item_Lua ?? C_DOTA_Item_Lua });
 setmetatable(BaseModifier.prototype, { __index: CDOTA_Modifier_Lua ?? C_DOTA_Modifier_Lua });
 
-
-export const registerAbility = (name?: string,) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
-    if (name !== undefined) {
-        // @ts-ignore
-        ability.name = name;
-    } else {
-        name = ability.name;
-    }
-
-    const [env] = getFileScope();
-
-    env[name] = {};
-
-    toDotaClassInstance(env[name], ability);
-
-    const originalSpawn = (env[name] as CDOTA_Ability_Lua).Spawn;
-    env[name].Spawn = function () {
-        this.____constructor();
-        if (originalSpawn) {
-            originalSpawn.call(this);
+export const registerAbility =
+    (name?: string) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
+        if (name !== undefined) {
+            // @ts-ignore
+            ability.name = name;
+        } else {
+            name = ability.name;
         }
+
+        const [env] = getFileScope();
+
+        env[name] = {};
+
+        toDotaClassInstance(env[name], ability);
+
+        const originalSpawn = (env[name] as CDOTA_Ability_Lua).Spawn;
+        env[name].Spawn = function () {
+            this.____constructor();
+            if (originalSpawn) {
+                originalSpawn.call(this);
+            }
+        };
     };
-};
 
 export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
     if (name !== undefined) {
@@ -71,7 +79,7 @@ export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Mo
     }
 
     const [env, source] = getFileScope();
-    const [fileName] = string.gsub(source, ".*scripts[\\/]vscripts[\\/]", "");
+    const [fileName] = string.gsub(source, '.*scripts[\\/]vscripts[\\/]', '');
 
     env[name] = {};
 
@@ -114,8 +122,8 @@ function clearTable(table: object) {
 function getFileScope(): [any, string] {
     let level = 1;
     while (true) {
-        const info = debug.getinfo(level, "S");
-        if (info && info.what === "main") {
+        const info = debug.getinfo(level, 'S');
+        if (info && info.what === 'main') {
             return [getfenv(level), info.source!];
         }
 
@@ -130,7 +138,7 @@ function toDotaClassInstance(instance: any, table: new () => any) {
             // Using hasOwnProperty to ignore methods from metatable added by ExtendInstance
             // https://github.com/SteamDatabase/GameTracking-Dota2/blob/7edcaa294bdcf493df0846f8bbcd4d47a5c3bd57/game/core/scripts/vscripts/init.lua#L195
             if (!instance.hasOwnProperty(key)) {
-                if (key != "__index") {
+                if (key != '__index') {
                     instance[key] = prototype[key];
                 }
             }

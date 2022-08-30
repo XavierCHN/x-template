@@ -25,6 +25,6 @@
         ],
         "no-redeclare": "off",
         "import/no-anonymous-default-export": "off",
-        "@typescript-eslint/no-redeclare": ["error"]
+        "@typescript-eslint/no-redeclare": ["off"]
     }
 }

@@ -11,7 +11,7 @@ require('utils/popups');
 require('utils/sha');
 
 //@ts-ignore
-let GameMode = require('game_mode').GameMode
+let GameMode = require('game_mode').GameMode;
 
 Object.assign(getfenv(), {
     Activate: GameMode.Activate,

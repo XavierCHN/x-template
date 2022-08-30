@@ -9,4 +9,4 @@ export default function useIsComponentMounted() {
         };
     }, []);
     return isMounted;
-};
+}

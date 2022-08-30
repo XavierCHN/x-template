@@ -1,5 +1,5 @@
-import { emitLocalEvent } from "./event-bus";
-import "panorama-polyfill/lib/console";
+import { emitLocalEvent } from './event-bus';
+import 'panorama-polyfill/lib/console';
 
 (() => {
     GameEvents.Subscribe(`x_net_table`, (data) => {
@@ -10,9 +10,9 @@ import "panorama-polyfill/lib/console";
             try {
                 let data = JSON.parse(data_str) as XNetTableDataJSON;
                 dispatch(data.table, data.key, data.value);
+            } catch {
+                // 如果解析出错，暂时不管他吧
             }
-            // 如果解析出错，暂时不管他吧
-            catch { }
         } else {
             // 如果是分割成多次发送的数据
             // 那么将他放到缓存中去，直到数据都接收完毕
@@ -25,21 +25,24 @@ import "panorama-polyfill/lib/console";
             let chunk_data = defs.slice(4).join('#');
             GameUI.CustomUIConfig().__x_nettable_chunks_cache__ ??= {};
             GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id] ??= {};
-            GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id][chunk_index] = chunk_data;
-            if (Object.values(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id]).length >= data_count) {
+            GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id][chunk_index] =
+                chunk_data;
+            if (
+                Object.values(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
+                    .length >= data_count
+            ) {
                 // 将所有的数据按顺序拼接
-                let res = Object.entries(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
+                let res = Object.entries(
+                    GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id]
+                )
                     .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
-                    .map(v => v[1])
+                    .map((v) => v[1])
                     .join('');
 
                 try {
                     let data = JSON.parse(res) as XNetTableDataJSON;
                     dispatch(data.table, data.key, data.value);
-                }
-                catch {
-
-                }
+                } catch {}
             }
         }
     });
@@ -66,7 +69,7 @@ declare global {
  * 比较网表的前值和后值是否一致
  * 如果不一致的话，返回false, 否则返回true
  * TODO，这个比对算法应该还是需要进一步优化的
- * 
+ *
  * @param {*} prev
  * @param {*} next
  */
@@ -80,25 +83,19 @@ export function isEqual(prev: any, next: any): boolean {
             for (let i = 0; i < prev.length; i++) {
                 if (!isEqual(prev[i], next[i])) return false;
             }
-        }
-        else {
+        } else {
             for (let key in prev) {
                 if (!isEqual(prev[key], next[key])) return false;
             }
         }
-    }
-    else {
+    } else {
         return prev == next;
     }
 
     return true;
 }
 
-export function dispatch(
-    table_name: string,
-    key: string,
-    content: any
-) {
+export function dispatch(table_name: string, key: string, content: any) {
     try {
         GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
         GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
@@ -108,13 +105,12 @@ export function dispatch(
             let table_data = {
                 table_name,
                 key,
-                content
+                content,
             };
             // console.log(`x net table data updated ${table_name}->${key}`);
             emitLocalEvent(`x_net_table`, table_data);
         }
-    }
-    catch (error) {
+    } catch (error) {
         console.log(`x_net_table dispatch error: ${table_name} -> ${key} -> ${content}`);
     }
 }
