@@ -8,7 +8,12 @@
     "plugins": ["@typescript-eslint", "import", "prettier", "react", "react-hooks"],
     "rules": {
         "no-use-before-define": "off",
-        "prettier/prettier": "error",
+        "prettier/prettier": [
+            "error",
+            {
+                "endOfLine": "auto"
+            }
+        ],
         "no-restricted-imports": [
             "error",
             {
