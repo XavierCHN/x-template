@@ -30,7 +30,8 @@ const { getAddonName, getDotaPath } = require('./utils');
         let argv = JSON.parse(process.env.npm_config_argv);
         if (argv.original != null && argv.original.length > 0) {
             let args = argv.original.slice(1);
-            if (args[0] == `launch`) { // 如果有手动输入run的情况
+            if (args[0] == `launch`) {
+                // 如果有手动输入run的情况
                 args = args.slice(1);
             }
             if (args.length > 0) {
