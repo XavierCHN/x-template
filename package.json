@@ -4,7 +4,6 @@
     "license": "MIT",
     "repository": "https://github.com/XavierCHN/x-template",
     "dota_developer": {
-        "main_lang": "SChinese",
         "publish_options": {
             "excludeFiles": [
                 "game/scripts/src/**/*.*",
@@ -24,6 +23,7 @@
                 "!game/scripts/vscripts/utils/aeslua/**/*.lua"
             ],
             "encryptDedicatedServerKeyTest": "Invalid_NotOnDedicatedServer",
+            "encryptDedicatedServerKeyRelease_Test": "这里需要填入测试图的密钥 GetDedicatedServerKeyV2('version') 的结果",
             "encryptDedicatedServerKeyRelease": "这里需要填入正式的发布密钥 GetDedicatedServerKeyV2('version') 的结果"
         }
     },

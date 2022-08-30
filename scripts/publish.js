@@ -15,6 +15,8 @@ let mode = process.argv[2];
 const dedicatedServerKey =
     mode == `release`
         ? settings.encryptDedicatedServerKeyRelease
+        : mode == `release_test`
+        ? settings.encryptDedicatedServerKeyRelease_Test
         : settings.encryptDedicatedServerKeyTest;
 const exec = require('child_process').exec;
 
@@ -58,8 +60,11 @@ walker
                 const timeStampString = `${timeStamp.getFullYear()}-${
                     timeStamp.getMonth() + 1
                 }-${timeStamp.getDate()} ${timeStamp.getHours()}:${timeStamp.getMinutes()}`;
-                const newAddonGameMode =
+                let newAddonGameMode =
                     `_G.PUBLISH_TIMESTAMP = "${timeStampString}"\n\n` + addonGameMode;
+                if (mode == `release_test`) {
+                    newAddonGameMode = `_G.ONLINE_TEST_MODE = true\n\n` + newAddonGameMode;
+                }
                 fs.writeFileSync(getPublishPath(fileName), newAddonGameMode);
             }
         }
@@ -68,7 +73,7 @@ walker
     .on(`end`, () => {
         console.log(
             `发布完成，发布模式是 ${
-                mode == `release` ? `正式发布` : `测试发布`
+                mode == `release` ? `正式发布` : mode == `release_test` ? `在线测试` : `本地测试`
             }\n其中${encryptCount}个Lua文件使用 ${dedicatedServerKey} 加密!\n正在启动dota2，\n如果是测试发布请查看游戏运行是否正常！如果是正式发布请直接上传`
         );
     });
