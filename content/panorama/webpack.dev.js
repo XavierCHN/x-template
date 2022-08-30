@@ -38,7 +38,7 @@ module.exports = {
             {
                 test: /\.js?$|\.jsx?$/,
                 loader: "babel-loader",
-                exclude: [/node_modules/, /sync_keyvalues/],
+                exclude: [/node_modules/],
                 options: { presets: ["@babel/preset-react", "@babel/preset-env"] },
             },
             {
@@ -71,7 +71,6 @@ module.exports = {
         new PanoramaTargetPlugin(),
         new PanoramaManifestPlugin({
             entries: [
-                { import: "./utils/sync_keyvalues.js" },
                 {
                     import: "./loading-screen/layout.xml",
                     filename: "custom_loading_screen.xml",

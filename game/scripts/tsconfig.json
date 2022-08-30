@@ -10,6 +10,7 @@
             {"transform": "@moddota/dota-lua-types/transformer"}, // 使用简洁模式API需要同时使用transformer
         ],
         "moduleResolution": "node",
+        "resolveJsonModule": true,
         "experimentalDecorators": true,
         "strictNullChecks": false,
         "strictPropertyInitialization": false,

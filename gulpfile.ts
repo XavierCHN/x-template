@@ -81,10 +81,12 @@ const cKVToLocal = () => {
  * @description Convert addon.csv local text to addon_*.txt file， this task is recommended to run after kv is finished
  *
  */
-const cCSVToLocalization = () => {
-    return gulp
+const cCSVToLocalization = (callback: Function) => {
+    gulp
         .src(`${paths.game_resource}/addon.csv`)
         .pipe(dotax.csvToLocals(paths.game_resource));
+    callback();
+
 };
 
 /**
