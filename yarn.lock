@@ -3514,10 +3514,10 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@1.0.29:
-  version "1.0.29"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.29.tgz#e6051c1bb50f3cb952622eb1d3e2592c018d606d"
-  integrity sha512-GNjorvl8FZ9bOnppCPyXTVtpNwYwFJ+xWs9G7zVGpBy98ACMuniMpBqcx9eN04efYY/AX5EYJzvqgD/GFN0OxA==
+gulp-dotax@1.0.30:
+  version "1.0.30"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.30.tgz#a44ffa3c5c3018dea29627db80ae666126dbba53"
+  integrity sha512-KQwdO1wkyRcotpbPnTE8nwPfIdegdc67p/nDVtS+fHhypCKfjCeclG/lNZEp/iyfkhkEhZ/MhiNfU1ps3Gy09g==
   dependencies:
     anymatch "^3.1.2"
     fs-extra "^10.1.0"
