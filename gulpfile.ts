@@ -65,40 +65,38 @@ const kv_2_js =
  * @description 从 kv 文件中提取所有需要的本地化词条，你可以使用 customPrefix 和 customSuffix 之类的参数来指定自己的前缀和后缀
  * @description Extract all description from kv file, you can use customPrefix and customSuffix to specify your prefix and suffix
  */
-const kv_to_local =
-    (watch: boolean = false) =>
-    () => {
-        return gulp.src(`${paths.kv}/**/*.{kv,txt}`).pipe(
-            dotax.kvToLocalsCSV(`${paths.game_resource}/addon.csv`, {
-                customPrefix: (key, data, path) => {
-                    if (data.BaseClass && /ability_/.test(data.BaseClass)) {
-                        if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
-                            return 'dota_tooltip_ability_combo_';
-                        } else if (data.ScriptFile && /^/.test(data.ScriptFile)) {
-                            return 'dota_tooltip_ability_chess_ability_';
-                        } else {
-                            return 'dota_tooltip_ability_';
-                        }
-                    }
-                    return '';
-                },
-                customSuffix: (key, data, path) => {
-                    let suffix = [''];
+const kv_to_local = () => () => {
+    return gulp.src(`${paths.kv}/**/*.{kv,txt}`).pipe(
+        dotax.kvToLocalsCSV(`${paths.game_resource}/addon.csv`, {
+            customPrefix: (key, data, path) => {
+                if (data.BaseClass && /ability_/.test(data.BaseClass)) {
                     if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
-                        suffix = ['_description'];
-                        let maxLevel = data.MaxLevel;
-                        if (maxLevel) {
-                            suffix = suffix.concat(
-                                Array.from({ length: maxLevel }, (_, i) => `_level${i + 1}`)
-                            );
-                        }
+                        return 'dota_tooltip_ability_combo_';
+                    } else if (data.ScriptFile && /^/.test(data.ScriptFile)) {
+                        return 'dota_tooltip_ability_chess_ability_';
+                    } else {
+                        return 'dota_tooltip_ability_';
                     }
-                    return suffix;
-                },
-                exportAbilityValues: false,
-            })
-        );
-    };
+                }
+                return '';
+            },
+            customSuffix: (key, data, path) => {
+                let suffix = [''];
+                if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
+                    suffix = ['_description'];
+                    let maxLevel = data.MaxLevel;
+                    if (maxLevel) {
+                        suffix = suffix.concat(
+                            Array.from({ length: maxLevel }, (_, i) => `_level${i + 1}`)
+                        );
+                    }
+                }
+                return suffix;
+            },
+            exportAbilityValues: false,
+        })
+    );
+};
 
 /**
  * @description 将 addon.csv 中的本地化文本转换为 addon_*.txt 文件
@@ -108,9 +106,15 @@ const kv_to_local =
 const csv_to_localization =
     (watch: boolean = false) =>
     () => {
-        return gulp
-            .src(`${paths.game_resource}/addon.csv`)
-            .pipe(dotax.csvToLocals(paths.game_resource));
+        const addonCsv = `${paths.game_resource}/addon.csv`;
+        const transpileAddonCSVToLocalization = () => {
+            return gulp.src(addonCsv).pipe(dotax.csvToLocals(paths.game_resource));
+        };
+        if (watch) {
+            return gulp.watch(addonCsv, transpileAddonCSVToLocalization);
+        } else {
+            return transpileAddonCSVToLocalization();
+        }
     };
 
 /**
