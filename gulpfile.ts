@@ -68,32 +68,32 @@ const kv_2_js =
 const kv_to_local = () => () => {
     return gulp.src(`${paths.kv}/**/*.{kv,txt}`).pipe(
         dotax.kvToLocalsCSV(`${paths.game_resource}/addon.csv`, {
-            customPrefix: (key, data, path) => {
-                if (data.BaseClass && /ability_/.test(data.BaseClass)) {
-                    if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
-                        return 'dota_tooltip_ability_combo_';
-                    } else if (data.ScriptFile && /^/.test(data.ScriptFile)) {
-                        return 'dota_tooltip_ability_chess_ability_';
-                    } else {
-                        return 'dota_tooltip_ability_';
-                    }
-                }
-                return '';
-            },
-            customSuffix: (key, data, path) => {
-                let suffix = [''];
-                if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
-                    suffix = ['_description'];
-                    let maxLevel = data.MaxLevel;
-                    if (maxLevel) {
-                        suffix = suffix.concat(
-                            Array.from({ length: maxLevel }, (_, i) => `_level${i + 1}`)
-                        );
-                    }
-                }
-                return suffix;
-            },
-            exportAbilityValues: false,
+            // customPrefix: (key, data, path) => {
+            //     if (data.BaseClass && /ability_/.test(data.BaseClass)) {
+            //         if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
+            //             return 'dota_tooltip_ability_combo_';
+            //         } else if (data.ScriptFile && /^/.test(data.ScriptFile)) {
+            //             return 'dota_tooltip_ability_chess_ability_';
+            //         } else {
+            //             return 'dota_tooltip_ability_';
+            //         }
+            //     }
+            //     return '';
+            // },
+            // customSuffix: (key, data, path) => {
+            //     let suffix = [''];
+            //     if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
+            //         suffix = ['_description'];
+            //         let maxLevel = data.MaxLevel;
+            //         if (maxLevel) {
+            //             suffix = suffix.concat(
+            //                 Array.from({ length: maxLevel }, (_, i) => `_level${i + 1}`)
+            //             );
+            //         }
+            //     }
+            //     return suffix;
+            // },
+            // exportAbilityValues: false,
         })
     );
 };
