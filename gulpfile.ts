@@ -169,7 +169,12 @@ gulp.task(
 );
 gulp.task(
     'dev',
-    gulp.parallel('sheet_2_kv:watch', 'csv_to_localization:watch', 'create_image_precache:watch')
+    gulp.parallel(
+        'sheet_2_kv:watch',
+        'csv_to_localization:watch',
+        'create_image_precache:watch',
+        'kv_2_js:watch'
+    )
 );
 gulp.task('build', gulp.series('predev'));
 gulp.task('jssync', gulp.series('sheet_2_kv', 'kv_2_js'));
