@@ -129,5 +129,8 @@
         "arrowParens": "always",
         "proseWrap": "never",
         "trailingComma": "es5"
+    },
+    "engines": {
+        "node": ">=16.0.0"
     }
 }
