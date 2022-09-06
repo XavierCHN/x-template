@@ -4063,10 +4063,10 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@^1.0.34:
-  version "1.0.35"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.35.tgz#807bbfcd36a41c0fe2379b9c44a39523ec19fb34"
-  integrity sha512-zfAzIsWic5wIzPTIHYh/nzF4Gsl6ri0lWcEW5tq7CfyWGFG7yJm6Z2aswSJCBeMXKH9HgwR6zi0Kiz+uyiT3Ow==
+gulp-dotax@^1.0.36:
+  version "1.0.36"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.36.tgz#547110e112cae33309b297dc8a17cd65c5f20b11"
+  integrity sha512-1owYvE/TcYdtqxgOoqUbCJuvc5XBwi3zr3mH45g1iPZpg6nGdsr9A842O4DwlH8NU1zCTfeNB01v3j8wBx3lvQ==
   dependencies:
     fs-extra "^10.1.0"
     gulp "^4.0.2"
