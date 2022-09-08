@@ -1,6 +1,6 @@
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('@demon673/webpack-panorama');
+const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama-x');
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -21,13 +21,13 @@ module.exports = {
         rules: [
             {
                 test: /\.xml$/,
-                loader: '@demon673/webpack-panorama/lib/layout-loader',
+                loader: 'webpack-panorama-x/lib/layout-loader',
                 options: {},
             },
             {
                 test: /\.[jt]sx$/,
                 issuer: /\.xml$/,
-                loader: '@demon673/webpack-panorama/lib/entry-loader',
+                loader: 'webpack-panorama-x/lib/entry-loader',
             },
             {
                 test: /\.tsx?$/,
