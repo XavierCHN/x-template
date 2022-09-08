@@ -1417,11 +1417,6 @@
     "@typescript-eslint/types" "5.36.0"
     eslint-visitor-keys "^3.3.0"
 
-"@typescript-to-lua/language-extensions@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmmirror.com/@typescript-to-lua/language-extensions/-/language-extensions-1.0.0.tgz#fad73b01c21ace67abbd1477cd2b1f8b3ce7287b"
-  integrity sha512-GtmhFqyg+txpGgGLM3mlS3R6AEG9MQhKALxxcbr6SBzg9u7YAXcPKqUBaBYd6nH+Pi/eQLcWz4BNOLhz8v4TjQ==
-
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.npmmirror.com/@webassemblyjs/ast/-/ast-1.11.1.tgz"
@@ -7144,12 +7139,11 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-to-lua@1.10.0:
-  version "1.10.0"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.10.0.tgz#a21ef950589e99e99a3e4af0be0af46245fd43de"
-  integrity sha512-rt+Bb2hH3FqytqTmTqOL+xPFRcV/r4TZ5X+46vVSfw9luzbu9V6ai5yyU8GePARVcf5hGvCv+DqxBNQtdcJLsA==
+typescript-to-lua@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.9.0.tgz"
+  integrity sha512-Oj8kutP1u/TSjN9oGUuESfOL+feHMSs7CCxl90C60jWTH+4ZXLtrXlRJTalA3Z2/aHjQXXgPaXQStSXBzAYLow==
   dependencies:
-    "@typescript-to-lua/language-extensions" "1.0.0"
     enhanced-resolve "^5.8.2"
     resolve "^1.15.1"
     source-map "^0.7.3"
