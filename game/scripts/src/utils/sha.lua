@@ -89,41 +89,19 @@ assert(Lua_has_int64 or Lua_has_int32 or not Lua_has_integers, "Lua integers mus
 local is_LuaJIT = ({false, [1] = true})[1] and (type(jit) ~= "table" or jit.version_num >= 20000) -- LuaJIT 1.x.x is treated as vanilla Lua 5.1
 local is_LuaJIT_21  -- LuaJIT 2.1+
 local LuaJIT_arch
-local ffi  -- LuaJIT FFI library (as a table)
-local b  -- 32-bit bitwise library (as a table)
+local ffi -- LuaJIT FFI library (as a table)
+local b -- 32-bit bitwise library (as a table)
 local library_name
-
-if is_LuaJIT then
-   -- Assuming "bit" library is always available on LuaJIT
-   b = require "bit"
-   library_name = "bit"
-   -- "ffi" is intentionally disabled on some systems for safety reason
-   local LuaJIT_has_FFI, result = pcall(require, "ffi")
-   if LuaJIT_has_FFI then
-      ffi = result
-   end
-   is_LuaJIT_21 = not (not loadstring "b=0b0")
-   LuaJIT_arch = type(jit) == "table" and jit.arch or ffi and ffi.arch or nil
-else
-   -- For vanilla Lua, "bit"/"bit32" libraries are searched in global namespace only.  No attempt is made to load a library if it's not loaded yet.
-   for _, libname in ipairs(_VERSION == "Lua 5.2" and {"bit32", "bit"} or {"bit", "bit32"}) do
-      if type(_G[libname]) == "table" and _G[libname].bxor then
-         b = _G[libname]
-         library_name = libname
-         break
-      end
-   end
-end
 
 --------------------------------------------------------------------------------
 -- You can disable here some of your system's abilities (for testing purposes)
 --------------------------------------------------------------------------------
--- is_LuaJIT = nil
--- is_LuaJIT_21 = nil
--- ffi = nil
+is_LuaJIT = nil
+is_LuaJIT_21 = nil
+ffi = nil
 -- Lua_has_int32 = nil
 -- Lua_has_int64 = nil
--- b, library_name = nil
+b, library_name = bit, 'bit'
 --------------------------------------------------------------------------------
 
 if print_debug_messages then
