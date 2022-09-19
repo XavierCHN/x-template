@@ -2,6 +2,9 @@ const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama-x');
 
+const entries = require('./entries.config');
+const entry = Object.assign({}, entries);
+
 /** @type {import('webpack').Configuration} */
 module.exports = {
     mode: 'development',
@@ -16,6 +19,9 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '...'],
         symlinks: false,
     },
+
+    // entries from entries.config.js
+    entry: entry,
 
     module: {
         rules: [
@@ -71,18 +77,6 @@ module.exports = {
 
     plugins: [
         new PanoramaTargetPlugin(),
-        new PanoramaManifestPlugin({
-            entries: [
-                {
-                    import: './loading-screen/layout.xml',
-                    filename: 'custom_loading_screen.xml',
-                },
-                { import: './hud/layout.xml', type: 'Hud' },
-                { import: './end_screen/layout.xml', type: 'EndScreen' },
-            ],
-            // 这是一个临时的解决方案，应该作为一个永久性的变更放到webpack-panorama中
-            minify: false,
-        }),
         new ForkTsCheckerWebpackPlugin({
             typescript: {
                 configFile: path.resolve(__dirname, 'tsconfig.json'),

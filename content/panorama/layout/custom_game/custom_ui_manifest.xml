@@ -1,0 +1,6 @@
+<root>
+  <Panel>
+    <CustomUIElement type="EndScreen" layoutfile="file://{resources}/layout/custom_game/end_screen.xml" />
+    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud.xml" />
+  </Panel>
+</root>

@@ -1,7 +1,18 @@
-import { reloadable } from '../lib/tstl-utils';
+import { Singleton } from './base/singleton';
 
 @reloadable
-export class XNetTable {
+export class XNetTable extends Singleton {
+    Activate() {
+        print(`[XNetTable] Activated`);
+        this._startHeartbeat();
+        // 注册事件监听
+        ListenToGameEvent(`player_connect_full`, (keys) => this._onPlayerConnectFull(keys), this);
+    }
+
+    Reload() {
+        print(`[XNetTable] Reloaded`);
+    }
+
     // 最大传输单元，这个其实取决于服务器的带宽，不建议太大
     private MTU = 2048;
     // 所有玩家都共享的数据
@@ -179,14 +190,6 @@ export class XNetTable {
         }
     }
 
-    constructor() {
-        // 开始数据发送队列
-        this._startHeartbeat();
-
-        // 注册事件监听
-        ListenToGameEvent(`player_connect_full`, (keys) => this._onPlayerConnectFull(keys), this);
-    }
-
     // 监听玩家的重新连接事件
     // 如果有玩家重连，那么把所有需要发送给他的数据都再发一遍给他
     private _onPlayerConnectFull(
@@ -261,13 +264,4 @@ export class XNetTable {
             return FrameTime();
         });
     }
-
-    static instance: XNetTable;
-    static getInstance() {
-        if (this.instance == null) {
-            this.instance = new XNetTable();
-        }
-        return this.instance;
-    }
-    static reload() {}
 }
