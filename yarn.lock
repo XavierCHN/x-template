@@ -1099,9 +1099,9 @@
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
 "@moddota/dota-lua-types@^4.19.0":
-  version "4.19.0"
-  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.19.0.tgz"
-  integrity sha512-IrRKM0ABieEGT6wYVyB4tQb2B7FR0PztcfICmzMkC7Y1xH00Xp6RJKzSTjgypByPAgYr6WBtL+h4uAeZuO8wrg==
+  version "4.20.0"
+  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.20.0.tgz#8b07a962565f4e4ba0c9e609b1a22bdae5769df4"
+  integrity sha512-LU8RRCcH/ky0hO+L33l7/qNb/p5BPL27nxO+m+/E28IcS+ef7SttSgmzhzhFm7mFi/Uo90onzLeZhNj+yN1+Cg==
   dependencies:
     lua-types "^2.10.1"
     tslib "^2.0.3"
@@ -1416,6 +1416,11 @@
   dependencies:
     "@typescript-eslint/types" "5.36.0"
     eslint-visitor-keys "^3.3.0"
+
+"@typescript-to-lua/language-extensions@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/@typescript-to-lua/language-extensions/-/language-extensions-1.0.0.tgz#fad73b01c21ace67abbd1477cd2b1f8b3ce7287b"
+  integrity sha512-GtmhFqyg+txpGgGLM3mlS3R6AEG9MQhKALxxcbr6SBzg9u7YAXcPKqUBaBYd6nH+Pi/eQLcWz4BNOLhz8v4TjQ==
 
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
@@ -4876,9 +4881,9 @@ lru-cache@^6.0.0:
     yallist "^4.0.0"
 
 lua-types@^2.10.1:
-  version "2.11.0"
-  resolved "https://registry.npmmirror.com/lua-types/-/lua-types-2.11.0.tgz"
-  integrity sha512-J/8qHrOjkZuPBDhnuAg0DWoaJEImqXNzgEnUigCTVrSVCcchM5Y5zpcI3aWAZPhuZlb0QKC/f3nc7VGmZmBg7w==
+  version "2.13.0"
+  resolved "https://registry.npmmirror.com/lua-types/-/lua-types-2.13.0.tgz#b76b2d56cfba7e649fb57498f1e60cec4accdb8c"
+  integrity sha512-wra+mIPZlcbm8bYoM6QutEwTOAjZ9KyKMiaidGeZ+QJItIAK9hwG+1I6GCDKnW0T9E/Xv2IoTFtZwxQv4zAIJw==
 
 make-dir@^2.1.0:
   version "2.1.0"
@@ -7087,7 +7092,7 @@ tslib@^1.8.1:
 
 tslib@^2.0.3, tslib@^2.3.0:
   version "2.4.0"
-  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.4.0.tgz"
+  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
 
 tsutils@^3.21.0:
@@ -7139,19 +7144,20 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-to-lua@1.9.0:
-  version "1.9.0"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.9.0.tgz#9c6fff18680077b8fe357bb6d097ae146ee51ab8"
-  integrity sha512-Oj8kutP1u/TSjN9oGUuESfOL+feHMSs7CCxl90C60jWTH+4ZXLtrXlRJTalA3Z2/aHjQXXgPaXQStSXBzAYLow==
+typescript-to-lua@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.10.0.tgz#a21ef950589e99e99a3e4af0be0af46245fd43de"
+  integrity sha512-rt+Bb2hH3FqytqTmTqOL+xPFRcV/r4TZ5X+46vVSfw9luzbu9V6ai5yyU8GePARVcf5hGvCv+DqxBNQtdcJLsA==
   dependencies:
+    "@typescript-to-lua/language-extensions" "1.0.0"
     enhanced-resolve "^5.8.2"
     resolve "^1.15.1"
     source-map "^0.7.3"
 
-typescript@^4.7.4:
-  version "4.7.4"
-  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.7.4.tgz"
-  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
+typescript@4.8.3:
+  version "4.8.3"
+  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
+  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
 
 uglify-js@^3.1.4:
   version "3.16.1"
