@@ -7139,9 +7139,9 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-to-lua@^1.9.0:
+typescript-to-lua@1.9.0:
   version "1.9.0"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.9.0.tgz"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.9.0.tgz#9c6fff18680077b8fe357bb6d097ae146ee51ab8"
   integrity sha512-Oj8kutP1u/TSjN9oGUuESfOL+feHMSs7CCxl90C60jWTH+4ZXLtrXlRJTalA3Z2/aHjQXXgPaXQStSXBzAYLow==
   dependencies:
     enhanced-resolve "^5.8.2"
