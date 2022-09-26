@@ -1,3 +1,9 @@
 <root>
-    <Panel />
+    <scripts>
+        <include src="./script.tsx" />
+    </scripts>
+    <styles>
+        <include src="./styles.less" />
+    </styles>
+    <Panel class="root" hittest="false" />
 </root>
