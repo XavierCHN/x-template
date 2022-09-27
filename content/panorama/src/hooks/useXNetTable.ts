@@ -15,9 +15,9 @@ export function onXNetTable<
         callback(value);
     }
 
-    onLocalEvent(`x_net_table`, (t, k, v) => {
-        if (t.toString() === table_name && k.toString() === key) {
-            callback(v);
+    onLocalEvent(`x_net_table`, (data) => {
+        if (data.table_name.toString() === table_name && data.key.toString() === key) {
+            callback(data.content);
         }
     });
 }
@@ -43,9 +43,9 @@ export function useNetTableKey<
 
     const [value, setValue] = useStateIfMounted<V>(current_value ?? fail_safe_value);
 
-    useLocalEvent(`x_net_table`, (t, k, v) => {
-        if (t.toString() === table_name && k.toString() === key) {
-            setValue(v);
+    useLocalEvent(`x_net_table`, (data) => {
+        if (data.table_name.toString() === table_name && data.key.toString() === key) {
+            setValue(data.content);
         }
     });
 
@@ -66,9 +66,9 @@ export function onPlayerXNetTable<
         callback(value);
     }
 
-    onLocalEvent(`x_net_table`, (t, k, v) => {
-        if (t.toString() === table_name && k.toString() === key) {
-            callback(v);
+    onLocalEvent(`x_net_table`, (data) => {
+        if (data.table_name.toString() === table_name && data.key.toString() === key) {
+            callback(data.content);
         }
     });
 }
@@ -102,9 +102,9 @@ export function usePlayerXNetTableKey<
 
     useLocalEvent(
         `x_net_table`,
-        (t, k, v) => {
-            if (t.toString() === table_name && k.toString() === playerKey) {
-                setValue(v);
+        (data) => {
+            if (data.table_name.toString() === table_name && data.key.toString() === playerKey) {
+                setValue(data.content);
             }
         },
         []
