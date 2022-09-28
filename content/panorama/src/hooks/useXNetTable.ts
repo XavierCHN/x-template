@@ -2,16 +2,6 @@ import { Dispatch, SetStateAction } from 'react';
 import { onLocalEvent, useLocalEvent } from '../utils/event-bus';
 import useStateIfMounted from './useStateIfMounted';
 
-declare global {
-    interface CustomUIConfig {
-        __x_nettable_cache__: {
-            [table: string]: {
-                [key: string]: any;
-            };
-        };
-    }
-}
-
 export function useXNetTableEvent<
     T extends keyof XNetTableDefinations,
     K extends keyof XNetTableDefinations[T]
@@ -62,15 +52,13 @@ export function useNetTableKey<
     GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
     GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
     let current_value =
-        GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key];
+        GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key]; // 这个cache的set在dispatcher.ts进行
 
     const [value, setValue] = useStateIfMounted<V>(current_value ?? fail_safe_value);
 
     useLocalEvent(`x_net_table`, (data) => {
         if (data.table_name.toString() === table_name && data.key.toString() === key) {
             setValue(data.content);
-            GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key] =
-                data.content;
         }
     });
 
