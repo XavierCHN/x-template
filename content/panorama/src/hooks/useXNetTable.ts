@@ -2,14 +2,23 @@ import { Dispatch, SetStateAction } from 'react';
 import { onLocalEvent, useLocalEvent } from '../utils/event-bus';
 import useStateIfMounted from './useStateIfMounted';
 
+declare global {
+    interface CustomUIConfig {
+        __x_nettable_cache__: {
+            [table: string]: {
+                [key: string]: any;
+            };
+        };
+    }
+}
+
 export function onXNetTable<
     T extends keyof XNetTableDefinations,
     K extends keyof XNetTableDefinations[T]
 >(table_name: T, key: K, callback: (data: XNetTableDefinations[T][K]) => void) {
     GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
-    GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
-    //@ts-expect-error
-    let value = GameUI.CustomUIConfig().__x_nettable_cache__[table_name][key];
+    GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name] ??= {};
+    let value = GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key];
 
     if (value != null) {
         callback(value);
@@ -18,6 +27,8 @@ export function onXNetTable<
     onLocalEvent(`x_net_table`, (data) => {
         if (data.table_name.toString() === table_name && data.key.toString() === key) {
             callback(data.content);
+            GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key] =
+                data.content;
         }
     });
 }
@@ -38,14 +49,16 @@ export function useNetTableKey<
 >(table_name: T, key: K, fail_safe_value: V): [V, Dispatch<SetStateAction<V>>] {
     GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
     GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
-    //@ts-expect-error
-    let current_value = GameUI.CustomUIConfig().__x_nettable_cache__[table_name][key];
+    let current_value =
+        GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key];
 
     const [value, setValue] = useStateIfMounted<V>(current_value ?? fail_safe_value);
 
     useLocalEvent(`x_net_table`, (data) => {
         if (data.table_name.toString() === table_name && data.key.toString() === key) {
             setValue(data.content);
+            GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key] =
+                data.content;
         }
     });
 
