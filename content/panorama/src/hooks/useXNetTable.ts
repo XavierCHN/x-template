@@ -15,7 +15,12 @@ declare global {
 export function onXNetTable<
     T extends keyof XNetTableDefinations,
     K extends keyof XNetTableDefinations[T]
->(table_name: T, key: K, callback: (data: XNetTableDefinations[T][K]) => void) {
+>(
+    table_name: T,
+    key: K,
+    callback: (data: XNetTableDefinations[T][K]) => void,
+    dependencies: any[] = []
+) {
     GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
     GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name] ??= {};
     let value = GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key];
@@ -24,14 +29,23 @@ export function onXNetTable<
         callback(value);
     }
 
-    onLocalEvent(`x_net_table`, (data) => {
-        if (data.table_name.toString() === table_name && data.key.toString() === key) {
-            callback(data.content);
-            GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key] =
-                data.content;
-        }
-    });
+    useLocalEvent(
+        `x_net_table`,
+        (data) => {
+            if (data.table_name.toString() === table_name && data.key.toString() === key) {
+                callback(data.content);
+                GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key] =
+                    data.content;
+            }
+        },
+        [table_name, key, ...dependencies]
+    );
 }
+
+export function useXNetTableEvent<
+    T extends keyof XNetTableDefinations,
+    K extends keyof XNetTableDefinations[T]
+>(table_name: T, key: K, callback: (data: XNetTableDefinations[T][K]) => void) {}
 
 /**
  * 侦听网表变更
