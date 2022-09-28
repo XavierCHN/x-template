@@ -14,3 +14,7 @@ export abstract class Singleton {
     public abstract Activate(): void;
     public abstract Reload(): void;
 }
+
+export type SingletonGameModule = (new () => Singleton) & {
+    [K in keyof typeof Singleton]: typeof Singleton[K];
+};

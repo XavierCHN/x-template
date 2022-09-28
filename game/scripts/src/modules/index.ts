@@ -19,10 +19,10 @@
  * 6. 将 MyModule加入 ALL_MODULES 数组。
  */
 
-import { Singleton } from './base/singleton';
+import { SingletonGameModule } from './base/singleton';
 import { XNetTable } from './xnet-table';
 
-export const ALL_MODULES: typeof Singleton[] = [
+export const ALL_MODULES: SingletonGameModule[] = [
     // 本游戏用到的所有模块，在此处列明
     XNetTable,
 ];
