@@ -119,16 +119,6 @@
         "webpack-cli": "^4.9.1",
         "webpack-panorama-x": "^0.3.0"
     },
-    "prettier": {
-        "printWidth": 100,
-        "tabWidth": 4,
-        "useTabs": false,
-        "semi": true,
-        "singleQuote": true,
-        "arrowParens": "always",
-        "proseWrap": "never",
-        "trailingComma": "es5"
-    },
     "engines": {
         "node": ">=16.0.0"
     }
