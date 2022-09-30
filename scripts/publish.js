@@ -20,7 +20,7 @@ const dedicatedServerKey =
         : settings.encryptDedicatedServerKeyTest;
 const exec = require('child_process').exec;
 
-const getPublishPath = (source) => source.replace(/^game/, 'publish');
+const getPublishPath = source => source.replace(/^game/, 'publish');
 
 let encryptCount = 0;
 walker
@@ -35,20 +35,13 @@ walker
                 console.log(`[publish.js] [create-path] ->${root}`);
             }
             if (anyMatch(encryptFiles, fileName)) {
-                exec(
-                    `lua scripts/encrypt_file.lua "${fileName}" "${getPublishPath(
-                        fileName
-                    )}" ${dedicatedServerKey}`,
-                    (err, out) => {
-                        if (err) console.error(`[publish.js] [encrypt] ->${fileName}`, err);
-                        if (!err) {
-                            encryptCount++;
-                            console.log(
-                                `[publish.js] [encrypt] ->${fileName} successed with key ${dedicatedServerKey}`
-                            );
-                        }
+                exec(`lua scripts/encrypt_file.lua "${fileName}" "${getPublishPath(fileName)}" ${dedicatedServerKey}`, (err, out) => {
+                    if (err) console.error(`[publish.js] [encrypt] ->${fileName}`, err);
+                    if (!err) {
+                        encryptCount++;
+                        console.log(`[publish.js] [encrypt] ->${fileName} successed with key ${dedicatedServerKey}`);
                     }
-                );
+                });
             } else {
                 console.log(`[publish.js] [copy] ->${fileName}`);
                 fs.copyFileSync(fileName, getPublishPath(fileName));
@@ -60,8 +53,7 @@ walker
                 const timeStampString = `${timeStamp.getFullYear()}-${
                     timeStamp.getMonth() + 1
                 }-${timeStamp.getDate()} ${timeStamp.getHours()}:${timeStamp.getMinutes()}`;
-                let newAddonGameMode =
-                    `_G.PUBLISH_TIMESTAMP = "${timeStampString}"\n\n` + addonGameMode;
+                let newAddonGameMode = `_G.PUBLISH_TIMESTAMP = "${timeStampString}"\n\n` + addonGameMode;
                 if (mode == `release_test`) {
                     newAddonGameMode = `_G.ONLINE_TEST_MODE = true\n\n` + newAddonGameMode;
                 }

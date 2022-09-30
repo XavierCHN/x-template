@@ -1,12 +1,10 @@
 import 'utils/index';
-import { ActivateAllModules, ReloadAllModules } from './modules';
+import { ActivateModules } from './modules';
 import Precache from './utils/precache';
 
 Object.assign(getfenv(), {
     Activate: () => {
-        ActivateAllModules();
+        ActivateModules();
     },
     Precache: Precache,
 });
-
-ReloadAllModules();

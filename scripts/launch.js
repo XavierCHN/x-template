@@ -61,7 +61,7 @@ const { getAddonName, getDotaPath } = require('./utils');
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
         spawn(path.join(win64, 'vconsole2.exe'));
     }
-})().catch((error) => {
+})().catch(error => {
     console.error(error);
     process.exit(1);
 });

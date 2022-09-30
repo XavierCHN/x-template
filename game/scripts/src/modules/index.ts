@@ -19,31 +19,25 @@
  * 6. 将 MyModule加入 ALL_MODULES 数组。
  */
 
-import { SingletonGameModule } from './base/singleton';
+import { GameConfig } from './GameConfig';
 import { XNetTable } from './xnet-table';
 
-export const ALL_MODULES: SingletonGameModule[] = [
-    // 本游戏用到的所有模块，在此处列明
-    XNetTable,
-];
-
-// @ts-expect-error @eslint-disable-next-line
-GameRules.ModuleActivated = GameRules.ModuleActivated ?? false;
-
-export function ActivateAllModules() {
-    // @ts-expect-error @eslint-disable-next-line
-    GameRules.ModuleActivated = true;
-    ALL_MODULES.forEach((m) => {
-        m.getInstance().Activate();
-    });
+declare global {
+    interface CDOTAGameRules {
+        // 声明所有的GameRules模块
+        XNetTable: XNetTable;
+    }
 }
 
-export function ReloadAllModules() {
-    // @ts-expect-error @eslint-disable-next-line
-    if (!GameRules.ModuleActivated) {
-        return;
+/**
+ * 这个方法会在game_mode实体生成之后调用，且仅调用一次
+ * 因此在这里作为单例模式使用
+ **/
+export function ActivateModules() {
+    if (GameRules.XNetTable == null) {
+        // 初始化所有的GameRules模块
+        GameRules.XNetTable = new XNetTable();
+        // 如果某个模块不需要在其他地方使用，那么直接在这里使用即可
+        new GameConfig();
     }
-    ALL_MODULES.forEach((m) => {
-        m.getInstance().Reload();
-    });
 }

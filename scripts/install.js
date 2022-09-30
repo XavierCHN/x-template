@@ -22,8 +22,7 @@ const { replace } = require('replace-json-property');
         }
     }
 
-    if (name !== originalName)
-        replace(path.resolve(__dirname, '..', 'package.json'), 'name', name, { spaces: 4 });
+    if (name !== originalName) replace(path.resolve(__dirname, '..', 'package.json'), 'name', name, { spaces: 4 });
 
     if (process.platform !== 'win32') {
         console.log('This script runs on windows only, Addon Linking is skipped.');
@@ -45,9 +44,7 @@ const { replace } = require('replace-json-property');
 
         const targetPath = path.join(dotaPath, directoryName, 'dota_addons', name);
         if (fs.existsSync(targetPath)) {
-            const isCorrect =
-                fs.lstatSync(sourcePath).isSymbolicLink() &&
-                fs.realpathSync(sourcePath) === targetPath;
+            const isCorrect = fs.lstatSync(sourcePath).isSymbolicLink() && fs.realpathSync(sourcePath) === targetPath;
             if (isCorrect) {
                 console.log(`Skipping '${sourcePath}' since it is already linked`);
                 continue;
@@ -68,7 +65,7 @@ const { replace } = require('replace-json-property');
             console.log(`Linked ${sourcePath} <==> ${targetPath}`);
         }
     }
-})().catch((error) => {
+})().catch(error => {
     console.error(error);
     process.exit(1);
 });

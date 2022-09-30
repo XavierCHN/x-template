@@ -18,7 +18,7 @@ module.exports.getDotaPath = async () => {
     return path.game.path;
 };
 
-read_all_files = (path) => {
+read_all_files = path => {
     var pa = fs.readdirSync(path);
     var files = [];
     pa.forEach((ele, index) => {
@@ -26,7 +26,7 @@ read_all_files = (path) => {
         let info = fs.statSync(child);
         if (info.isDirectory()) {
             let subs = read_all_files(child);
-            subs.forEach((s) => files.push(s));
+            subs.forEach(s => files.push(s));
         } else {
             files.push(child);
         }
@@ -35,7 +35,7 @@ read_all_files = (path) => {
 };
 module.exports.read_all_files = read_all_files;
 
-read_sub_directories = (path) => {
+read_sub_directories = path => {
     var pa = fs.readdirSync(path);
     var directories = [];
     pa.forEach((ele, index) => {

@@ -18,13 +18,7 @@ const { getAddonName, getDotaPath } = require('./utils');
     }
 
     // get the resourcecompiler.exe path
-    const resourceCompilerPath = path.join(
-        dotaPath,
-        'game',
-        'bin',
-        'win64',
-        'resourcecompiler.exe'
-    );
+    const resourceCompilerPath = path.join(dotaPath, 'game', 'bin', 'win64', 'resourcecompiler.exe');
 
     const addonContent = path.join(dotaPath, 'content', 'dota_addons', getAddonName());
 
@@ -34,7 +28,7 @@ const { getAddonName, getDotaPath } = require('./utils');
     let params = script.match(/"(?:\\?[\S\s])*?"/g);
     subDirs = ['materials', 'particles', 'soundevents', 'vscripts', 'scripts', 'maps']; // default compile targets
     if (params !== null) {
-        subDirs = params.map((p) => p.replace(/"/g, ''));
+        subDirs = params.map(p => p.replace(/"/g, ''));
     }
 
     let args = [];
@@ -42,7 +36,7 @@ const { getAddonName, getDotaPath } = require('./utils');
     args.push(`-game "${gamePath}"`);
     args.push(`-verbose`);
     args.push(`-r`);
-    subDirs.forEach((dir) => {
+    subDirs.forEach(dir => {
         let c = args.concat([`-i "${path.join(addonContent, dir, '*')}"`]);
         exec(c.join(` `), (err, stdout, stderr) => {
             if (err) {
@@ -52,7 +46,7 @@ const { getAddonName, getDotaPath } = require('./utils');
             if (stdout) console.log(stdout);
         });
     });
-})().catch((error) => {
+})().catch(error => {
     console.error(error);
     process.exit(1);
 });

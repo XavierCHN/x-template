@@ -12,13 +12,11 @@ import useIsComponentMounted from './useIsComponnetMounted';
  * the first is the current state, the second is a state update function
  * that does nothing if the component is not mounted
  */
-export default function useStateIfMounted<S>(
-    initialValue: S | (() => S)
-): [S, Dispatch<SetStateAction<S>>] {
+export default function useStateIfMounted<S>(initialValue: S | (() => S)): [S, Dispatch<SetStateAction<S>>] {
     const isComponentMounted = useIsComponentMounted();
     const [state, setState] = useState(initialValue);
     const newSetState = useCallback(
-        (value) => {
+        value => {
             if (isComponentMounted.current) {
                 setState(value);
             }

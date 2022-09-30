@@ -13,15 +13,12 @@ const gameServiceNew = gameService
 // 输出所有API作为types
 const apis = gameServiceNew.match(/url:\s*(['"][a-zA-Z0-9\/]+['"])/g);
 const api_type_string = apis
-    .map((api) => {
+    .map(api => {
         return api.replace(/url:\s*/g, ``);
     })
     .sort()
     .join(` | \n`);
-fs.writeFileSync(
-    `game/scripts/src/server/core/urls.ts`,
-    `export type URLs = \n${api_type_string};\n`
-);
+fs.writeFileSync(`game/scripts/src/server/core/urls.ts`, `export type URLs = \n${api_type_string};\n`);
 
 // 重新写入文件
 fs.writeFileSync(`game/scripts/src/server/services/GameService.ts`, gameServiceNew);

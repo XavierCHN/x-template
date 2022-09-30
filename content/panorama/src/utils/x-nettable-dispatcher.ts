@@ -2,7 +2,7 @@ import { emitLocalEvent } from './event-bus';
 import 'panorama-polyfill/lib/console';
 
 (() => {
-    GameEvents.Subscribe(`x_net_table`, (data) => {
+    GameEvents.Subscribe(`x_net_table`, data => {
         let data_str = data.data;
         // 如果数据不以#开头，那么说明是一次发送过来的
         // 使用JSON.parse解析数据，并dispatch
@@ -25,18 +25,12 @@ import 'panorama-polyfill/lib/console';
             let chunk_data = defs.slice(4).join('#');
             GameUI.CustomUIConfig().__x_nettable_chunks_cache__ ??= {};
             GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id] ??= {};
-            GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id][chunk_index] =
-                chunk_data;
-            if (
-                Object.values(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
-                    .length >= data_count
-            ) {
+            GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id][chunk_index] = chunk_data;
+            if (Object.values(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id]).length >= data_count) {
                 // 将所有的数据按顺序拼接
-                let res = Object.entries(
-                    GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id]
-                )
+                let res = Object.entries(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
                     .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
-                    .map((v) => v[1])
+                    .map(v => v[1])
                     .join('');
 
                 try {

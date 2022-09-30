@@ -1,12 +1,10 @@
-import { Singleton } from './base/singleton';
-
 @reloadable
-export class XNetTable extends Singleton {
+export class XNetTable {
     Activate() {
         print(`[XNetTable] Activated`);
         this._startHeartbeat();
         // 注册事件监听
-        ListenToGameEvent(`player_connect_full`, (keys) => this._onPlayerConnectFull(keys), this);
+        ListenToGameEvent(`player_connect_full`, keys => this._onPlayerConnectFull(keys), this);
     }
 
     Reload() {
@@ -35,11 +33,11 @@ export class XNetTable extends Singleton {
      * @returns
      * @memberof XNetTable
      */
-    SetTableValue<
-        TName extends keyof XNetTableDefinations,
-        T extends XNetTableDefinations[TName],
-        K extends keyof T
-    >(tname: TName, key: K, value: T[K]) {
+    SetTableValue<TName extends keyof XNetTableDefinations, T extends XNetTableDefinations[TName], K extends keyof T>(
+        tname: TName,
+        key: K,
+        value: T[K]
+    ) {
         if (!IsServer()) return;
 
         let k = tostring(key);
@@ -98,11 +96,12 @@ export class XNetTable extends Singleton {
      * @return {*} {void}
      * @memberof XNetTable
      */
-    SetPlayerTableValue<
-        TName extends keyof XNetTableDefinations,
-        T extends XNetTableDefinations[TName],
-        K extends keyof T
-    >(playerId: PlayerID, tname: TName, key: K, value: T[K]) {
+    SetPlayerTableValue<TName extends keyof XNetTableDefinations, T extends XNetTableDefinations[TName], K extends keyof T>(
+        playerId: PlayerID,
+        tname: TName,
+        key: K,
+        value: T[K]
+    ) {
         if (!IsServer()) return;
 
         let k = tostring(key);
@@ -133,12 +132,7 @@ export class XNetTable extends Singleton {
      * @returns {string[]}
      * @memberof XNetTable
      */
-    private _prepareDataChunks(
-        tname: string,
-        key: string,
-        value?: any,
-        playerId?: PlayerID
-    ): string[] {
+    private _prepareDataChunks(tname: string, key: string, value?: any, playerId?: PlayerID): string[] {
         let data = json.encode({
             table: tname,
             key: key,
@@ -192,9 +186,7 @@ export class XNetTable extends Singleton {
 
     // 监听玩家的重新连接事件
     // 如果有玩家重连，那么把所有需要发送给他的数据都再发一遍给他
-    private _onPlayerConnectFull(
-        keys: GameEventProvidedProperties & GameEventDeclarations[`player_connect_full`]
-    ) {
+    private _onPlayerConnectFull(keys: GameEventProvidedProperties & GameEventDeclarations[`player_connect_full`]) {
         let playerId = keys.PlayerID;
         let player = PlayerResource.GetPlayer(playerId);
         if (player == null) return;
@@ -225,9 +217,7 @@ export class XNetTable extends Singleton {
             while (this._data_queue.length > 0) {
                 // 这里设置为MTU的2.5倍作为一帧发送数据最大量，这个还需要进一步进行压力测试看看会不会导致卡顿
                 if (data_sent_length > this.MTU * 2.5) {
-                    print(
-                        `[x_net_table]当前帧发送数据量${data_sent_length},剩余${this._data_queue.length}条数据未发送，留到下一帧执行`
-                    );
+                    print(`[x_net_table]当前帧发送数据量${data_sent_length},剩余${this._data_queue.length}条数据未发送，留到下一帧执行`);
                     return FrameTime();
                 }
 

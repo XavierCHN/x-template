@@ -13,17 +13,9 @@ export class BaseModifier {
         ability?: CDOTABaseAbility,
         modifierTable?: object
     ): InstanceType<T> {
-        return target.AddNewModifier(
-            caster,
-            ability,
-            this.name,
-            modifierTable
-        ) as unknown as InstanceType<T>;
+        return target.AddNewModifier(caster, ability, this.name, modifierTable) as unknown as InstanceType<T>;
     }
-    public static find_on<T extends typeof BaseModifier>(
-        this: T,
-        target: CDOTA_BaseNPC
-    ): InstanceType<T> {
+    public static find_on<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC): InstanceType<T> {
         return target.FindModifierByName(this.name) as unknown as InstanceType<T>;
     }
 
@@ -46,29 +38,28 @@ setmetatable(BaseAbility.prototype, { __index: CDOTA_Ability_Lua ?? C_DOTA_Abili
 setmetatable(BaseItem.prototype, { __index: CDOTA_Item_Lua ?? C_DOTA_Item_Lua });
 setmetatable(BaseModifier.prototype, { __index: CDOTA_Modifier_Lua ?? C_DOTA_Modifier_Lua });
 
-export const registerAbility =
-    (name?: string) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
-        if (name !== undefined) {
-            // @ts-ignore
-            ability.name = name;
-        } else {
-            name = ability.name;
+export const registerAbility = (name?: string) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
+    if (name !== undefined) {
+        // @ts-ignore
+        ability.name = name;
+    } else {
+        name = ability.name;
+    }
+
+    const [env] = getFileScope();
+
+    env[name] = {};
+
+    toDotaClassInstance(env[name], ability);
+
+    const originalSpawn = (env[name] as CDOTA_Ability_Lua).Spawn;
+    env[name].Spawn = function () {
+        this.____constructor();
+        if (originalSpawn) {
+            originalSpawn.call(this);
         }
-
-        const [env] = getFileScope();
-
-        env[name] = {};
-
-        toDotaClassInstance(env[name], ability);
-
-        const originalSpawn = (env[name] as CDOTA_Ability_Lua).Spawn;
-        env[name].Spawn = function () {
-            this.____constructor();
-            if (originalSpawn) {
-                originalSpawn.call(this);
-            }
-        };
     };
+};
 
 export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
     if (name !== undefined) {
