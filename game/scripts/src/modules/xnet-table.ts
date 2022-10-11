@@ -1,6 +1,6 @@
 @reloadable
 export class XNetTable {
-    Activate() {
+    constructor() {
         print(`[XNetTable] Activated`);
         this._startHeartbeat();
         // 注册事件监听
