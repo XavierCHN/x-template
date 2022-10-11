@@ -5,7 +5,7 @@ if (global.reloadCache === undefined) {
     global.reloadCache = {};
 }
 
-function reloadable<T extends { new (...args: any[]): {} }>(constructor: T): T {
+export function reloadable<T extends { new (...args: any[]): {} }>(constructor: T): T {
     const className = constructor.name;
     if (global.reloadCache[className] === undefined) {
         global.reloadCache[className] = constructor;
@@ -14,5 +14,3 @@ function reloadable<T extends { new (...args: any[]): {} }>(constructor: T): T {
     Object.assign(global.reloadCache[className].prototype, constructor.prototype);
     return global.reloadCache[className];
 }
-
-global.reloadable = global.reloadable ?? reloadable;
