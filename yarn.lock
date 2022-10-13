@@ -3919,10 +3919,10 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@1.0.38:
-  version "1.0.38"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.38.tgz#595194d0c73f934546f1fd25f74609ab489c541d"
-  integrity sha512-J037qvYwE5cvxYsW2Q0k7Nq5cmegnOzN1xLK05frnAQX9dn2Bqhp5oxv6rRbKYw6x9WxA5mmmp3f6uyFBCdIhA==
+gulp-dotax@1.0.40:
+  version "1.0.40"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.40.tgz#f33c94f6c29878e80993e2f6b89b0e1a3cb8447d"
+  integrity sha512-AigxrYzE1dUFx7WzIZP4cyqPxIBP7JMb8usn0qndsvXYYvoYypqGIc58uelpYzsY1n35+Th1Wr9IzjvpjXQ45w==
   dependencies:
     fs-extra "^10.1.0"
     gulp "^4.0.2"
