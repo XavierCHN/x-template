@@ -11,7 +11,7 @@ import 'panorama-polyfill/lib/console';
                 let data = JSON.parse(data_str) as XNetTableDataJSON;
                 dispatch(data.table, data.key, data.value);
             } catch {
-                // 如果解析出错，暂时不管他吧
+                console.warn(`x_net_table dispatch error: ${data_str}`);
             }
         } else {
             // 如果是分割成多次发送的数据
@@ -36,7 +36,9 @@ import 'panorama-polyfill/lib/console';
                 try {
                     let data = JSON.parse(res) as XNetTableDataJSON;
                     dispatch(data.table, data.key, data.value);
-                } catch {}
+                } catch {
+                    console.warn(`x_net_table dispatch error: ${res}`);
+                }
             }
         }
     });
