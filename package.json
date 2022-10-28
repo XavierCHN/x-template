@@ -63,6 +63,7 @@
         "@types/react": "^16.14.5",
         "@typescript-eslint/eslint-plugin": "^5.36.0",
         "@typescript-eslint/parser": "^5.36.0",
+        "@typescript-to-lua/language-extensions": "^1.0.0",
         "anymatch": "^3.1.2",
         "babel-loader": "^8.2.3",
         "classnames": "^2.3.1",
