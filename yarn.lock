@@ -1393,7 +1393,7 @@
     "@typescript-eslint/types" "5.36.0"
     eslint-visitor-keys "^3.3.0"
 
-"@typescript-to-lua/language-extensions@1.0.0":
+"@typescript-to-lua/language-extensions@1.0.0", "@typescript-to-lua/language-extensions@^1.0.0":
   version "1.0.0"
   resolved "https://registry.npmmirror.com/@typescript-to-lua/language-extensions/-/language-extensions-1.0.0.tgz#fad73b01c21ace67abbd1477cd2b1f8b3ce7287b"
   integrity sha512-GtmhFqyg+txpGgGLM3mlS3R6AEG9MQhKALxxcbr6SBzg9u7YAXcPKqUBaBYd6nH+Pi/eQLcWz4BNOLhz8v4TjQ==

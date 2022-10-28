@@ -29,15 +29,14 @@ export function offLocalEvent<EName extends keyof LocalEvent, EData extends Loca
 
 export function useLocalEvent<EName extends keyof LocalEvent, EData extends LocalEvent[EName]>(
     eventName: EName,
-    listener: (evt: EData, ...arg: any[]) => void,
-    dependencies: DependencyList = []
+    listener: (evt: EData, ...arg: any[]) => void
 ) {
     useEffect(() => {
         onLocalEvent(eventName, listener);
         return () => {
             offLocalEvent(eventName, listener);
         };
-    }, dependencies);
+    }, [eventName, listener]);
 }
 
 declare global {

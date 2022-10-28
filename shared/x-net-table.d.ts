@@ -1,5 +1,12 @@
 // 面向所有人的XNetTables
 declare interface XNetTableDefinations {
+    test_table: {
+        test_key: {
+            data_1: string;
+            data_2?: number;
+            data_3?: boolean[];
+        };
+    };
     settings: {
         basicSettings: BasicSettings;
     };
