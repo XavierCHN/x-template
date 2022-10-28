@@ -1,13 +1,12 @@
 {
     "parser": "@typescript-eslint/parser",
-    "extends": ["plugin:prettier/recommended"],
+    "extends": ["plugin:prettier/recommended", "plugin:react-hooks/recommended"],
     "settings": {
         "import/resolver": { "node": { "extensions": [".js", ".ts", ".jsx", ".tsx"] } },
         "import/extensions": [".js", ".ts", ".jsx", ".tsx"]
     },
     "plugins": ["@typescript-eslint", "import", "prettier", "react", "react-hooks"],
     "rules": {
-        "no-use-before-define": "off",
         "prettier/prettier": [
             "error",
             {
@@ -28,6 +27,8 @@
         ],
         "no-redeclare": "off",
         "import/no-anonymous-default-export": "off",
-        "@typescript-eslint/no-redeclare": ["off"]
+        "@typescript-eslint/no-redeclare": ["off"],
+        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/rules-of-hooks": "error"
     }
 }
