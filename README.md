@@ -6,9 +6,9 @@
 #### [Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
 #### <a href="#x-template-1">中文说明</a>
 
-### 简单的视频教程（中文） a starter video tutorial (Chinese)
+### [简单的视频教程（中文） a starter video tutorial (Chinese)](https://www.bilibili.com/video/BV1de4y1s7kw/?vd_source=9bc3eaf21f82a00973f08ff2dbcfd356)
 
-[一个简单的使用教程（还包含了一些dota2自定义游戏的基本操作）](https://www.bilibili.com/video/BV1de4y1s7kw/?vd_source=9bc3eaf21f82a00973f08ff2dbcfd356)
+视频录制的比较早，目前已经转换为`yarn`作为npm包管理工具，请自行将视频中的`npm`改为`yarn`
 
 ### Pre-requisites
 
