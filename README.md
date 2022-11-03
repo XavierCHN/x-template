@@ -1,68 +1,12 @@
 
-# X-Template
-
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]() Xavier's dota2 custom game development template (English translated with [DeepL](https://www.deepl.com))
 
 #### [Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
-#### <a href="#x-template-1">中文说明</a>
+#### <a href="#x-template">中文说明</a>
+#### <a href="#x-template-1">English Readme</a>
 
 ### [简单的视频教程（中文） a starter video tutorial (Chinese)](https://www.bilibili.com/video/BV1de4y1s7kw/?vd_source=9bc3eaf21f82a00973f08ff2dbcfd356)
 
 视频录制的比较早，目前已经转换为`yarn`作为npm包管理工具，请自行将视频中的`npm`改为`yarn`
-
-### Pre-requisites
-
-If you want to use this template, in addition to mastering the Valve's development tools, you need to additionally learn
-
-1. the syntax of `typescript`, `javascript`
-2. the basics of `react`
-3. the basics of `node.js`
-4. learn about [react-panorama](https://github.com/ark120202/react-panorama)
-5. learn about [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
-6. learn about the `DOTA2 Typescript API`, you can check out `node_modules/dota-lua-types` and `node_modules/panorama-types` after you finish `yarn`.
-
-### Supported features
-
-1. convert the xlsx, xls kv files into a kv file and put it in the `game/scripts/npc`,
-2. convert `addon.csv` to `addon_*.txt`, (also you can convert them back to `addon.csv`),
-3. convert kv files to json files for you to fetch kv data in panorama UI,
-4. use typescript to write game logic and panorama UI in `content/panorama/src` and `game/scripts/src`.
-
-- please check `gulpfile.ts` for more details.
-
-### Supported commands
-
-1. `yarn launch [[addon_name] map_name]` launches dota2, all parameters are optional, if `addon_name` is provided then the specified addon will be loaded (default to launch this project), if `map_name` is provided then the corresponding map name will be loaded automatically (if addon_name is not provided then the current addon will be loaded by default)
-2. `yarn dev` enter dev mode to compile the ts source code and watch the changes of the files.
-3. `yarn test` and `yarn prod` to run `publish` operation, it will automatically generate `publish` folder and automatically link to `dota_addons/you_addon_name_publish` folder, then you can choose this folder to publish (you can set some settings for publishing in `package.json -> dota_ developer` to make some settings for publishing).
-
-### Usage
-
-1. [click use this project as a template to generate your own project](https://github.com/XavierCHN/x-template/generate) or [fork this project](https://github.com/XavierCHN/x-template/fork)
-2. install `node.js`, require above Node v14.10.1 ~~ because versions below is not tested ~~
-3. clone the generated or fork project
-4. open `package.json` and change `name` to your preferred name
-5. execute `yarn` to install the dependencies, it should automatically link `content`,`game` folder to your `dota 2 beta/dota_addons/your_preferred_name`, (if you encounter permission problems, please try to restart)
-6. `yarn dev` and start your development
-
-### Contents
-
--   content is synchronized with `dota 2 beta/content/dota_addons/your_addon_name`
--   game is synchronized with `dota 2 beta/game/dota_addons/your_addon_name`
--   shared to write some shared declarations used in `panorama` and `typescript-to-lua`, like `custom net tables`
--   excels to edit kv tables
--   localization to write localization files
--   scripts contains some helper scripts
-
-1. if you need encryption, please check `scripts/publish.js`
-2. feel free to submit `issues`
-3. contributions are welcome
-
-### Acknowledgements
-
--   ModDota Community
--   React-panorama is developed by [https://github.com/ark120202](https://github.com/ark120202)
--   Some of the code is from [https://github.com/MODDOTA/TypeScriptAddonTemplate](https://github.com/MODDOTA/TypeScriptAddonTemplate)
 
 # X-Template
 
@@ -141,3 +85,61 @@ Xavier 的 dota2 自定义游戏开发模板
 
 ### 其他
 如果你在DOTA2自定义游戏制作过程中遇到了任何问题，可以到本项目的 [Issues页面](https://github.com/XavierCHN/x-template/issues) 提问，如果我知道的将会予以解答。
+
+# X-Template
+
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]() Xavier's dota2 custom game development template (English translated with [DeepL](https://www.deepl.com))
+
+### Pre-requisites
+
+If you want to use this template, in addition to mastering the Valve's development tools, you need to additionally learn
+
+1. the syntax of `typescript`, `javascript`
+2. the basics of `react`
+3. the basics of `node.js`
+4. learn about [react-panorama](https://github.com/ark120202/react-panorama)
+5. learn about [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
+6. learn about the `DOTA2 Typescript API`, you can check out `node_modules/dota-lua-types` and `node_modules/panorama-types` after you finish `yarn`.
+
+### Supported features
+
+1. convert the xlsx, xls kv files into a kv file and put it in the `game/scripts/npc`,
+2. convert `addon.csv` to `addon_*.txt`, (also you can convert them back to `addon.csv`),
+3. convert kv files to json files for you to fetch kv data in panorama UI,
+4. use typescript to write game logic and panorama UI in `content/panorama/src` and `game/scripts/src`.
+
+- please check `gulpfile.ts` for more details.
+
+### Supported commands
+
+1. `yarn launch [[addon_name] map_name]` launches dota2, all parameters are optional, if `addon_name` is provided then the specified addon will be loaded (default to launch this project), if `map_name` is provided then the corresponding map name will be loaded automatically (if addon_name is not provided then the current addon will be loaded by default)
+2. `yarn dev` enter dev mode to compile the ts source code and watch the changes of the files.
+3. `yarn test` and `yarn prod` to run `publish` operation, it will automatically generate `publish` folder and automatically link to `dota_addons/you_addon_name_publish` folder, then you can choose this folder to publish (you can set some settings for publishing in `package.json -> dota_ developer` to make some settings for publishing).
+
+### Usage
+
+1. [click use this project as a template to generate your own project](https://github.com/XavierCHN/x-template/generate) or [fork this project](https://github.com/XavierCHN/x-template/fork)
+2. install `node.js`, require above Node v14.10.1 ~~ because versions below is not tested ~~
+3. clone the generated or fork project
+4. open `package.json` and change `name` to your preferred name
+5. execute `yarn` to install the dependencies, it should automatically link `content`,`game` folder to your `dota 2 beta/dota_addons/your_preferred_name`, (if you encounter permission problems, please try to restart)
+6. `yarn dev` and start your development
+
+### Contents
+
+-   content is synchronized with `dota 2 beta/content/dota_addons/your_addon_name`
+-   game is synchronized with `dota 2 beta/game/dota_addons/your_addon_name`
+-   shared to write some shared declarations used in `panorama` and `typescript-to-lua`, like `custom net tables`
+-   excels to edit kv tables
+-   localization to write localization files
+-   scripts contains some helper scripts
+
+1. if you need encryption, please check `scripts/publish.js`
+2. feel free to submit `issues`
+3. contributions are welcome
+
+### Acknowledgements
+
+-   ModDota Community
+-   React-panorama is developed by [https://github.com/ark120202](https://github.com/ark120202)
+-   Some of the code is from [https://github.com/MODDOTA/TypeScriptAddonTemplate](https://github.com/MODDOTA/TypeScriptAddonTemplate)
