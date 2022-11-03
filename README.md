@@ -8,9 +8,7 @@
 
 ### 简单的视频教程（中文） a starter video tutorial (Chinese)
 
-一个简单的使用教程（还包含了一些dota2自定义游戏的基本操作）
-
-<iframe src="//player.bilibili.com/player.html?aid=647248335&bvid=BV1de4y1s7kw&cid=880362279&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+[一个简单的使用教程（还包含了一些dota2自定义游戏的基本操作）](https://www.bilibili.com/video/BV1de4y1s7kw/?vd_source=9bc3eaf21f82a00973f08ff2dbcfd356)
 
 ### Pre-requisites
 
