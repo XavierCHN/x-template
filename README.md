@@ -1,10 +1,16 @@
-## [Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
-
-## <a href="#x-template-1">中文说明</a>
 
 # X-Template
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]() Xavier's dota2 custom game development template (English translated with [DeepL](https://www.deepl.com))
+
+#### [Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
+#### <a href="#x-template-1">中文说明</a>
+
+### 简单的视频教程（中文） a starter video tutorial (Chinese)
+
+一个简单的使用教程（还包含了一些dota2自定义游戏的基本操作）
+
+<iframe src="//player.bilibili.com/player.html?aid=647248335&bvid=BV1de4y1s7kw&cid=880362279&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 ### Pre-requisites
 
