@@ -45,40 +45,14 @@ export class XNetTable {
         let k = tostring(key);
         this._data[tname] ??= {};
         if (value == null) {
-            let noUpdate = XNetTable.isEqual(this._data[tname][k], {});
             this._data[tname][k] = {};
-            if (noUpdate) return;
             let data = this._prepareDataChunks(tname, k, {});
             this._updatePositively(undefined, data);
         } else {
-            let noUpdate = XNetTable.isEqual(this._data[tname][k], value);
             this._data[tname][k] = value;
-            if (noUpdate) return;
             let data = this._prepareDataChunks(tname, k, value);
             this._updatePositively(undefined, data);
         }
-    }
-
-    private static isEqual(prev: any, next: any): boolean {
-        if (type(prev) != type(next)) return false;
-
-        if (type(prev) == 'table') {
-            if (prev == null) return next == null;
-            if (Array.isArray(prev)) {
-                if (Object.values(prev).length != Object.values(next).length) return false;
-                for (let i = 0; i < prev.length; i++) {
-                    if (!XNetTable.isEqual(prev[i], next[i])) return false;
-                }
-            } else {
-                for (let key in prev) {
-                    if (!XNetTable.isEqual(prev[key], next[key])) return false;
-                }
-            }
-        } else {
-            return prev == next;
-        }
-
-        return true;
     }
 
     /**
