@@ -143,7 +143,7 @@ export class XNetTable {
     }
 
     private _updatePositively(target: PlayerID | undefined, chunks: string[]) {
-        for (let chunk of chunks) {
+        for (let chunk of chunks.reverse()) {
             this._data_queue.unshift({
                 target: target,
                 data: chunk,
@@ -191,8 +191,7 @@ export class XNetTable {
             let data_sent_length = 0;
 
             while (this._data_queue.length > 0) {
-                // 这里设置为MTU的2.5倍作为一帧发送数据最大量，这个还需要进一步进行压力测试看看会不会导致卡顿
-                if (data_sent_length > this.MTU * 2.5) {
+                if (data_sent_length > this.MTU) {
                     print(`[x_net_table]当前帧发送数据量${data_sent_length},剩余${this._data_queue.length}条数据未发送，留到下一帧执行`);
                     return FrameTime();
                 }
