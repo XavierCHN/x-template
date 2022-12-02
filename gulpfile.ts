@@ -47,11 +47,7 @@ const kv_2_js =
     () => {
         const kvFiles = `${paths.kv}/**/*.{kv,txt}`;
         const transpileKVToJS = () => {
-            return gulp
-                .src(kvFiles)
-                .pipe(dotax.kvToJS())
-                .pipe(gulp.dest(paths.panorama_json))
-                .pipe(gulp.dest(paths.src_json));
+            return gulp.src(kvFiles).pipe(dotax.kvToJS()).pipe(gulp.dest(paths.panorama_json)).pipe(gulp.dest(paths.src_json));
         };
 
         if (watch) {
@@ -122,10 +118,7 @@ const csv_to_localization =
  * @description Convert addon_*.txt file to addon.csv file, this task is for adapting your original development method, if you are re-developing, you don't need to run this task
  */
 const localization_2_csv = () => {
-    return dotax.localsToCSV(
-        `${paths.game_resource}/addon_*.txt`,
-        `${paths.game_resource}/addon.csv`
-    );
+    return dotax.localsToCSV(`${paths.game_resource}/addon_*.txt`, `${paths.game_resource}/addon.csv`);
 };
 
 /**
@@ -137,10 +130,7 @@ const create_image_precache =
     () => {
         const imageFiles = `${paths.panorama}/images/**/*.{jpg,png,psd}`;
         const createImagePrecache = () => {
-            return gulp
-                .src(imageFiles)
-                .pipe(dotax.imagePrecacche(`content/panorama/images/`))
-                .pipe(gulp.dest(paths.panorama));
+            return gulp.src(imageFiles).pipe(dotax.imagePrecacche(`content/panorama/images/`)).pipe(gulp.dest(paths.panorama));
         };
         if (watch) {
             return gulp.watch(imageFiles, createImagePrecache);
@@ -148,6 +138,19 @@ const create_image_precache =
             return createImagePrecache();
         }
     };
+
+/**
+ * start a file sserver to save/read files
+ */
+import app from './scripts/file_server';
+const start_file_server = (callback: Function) => {
+    app.listen(10384, () => {
+        console.log('file server listening on port 3000');
+        callback();
+    });
+};
+
+gulp.task('start_file_server', start_file_server);
 
 gulp.task('localization_2_csv', localization_2_csv);
 
@@ -163,19 +166,8 @@ gulp.task('kv_2_js:watch', kv_2_js(true));
 gulp.task('csv_to_localization', csv_to_localization());
 gulp.task('csv_to_localization:watch', csv_to_localization(true));
 
-gulp.task(
-    'predev',
-    gulp.series('sheet_2_kv', 'kv_2_js', 'csv_to_localization', 'create_image_precache')
-);
-gulp.task(
-    'dev',
-    gulp.parallel(
-        'sheet_2_kv:watch',
-        'csv_to_localization:watch',
-        'create_image_precache:watch',
-        'kv_2_js:watch'
-    )
-);
+gulp.task('predev', gulp.series('sheet_2_kv', 'kv_2_js', 'csv_to_localization', 'create_image_precache'));
+gulp.task('dev', gulp.parallel('sheet_2_kv:watch', 'csv_to_localization:watch', 'create_image_precache:watch', 'kv_2_js:watch', 'start_file_server'));
 gulp.task('build', gulp.series('predev'));
 gulp.task('jssync', gulp.series('sheet_2_kv', 'kv_2_js'));
 gulp.task('kv_to_local', kv_to_local());
