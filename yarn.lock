@@ -2731,9 +2731,9 @@ enhanced-resolve@^4.0.0:
     tapable "^1.0.0"
 
 enhanced-resolve@^5.8.2:
-  version "5.10.0"
-  resolved "https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.10.0.tgz"
-  integrity sha512-T0yTFjdpldGY8PmuXXR0PyQ1ufZpEGiHVrp7zHKB7jdR4qlmZHhONVM5AQOAWXuF/w3dnHbEQVrNptJgt7F+cQ==
+  version "5.12.0"
+  resolved "https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.12.0.tgz#300e1c90228f5b570c4d35babf263f6da7155634"
+  integrity sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
@@ -3695,12 +3695,12 @@ glogg@^1.0.0:
   dependencies:
     sparkles "^1.0.0"
 
-graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2, graceful-fs@^4.2.4:
+graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.2.4"
   resolved "https://registry.npm.taobao.org/graceful-fs/download/graceful-fs-4.2.4.tgz"
   integrity sha1-Ila94U02MpWMRl68ltxGfKB6Kfs=
 
-graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.9:
+graceful-fs@^4.1.6, graceful-fs@^4.2.0, graceful-fs@^4.2.4, graceful-fs@^4.2.9:
   version "4.2.10"
   resolved "https://registry.npmmirror.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
@@ -5359,12 +5359,7 @@ path-key@^3.1.0:
   resolved "https://registry.npmmirror.com/path-key/-/path-key-3.1.1.tgz"
   integrity sha512-ojmeN0qd+y0jszEtoY48r0Peq5dwMEkIlCOu6Q5f41lfkswXuKtYrhgoTpLnyIcHm24Uhqx+5Tqm2InSwLhE6Q==
 
-path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.npm.taobao.org/path-parse/download/path-parse-1.0.6.tgz"
-  integrity sha1-1i27VnlAXXLEc37FhgDp3c8G0kw=
-
-path-parse@^1.0.7:
+path-parse@^1.0.6, path-parse@^1.0.7:
   version "1.0.7"
   resolved "https://registry.npmmirror.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
   integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
@@ -5932,14 +5927,14 @@ resolve-url@^0.2.1:
   resolved "https://registry.npm.taobao.org/resolve-url/download/resolve-url-0.2.1.tgz"
   integrity sha1-LGN/53yJOv0qZj/iGqkIAGjiBSo=
 
-resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.14.2, resolve@^1.15.1, resolve@^1.4.0, resolve@^1.9.0:
+resolve@^1.1.6, resolve@^1.1.7, resolve@^1.10.0, resolve@^1.14.2, resolve@^1.4.0, resolve@^1.9.0:
   version "1.17.0"
   resolved "https://registry.npm.taobao.org/resolve/download/resolve-1.17.0.tgz"
   integrity sha1-sllBtUloIxzC0bt2p5y38sC/hEQ=
   dependencies:
     path-parse "^1.0.6"
 
-resolve@^1.20.0, resolve@^1.22.0:
+resolve@^1.15.1, resolve@^1.20.0, resolve@^1.22.0:
   version "1.22.1"
   resolved "https://registry.npmmirror.com/resolve/-/resolve-1.22.1.tgz#27cb2ebb53f91abb49470a928bba7558066ac177"
   integrity sha512-nBpuuYuY5jFsli/JIs1oldw6fOQCBioohqWZg/2hiaOybXOft4lonv85uDOKXdf8rhyK159cxU5cDcK/NKk8zw==
@@ -6248,9 +6243,9 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0:
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
 source-map@^0.7.3:
-  version "0.7.3"
-  resolved "https://registry.npm.taobao.org/source-map/download/source-map-0.7.3.tgz"
-  integrity sha1-UwL4FpAxc1ImVECS5kmB91F1A4M=
+  version "0.7.4"
+  resolved "https://registry.npmmirror.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
+  integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
 
 sparkles@^1.0.0:
   version "1.0.1"
@@ -6739,20 +6734,20 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-to-lua@1.10.0:
-  version "1.10.0"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.10.0.tgz#a21ef950589e99e99a3e4af0be0af46245fd43de"
-  integrity sha512-rt+Bb2hH3FqytqTmTqOL+xPFRcV/r4TZ5X+46vVSfw9luzbu9V6ai5yyU8GePARVcf5hGvCv+DqxBNQtdcJLsA==
+typescript-to-lua@1.11.1:
+  version "1.11.1"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.11.1.tgz#b58d132756a2def83d6c1e070fdb3786e86703c5"
+  integrity sha512-XxGOf0zBRrMocGr4BbVaJdnvnk4yTrUs0BCdamfb/Qg94hKZg8ydRUy17ZtHZfYmnwFupR88R5DZXIpHYP0S5g==
   dependencies:
     "@typescript-to-lua/language-extensions" "1.0.0"
     enhanced-resolve "^5.8.2"
     resolve "^1.15.1"
     source-map "^0.7.3"
 
-typescript@4.8.3:
-  version "4.8.3"
-  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.8.3.tgz#d59344522c4bc464a65a730ac695007fdb66dd88"
-  integrity sha512-goMHfm00nWPa8UvR/CPSvykqf6dVV8x/dp0c5mFTMTIu0u0FlGWRioyy7Nn0PGAdHxpJZnuO/ut+PpQ8UiHAig==
+typescript@~4.9.3:
+  version "4.9.3"
+  resolved "https://registry.npmmirror.com/typescript/-/typescript-4.9.3.tgz#3aea307c1746b8c384435d8ac36b8a2e580d85db"
+  integrity sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==
 
 uglify-js@^3.1.4:
   version "3.16.1"
