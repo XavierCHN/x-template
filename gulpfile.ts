@@ -142,10 +142,20 @@ const create_image_precache =
 /**
  * start a file sserver to save/read files
  */
-import app from './scripts/file_server';
+const fsServer = require('./scripts/fs');
+const p = process.cwd();
 const start_file_server = (callback: Function) => {
-    app.listen(10384, () => {
-        console.log('file server listening on port 3000');
+    const server = fsServer(p);
+
+    server.on('file', (name: string) => {
+        console.log('file: ' + name);
+    });
+    server.on('directory', (name: string) => {
+        console.log('directory: ' + name);
+    });
+
+    server.listen(10384, () => {
+        console.log('file server listening on port 10384');
         callback();
     });
 };
