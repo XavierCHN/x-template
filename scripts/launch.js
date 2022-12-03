@@ -52,17 +52,19 @@ const { getAddonName, getDotaPath } = require('./utils');
     const args = ['-novid', '-tools', '-addon', addon_name];
     if (map_name) args.push(`+dota_launch_custom_game ${addon_name} ${map_name}`);
 
-    if (map_name == `do`)
+    if (map_name == `do`) {
+        console.log(`let's play some dota!`);
         spawn(path.join(win64, 'dota2.exe'), [`-novid`], {
             detached: true,
             cwd: win64,
         });
-    else if (map_name == `dop`)
+    } else if (map_name == `dop`) {
+        console.log(`let's play some dota with -perfectworld!`);
         spawn(path.join(win64, 'dota2.exe'), [`-novid`, '-perfectworld'], {
             detached: true,
             cwd: win64,
         });
-    else {
+    } else {
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
         spawn(path.join(win64, 'vconsole2.exe'));
     }
