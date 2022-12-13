@@ -25,7 +25,7 @@ Xavier 的 dota2 自定义游戏开发模板
 
 
 1. 前端的`content/panorama/src`与后端的`game/scripts/src`文件夹分别用来写用户界面 react 源码和游戏逻辑的 ts 源代码
-2. 将你的 excel 文件变成 kv 文件并放到`game/scripts/npc`文件夹，同时在panorama和scripts文件夹生成对应的json文件，用来给你的ts代码获取kv数据使用
+2. 将你的 excel 文件变成 kv 文件并放到`game/scripts/npc`文件夹，同时在panorama和scripts文件夹生成与每个kv文件对应的json文件，这样你的ts代码可以很方便地获取kv数据
 3. 将 `addon.csv` 变成 `addon_*.txt`，(也可以把 `addon_*.txt` 变成 `addon.csv`)
 
 ### 支持的指令
