@@ -1,10 +1,10 @@
 /**
  * a custom fs to read/write files via http request
  * @example
- *    fs.read('/game/scripts/src/addon_game_mode.ts').then(content => {
+ *    fs.read('./game/scripts/src/addon_game_mode.ts').then(content => {
  *        print(content);
  *    });
- *    fs.write('/game/scripts/src/test.ts', 'to be or not to be, it is a problem\r\n');
+ *    fs.write('./game/scripts/src/test.ts', 'to be or not to be, it is a problem\r\n');
  * */
 export class fs {
     public static request(method: 'PUT' | 'GET' | 'POST', url: string) {
