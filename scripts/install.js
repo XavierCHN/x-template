@@ -27,7 +27,7 @@ const { replace } = require('replace-json-property');
     // if the user doesn't change the name, give an error message
     if (name === 'x_template') {
         console.log(
-            'You have not changed the name of the addon. Please change the name in package.json and run this script again.\n请在package.json中修改name字段，然后重新运行'
+            'You have not changed the name of the addon. Please change the name in package.json and run this script again. addon linking is skipped!\n请在package.json中修改name字段，然后重新运行，此次运行跳过文件夹链接创建'
         );
         return;
     }
