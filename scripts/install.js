@@ -24,6 +24,14 @@ const { replace } = require('replace-json-property');
 
     if (name !== originalName) replace(path.resolve(__dirname, '..', 'package.json'), 'name', name, { spaces: 4 });
 
+    // if the user doesn't change the name, give an error message
+    if (name === 'x_template') {
+        console.log(
+            'You have not changed the name of the addon. Please change the name in package.json and run this script again.\n请在package.json中修改name字段，然后重新运行'
+        );
+        return;
+    }
+
     if (process.platform !== 'win32') {
         console.log('This script runs on windows only, Addon Linking is skipped.');
         return;
