@@ -47,16 +47,19 @@ function precacheEveryResourceInKV(kvFileList: string[], context: CScriptPrecach
 // 预载入资源列表
 function precacheResource(resourceList: string[], context: CScriptPrecacheContext) {
     resourceList.forEach(resource => {
-        const res = resource as string;
-        if (res.endsWith('.vpcf')) {
-            PrecacheResource('particle', res, context);
-        } else if (res.endsWith('.vsndevts')) {
-            PrecacheResource('soundfile', res, context);
-        } else if (res.endsWith('.vmdl')) {
-            PrecacheResource('model', res, context);
-        }
+        precacheResString(resource, context);
     });
 }
+function precacheResString(res: string, context: CScriptPrecacheContext) {
+    if (res.endsWith('.vpcf')) {
+        PrecacheResource('particle', res, context);
+    } else if (res.endsWith('.vsndevts')) {
+        PrecacheResource('soundfile', res, context);
+    } else if (res.endsWith('.vmdl')) {
+        PrecacheResource('model', res, context);
+    }
+}
+
 // 预载入单位列表
 function precacheUnits(unitNamesList: string[], context?: CScriptPrecacheContext) {
     if (context != null) {
@@ -82,14 +85,7 @@ function precacheEverythingFromTable(kvTable: any, context: CScriptPrecacheConte
         if (type(v) === 'table') {
             precacheEverythingFromTable(v, context);
         } else if (type(v) === 'string') {
-            const res = v as string;
-            if (res.endsWith('.vpcf')) {
-                PrecacheResource('particle', res, context);
-            } else if (res.endsWith('.vsndevts')) {
-                PrecacheResource('soundfile', res, context);
-            } else if (res.endsWith('.vmdl')) {
-                PrecacheResource('model', res, context);
-            }
+            precacheResString(v, context);
         }
     }
 }
