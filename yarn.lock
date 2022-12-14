@@ -3749,10 +3749,10 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@1.0.42:
-  version "1.0.42"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.42.tgz#74caf5bae63a1898906f371a31bdc0cd29c3c0be"
-  integrity sha512-OjDs701M1/G3hza4hIdoUR8GjTKBV1EMPbi5Vf0mds+BBAbIGXaThj5U7FvrC0O34N9pIVPqhWNQcAS7Utl4dg==
+gulp-dotax@1.0.44:
+  version "1.0.44"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.44.tgz#efb5cc1e7c00785c072484e632811bb030db3cb4"
+  integrity sha512-55vd5mjxeAfONUIwqqaY0ZQr592yueLx9UovjsXEzS4OIsZO8ELdIlFCc0+QNHn0sPliqadkAu3Oo6K/1pwgiQ==
   dependencies:
     easy-keyvalues "^1.0.12"
     fs-extra "^10.1.0"
