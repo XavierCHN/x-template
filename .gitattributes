@@ -1,2 +1,7 @@
-# Auto detect text files and perform LF normalization
+# Set the default behavior, in case people don't have core.autocrlf set.
 * text=auto
+
+# trying to fix the crlf warning?
+# https://stackoverflow.com/questions/170961/whats-the-strategy-for-handling-crlf-carriage-return-line-feed-with-git
+*.txt text eol=lf
+*.json text eol=lf
