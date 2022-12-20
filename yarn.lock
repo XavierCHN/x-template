@@ -3715,10 +3715,10 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@1.0.48:
-  version "1.0.48"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.48.tgz#2e6bb2d20e43d573ba98e89fd399618c745d3666"
-  integrity sha512-6+CrUlAxFCHv9D5xGLW6Xk4nELaa2PwK7oEY0Ceuip8MArikzLd6fGoxTguUoU4Qb0wp4GI+MGAeIfPDp6Zazw==
+gulp-dotax@1.0.49:
+  version "1.0.49"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.0.49.tgz#ed2584e72082d13d65ccdde67ec03b3f6d6de7a1"
+  integrity sha512-Pas8hphdQSXmN6QkuaiHyN9GYd9L7p+3gwaCsuooGzUWZX4pfKJlPxVkrUrgLp5cdwDhZW3b3txnMvleKtyzMw==
   dependencies:
     easy-keyvalues "^1.0.12"
     fs-extra "^10.1.0"
