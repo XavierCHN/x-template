@@ -64,6 +64,12 @@ const { getAddonName, getDotaPath } = require('./utils');
             detached: true,
             cwd: win64,
         });
+    } else if (map_name == `doc`) {
+        console.log(`let's play some dota with -steamchina!`);
+        spawn(path.join(win64, 'dota2.exe'), [`-novid`, '-steamchina'], {
+            detached: true,
+            cwd: win64,
+        });
     } else {
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
         spawn(path.join(win64, 'vconsole2.exe'));
