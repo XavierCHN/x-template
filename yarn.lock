@@ -986,12 +986,19 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@demon673/react-panorama@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.npmmirror.com/@demon673/react-panorama/download/@demon673/react-panorama-0.2.2.tgz"
-  integrity sha512-gQTMKBaniNIMqnUmKoRH9mthy/eXBMm7aMk9Az4k6wSsPC3Hhz0bunCVo0xusIKXcV9RQshvQmoZrUFZ2hcYrQ==
+"@demon673/panorama-polyfill@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.npmmirror.com/@demon673/panorama-polyfill/-/panorama-polyfill-0.1.4.tgz#809121359580917646a79433bb5da08dafa63e85"
+  integrity sha512-jR1t6jj5M5h/uY3Z/W6jdwz/0gkOlrWZ14Iq3IcEXB/nimKROYgE2SBx5O4s9mNYRVvkyQPhHS3v/yR5XK/iaw==
   dependencies:
-    panorama-polyfill "^0.1.0"
+    object-inspect "^1.8.0"
+
+"@demon673/react-panorama@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.npmmirror.com/@demon673/react-panorama/-/react-panorama-0.2.7.tgz#c238fbfb25919228569c05d2f47713445e867828"
+  integrity sha512-VGbroJNVJ5UHH98i2k44ZXb0sBTz9mYQ+Z/X7fSwCZRiLIz/lXoMLYzmmdkz+vPHDgX0Mx6XlH+rNfH2mLp6xw==
+  dependencies:
+    "@demon673/panorama-polyfill" "^0.1.4"
 
 "@discoveryjs/json-ext@^0.5.0":
   version "0.5.7"
@@ -5262,13 +5269,6 @@ p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.npmmirror.com/p-try/-/p-try-2.2.0.tgz"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
-
-panorama-polyfill@^0.1.0, panorama-polyfill@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.npmmirror.com/panorama-polyfill/-/panorama-polyfill-0.1.1.tgz"
-  integrity sha512-LXROlGC0j8wWtLc6jm7HMhWH0c6Ft5SM/58zZGn05oo2a7g7UNTeQuCPzNGvDy+mqX271rPHUrDoY4BmyGMzjQ==
-  dependencies:
-    object-inspect "^1.8.0"
 
 papaparse@^5.3.2:
   version "5.3.2"

@@ -1,5 +1,5 @@
-import 'panorama-polyfill/lib/console';
-import 'panorama-polyfill/lib/timers';
+import '@demon673/panorama-polyfill/lib/console';
+import '@demon673/panorama-polyfill/lib/timers';
 
 import React from 'react';
 import { render } from '@demon673/react-panorama';
@@ -12,3 +12,5 @@ const Test: React.FC = () => {
 };
 
 render(<Test />, $.GetContextPanel());
+
+console.log(`Hello, world!`);
