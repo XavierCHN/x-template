@@ -1,6 +1,7 @@
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama-x');
+const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 
 const entries = require('./entries.config');
 const entry = Object.assign({}, entries);
@@ -82,5 +83,17 @@ module.exports = {
                 configFile: path.resolve(__dirname, 'tsconfig.json'),
             },
         }),
+        new ReplaceInFileWebpackPlugin([
+            {
+                dir: 'content/panorama/layout/custom_game',
+                test: /\.js$/,
+                rules: [
+                    {
+                        search: /new Function\(\'return this\'\)\(\)/g,
+                        replace: 'globalThis',
+                    },
+                ],
+            },
+        ]),
     ],
 };
