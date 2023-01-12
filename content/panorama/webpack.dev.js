@@ -16,6 +16,10 @@ module.exports = {
         chunkFormat: 'commonjs',
     },
 
+    optimization: {
+        usedExports: true, // 启用 tree shaking
+    },
+
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '...'],
         symlinks: false,
