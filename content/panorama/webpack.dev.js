@@ -3,9 +3,6 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama-x');
 const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 
-const entries = require('./entries.config');
-const entry = Object.assign({}, entries);
-
 /** @type {import('webpack').Configuration} */
 module.exports = {
     mode: 'development',
@@ -24,9 +21,6 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '...'],
         symlinks: false,
     },
-
-    // entries from entries.config.js
-    entry: entry,
 
     module: {
         rules: [
@@ -83,6 +77,16 @@ module.exports = {
             typescript: {
                 configFile: path.resolve(__dirname, 'tsconfig.json'),
             },
+        }),
+        new PanoramaManifestPlugin({
+            entries: [
+                { import: './utils/x-nettable-dispatcher.ts', filename: 'x-nettable-dispatcher.js' },
+                { import: './loading-screen/layout.xml', filename: 'custom_loading_screen.xml' },
+                { import: './hud/layout.xml', filename: 'hud.xml' },
+                { import: './end_screen/layout.xml', filename: 'endscreen.xml' },
+            ],
+            // 这是一个临时的解决方案，应该作为一个永久性的变更放到webpack-panorama中
+            minify: false,
         }),
         new ReplaceInFileWebpackPlugin([
             {

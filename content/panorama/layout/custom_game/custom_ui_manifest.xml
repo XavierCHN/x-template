@@ -1,9 +1,0 @@
-<root>
-  <scripts>
-    <include src="file://{resources}/layout/custom_game/x-nettable-dispatcher.js"></include>
-  </scripts>
-  <Panel>
-    <CustomUIElement type="EndScreen" layoutfile="file://{resources}/layout/custom_game/endscreen.xml" />
-    <CustomUIElement type="Hud" layoutfile="file://{resources}/layout/custom_game/hud.xml" />
-  </Panel>
-</root>
