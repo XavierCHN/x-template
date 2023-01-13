@@ -7055,7 +7055,7 @@ webpack-merge@^5.7.3:
     clone-deep "^4.0.1"
     wildcard "^2.0.0"
 
-webpack-panorama-x@0.4.0:
+webpack-panorama-x@^0.4.0:
   version "0.4.0"
   resolved "https://registry.npmmirror.com/webpack-panorama-x/-/webpack-panorama-x-0.4.0.tgz#24e47639eabbca28e2c5c01580416c91827de566"
   integrity sha512-regOouAcJzLS931Kwx/VM4NIFQworHDjQNqKTks3tg4t6LrhXDFiCze1KtNf7UGpq08nKsfbrv/4RzYmDvTJ3g==
