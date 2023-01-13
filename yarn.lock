@@ -7055,10 +7055,10 @@ webpack-merge@^5.7.3:
     clone-deep "^4.0.1"
     wildcard "^2.0.0"
 
-webpack-panorama-x@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmmirror.com/webpack-panorama-x/-/webpack-panorama-x-0.3.0.tgz#a6ea1bfa8e2802d63e633c5b5c1d26cc4f685dd3"
-  integrity sha512-zI1mZipFmuF/YNmbBheld7N9xL2q5IodeMCdF0EIJXmp8g/FVdaNsHm9S0QNFjzH17Kywgs6j32XzbCURch1nQ==
+webpack-panorama-x@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmmirror.com/webpack-panorama-x/-/webpack-panorama-x-0.4.0.tgz#24e47639eabbca28e2c5c01580416c91827de566"
+  integrity sha512-regOouAcJzLS931Kwx/VM4NIFQworHDjQNqKTks3tg4t6LrhXDFiCze1KtNf7UGpq08nKsfbrv/4RzYmDvTJ3g==
   dependencies:
     "@posthtml/esm" "^1.0.0"
     html-webpack-plugin "^5.5.0"

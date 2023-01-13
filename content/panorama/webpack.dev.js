@@ -82,11 +82,9 @@ module.exports = {
             entries: [
                 { import: './utils/x-nettable-dispatcher.ts', filename: 'x-nettable-dispatcher.js' },
                 { import: './loading-screen/layout.xml', filename: 'custom_loading_screen.xml' },
-                { import: './hud/layout.xml', filename: 'hud.xml' },
-                { import: './end_screen/layout.xml', filename: 'endscreen.xml' },
+                { import: './hud/layout.xml', filename: 'hud.xml', type: 'Hud' },
+                { import: './end_screen/layout.xml', filename: 'endscreen.xml', type: 'EndScreen' },
             ],
-            // 这是一个临时的解决方案，应该作为一个永久性的变更放到webpack-panorama中
-            minify: false,
         }),
         new ReplaceInFileWebpackPlugin([
             {
