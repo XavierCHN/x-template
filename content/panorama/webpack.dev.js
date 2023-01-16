@@ -86,17 +86,5 @@ module.exports = {
                 { import: './end_screen/layout.xml', filename: 'endscreen.xml', type: 'EndScreen' },
             ],
         }),
-        new ReplaceInFileWebpackPlugin([
-            {
-                dir: 'content/panorama/layout/custom_game',
-                test: /\.js$/,
-                rules: [
-                    {
-                        search: /new Function\(\'return this\'\)\(\)/g,
-                        replace: 'globalThis',
-                    },
-                ],
-            },
-        ]),
     ],
 };
