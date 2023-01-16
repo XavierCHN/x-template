@@ -54,7 +54,7 @@
         "@babel/preset-env": "^7.16.5",
         "@babel/preset-react": "^7.16.5",
         "@demon673/panorama-polyfill": "^0.1.4",
-        "@demon673/react-panorama": "^0.2.7",
+        "@demon673/react-panorama": "^0.2.8",
         "@moddota/dota-lua-types": "^4.19.0",
         "@moddota/panorama-types": "^1.20.0",
         "@types/events": "^3.0.0",

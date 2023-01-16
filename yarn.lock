@@ -993,10 +993,10 @@
   dependencies:
     object-inspect "^1.8.0"
 
-"@demon673/react-panorama@^0.2.7":
-  version "0.2.7"
-  resolved "https://registry.npmmirror.com/@demon673/react-panorama/-/react-panorama-0.2.7.tgz#c238fbfb25919228569c05d2f47713445e867828"
-  integrity sha512-VGbroJNVJ5UHH98i2k44ZXb0sBTz9mYQ+Z/X7fSwCZRiLIz/lXoMLYzmmdkz+vPHDgX0Mx6XlH+rNfH2mLp6xw==
+"@demon673/react-panorama@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.npmmirror.com/@demon673/react-panorama/-/react-panorama-0.2.8.tgz#aed36459eda5828a30fb5e4b7c276f98e3a1e312"
+  integrity sha512-rY5AIS/dWwKxsSGXAaWB4dUciGVBbtdCdN9WefoARivXaJg7+vSsDook5pLwCsftI8RI6bYkLhajqmZX68xZaQ==
   dependencies:
     "@demon673/panorama-polyfill" "^0.1.4"
 
