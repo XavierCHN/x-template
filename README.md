@@ -31,7 +31,7 @@ Xavier 的 dota2 自定义游戏开发模板
 ### 支持的指令
 
 1. `yarn launch [[addon_name] map_name]` 启动 dota2，两个参数为可选参数，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名（若未提供 addon_name 则默认载入当前 addon）
-2. `yarn dev` 进入 dev 模式，将会执行`同步KV到js，生成localization，Excel转KV等操作`
+2. `yarn dev` 进入 dev 模式，将会执行`将后端的ts代码编译成lua代码、使用webpack打包前端代码、同步KV到js，生成localization，Excel转KV等操作`，正常来说，每次开发你需要保持yarn dev的运行状态
 3. `yarn test` 和 `yarn prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
     > 加密发布流程
 
@@ -47,7 +47,7 @@ Xavier 的 dota2 自定义游戏开发模板
 
 > 执行`yarn launch your_addon_name_publish`来启动加密后的图，之后执行上传操作
 
-> 如果要使用加密功能，需要安装 [Lua 命令行程序](http://luabinaries.sourceforge.net/)
+> 要使用加密功能，需要安装 [Lua 命令行程序](http://luabinaries.sourceforge.net/)（如果未安装会提示未找到lua命令）
 
 ### 使用步骤
 
@@ -76,7 +76,7 @@ Xavier 的 dota2 自定义游戏开发模板
 > 只推荐使用`steam`启动dota2的形式来完成modding，如果尚未安装，请[点此下载](https://store.steampowered.com/about/)
 
 ##### 需要安装的软件包括：
-1. 代码编辑器 [Visual Studio Code](https://code.visualstudio.com) 或者 [Sublime Text 3](http://www.sublimetext.com/3) （推荐都安装）
+1. 代码编辑器 [Visual Studio Code](https://code.visualstudio.com) 或者其他你习惯使用的typescript代码编辑器
 2. 反编译工具 [ValveResourceFormat](https://github.com/SteamDatabase/ValveResourceFormat/releases)（推荐）或者 [GCFScape](https://nemstools.github.io/pages/GCFScape-Download.html)(已略过时，某些格式反编译不了，但是速度比较快，推荐都安装)
 3. Adobe系列工具, 如PhotoShop（必须）, Audition（选装）等，请到 [官网](https://www.adobe.com/) 下载或自行使用搜索引擎获取
 4. 代码版本控制 [Github Desktop](https://desktop.github.com/)（推荐，和github的配合比较好） 或 [SourceTree](https://www.sourcetreeapp.com/) 或 [TortoiseSVN](https://tortoisesvn.net/index.zh.html)
