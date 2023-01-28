@@ -1,5 +1,5 @@
-import '@demon673/panorama-polyfill/lib/console';
-import '@demon673/panorama-polyfill/lib/timers';
+import 'panorama-polyfill-x/lib/console';
+import 'panorama-polyfill-x/lib/timers';
 
 import React from 'react';
 import { render } from '@demon673/react-panorama';

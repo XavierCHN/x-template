@@ -1,5 +1,5 @@
 import { emitLocalEvent } from './event-bus';
-import '@demon673/panorama-polyfill/lib/console';
+import 'panorama-polyfill-x/lib/console';
 
 (() => {
     GameEvents.Subscribe(`x_net_table`, data => {
