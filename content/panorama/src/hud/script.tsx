@@ -2,7 +2,7 @@ import 'panorama-polyfill-x/lib/console';
 import 'panorama-polyfill-x/lib/timers';
 
 import React from 'react';
-import { render } from '@demon673/react-panorama';
+import { render } from 'react-panorama-x';
 import { useXNetTableKey } from '../hooks/useXNetTable';
 
 const Test: React.FC = () => {
