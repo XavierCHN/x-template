@@ -123,10 +123,10 @@ function getFileScope(): [any, string] {
             // loadstring的 main short_src 为'[string "local a = 1"] blah blah
             // 如果你没有加密使用这个方法的脚本（目前为包含registerAbility与registerModifier的代码）
             // 可以注释或忽略下面这两行代码
-            info.short_src != null &&
-            !info.short_src.startsWith(`[string`)
+            info.source &&
+            info.source.startsWith('@') // ensure this is the main script
         ) {
-            return [getfenv(level), info.source!];
+            return [getfenv(level), info.source];
         }
 
         level += 1;
