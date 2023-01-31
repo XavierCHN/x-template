@@ -25,6 +25,12 @@
                 ]
             }
         ],
+        "@typescript-eslint/consistent-type-imports": [
+            "error",
+            {
+                "prefer": "type-imports"
+            }
+        ],
         "no-redeclare": "off",
         "import/no-anonymous-default-export": "off",
         "@typescript-eslint/no-redeclare": ["off"],
