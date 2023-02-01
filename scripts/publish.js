@@ -5,19 +5,18 @@ const fs = require('fs');
 const anyMatch = require('anymatch');
 const path = require('path');
 
-const packageJson = require('../package.json');
-const settings = packageJson.dota_developer.publish_options;
+const config = require('./addon.config.js');
 const walker = walk.walk('game');
-const excludeFiles = settings.excludeFiles;
-const encryptFiles = settings.encryptFiles;
+const excludeFiles = config.exclude_files;
+const encryptFiles = config.encrypt_files;
 
 let mode = process.argv[2];
 const dedicatedServerKey =
     mode == `release`
-        ? settings.encryptDedicatedServerKeyRelease
+        ? config.encryptDedicatedServerKeyRelease
         : mode == `release_test`
-        ? settings.encryptDedicatedServerKeyRelease_Test
-        : settings.encryptDedicatedServerKeyTest;
+        ? config.encryptDedicatedServerKeyRelease_Test
+        : config.encryptDedicatedServerKeyTest;
 const exec = require('child_process').exec;
 
 const getPublishPath = source => source.replace(/^game/, 'publish');
