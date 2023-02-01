@@ -24,6 +24,7 @@ const sheet_2_kv =
                 .src(excelFiles)
                 .pipe(
                     dotax.sheetToKV({
+                        // 所有支持的参数请按住 Ctrl 点击 sheetToKV 查看，以下其他 API 也是如此
                         sheetsIgnore: '^__', // 忽略以两个下划线开头的sheet
                         indent: `	`, // 自定义缩进
                     })
