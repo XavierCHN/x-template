@@ -2747,7 +2747,7 @@ enhanced-resolve@^4.0.0:
 
 enhanced-resolve@^5.8.2:
   version "5.12.0"
-  resolved "https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.12.0.tgz"
+  resolved "https://registry.npmmirror.com/enhanced-resolve/-/enhanced-resolve-5.12.0.tgz#300e1c90228f5b570c4d35babf263f6da7155634"
   integrity sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==
   dependencies:
     graceful-fs "^4.2.4"
@@ -3517,8 +3517,8 @@ fsevents@~2.3.1:
 
 function-bind@^1.1.1:
   version "1.1.1"
-  resolved "https://registry.npm.taobao.org/function-bind/download/function-bind-1.1.1.tgz"
-  integrity sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=
+  resolved "https://registry.npmmirror.com/function-bind/-/function-bind-1.1.1.tgz#a56899d3ea3c9bab874bb9773b7c5ede92f4895d"
+  integrity sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==
 
 function.prototype.name@^1.1.5:
   version "1.1.5"
@@ -3882,8 +3882,8 @@ has-values@^1.0.0:
 
 has@^1.0.3:
   version "1.0.3"
-  resolved "https://registry.npm.taobao.org/has/download/has-1.0.3.tgz"
-  integrity sha1-ci18v8H2qoJB8W3YFOAR4fQeh5Y=
+  resolved "https://registry.npmmirror.com/has/-/has-1.0.3.tgz#722d7cbfc1f6aa8241f16dd814e011e1f41e8796"
+  integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
 
@@ -4104,10 +4104,17 @@ is-callable@^1.2.4:
   resolved "https://registry.nlark.com/is-callable/download/is-callable-1.2.4.tgz"
   integrity sha1-RzAdWN0CWUB4ZVR4U99tYf5HGUU=
 
-is-core-module@^2.8.1, is-core-module@^2.9.0:
+is-core-module@^2.8.1:
   version "2.10.0"
   resolved "https://registry.npmmirror.com/is-core-module/-/is-core-module-2.10.0.tgz"
   integrity sha512-Erxj2n/LDAZ7H8WNJXd9tw38GYM3dv8rk8Zcs+jJuxYTW7sozH+SS8NtrSjVL1/vpLvWi1hxy96IzjJ3EHTJJg==
+  dependencies:
+    has "^1.0.3"
+
+is-core-module@^2.9.0:
+  version "2.11.0"
+  resolved "https://registry.npmmirror.com/is-core-module/-/is-core-module-2.11.0.tgz#ad4cb3e3863e814523c96f3f58d26cc570ff0144"
+  integrity sha512-RRjxlvLDkD1YJwDbroBHMb+cukurkDWNyHx7D3oNB5x9rb5ogcksMC5wHCadcXoo67gVr/+3GFySh3134zi6rw==
   dependencies:
     has "^1.0.3"
 
@@ -6263,7 +6270,7 @@ source-map@^0.6.0, source-map@^0.6.1, source-map@~0.6.0:
 
 source-map@^0.7.3:
   version "0.7.4"
-  resolved "https://registry.npmmirror.com/source-map/-/source-map-0.7.4.tgz"
+  resolved "https://registry.npmmirror.com/source-map/-/source-map-0.7.4.tgz#a9bbe705c9d8846f4e08ff6765acf0f1b0898656"
   integrity sha512-l3BikUxvPOcn5E74dZiq5BGsTb5yEwhaTSzccU6t4sDOH8NWJCstKO5QT2CvtFoK6F0saL7p9xHAqHOlCPJygA==
 
 sparkles@^1.0.0:
@@ -6511,7 +6518,7 @@ supports-color@^8.0.0:
 
 supports-preserve-symlinks-flag@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.npmmirror.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz"
+  resolved "https://registry.npmmirror.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
 sver-compat@^1.5.0:
@@ -6760,10 +6767,10 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-to-lua@1.11.1:
-  version "1.11.1"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.11.1.tgz"
-  integrity sha512-XxGOf0zBRrMocGr4BbVaJdnvnk4yTrUs0BCdamfb/Qg94hKZg8ydRUy17ZtHZfYmnwFupR88R5DZXIpHYP0S5g==
+typescript-to-lua@1.12.0:
+  version "1.12.0"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.12.0.tgz#28e23d630a3f620cee473f4cf32de1e2624eb5d6"
+  integrity sha512-ISKXbLWtyPXoTD+BMgzM9WyPcb0u3t13/2oM5mhnrYyWiknmSYUv2pBm1yK/dnleQacmwjQZAK/qEsyW0Mjrcw==
   dependencies:
     "@typescript-to-lua/language-extensions" "1.0.0"
     enhanced-resolve "^5.8.2"
