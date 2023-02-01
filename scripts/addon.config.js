@@ -33,8 +33,14 @@ const encryptDedicatedServerKeyRelease = `这里需要填入正式的发布密�
 
 /** 验证配置是否合法 */
 const assert = require('assert');
-assert(addon_name.match(/^[a-zA-Z][a-zA-Z0-9_]*$/), 'addon_name 必须为字母开头，而且只能包含字母、数字和下划线，请到 addon.config.js 修改');
-assert(addon_name !== 'x_template', '请到 addon.config.js 修改 addon_name 为你的项目名称，不能为 x_template');
+assert(
+    addon_name.match(/^[a-zA-Z][a-zA-Z0-9_]*$/),
+    'addon_name 必须为字母开头，而且只能包含字母、数字和下划线，请到 addon.config.js 修改\nplease change addon_name in addon.config.js to match /^[a-zA-Z][a-zA-Z0-9_]*$/'
+);
+assert(
+    addon_name !== 'x_template',
+    '请到 addon.config.js 修改 addon_name 为你的项目名称，不能为 x_template\nplease change addon_name in addon.config.js to your project name, not x_template'
+);
 
 module.exports = {
     addon_name: addon_name,
