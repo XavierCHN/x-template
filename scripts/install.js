@@ -35,7 +35,7 @@ const { getDotaPath } = require('./utils');
                 // 移除目标文件夹的所有内容，
                 console.log(`'${targetPath}' is already linked to another directory, removing`);
                 fs.chmodSync(targetPath, '0755');
-                rimraf(targetPath).then(() => {
+                rimraf(targetPath, () => {
                     console.log('removed target path');
                     fs.moveSync(sourcePath, targetPath);
                     fs.symlinkSync(targetPath, sourcePath, 'junction');
