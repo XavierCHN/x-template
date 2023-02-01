@@ -1,6 +1,6 @@
 const { spawn } = require('child_process');
 const path = require('path');
-const { getAddonName, getDotaPath } = require('./utils');
+const { getDotaPath } = require('./utils');
 
 (async () => {
     const dotaPath = await getDotaPath();
@@ -12,7 +12,7 @@ const { getAddonName, getDotaPath } = require('./utils');
 
     const win64 = path.join(dotaPath, 'game', 'bin', 'win64');
 
-    let addon_name = getAddonName();
+    let addon_name = require('./addon.config.js').addon_name;
     let map_name;
 
     let script = process.env.npm_lifecycle_script ?? process.env.npm_package_scripts_launch;

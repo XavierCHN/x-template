@@ -55,7 +55,7 @@ Xavier 的 dota2 自定义游戏开发模板
 2. 安装`node.js`，目前的要求是`>16.0.0`
 3. clone 你使用模板生成的或者 fork 的项目
 4. 安装好vscode之后和下方[DOTA2 Modding 工具推荐](https://github.com/XavierCHN/x-template#dota2-modding-%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%8D%90) 相关软件后，使用vscode打开clone的文件夹
-5. 打开`package.json`，将`name`修改为你自己喜欢的名字
+5. 打开`scripts/addon.config.js`，将`addon_name`修改为你的项目名称
 6. 执行`yarn install`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons` (如果碰到权限问题，请关闭代码编辑器后使用控制台来执行`yarn`，或者重启一下电脑再试，如果碰到安装错误，可以尝试使用[npmmirror镜像](https://npmmirror.com/)，或者直接执行`yarn config set registry https://registry.npmmirror.com`再执行`yarn install`)
 7. `yarn dev`，开始你的开发
 8. 如果你要启动你的项目，你可以使用指令`yarn launch map_name`启动游戏并载入地图，或者使用`yarn launch`只是启动工具而不载入地图，之后再在控制台使用指令载入地图。

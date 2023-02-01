@@ -3,34 +3,9 @@ const fs = require('fs-extra');
 const path = require('path');
 const rimraf = require('rimraf');
 const { getDotaPath } = require('./utils');
-const readlineSync = require('readline-sync');
-const { replace } = require('replace-json-property');
 
 (async () => {
-    let originalName = require('../package.json').name;
-    let name = originalName;
-    while (!/^[a-z]([\d_a-z]+)?$/.test(name)) {
-        name = readlineSync.question(
-            'Please your addon name! should start with a \nletter and consist only of lowercase characters,\ndigits and underscores, or input N to skip addon linking (NOT recommended): '
-        );
-        if (name.toLocaleLowerCase() == `n`) {
-            console.log(`Skipping addon linking...`);
-            return;
-        }
-        if (!/^[a-z]([\d_a-z]+)?$/.test(name)) {
-            console.log('Invalid name!');
-        }
-    }
-
-    if (name !== originalName) replace(path.resolve(__dirname, '..', 'package.json'), 'name', name, { spaces: 4 });
-
-    // if the user doesn't change the name, give an error message
-    if (name === 'x_template') {
-        console.log(
-            'You have not changed the name of the addon. Please change the name in package.json and run this script again. addon linking is skipped!\n请在package.json中修改name字段，然后重新运行，此次运行跳过文件夹链接创建'
-        );
-        return;
-    }
+    let addon_name = require('./addon.config.js').addon_name; // 直接从addon.config.js中读取项目名称
 
     if (process.platform !== 'win32') {
         console.log('This script runs on windows only, Addon Linking is skipped.');
@@ -50,7 +25,7 @@ const { replace } = require('replace-json-property');
         const targetRoot = path.join(dotaPath, directoryName, 'dota_addons');
         assert(fs.existsSync(targetRoot), `Could not find '${targetRoot}'`);
 
-        const targetPath = path.join(dotaPath, directoryName, 'dota_addons', name);
+        const targetPath = path.join(dotaPath, directoryName, 'dota_addons', addon_name);
         if (fs.existsSync(targetPath)) {
             const isCorrect = fs.lstatSync(sourcePath).isSymbolicLink() && fs.realpathSync(sourcePath) === targetPath;
             if (isCorrect) {
@@ -60,7 +35,7 @@ const { replace } = require('replace-json-property');
                 // 移除目标文件夹的所有内容，
                 console.log(`'${targetPath}' is already linked to another directory, removing`);
                 fs.chmodSync(targetPath, '0755');
-                await rimraf(targetPath, () => {
+                rimraf(targetPath).then(() => {
                     console.log('removed target path');
                     fs.moveSync(sourcePath, targetPath);
                     fs.symlinkSync(targetPath, sourcePath, 'junction');

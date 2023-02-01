@@ -3,30 +3,6 @@
     "description": "a ts-react template for dota2 modding, together with some helper scripts",
     "license": "MIT",
     "repository": "https://github.com/XavierCHN/x-template",
-    "dota_developer": {
-        "publish_options": {
-            "excludeFiles": [
-                "game/scripts/src/**/*.*",
-                "**/*.ts",
-                "**/*.bin",
-                "**/*.py",
-                "**/*.cfg"
-            ],
-            "encryptFiles": [
-                "**/*.lua",
-                "!game/scripts/vscripts/lualib_bundle.lua",
-                "!game/scripts/vscripts/addon_init.lua",
-                "!game/scripts/vscripts/addon_game_mode.lua",
-                "!game/scripts/vscripts/addon_game_mode_client.lua",
-                "!game/scripts/vscripts/utils/decrypt.lua",
-                "!game/scripts/vscripts/utils/aeslua.lua",
-                "!game/scripts/vscripts/utils/aeslua/**/*.lua"
-            ],
-            "encryptDedicatedServerKeyTest": "Invalid_NotOnDedicatedServer",
-            "encryptDedicatedServerKeyRelease_Test": "这里需要填入测试图的密钥 GetDedicatedServerKeyV2('version') 的结果",
-            "encryptDedicatedServerKeyRelease": "这里需要填入正式的发布密钥 GetDedicatedServerKeyV2('version') 的结果"
-        }
-    },
     "scripts": {
         "lint": "eslint --ext .js,.ts,.tsx --quiet --fix \"./content/panorama/src/**/*.{js,ts,tsx}\" \"./game/scripts/src/**/*.{js,ts,tsx}\" \"./scripts/**/*.{js,ts,tsx}\" \"./shared/**/*.{js,ts,tsx}\" ",
         "postinstall": "node scripts/install.js",
@@ -90,9 +66,7 @@
         "pump": "^3.0.0",
         "react": "^16.14.0",
         "react-panorama-x": "^0.3.0",
-        "readline-sync": "^1.4.10",
         "replace-in-file-webpack-plugin": "^1.0.6",
-        "replace-json-property": "^1.8.0",
         "rimraf": "^3.0.2",
         "steam-game-path": "^2.0.1",
         "terser-webpack-plugin": "^5.3.4",

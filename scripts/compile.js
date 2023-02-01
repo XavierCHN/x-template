@@ -3,7 +3,7 @@ const { exec } = require('child_process');
 const fs = require('fs-extra');
 const path = require('path');
 const rimraf = require('rimraf');
-const { getAddonName, getDotaPath } = require('./utils');
+const { getDotaPath } = require('./utils');
 
 (async () => {
     if (process.platform !== 'win32') {
@@ -19,8 +19,9 @@ const { getAddonName, getDotaPath } = require('./utils');
 
     // get the resourcecompiler.exe path
     const resourceCompilerPath = path.join(dotaPath, 'game', 'bin', 'win64', 'resourcecompiler.exe');
+    const addon_name = require('./addon.config.js').addon_name; // 直接从addon.config.js中读取项目名称
 
-    const addonContent = path.join(dotaPath, 'content', 'dota_addons', getAddonName());
+    const addonContent = path.join(dotaPath, 'content', 'dota_addons', addon_name);
 
     const gamePath = path.join(dotaPath, 'game', 'dota');
 
