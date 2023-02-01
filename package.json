@@ -30,7 +30,7 @@
         "@babel/preset-env": "^7.16.5",
         "@babel/preset-react": "^7.16.5",
         "@moddota/dota-lua-types": "^4.19.0",
-        "@moddota/panorama-types": "^1.20.0",
+        "@moddota/panorama-types": "^1.21.0",
         "@types/events": "^3.0.0",
         "@types/fs-extra": "^9.0.13",
         "@types/gulp": "^4.0.9",
