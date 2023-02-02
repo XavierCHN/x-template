@@ -1098,7 +1098,7 @@
   dependencies:
     lua-types "^2.13.0"
 
-"@moddota/panorama-types@^1.20.0":
+"@moddota/panorama-types@^1.21.0":
   version "1.21.0"
   resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.21.0.tgz#576fd7b352b046418c2f816f908a73a2d6a95652"
   integrity sha512-t6haAiG5na94mGe/yoV5MNz8JHm5I9ZXVsL5ZzT7AfCIQbhtclwwy5O0c1F00M76FrdmCFklrx1pPUzaKR352w==
