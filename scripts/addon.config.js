@@ -1,5 +1,5 @@
 /** 项目名称 */
-let addon_name = 'x_template'; // 必须为字母开头，而且只能包含字母、数字和下划线
+let addon_name = 'test'; // 必须为字母开头，而且只能包含字母、数字和下划线
 
 /** 要加密的项目列表 */
 let encrypt_files = [

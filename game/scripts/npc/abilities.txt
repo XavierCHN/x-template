@@ -12,9 +12,16 @@
 			"radius" "1 2 3 4"
 			"test" "1"
 			"another_test" "10.5 2.3 3.3 1.1"
+			"target_damage" {
+"value" "110 120 130"
+"special_bonus_unique_abaddon_2" "+30"
+}
 		}
 		"MaxLevel" "2"
 		"AbilityCooldown" "1 2 3 4 "
 		"AbilityManaCost" "1 1 1 1"
+		"PlainKV" {
+"test" "this is test of plain kv"
+}
 	}
 }
