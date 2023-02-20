@@ -29,12 +29,12 @@ export class GameConfig {
         game.SetForceRightClickAttackDisabled(true); // 是否禁用右键攻击
         game.SetHudCombatEventsDisabled(true); // 是否禁用战斗事件（左下角的战斗消息）
         game.SetCustomGameForceHero(`npc_dota_hero_phoenix`); // 设置强制英雄（会直接跳过英雄选择阶段并直接为所有玩家选择这个英雄）
-        game.SetUseCustomHeroLevels(true); // 是否启用自定义英雄等级
-        game.SetCustomHeroMaxLevel(1); // 设置自定义英雄最大等级
-        game.SetCustomXPRequiredToReachNextLevel({
-            // 设置自定义英雄每个等级所需经验，这里的经验是升级到这一级所需要的*总经验）
-            1: 0,
-        });
+        // game.SetUseCustomHeroLevels(true); // 是否启用自定义英雄等级
+        // game.SetCustomHeroMaxLevel(1); // 设置自定义英雄最大等级
+        // game.SetCustomXPRequiredToReachNextLevel({
+        //     // 设置自定义英雄每个等级所需经验，这里的经验是升级到这一级所需要的*总经验）
+        //     1: 0,
+        // });
         game.SetDaynightCycleDisabled(true); // 是否禁用白天黑夜循环
         game.SetDeathOverlayDisabled(true); // 是否禁用死亡遮罩（灰色的遮罩）
 
