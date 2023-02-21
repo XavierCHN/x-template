@@ -1,3 +1,4 @@
+import { Debug } from './Debug';
 import { GameConfig } from './GameConfig';
 import { XNetTable } from './xnet-table';
 
@@ -18,5 +19,7 @@ export function ActivateModules() {
         GameRules.XNetTable = new XNetTable();
         // 如果某个模块不需要在其他地方使用，那么直接在这里使用即可
         new GameConfig();
+        // 初始化测试模块xD
+        new Debug();
     }
 }
