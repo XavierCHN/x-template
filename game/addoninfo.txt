@@ -11,10 +11,6 @@
 	DefaultMap = "dota"
 	Default_Keys = 
 	[
-		{
-			Key = "SPACE"
-			Command = "KeySpace"
-		},
 	]
 	DisableIK = false
 	EnablePickRules = false
