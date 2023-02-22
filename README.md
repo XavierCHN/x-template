@@ -33,7 +33,7 @@ Xavier 的 dota2 自定义游戏开发模板
 1. `yarn launch [[addon_name] map_name]` 启动 dota2，两个参数为可选参数，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名（若未提供 addon_name 则默认载入当前 addon）
 2. `yarn dev` 进入 dev 模式，将会执行`将后端的ts代码编译成lua代码、使用webpack打包前端代码、同步KV到js，生成localization，Excel转KV等操作`，正常来说，每次开发你需要保持yarn dev的运行状态
 3. `yarn test` 和 `yarn prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
-加密发布流程
+##### PS. 加密发布流程
 
 将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密（解密脚本，入口文件不能加密，客户端会使用到的技能和Modifier代码建议也不加密，不要尝试通过将密钥发送给客户端这样的操作来加密客户端脚本，因为别人可以通过读内存等等方法获取到密钥）
 
