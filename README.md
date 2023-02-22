@@ -35,7 +35,7 @@ Xavier 的 dota2 自定义游戏开发模板
 3. `yarn test` 和 `yarn prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
 加密发布流程
 
-将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密（解密脚本，入口文件不能加密，客户端会使用到的技能和Modifier代码建议也不加密）
+将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密（解密脚本，入口文件不能加密，客户端会使用到的技能和Modifier代码建议也不加密，不要尝试通过将密钥发送给客户端这样的操作来加密客户端脚本，因为别人可以通过读内存等等方法获取到密钥）
 
 将`encryptDedicatedServerKey`修改成你的图的 DedicatedServerKey
 
