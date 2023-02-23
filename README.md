@@ -35,21 +35,19 @@ Xavier 的 dota2 自定义游戏开发模板
 3. `yarn test` 和 `yarn prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
 ##### PS. 加密发布流程
 
-将 packages.json 里面的`encryptFiles`根据你的需要修改，哪些文件加密，哪些不加密（解密脚本，入口文件不能加密，客户端会使用到的技能和Modifier代码建议也不加密，不要尝试通过将密钥发送给客户端这样的操作来加密客户端脚本，因为别人可以通过读内存等等方法获取到密钥）
+将 scripts/addon.config.js 里面的 `encrypt_files` 变量根据你的需要修改，哪些文件加密，哪些不加密（解密脚本，入口文件不能加密，客户端会使用到的技能和Modifier代码建议也不加密，不要尝试通过将密钥发送给客户端这样的操作来加密客户端脚本，因为别人可以通过读内存等等方法获取到密钥）
 
-将`encryptDedicatedServerKey`修改成你的图的 DedicatedServerKey
+将该文件中的 `encryptDedicatedServerKeyRelease` 修改成你的图的 DedicatedServerKey
 
-可以不加密上传一次，去获取KEY,要注意，获取KEY的VERSION参数应该和 decrypt.lua 中的保持一致
+key的获取方法：不加密上传一次，去获取KEY,要注意，获取KEY的 `version` 参数应该和 decrypt.lua 中的保持一致，你也可以上传[这个项目](https://github.com/XavierCHN/fetch-keys)去批量获取一些key，之后根据需要使用某一个key
 
-执行`yarn test` 来完成测试加密流程
-
-测试加密就是用本地的 Invalid_NotDedicatedServer 密钥进行加密，之后在本地启动 publish 文件夹看看加密是否正确运行，并且尝试打开游戏看看各种逻辑是否运行正确
+执行`yarn test` 来完成测试加密流程（在加密范围内的代码有变更之后需要执行，一般是要确认新加的功能能否在加密后正常运行）
 
 确认一切运行正确后，执行 `yarn prod` 来完成正式发布加密流程
 
-执行`yarn launch your_addon_name_publish`来启动加密后的图，之后执行上传操作，注意，这个时候本地的publish是不能正常运行的，因为密钥只有服务器上有，因此直接上传即可
+执行`yarn launch your_addon_name_publish`来启动加密后的图，之后执行上传操作（注意，这个时候本地的publish是不能正常运行的，因为密钥只有服务器上有，因此直接上传即可）
 
-注意：要使用加密功能，需要安装 [Lua 命令行程序](http://luabinaries.sourceforge.net/)（如果未安装会提示未找到lua命令）
+* 注意：要使用加密功能，需要安装 [Lua 命令行程序](http://luabinaries.sourceforge.net/)（如果未安装会提示未找到lua命令）
 
 ### 使用步骤
 
