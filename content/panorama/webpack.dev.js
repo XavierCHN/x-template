@@ -13,6 +13,10 @@ module.exports = {
         chunkFormat: 'commonjs',
     },
 
+    watchOptions: {
+        aggregateTimeout: 1000, // 在1s内保存的所有文件都会被一次打包，因此也意味着每次按保存后要等一秒才能看到运行结果
+    },
+
     optimization: {
         usedExports: true, // 启用 tree shaking
     },
