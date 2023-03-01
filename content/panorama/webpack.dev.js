@@ -1,7 +1,6 @@
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama-x');
-const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
