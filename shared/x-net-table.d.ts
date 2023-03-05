@@ -1,4 +1,3 @@
-// 面向所有人的XNetTables
 declare interface XNetTableDefinations {
     test_table: {
         test_key: {
@@ -11,9 +10,6 @@ declare interface XNetTableDefinations {
         basicSettings: BasicSettings;
     };
 }
-
-// 单个玩家的XNetTables
-declare interface PlayerXNetTableDefinations {}
 
 declare interface BasicSettings {}
 
