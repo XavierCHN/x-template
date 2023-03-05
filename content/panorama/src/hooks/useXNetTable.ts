@@ -1,6 +1,6 @@
 import React from 'react';
-import { Dispatch, SetStateAction } from 'react';
-import { LocalEvent } from '../def/local_event_def';
+import type { Dispatch, SetStateAction } from 'react';
+import type { LocalEvent } from '../def/local_event_def';
 import { onLocalEvent, useLocalEvent } from '../utils/event-bus';
 import useStateIfMounted from './useStateIfMounted';
 
