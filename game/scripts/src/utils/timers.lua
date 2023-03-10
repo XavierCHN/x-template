@@ -1,4 +1,4 @@
-TIMERS_VERSION = "1.06"
+TIMERS_VERSION = "1.07"
 
 --[[
 	1.06 modified by Celireor (now uses binary heap priority queue instead of iteration to determine timer of shortest duration)
@@ -105,6 +105,15 @@ function BinaryHeap:Remove(item)
 		self[newindex].index = newindex
 		index = newindex
 	end
+end
+
+function BinaryHeap:Find(name)
+	for i,v in ipairs(self) do
+		if v.name == name then
+			return v
+		end
+	end
+	return nil
 end
 
 setmetatable(BinaryHeap, {__call = function(self, key) return setmetatable({key=key}, self) end})
@@ -220,15 +229,30 @@ end
 
 function Timers:CreateTimer(arg1, arg2, context)
 	local timer
+    
+	-- CreateTimer(callback: (this: void) => void | number): string;
+    -- CreateTimer<T>(callback: (this: T) => void | number, context: T): string;
 	if type(arg1) == "function" then
 		if arg2 ~= nil then
 			context = arg2
 		end
 		timer = {callback = arg1}
+	
+	-- CreateTimer(options: CreateTimerOptions): string;
+	-- CreateTimer<T>(options: CreateTimerOptionsContext<T>, context: T): string;
 	elseif type(arg1) == "table" then
 		timer = arg1
+	
+	-- CreateTimer(delay: number, callback: (this: void) => void | number): string;
+	-- CreateTimer<T>(delay: number, callback: (this: T) => void | number, context: T): string;
 	elseif type(arg1) == "number" then
 		timer = {endTime = arg1, callback = arg2}
+	
+	-- CreateTimer(name: string, options: CreateTimerOptions): string;
+    -- CreateTimer<T>(name: string, options: CreateTimerOptionsContext<T>, context: T): string;
+	elseif type(arg1) == "string" then
+		timer = arg2
+		timer.name = arg1
 	end
 	if not timer.callback then
 		print("Invalid timer created")
@@ -252,7 +276,11 @@ function Timers:CreateTimer(arg1, arg2, context)
 
 	timerHeap:Insert(timer)
 
-	return timer
+	if timer.name == nil then
+		timer = DoUniqueString('timer')
+	end
+
+	return timer.name
 end
 
 function Timers:NextTick(callback)
@@ -261,12 +289,20 @@ end
 
 function Timers:RemoveTimer(name)
 	local timerHeap = self.gameTimeHeap
-	if name.useGameTime ~= nil and name.useGameTime == false then
+
+	local timer = self.gameTimeHeap:Find(name)
+	
+	if timer ~= nil then
+		timerHeap:Remove(timer)
+	else
 		timerHeap = self.realTimeHeap
+		timer = self.realTimeHeap:Find(name)
+		if timer ~= nil then
+			timerHeap:Remove(timer)
+		end
 	end
 
-	timerHeap:Remove(name)
-	if Timers.runningTimer == name then
+	if Timers.runningTimer == timer then
 		Timers.removeSelf = true
 	end
 end
