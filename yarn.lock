@@ -1092,17 +1092,16 @@
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
 "@moddota/dota-lua-types@^4.19.0":
-  version "4.20.0"
-  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.20.0.tgz"
-  integrity sha512-LU8RRCcH/ky0hO+L33l7/qNb/p5BPL27nxO+m+/E28IcS+ef7SttSgmzhzhFm7mFi/Uo90onzLeZhNj+yN1+Cg==
+  version "4.22.0"
+  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.22.0.tgz#289012d6079140671ca0a5f6d44f6567e0f5efd4"
+  integrity sha512-j7hslCNIhH48q4bxkipHWje5W9l+V6XH6OKN0lhm56HQDwVBidKROQSBmucKq4Bk3PkBm605KUcHMYduXzYvIg==
   dependencies:
-    lua-types "^2.10.1"
-    tslib "^2.0.3"
+    lua-types "^2.13.0"
 
 "@moddota/panorama-types@^1.21.0":
-  version "1.21.0"
-  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.21.0.tgz"
-  integrity sha512-t6haAiG5na94mGe/yoV5MNz8JHm5I9ZXVsL5ZzT7AfCIQbhtclwwy5O0c1F00M76FrdmCFklrx1pPUzaKR352w==
+  version "1.22.0"
+  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.22.0.tgz#82e703b1a92ecf760127fb28267698169eba2743"
+  integrity sha512-wohCE3+utU4W21msJV7Xbdtkr85iRWPwwWO2CCcutixyo+iSGelEtmAYRdHAK7evwjwkM85v0hDglRG+B4aUVw==
   dependencies:
     tslib "^2.0.3"
 
@@ -4693,10 +4692,10 @@ lru-queue@^0.1.0:
   dependencies:
     es5-ext "~0.10.2"
 
-lua-types@^2.10.1:
-  version "2.13.0"
-  resolved "https://registry.npmmirror.com/lua-types/-/lua-types-2.13.0.tgz"
-  integrity sha512-wra+mIPZlcbm8bYoM6QutEwTOAjZ9KyKMiaidGeZ+QJItIAK9hwG+1I6GCDKnW0T9E/Xv2IoTFtZwxQv4zAIJw==
+lua-types@^2.13.0:
+  version "2.13.1"
+  resolved "https://registry.npmmirror.com/lua-types/-/lua-types-2.13.1.tgz#8df705ae47617d4a2f189d727f075ca36e690bdb"
+  integrity sha512-rRwtvX6kS+5MpuO3xpvKsnYjdSDDI064Qq1OqX8gY+r+0l7m3dFLiZPDFoHqH22jaBpEvcHcPs6+WD7qkdmFsA==
 
 make-dir@^2.1.0:
   version "2.1.0"
@@ -6765,7 +6764,12 @@ tslib@^1.8.1:
   resolved "https://registry.npmmirror.com/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2.0.3, tslib@^2.3.0:
+tslib@^2.0.3:
+  version "2.5.0"
+  resolved "https://registry.npmmirror.com/tslib/-/tslib-2.5.0.tgz#42bfed86f5787aeb41d031866c8f402429e0fddf"
+  integrity sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==
+
+tslib@^2.3.0:
   version "2.4.0"
   resolved "https://registry.npmmirror.com/tslib/-/tslib-2.4.0.tgz"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
