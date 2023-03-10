@@ -175,6 +175,7 @@ function Timers:ExecuteTimers(timerList, now)
 	if now >= currentTimer.endTime then
 		-- Remove from timers list
 		timerList:Remove(currentTimer)
+		Timers.runningTimer = currentTimer
 		Timers.removeSelf = false
 
 		-- Run the callback
