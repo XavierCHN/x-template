@@ -13,7 +13,7 @@
 			"unknown_var_1" "1000 2000 30000 40000"
 		}
 		"MaxLevel" "2"
-		"AbilityCooldown" "1 2 3 4 "
+		"AbilityCooldown" "1 2 3 4"
 		"AbilityManaCost" "1 1 1 1"
 	}
 }
