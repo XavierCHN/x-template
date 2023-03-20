@@ -39,7 +39,7 @@ assert(
 );
 assert(
     addon_name !== 'x_template',
-    '请到 addon.config.js 修改 addon_name 为你的项目名称，不能为 x_template\nplease change addon_name in addon.config.js to your project name, not x_template'
+    '请到 scripts/addon.config.js 修改 addon_name 为你的项目名称，不能为 x_template\nplease change addon_name in addon.config.js to your project name, not x_template'
 );
 
 module.exports = {
