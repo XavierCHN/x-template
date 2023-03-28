@@ -12,7 +12,7 @@ const { getDotaPath } = require('./utils');
 
     const win64 = path.join(dotaPath, 'game', 'bin', 'win64');
 
-    let addon_name = require('./addon.config.js').addon_name;
+    let addon_name;
     let map_name;
 
     let script = process.env.npm_lifecycle_script ?? process.env.npm_package_scripts_launch;
@@ -71,6 +71,7 @@ const { getDotaPath } = require('./utils');
             cwd: win64,
         });
     } else {
+        if (addon_name == undefined) addon_name = require('./addon.config.js').addon_name;
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
         spawn(path.join(win64, 'vconsole2.exe'));
     }
