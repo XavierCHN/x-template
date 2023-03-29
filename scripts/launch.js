@@ -52,24 +52,10 @@ const { getDotaPath } = require('./utils');
     const args = ['-novid', '-tools', '-addon', addon_name];
     if (map_name) args.push(`+dota_launch_custom_game ${addon_name} ${map_name}`);
 
-    if (map_name == `do`) {
-        console.log(`let's play some dota!`);
-        spawn(path.join(win64, 'dota2.exe'), [`-novid`], {
-            detached: true,
-            cwd: win64,
-        });
-    } else if (map_name == `dop`) {
-        console.log(`let's play some dota with -perfectworld!`);
-        spawn(path.join(win64, 'dota2.exe'), [`-novid`, '-perfectworld'], {
-            detached: true,
-            cwd: win64,
-        });
-    } else if (map_name == `doc`) {
-        console.log(`let's play some dota with -steamchina!`);
-        spawn(path.join(win64, 'dota2.exe'), [`-novid`, '-steamchina'], {
-            detached: true,
-            cwd: win64,
-        });
+    if ([`do`, `dota`, `dota2`, `dop`, `doc`].includes(map_name)) {
+        console.log(`let's play some dota! ${map_name == `dop` ? `-perfectworld` : map_name == `doc` ? `-steamchina` : ``}`);
+        const args = [`-novid`].concat(map_name == `dop` ? [`-perfectworld`] : map_name == `doc` ? [`-steamchina`] : []);
+        spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
     } else {
         if (addon_name == undefined) addon_name = require('./addon.config.js').addon_name;
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
