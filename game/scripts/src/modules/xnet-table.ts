@@ -1,5 +1,25 @@
 import { reloadable } from '../utils/tstl-utils';
 
+/**
+ * A module that uses events to simulate a network table, primarily intended to implement the
+ * functionality of Valve's official `CustomNetTables`
+ * as described at: https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools/Custom_Nettables
+ * The main purpose is to overcome the 2MB limit of the network table and allow for transmission of larger data sets.
+ * It should be noted that sending events takes up server frame time, so for very large data sets
+ * they will be split up and sent separately before being reassembled.
+ * For small, frequently updated data in-game, it is still recommended to
+ * use the native CustomNetTables to avoid affecting network performance.
+ *
+ * 一个使用事件来模拟网表的模块，其主要目的是为了实现官方的 `CustomNetTables` 的功能
+ * 具体见：https://developer.valvesoftware.com/wiki/Dota_2_Workshop_Tools/Custom_Nettables
+ * 主要目的是为了突破网表的2MB的限制，用以实现更大的数据传输。
+ * 需要注意的是，发送事件需要占用服务器帧时间，所以对于特别大的数据将会拆分后发送再组合。
+ * 游戏中的小体积高频数据同步，依然推荐使用原生的CustomNetTables，以避免影响网络性能。
+ *
+ * @export
+ * @class XNetTable
+ * @license MIT
+ */
 @reloadable
 export class XNetTable {
     constructor() {
