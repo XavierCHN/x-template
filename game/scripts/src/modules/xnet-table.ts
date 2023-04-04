@@ -115,6 +115,9 @@ export class XNetTable {
         }
     }
 
+    /** 用来记录每个网表上次更新时间的map */
+    private _lastUpdateTimeMarks: Record<string, number> = {};
+
     /**
      * 处理网表数据，目前只是简单做json
      * 目前并没有做自动转换数据类型的操作，比如将entity转换为entity index等
@@ -129,6 +132,14 @@ export class XNetTable {
      * @memberof XNetTable
      */
     private _prepareDataChunks(tname: string, key: string, value?: any, playerId?: PlayerID): string[] {
+        // 如果某个同样的数据被短时间内更新太多次（一帧内超过1次），那么弹出一个警告，要求玩家优化代码
+        const tkv = `${tname}.${key}.${playerId ?? 'all'}`;
+        const now = GameRules.GetGameTime();
+        if (this._lastUpdateTimeMarks[tkv] == now) {
+            print(`[XNetTable] Warning: ${tkv} updated too many times in one frame!`);
+        }
+        this._lastUpdateTimeMarks[tkv] = now;
+
         let data = json.encode({
             table: tname,
             key: key,
