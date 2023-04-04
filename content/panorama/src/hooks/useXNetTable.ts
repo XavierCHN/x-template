@@ -17,10 +17,10 @@ import useStateIfMounted from './useStateIfMounted';
  * @param {K} key
  * @param {(data: XNetTableDefinations[T][K]) => void} callback
  */
-export function useXNetTableEvent<T extends keyof XNetTableDefinations, K extends keyof XNetTableDefinations[T]>(
-    table_name: T,
-    key: K,
-    callback: (data: XNetTableDefinations[T][K]) => void
+export function useXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinations, T extends XNetTableDefinations[TABLE_NAME], KEY extends keyof T>(
+    table_name: TABLE_NAME,
+    key: KEY,
+    callback: (data: T[KEY]) => void
 ) {
     const _callback = React.useCallback(
         (data: LocalEvent['x_net_table']) => {
@@ -46,10 +46,10 @@ export function useXNetTableEvent<T extends keyof XNetTableDefinations, K extend
  * @param {K} key
  * @param {(data: XNetTableDefinations[T][K]) => void} callback
  */
-export function onXNetTableEvent<T extends keyof XNetTableDefinations, K extends keyof XNetTableDefinations[T]>(
-    table_name: T,
-    key: K,
-    callback: (data: XNetTableDefinations[T][K]) => void
+export function onXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinations, T extends XNetTableDefinations[TABLE_NAME], KEY extends keyof T>(
+    table_name: TABLE_NAME,
+    key: KEY,
+    callback: (data: T[KEY]) => void
 ) {
     onLocalEvent(`x_net_table`, data => {
         if (data.table_name.toString() === table_name && data.key.toString() === key) {
@@ -62,21 +62,21 @@ export function onXNetTableEvent<T extends keyof XNetTableDefinations, K extends
  * 侦听网表变更的hook回调
  * @export
  * @template T
- * @template K
+ * @template KEY
  * @param {T} table_name 表名
- * @param {K} key 表键
- * @param {XNetTableDefinations[T][K]} fail_safe_value 如果网表中不含有该值，那么返回该值，此项必须是为了避免react渲染出错
+ * @param {KEY} key 表键
+ * @param {XNetTableDefinations[T][KEY]} fail_safe_value 如果网表中不含有该值，那么返回该值，此项必须是为了避免react渲染出错
  */
-export function useXNetTableKey<T extends keyof XNetTableDefinations, K extends keyof XNetTableDefinations[T], V = XNetTableDefinations[T][K]>(
-    table_name: T,
-    key: K,
-    fail_safe_value: V
-): [V, Dispatch<SetStateAction<V>>] {
+export function useXNetTableKey<TABLE_NAME extends keyof XNetTableDefinations, T extends XNetTableDefinations[TABLE_NAME], KEY extends keyof T>(
+    table_name: TABLE_NAME,
+    key: KEY,
+    fail_safe_value: T[KEY]
+): [T[KEY], Dispatch<SetStateAction<T[KEY]>>] {
     GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
     GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
     let current_value = GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key]; // 这个cache的set在dispatcher.ts进行
 
-    const [value, setValue] = useStateIfMounted<V>(current_value ?? fail_safe_value);
+    const [value, setValue] = useStateIfMounted<T[KEY]>(current_value ?? fail_safe_value);
 
     const callback = React.useCallback(
         data => {
