@@ -104,7 +104,7 @@ const kv_to_local = () => () => {
 const csv_to_localization =
     (watch: boolean = false) =>
     () => {
-        const addonCsv = `${paths.game_resource}/addon.csv`;
+        const addonCsv = `${paths.game_resource}/*.csv`;
         const transpileAddonCSVToLocalization = () => {
             return gulp.src(addonCsv).pipe(dotax.csvToLocals(paths.game_resource));
         };
