@@ -46,7 +46,7 @@ const { getDotaPath } = require('./utils');
         }
     } else console.log('Usage `yarn launch [[addon name] map name]`');
 
-    const args = ['-novid', '-tools', '-addon', addon_name];
+    const args = ['-novid', '-tools'];
 
     if ([`do`, `dota2`, `dop`, `doc`].includes(map_name)) {
         console.log(`let's play some dota! ${map_name == `dop` ? `-perfectworld` : map_name == `doc` ? `-steamchina` : ``}`);
@@ -54,8 +54,13 @@ const { getDotaPath } = require('./utils');
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
     } else {
         if (addon_name == undefined) addon_name = require('./addon.config.js').addon_name;
-        if (map_name) args.push(`+dota_launch_custom_game ${addon_name} ${map_name}`);
-        if (map_name != null) console.log(`begin to load addon=>${addon_name}, map name=>${map_name}`);
+
+        args = args.concat(['-addon', addon_name]);
+
+        if (map_name) {
+            args.push(`+dota_launch_custom_game ${addon_name} ${map_name}`);
+            console.log(`begin to load addon=>${addon_name}, map name=>${map_name}`);
+        }
 
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
         spawn(path.join(win64, 'vconsole2.exe'));
