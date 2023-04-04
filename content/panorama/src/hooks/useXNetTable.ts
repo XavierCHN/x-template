@@ -71,7 +71,7 @@ export function useXNetTableKey<TABLE_NAME extends keyof XNetTableDefinations, T
     table_name: TABLE_NAME,
     key: KEY,
     fail_safe_value: T[KEY]
-): [T[KEY], Dispatch<SetStateAction<T[KEY]>>] {
+): T[KEY] {
     GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
     GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
     let current_value = GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key]; // 这个cache的set在dispatcher.ts进行
@@ -89,5 +89,5 @@ export function useXNetTableKey<TABLE_NAME extends keyof XNetTableDefinations, T
 
     useLocalEvent(`x_net_table`, callback);
 
-    return [value, setValue];
+    return value;
 }
