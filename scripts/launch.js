@@ -46,7 +46,7 @@ const { getDotaPath } = require('./utils');
         }
     } else console.log('Usage `yarn launch [[addon name] map name]`');
 
-    const args = ['-novid', '-tools'];
+    let args = ['-novid', '-tools'];
 
     if ([`do`, `dota2`, `dop`, `doc`].includes(map_name)) {
         console.log(`let's play some dota! ${map_name == `dop` ? `-perfectworld` : map_name == `doc` ? `-steamchina` : ``}`);
