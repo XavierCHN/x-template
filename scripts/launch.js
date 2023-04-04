@@ -52,7 +52,7 @@ const { getDotaPath } = require('./utils');
     const args = ['-novid', '-tools', '-addon', addon_name];
     if (map_name) args.push(`+dota_launch_custom_game ${addon_name} ${map_name}`);
 
-    if ([`do`, `dota`, `dota2`, `dop`, `doc`].includes(map_name)) {
+    if ([`do`, `dota2`, `dop`, `doc`].includes(map_name)) {
         console.log(`let's play some dota! ${map_name == `dop` ? `-perfectworld` : map_name == `doc` ? `-steamchina` : ``}`);
         const args = [`-novid`].concat(map_name == `dop` ? [`-perfectworld`] : map_name == `doc` ? [`-steamchina`] : []);
         spawn(path.join(win64, 'dota2.exe'), args, { detached: true, cwd: win64 });
