@@ -86,7 +86,7 @@ module.exports = {
                 { import: './utils/x-nettable-dispatcher.ts', filename: 'x-nettable-dispatcher.js' },
                 { import: './loading-screen/layout.xml', filename: 'custom_loading_screen.xml' },
                 { import: './hud/layout.xml', type: 'Hud' },
-                { import: './end_screen/layout.xml', type: 'EndScreen' },
+                { import: './end_screen/layout.xml', type: 'EndScreen', filename: 'end_screen.xml' },
             ],
         }),
     ],
