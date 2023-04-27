@@ -49,6 +49,7 @@ Xavier 的 dota2 自定义游戏开发模板
 1. 前端的`content/panorama/src`与后端的`game/scripts/src`文件夹分别用来写用户界面 react 源码和游戏逻辑的 ts 源代码
 2. 将你的 excel 文件变成 kv 文件并放到`game/scripts/npc`文件夹，同时在panorama和scripts文件夹生成与每个kv文件对应的json文件，这样你的ts代码可以很方便地获取kv数据
 3. 将 `addon.csv` 变成 `addon_*.txt`，(也可以把 `addon_*.txt` 变成 `addon.csv`)
+4. 将服务器API转换为typescript接口，同时提供了一个有效的请求类用来处理请求，使用的是 [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen)
 
 ### 支持的指令
 
@@ -71,6 +72,8 @@ key的获取方法：不加密上传一次，去获取KEY,要注意，获取KEY�
 
 * 注意：要使用加密功能，需要安装 [Lua 命令行程序](http://luabinaries.sourceforge.net/)（如果未安装会提示未找到lua命令）
 
+
+4. `yarn api` 生成与 `scripts/server_api.json` （需要符合**Swagger 3.0规范**）的API一致的请求类，并储存于 `game/scripts/src/server/services`，关于请求实现的细节，请查阅 `game/scripts/src/server/core` 文件夹
 
 ### 文件夹内容
 
