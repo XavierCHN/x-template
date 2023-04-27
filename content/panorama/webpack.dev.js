@@ -84,9 +84,13 @@ module.exports = {
         new PanoramaManifestPlugin({
             entries: [
                 { import: './utils/x-nettable-dispatcher.ts', filename: 'x-nettable-dispatcher.js' },
+                // if type is not set, it will not be included in the manifest
+                // usually used for loading screen, tooltips and popups which loaded
+                // by engine or BLoadLayout etc.
                 { import: './loading-screen/layout.xml', filename: 'custom_loading_screen.xml' },
-                { import: './hud/layout.xml', type: 'Hud' },
                 { import: './end_screen/layout.xml', type: 'EndScreen', filename: 'end_screen.xml' },
+                // if filename is not set, it will use the name of the entry
+                { import: './hud/layout.xml', type: 'Hud' },
             ],
         }),
     ],
