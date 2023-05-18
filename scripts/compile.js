@@ -1,9 +1,9 @@
-const assert = require('assert');
-const { exec } = require('child_process');
+const { execSync } = require('child_process');
 const fs = require('fs-extra');
 const path = require('path');
-const rimraf = require('rimraf');
 const { getDotaPath } = require('./utils');
+const readline = require('readline');
+const { stdin: input, stdout: output } = require('process');
 
 (async () => {
     if (process.platform !== 'win32') {
@@ -25,28 +25,56 @@ const { getDotaPath } = require('./utils');
 
     const gamePath = path.join(dotaPath, 'game', 'dota');
 
-    let script = process.env.npm_lifecycle_script ?? process.env.npm_package_scripts_launch;
-    let params = script.match(/"(?:\\?[\S\s])*?"/g);
-    subDirs = ['materials', 'particles', 'soundevents', 'vscripts', 'scripts', 'maps']; // default compile targets
-    if (params !== null) {
-        subDirs = params.map(p => p.replace(/"/g, ''));
-    }
+    // use readline to get the compile target dirs
+    const rl = readline.createInterface({ input, output });
+    rl.question(
+        `请输入你要编译的文件夹名称，多个文件夹用空格分隔：\n（直接回车以编译game目录下的所有文件夹，也可以输入 maps/test.vmap 等来编译单个文件）`,
+        answer => {
+            const subdirs = answer.split(' ');
 
-    let args = [];
-    args.push(`"${resourceCompilerPath}"`);
-    args.push(`-game "${gamePath}"`);
-    args.push(`-verbose`);
-    args.push(`-r`);
-    subDirs.forEach(dir => {
-        let c = args.concat([`-i "${path.join(addonContent, dir, '*')}"`]);
-        exec(c.join(` `), (err, stdout, stderr) => {
-            if (err) {
-                console.error(err);
-                process.exit(1);
+            let args = [];
+            args.push(`"${resourceCompilerPath}"`);
+            args.push(`-game "${gamePath}"`);
+            args.push(`-verbose`);
+            args.push(`-pauseiferror`);
+            args.push(`-r`);
+
+            if (subdirs.length <= 0) {
+                console.log('没有输入文件夹名称，将编译game目录下的所有文件夹');
+                subdirs = fs.readdirSync(addonContent);
             }
-            if (stdout) console.log(stdout);
-        });
-    });
+
+            console.log(`开始编译${subdirs.length}个文件夹...`);
+
+            subdirs.forEach(dir => {
+                console.log(`编译${dir}...`);
+
+                // 判断文件夹是否存在
+                if (!fs.existsSync(path.join(addonContent, dir))) {
+                    console.log(`文件(夹) ${path.join(addonContent, dir)}不存在，跳过...`);
+                    return;
+                }
+
+                let c = args.concat([
+                    `-i "${path.join(
+                        addonContent,
+                        dir,
+                        // 如果是文件夹，自动加上 * 通配符
+                        fs.statSync(path.join(addonContent, dir)).isDirectory() ? '*' : ''
+                    )}"`,
+                ]);
+                const command = c.join(` `);
+                console.log(`开始执行指令：${command}`);
+
+                execSync(command, {
+                    maxBuffer: 1024 * 1024 * 100, // 给大一点
+                    // output console output in the command window
+                    stdio: 'inherit',
+                });
+            });
+            rl.close();
+        }
+    );
 })().catch(error => {
     console.error(error);
     process.exit(1);
