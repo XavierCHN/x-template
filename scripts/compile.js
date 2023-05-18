@@ -28,7 +28,7 @@ const { stdin: input, stdout: output } = require('process');
     // use readline to get the compile target dirs
     const rl = readline.createInterface({ input, output });
     rl.question(
-        `请输入你要编译的文件或文件夹名称，多个文件夹用空格分隔：\n（直接回车以编译game目录下的所有文件夹，也可以输入 maps/test.vmap 等来编译单个文件）\n`,
+        `请输入你要编译的文件或文件夹名称，多个文件夹用空格分隔：\n示例：文件夹输入：panorama/layout\n单一文件输入 maps/temp.vmap\n`,
         answer => {
             const subdirs = answer.split(' ');
 

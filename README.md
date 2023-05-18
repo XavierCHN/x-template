@@ -130,6 +130,7 @@ If you want to use this template, in addition to mastering the Valve's developme
 1. `yarn launch [[addon_name] map_name]` launches dota2, all parameters are optional, if `addon_name` is provided then the specified addon will be loaded (default to launch this project), if `map_name` is provided then the corresponding map name will be loaded automatically (if addon_name is not provided then the current addon will be loaded by default)
 2. `yarn dev` enter dev mode to compile the ts source code and watch the changes of the files.
 3. `yarn test` and `yarn prod` to run `publish` operation, it will automatically generate `publish` folder and automatically link to `dota_addons/you_addon_name_publish` folder, then you can choose this folder to publish (you can set some settings for publishing in `package.json -> dota_ developer` to make some settings for publishing).
+4. `yarn compile` to compile the source contents
 
 ### Usage
 
