@@ -12,7 +12,7 @@
         "test": "run-s prod:* && run-s test_copy",
         "prod": "run-s prod:* && run-s release_copy",
         "prod:gulp": "gulp prod",
-        "prod:panorama": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.prod.js",
+        "prod:panorama": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.prod.js && gulp compile_less",
         "prod:vscripts": "tstl --project game/scripts/tsconfig.json",
         "test_copy": "node scripts/publish.js test",
         "release_copy": "node scripts/publish.js release",
