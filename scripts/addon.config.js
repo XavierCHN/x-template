@@ -8,6 +8,7 @@ let encrypt_files = [
     '!game/scripts/vscripts/addon_init.lua',
     '!game/scripts/vscripts/addon_game_mode.lua',
     '!game/scripts/vscripts/addon_game_mode_client.lua',
+    '!game/scripts/vscripts/utils/index.lua',
     '!game/scripts/vscripts/utils/decrypt.lua',
     '!game/scripts/vscripts/utils/aeslua.lua',
     '!game/scripts/vscripts/utils/aeslua/**/*.lua',
