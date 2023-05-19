@@ -1,6 +1,8 @@
 import gulp from 'gulp';
 import * as dotax from 'gulp-dotax';
 import path from 'path';
+import less from 'gulp-less';
+import replace from 'gulp-replace';
 
 const paths: { [key: string]: string } = {
     excels: 'excels',
@@ -141,6 +143,25 @@ const create_image_precache =
         }
     };
 
+/** compile all less files to panorama path */
+const compile_less =
+    (watch: boolean = false) =>
+    () => {
+        const lessFiles = `${paths.panorama}/src/**/*.less`;
+        const compileLess = () => {
+            return gulp
+                .src(lessFiles)
+                .pipe(less())
+                .pipe(replace(/@keyframes\s*(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g, (match, name) => match.replace(name, `'${name}'`)))
+                .pipe(gulp.dest(path.join(paths.panorama, 'layout/custom_game')));
+        };
+        if (watch) {
+            return gulp.watch(lessFiles, compileLess);
+        } else {
+            return compileLess();
+        }
+    };
+
 /**
  * start a file sserver to save/read files
  */
@@ -178,8 +199,14 @@ gulp.task('kv_2_js:watch', kv_2_js(true));
 gulp.task('csv_to_localization', csv_to_localization());
 gulp.task('csv_to_localization:watch', csv_to_localization(true));
 
-gulp.task('predev', gulp.series('sheet_2_kv', 'kv_2_js', 'csv_to_localization', 'create_image_precache'));
-gulp.task('dev', gulp.parallel('sheet_2_kv:watch', 'csv_to_localization:watch', 'create_image_precache:watch', 'kv_2_js:watch'));
+gulp.task('compile_less', compile_less());
+gulp.task('compile_less:watch', compile_less(true));
+
+gulp.task('predev', gulp.series('sheet_2_kv', 'kv_2_js', 'csv_to_localization', 'create_image_precache', 'compile_less'));
+gulp.task(
+    'dev',
+    gulp.parallel('sheet_2_kv:watch', 'csv_to_localization:watch', 'create_image_precache:watch', 'kv_2_js:watch', 'compile_less:watch')
+);
 gulp.task('build', gulp.series('predev'));
 gulp.task('jssync', gulp.series('sheet_2_kv', 'kv_2_js'));
 gulp.task('kv_to_local', kv_to_local());

@@ -1,6 +1,7 @@
 const path = require('path');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { PanoramaManifestPlugin, PanoramaTargetPlugin } = require('webpack-panorama-x');
+const { WatchIgnorePlugin } = require('webpack');
 
 /** @type {import('webpack').Configuration} */
 module.exports = {
@@ -98,5 +99,7 @@ module.exports = {
                 { import: './hud/layout.xml', type: 'Hud' },
             ],
         }),
+        // use ignore plugin to ignore less files changes
+        new WatchIgnorePlugin({ paths: [/\.less$/] }),
     ],
 };
