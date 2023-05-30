@@ -1,4 +1,4 @@
-TIMERS_VERSION = "1.07"
+TIMERS_VERSION = "1.08"
 
 --[[
 	1.06 modified by Celireor (now uses binary heap priority queue instead of iteration to determine timer of shortest duration)
@@ -246,6 +246,10 @@ function Timers:CreateTimer(arg1, arg2, context)
 	-- CreateTimer(delay: number, callback: (this: void) => void | number): string;
 	-- CreateTimer<T>(delay: number, callback: (this: T) => void | number, context: T): string;
 	elseif type(arg1) == "number" then
+		if arg1 ~= arg1 or arg1 == math.huge or arg1 == -math.huge then
+			error("Invalid timer duration: " .. arg1)
+			return
+		end
 		timer = {endTime = arg1, callback = arg2}
 	
 	-- CreateTimer(name: string, options: CreateTimerOptions): string;
