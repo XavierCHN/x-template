@@ -99,8 +99,8 @@ const kv_to_local = () => () => {
 };
 
 /**
- * @description 将 addon.csv 中的本地化文本转换为 addon_*.txt 文件
- * @description Convert addon.csv local text to addon_*.txt file
+ * @description 将 resource/*.csv 中的本地化文本转换为 addon_*.txt 文件
+ * @description Convert resource/*.csv local text to addon_*.txt file
  *
  */
 const csv_to_localization =
