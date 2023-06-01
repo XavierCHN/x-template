@@ -149,11 +149,14 @@ const compile_less =
     () => {
         const lessFiles = `${paths.panorama}/src/**/*.less`;
         const compileLess = () => {
-            return gulp
-                .src(lessFiles)
-                .pipe(less())
-                .pipe(replace(/@keyframes\s*(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g, (match, name) => match.replace(name, `'${name}'`)))
-                .pipe(gulp.dest(path.join(paths.panorama, 'layout/custom_game')));
+            return (
+                gulp
+                    .src(lessFiles)
+                    .pipe(less())
+                    // valve 对于 @keyframes 有特殊的格式要求，需要将 @keyframes 的名称用单引号包裹
+                    .pipe(replace(/@keyframes\s*(-?[_a-zA-Z]+[_a-zA-Z0-9-]*)/g, (match, name) => match.replace(name, `'${name}'`)))
+                    .pipe(gulp.dest(path.join(paths.panorama, 'layout/custom_game')))
+            );
         };
         if (watch) {
             return gulp.watch(lessFiles, compileLess);
