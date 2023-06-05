@@ -13,7 +13,6 @@ export class Debug {
         ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
     }
     OnPlayerChat(keys: GameEventProvidedProperties & PlayerChatEvent): void {
-        if (!this.DebugEnabled) return; // 只在测试模式下启动
         let strs = keys.text.split(' ');
         let cmd = strs[0];
         let args = strs.slice(1);
@@ -23,6 +22,23 @@ export class Debug {
             if (this.OnlineDebugWhiteList.includes(steamid)) {
                 this.DebugEnabled = !this.DebugEnabled;
             }
+        }
+
+        // 只在允许调试的时候才执行以下指令
+        // commands that only work in debug mode below:
+        if (!this.DebugEnabled) return;
+
+        // 其他的测试指令写在下面
+        if (cmd === 'get_key_v3') {
+            const version = args[0];
+            const key = GetDedicatedServerKeyV3(version);
+            Say(HeroList.GetHero(0), `${version}: ${key}`, true);
+        }
+
+        if (cmd === 'get_key_v2') {
+            const version = args[0];
+            const key = GetDedicatedServerKeyV2(version);
+            Say(HeroList.GetHero(0), `${version}: ${key}`, true);
         }
     }
 }
