@@ -12,8 +12,8 @@ const ServerAddress: string = IsInToolsMode()
 export const ServerAuthKey: string = IsInToolsMode()
     ? 'Invalid_NotDedicatedServer' // 本地测试的秘钥
     : ONLINE_TEST_MODE
-    ? GetDedicatedServerKeyV2('server') // 在线测试（在线测试服的秘钥）
-    : GetDedicatedServerKeyV2('server'); // 正式服的服务器秘钥
+    ? GetDedicatedServerKeyV3('server') // 在线测试（在线测试服的秘钥）
+    : GetDedicatedServerKeyV3('server'); // 正式服的服务器秘钥
 
 // 无需加signature验证的请求，写在这个地方的请求发到服务器后，服务器不需要验证signature
 export const NoSignatureURLs: string[] = ['/api/v1/game/statistic/saveStatisticData'];
