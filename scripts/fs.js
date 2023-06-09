@@ -31,8 +31,11 @@ module.exports = function (root) {
         var name = path.join('/', req.url.split('?')[0]).replace(/%20/g, ' ');
         var u = path.join(root, name);
 
-        if (req.method === 'POST') return mkdirp(u);
-        if (req.method === 'PUT') return pump(req, fs.createWriteStream(u));
+        if (req.method === 'POST')
+            mkdirp(u)
+                .then(() => res.end())
+                .catch(onerror);
+        if (req.method === 'PUT') return pump(req, fs.createWriteStream(u), onerror);
 
         var onfile = function (st) {
             server.emit('file', u, st);
