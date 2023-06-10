@@ -87,6 +87,6 @@ walker
         }
 
         // 正式发布模式，直接启动dota2
-        console.log(color.red(`启动正式版dota2，如果已运行过test，请直接上传游戏`));
+        console.log(color.red(`启动正式版dota2，如果已运行过test，请直接上传游戏，要注意分辨到底是测试图还是正式图`));
         await launchDota2(`${addon_name}_publish`);
     });
