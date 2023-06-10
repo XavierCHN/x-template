@@ -8,16 +8,17 @@
 
     const select = require('@inquirer/select');
 
+    const config = require('./addon.config.js');
+
     const mode = await select.default({
         message: '请选择发布模式',
         choices: [
-            { name: '正式发布 PRODUCTION', value: 'release' },
-            { name: '测试发布 ONLINE TEST', value: 'release_test' },
-            { name: '本地测试 LOCAL TEST', value: 'test' },
+            { name: `正式发布 PRODUCTION 对应密钥： "${config.encryptDedicatedServerKeyRelease}"`, value: 'release' },
+            { name: `测试发布 ONLINETEST 对应密钥： "${config.encryptDedicatedServerKeyRelease_Test}"`, value: 'release_test' },
+            { name: `本地测试 LOCAL TEST 对应密钥："${config.encryptDedicatedServerKeyTest}"`, value: 'test' },
         ],
     });
 
-    const config = require('./addon.config.js');
     const walker = walk.walk('game');
     const excludeFiles = config.exclude_files;
     const encryptFiles = config.encrypt_files;
