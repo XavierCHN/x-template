@@ -11,7 +11,7 @@
         "pretest": "node scripts/prepublish.js",
         "test": "run-s prod:* && run-s test_copy",
         "prod": "run-s prod:* && run-s release_copy",
-        "prodt": "run-s prod:* && run-s release_copy",
+        "prodt": "run-s prod:* && run-s releast_test_copy",
         "prod:gulp": "gulp prod",
         "prod:panorama": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.prod.js && gulp compile_less",
         "prod:vscripts": "tstl --project game/scripts/tsconfig.json",
