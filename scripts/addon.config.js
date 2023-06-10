@@ -26,7 +26,7 @@ let exclude_files = [
 /** 本地测试（工具模式）密钥，一般不需要修改 */
 const encryptDedicatedServerKeyTest = `Invalid_NotOnDedicatedServer`;
 
-/** 测试发布（测试图）密钥，运行 yarn test 必须，获取方法请参考 https://github.com/XavierCHN/fetch-keys */
+/** 测试发布（测试图）密钥，运行 yarn prodt 必须，获取方法请参考 https://github.com/XavierCHN/fetch-keys */
 const encryptDedicatedServerKeyRelease_Test = `这里需要填入测试图的密钥 GetDedicatedServerKeyV3('version') 的结果`;
 
 /** 正式发布（正式图）密钥，运行 yarn prod 必须，获取方法请参考 https://github.com/XavierCHN/fetch-keys */
