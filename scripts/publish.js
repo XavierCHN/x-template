@@ -13,8 +13,8 @@
     const mode = await select.default({
         message: '请选择发布模式',
         choices: [
-            { name: `正式发布 PRODUCTION 对应密钥： "${config.encryptDedicatedServerKeyRelease}"`, value: 'release' },
-            { name: `测试发布 ONLINETEST 对应密钥： "${config.encryptDedicatedServerKeyRelease_Test}"`, value: 'release_test' },
+            { name: `正式发布 PRODUCTION 对应密钥："${config.encryptDedicatedServerKeyRelease}"`, value: 'release' },
+            { name: `测试发布 ONLINETEST 对应密钥："${config.encryptDedicatedServerKeyRelease_Test}"`, value: 'release_test' },
             { name: `本地测试 LOCAL TEST 对应密钥："${config.encryptDedicatedServerKeyTest}"`, value: 'test' },
         ],
     });
