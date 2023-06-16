@@ -32,7 +32,7 @@ end
 
 print("encrypt to ", source_path, target_path)
 local file = io.open(source_path)
-local text = '-- ' .. string.gsub(source_path, './game/scripts/vscripts', '') .. '\n' .. file:read("*all")
+local text = '-- ' .. string.sub(source_path, -50, -1) .. '\n' .. file:read("*all")
 local cipher = aeslua.encrypt(key, text, aeslua.AES128, aeslua.CBCMODE)
 local hexstring = string.tohex(cipher)
 local wf = io.open(target_path, "w")
