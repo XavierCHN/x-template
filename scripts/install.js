@@ -48,6 +48,16 @@ const { getDotaPath } = require('./utils');
             console.log(`Linked ${sourcePath} <==> ${targetPath}`);
         }
     }
+    // create symbolic link from game/scripts/src/shared to content/panorama/src/shared
+    const sharedPath = path.resolve(__dirname, '..', 'game', 'scripts', 'src', 'shared');
+    const sharedTargetPath = path.resolve(__dirname, '..', 'content', 'panorama', 'src', 'shared');
+    if (fs.existsSync(sharedPath)) {
+        if (fs.existsSync(sharedTargetPath)) {
+            fs.removeSync(sharedTargetPath);
+        }
+        fs.symlinkSync(sharedPath, sharedTargetPath, 'junction');
+        console.log(`Linked ${sharedPath} <==> ${sharedTargetPath}`);
+    }
 })().catch(error => {
     console.error(error);
     process.exit(1);

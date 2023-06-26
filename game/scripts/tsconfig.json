@@ -16,7 +16,7 @@
         "strictPropertyInitialization": false,
         "strict": false
     },
-    "include": ["src", "../../shared"],
+    "include": ["src"],
     "tstl": {
         "luaTarget": "JIT",
         "sourceMapTraceback": true,
