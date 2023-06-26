@@ -1,8 +1,8 @@
+import type { InitEvent } from './types';
 import {
     ContextFrom,
     EventFrom,
     EventObject,
-    InitEvent,
     InterpreterStatus,
     MachineImplementationsFrom,
     ServiceFrom,
@@ -200,7 +200,13 @@ const executeStateActions = <
 >(
     state: StateMachine.State<TContext, TEvent, TState>,
     event: TEvent | InitEvent
-) => state.actions.forEach(({ exec }) => exec && exec(state.context, event));
+) =>
+    state.actions.forEach(({ exec }) => {
+        if (exec) {
+            // undefined is for the self argument, which is not needed.
+            xpcall(exec, debug.traceback, undefined, state.context, event);
+        }
+    });
 
 export function interpret<
     TContext extends object,
