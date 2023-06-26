@@ -48,6 +48,7 @@ const { getDotaPath } = require('./utils');
             console.log(`Linked ${sourcePath} <==> ${targetPath}`);
         }
     }
+
     // create symbolic link from game/scripts/src/shared to content/panorama/src/shared
     // shared source should be inside dota 2 beta since valve did not support symlink in addon
     const sharedSource = path.join(dotaPath, 'game', 'dota_addons', addon_name, 'scripts', 'src', 'shared');
