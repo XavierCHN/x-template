@@ -4,7 +4,7 @@
     "license": "MIT",
     "repository": "https://github.com/XavierCHN/x-template",
     "scripts": {
-        "lint": "eslint --ext .js,.ts,.tsx --quiet --fix \"./content/panorama/src/**/*.{js,ts,tsx}\" \"./game/scripts/src/**/*.{js,ts,tsx}\" \"./scripts/**/*.{js,ts,tsx}\" \"./shared/**/*.{js,ts,tsx}\" ",
+        "lint": "eslint --ext .js,.ts,.tsx --quiet --fix \"./content/panorama/src/**/*.{js,ts,tsx}\" \"./game/scripts/src/**/*.{js,ts,tsx}\" \"./scripts/**/*.{js,ts,tsx}\"",
         "postinstall": "node scripts/install.js",
         "launch": "node scripts/launch.js",
         "prod": "node scripts/prepublish.js && run-s prod:* && node scripts/publish.js",
