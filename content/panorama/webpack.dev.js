@@ -21,6 +21,10 @@ module.exports = {
         usedExports: true, // 启用 tree shaking
     },
 
+    cache: {
+        type: 'filesystem', // 降低首次运行的编译时间
+    },
+
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx', '...'],
         symlinks: false,
