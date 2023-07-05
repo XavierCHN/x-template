@@ -1,6 +1,12 @@
 /** 项目名称 */
 let addon_name = 'x_template'; // 必须为字母开头，而且只能包含字母、数字和下划线
 
+try {
+    addon_name = require('./.test/addon_name');
+} catch (e) {
+    //do nothing
+}
+
 /** 要加密的项目列表 */
 let encrypt_files = [
     '**/*.lua',

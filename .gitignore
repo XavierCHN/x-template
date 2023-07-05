@@ -37,3 +37,6 @@ game/scripts/src/json
 
 # ignore panorama/shared
 content/panorama/src/shared
+
+#ignore local test scripts
+scripts/.test
