@@ -1,5 +1,22 @@
 import { reloadable } from '../utils/tstl-utils';
 
+function get_table_size(t: any) {
+    // 如果是数字或者字符串，那么直接返回长度
+    if (type(t) !== `string`) {
+        return tostring(t).length;
+    }
+    // 如果是表格，那么递归计算尺寸
+    let size = 0;
+    for (const [k, v] of pairs(t)) {
+        size = size + get_table_size(k) + get_table_size(v);
+    }
+    return size;
+}
+
+declare type PartialRecord<K extends keyof any, T> = {
+    [P in K]?: T;
+};
+
 /**
  * A module that uses events to simulate a network table, primarily intended to implement the
  * functionality of Valve's official `CustomNetTables`
@@ -21,7 +38,7 @@ import { reloadable } from '../utils/tstl-utils';
  * @license MIT
  */
 @reloadable
-export class XNetTable {
+export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetTableDefinations[TName], K extends keyof T> {
     constructor() {
         print(`[XNetTable] Activated`);
         this._startHeartbeat();
@@ -34,15 +51,21 @@ export class XNetTable {
     }
 
     // 最大传输单元，这个其实取决于服务器的带宽，不建议太大
-    private MTU = 2048;
+    // 经过测试，比较好的数值是12KB
+    private MTU = 1024 * 12;
+
     // 所有玩家都共享的数据
-    private _data: Record<string, Record<string, any>> = {};
+    private _data: PartialRecord<TName, PartialRecord<K, any>> = {};
     // 某个玩家单独的数据，这个数据互相之间是保密的，不会发送到其他玩家的客户端
-    private _player_data: Partial<Record<PlayerID, Record<string, Record<string, any>>>> = {};
-    // 数据队列，用来存储数据发送的队列
+    private _player_data: PartialRecord<PlayerID, PartialRecord<TName, PartialRecord<K, any>>> = {};
+
+    // 数据队列，用来存储所有待发送的数据
     private _data_queue: {
         target?: PlayerID;
-        data: string;
+        data_length: number;
+        data:
+            | string // 要么是以字符串形式发送的数据块
+            | XNetTableObject; // 要么是一次性发送的数据
     }[] = [];
 
     /**
@@ -55,91 +78,85 @@ export class XNetTable {
      * @returns
      * @memberof XNetTable
      */
-    SetTableValue<TName extends keyof XNetTableDefinations, T extends XNetTableDefinations[TName], K extends keyof T>(
-        tname: TName,
-        key: K,
-        value: T[K]
-    ) {
+    SetTableValue(tname: TName, key: K, value: T[K]) {
         if (!IsServer()) return;
 
-        let k = tostring(key);
+        let k = tostring(key) as K;
         this._data[tname] ??= {};
-        if (value == null) {
-            this._data[tname][k] = {};
-            let data = this._prepareDataChunks(tname, k, {});
-            this._updatePositively(undefined, data);
-        } else {
-            this._data[tname][k] = value;
-            let data = this._prepareDataChunks(tname, k, value);
-            this._updatePositively(undefined, data);
-        }
+        value = value ?? ({} as T[K]);
+        this._data[tname][k] = value;
+        this._appendUpdateRequest(undefined, tname, k, value);
     }
 
-    /**
-     * 设置某个玩家的数据，这个数据对于其他玩家是保密的，不会发送到他们的客户端
-     *
-     * 数据将会被放入更新队列中，默认会放到队列头，也就是会被立马发送出去
-     * 这样时效性最佳，如果有什么太长的数据，那他会被延迟发送
-     *
-     * @description 设置表数据(server only)
-     * @author XavierCHN
-     * @template TName
-     * @template T
-     * @template K
-     * @param {TName} tname 表名
-     * @param {K} key 键值
-     * @param {T[K]} value 数据
-     * @return {*} {void}
-     * @memberof XNetTable
-     */
-    SetPlayerTableValue<TName extends keyof XNetTableDefinations, T extends XNetTableDefinations[TName], K extends keyof T>(
-        playerId: PlayerID,
-        tname: TName,
-        key: K,
-        value: T[K]
-    ) {
+    SetPlayerTableValue(playerId: PlayerID, tname: TName, key: K, value: T[K]) {
         if (!IsServer()) return;
 
-        let k = tostring(key);
+        let k = tostring(key) as K;
         this._player_data[playerId] ??= {};
         this._player_data[playerId]![tname] ??= {};
+        value = value ?? ({} as T[K]);
+        this._player_data[playerId]![tname][k] = value;
+        this._appendUpdateRequest(playerId, tname, k, value);
+    }
 
-        if (value == null) {
-            this._player_data[playerId]![tname][k] = {};
-            let data = this._prepareDataChunks(tname, k, null, playerId);
-            this._updatePositively(playerId, data);
+    private _last_update_time_mark: Record<string, number> = {};
+
+    private _appendUpdateRequest(playerId: PlayerID | undefined, tname: TName, key: K, value: T[K]) {
+        const k = tostring(key);
+
+        // 判断value的大小，如果过小，那么直接使用object发送
+        // 如果过大，那么拆分之后使用字符串分割发送
+        const size = get_table_size(value);
+
+        // 判断是否一帧执行了多次更新，如果是，那么报错要求用户优化代码
+        const mark_name = `${playerId ?? 'all'}.${tname}.${k}`;
+        const now = GameRules.GetGameTime();
+        const last_update_time = this._last_update_time_mark[mark_name] ?? 0;
+        if (now == last_update_time) {
+            print(`[XNetTable] ${mark_name}同一帧执行了多次更新，建议优化代码，一帧最多只更新一次，本次更新照常执行`);
+        }
+        this._last_update_time_mark[mark_name] = now;
+
+        // 用以判断过小的数据，如果数据太小，直接推入发送队列
+        if (size < this.MTU) {
+            this._data_queue.push({
+                target: playerId,
+                data_length: size,
+                data: {
+                    table_name: tname,
+                    key: k,
+                    content: value,
+                },
+            });
         } else {
-            this._player_data[playerId]![tname][k] = value;
-            let data = this._prepareDataChunks(tname, k, value, playerId);
-            this._updatePositively(playerId, data);
+            // 对于过大的数据，那么进行拆分
+            const data = this._prepareDataChunks(tname, k, value);
+            for (let i = 0; i < data.length; i++) {
+                this._insertDataToQueue(data[i], playerId);
+            }
         }
     }
 
-    /** 用来记录每个网表上次更新时间的map */
-    private _lastUpdateTimeMarks: Record<string, number> = {};
-
-    /**
-     * 处理网表数据，目前只是简单做json
-     * 目前并没有做自动转换数据类型的操作，比如将entity转换为entity index等
-     * 发送之前要自己做处理
-     *
-     * @private
-     * @param {string} tname
-     * @param {string} key
-     * @param {*} [value]
-     * @param {PlayerID} [playerId]
-     * @returns {string[]}
-     * @memberof XNetTable
-     */
-    private _prepareDataChunks(tname: string, key: string, value?: any, playerId?: PlayerID): string[] {
-        // 如果某个同样的数据被短时间内更新太多次（一帧内超过1次），那么弹出一个警告，要求玩家优化代码
-        const tkv = `${tname}.${key}.${playerId ?? 'all'}`;
-        const now = GameRules.GetGameTime();
-        if (this._lastUpdateTimeMarks[tkv] == now) {
-            print(`[XNetTable] Warning: ${tkv} updated too many times in one frame!`);
+    private _insertDataToQueue(data: string | XNetTableObject, playerId?: PlayerID, negatively?: boolean) {
+        let size = get_table_size(data);
+        // 一般是先发先到，但是如果是消极的推送，那么就是后发先到
+        if (negatively) {
+            this._data_queue.unshift({
+                target: playerId,
+                data_length: size,
+                data: data,
+            });
+        } else {
+            this._data_queue.push({
+                target: playerId,
+                data_length: size,
+                data: data,
+            });
         }
-        this._lastUpdateTimeMarks[tkv] = now;
+    }
 
+    private _prepareDataChunks(tname: string, key: string | number, value?: any): string[] {
+        // 将数据json化之后分割成小块来准备发送
         let data = json.encode({
             table: tname,
             key: key,
@@ -173,24 +190,6 @@ export class XNetTable {
         return chunks;
     }
 
-    private _updatePositively(target: PlayerID | undefined, chunks: string[]) {
-        for (let chunk of chunks.reverse()) {
-            this._data_queue.unshift({
-                target: target,
-                data: chunk,
-            });
-        }
-    }
-
-    private _updateNegatively(target: PlayerID | undefined, chunks: string[]) {
-        for (let chunk of chunks) {
-            this._data_queue.push({
-                target: target,
-                data: chunk,
-            });
-        }
-    }
-
     // 监听玩家的重新连接事件
     // 如果有玩家重连，那么把所有需要发送给他的数据都再发一遍给他
     private _onPlayerConnectFull(keys: GameEventProvidedProperties & GameEventDeclarations[`player_connect_full`]) {
@@ -201,8 +200,8 @@ export class XNetTable {
         // 发送所有的全局共享数据
         for (let tname in this._data) {
             for (let key in this._data[tname]) {
-                let data = this._prepareDataChunks(tname, key, this._data[tname][key], playerId);
-                this._updateNegatively(playerId, data);
+                // @ts-expect-error
+                this._appendUpdateRequest(playerId, tname, key, this._data[tname][key]);
             }
         }
         // 发送所有这个玩家独享的数据
@@ -211,8 +210,8 @@ export class XNetTable {
             let table = this._player_data[playerId]![tname];
             if (table == null) continue;
             for (let key in table) {
-                let data = this._prepareDataChunks(tname, key, table[key], playerId);
-                this._updateNegatively(playerId, data);
+                // @ts-expect-error
+                this._appendUpdateRequest(playerId, tname, key, table[key]);
             }
         }
     }
@@ -223,7 +222,7 @@ export class XNetTable {
 
             while (this._data_queue.length > 0) {
                 if (data_sent_length > this.MTU) {
-                    print(`[x_net_table]当前帧发送数据量${data_sent_length},剩余${this._data_queue.length}条数据未发送，留到下一帧执行`);
+                    // print(`[x_net_table]当前帧发送数据量${data_sent_length},剩余${this._data_queue.length}条数据未发送，留到下一帧执行`);
                     return FrameTime();
                 }
 
@@ -232,26 +231,28 @@ export class XNetTable {
                     // print(`数据已经发完了，进入等待状态`);
                     return FrameTime();
                 }
-                let data_str = data.data;
-                data_sent_length += data_str.length;
+
+                const content = data.data;
+                const content_length = data.data_length;
+                const target = data.target;
+                data_sent_length += content_length;
 
                 // -1或者为null代表发送到所有客户端
-                if (data.target == null || data.target == -1) {
+                if (target == null || target == -1) {
                     // print(`给全体玩家发送数据${data_str}`);
                     CustomGameEventManager.Send_ServerToAllClients(`x_net_table`, {
-                        data: data_str,
+                        data: content,
                     });
                 }
                 // 否则发送给对应玩家
                 else {
                     // print(`给玩家${data.target}发送数据${data_str}`);
-                    let playerId = data.target;
-                    let player = PlayerResource.GetPlayer(playerId);
+                    let player = PlayerResource.GetPlayer(target);
 
                     // 只有当玩家存在的时候才发给他
                     if (player != null && !player.IsNull()) {
                         CustomGameEventManager.Send_ServerToPlayer(player, `x_net_table`, {
-                            data: data_str,
+                            data: content,
                         });
                     }
                 }

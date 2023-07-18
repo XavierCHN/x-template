@@ -2,22 +2,34 @@ import { emitLocalEvent } from './event-bus';
 import 'panorama-polyfill-x/lib/console';
 
 (() => {
-    GameEvents.Subscribe(`x_net_table`, data => {
-        let data_str = data.data;
+    GameEvents.Subscribe(`x_net_table`, received_object => {
+        let content = received_object.data;
+
+        // 如果数据不是string，那么直接dispatch
+        if (typeof content != 'string') {
+            emitLocalEvent('x_net_table', {
+                // 这个解包看似没必要，但是为了安全性，还是写一下比较好
+                table_name: content.table_name,
+                key: content.key,
+                content: content.content,
+            });
+            return;
+        }
+
         // 如果数据不以#开头，那么说明是一次发送过来的
         // 使用JSON.parse解析数据，并dispatch
-        if (data_str.charAt(0) != '#') {
+        if (content.charAt(0) != '#') {
             try {
-                let data = JSON.parse(data_str) as XNetTableDataJSON;
+                let data = JSON.parse(content) as XNetTableDataJSON;
                 dispatch(data.table, data.key, data.value);
             } catch {
-                console.warn(`x_net_table dispatch error: ${data_str}`);
+                console.warn(`x_net_table dispatch error: ${content}`);
             }
         } else {
             // 如果是分割成多次发送的数据
             // 那么将他放到缓存中去，直到数据都接收完毕
             // 如果接收完毕了，那么合并数据再dispatch
-            let defs = data_str.split('#');
+            let defs = content.split('#');
             let unique_id = defs[1];
             let data_count = parseInt(defs[2]);
             let chunk_index = parseInt(defs[3]);
