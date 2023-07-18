@@ -23,6 +23,7 @@ const encrypt_files = [
 /** 发布时要排除的文件列表 */
 const exclude_files = [
     'game/scripts/src/**/*.*', // 不输出源码
+    '**/*.json',
     '**/*.ts',
     '**/*.bin',
     '**/*.py',
