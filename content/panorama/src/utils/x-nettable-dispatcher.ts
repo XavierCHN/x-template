@@ -3,7 +3,7 @@ import 'panorama-polyfill-x/lib/console';
 
 (() => {
     GameEvents.Subscribe(`x_net_table`, received_object => {
-        let content = received_object.data;
+        const content = received_object.data;
 
         // 如果数据不是string，那么直接dispatch
         if (typeof content != 'string') {
@@ -21,7 +21,7 @@ import 'panorama-polyfill-x/lib/console';
         // 导致出错
         if (content.charAt(0) != '#') {
             try {
-                let _table_object = JSON.parse(content) as XNetTableDataJSON;
+                const _table_object = JSON.parse(content) as XNetTableDataJSON;
                 dispatch(_table_object.table, _table_object.key, _table_object.value);
             } catch {
                 console.warn(`x_net_table dispatch error: ${content}`);
@@ -32,24 +32,24 @@ import 'panorama-polyfill-x/lib/console';
         // 如果是分割成多次发送的数据
         // 那么将他放到缓存中去，直到数据都接收完毕
         // 如果接收完毕了，那么合并数据再dispatch
-        let defs = content.split('#');
-        let unique_id = defs[1];
-        let data_count = parseInt(defs[2]);
-        let chunk_index = parseInt(defs[3]);
+        const defs = content.split('#');
+        const unique_id = defs[1];
+        const data_count = parseInt(defs[2]);
+        const chunk_index = parseInt(defs[3]);
         // 有时候数据里面可能含有#，那么需要将剩下的数据拼接起来
-        let chunk_data = defs.slice(4).join('#');
+        const chunk_data = defs.slice(4).join('#');
         GameUI.CustomUIConfig().__x_nettable_chunks_cache__ ??= {};
         GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id] ??= {};
         GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id][chunk_index] = chunk_data;
         if (Object.values(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id]).length >= data_count) {
             // 将所有的数据按顺序拼接
-            let res = Object.entries(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
+            const res = Object.entries(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
                 .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
                 .map(v => v[1])
                 .join('');
 
             try {
-                let data = JSON.parse(res) as XNetTableDataJSON;
+                const data = JSON.parse(res) as XNetTableDataJSON;
                 dispatch(data.table, data.key, data.value);
             } catch {
                 console.warn(`x_net_table dispatch error: ${res}`);
@@ -109,10 +109,10 @@ export function dispatch(table_name: string, key: string, content: any) {
     try {
         GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
         GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
-        let prev = GameUI.CustomUIConfig().__x_nettable_cache__[table_name][key];
+        const prev = GameUI.CustomUIConfig().__x_nettable_cache__[table_name][key];
         if (!isEqual(prev, content)) {
             GameUI.CustomUIConfig().__x_nettable_cache__[table_name][key] = content;
-            let table_data = {
+            const table_data = {
                 table_name,
                 key,
                 content,

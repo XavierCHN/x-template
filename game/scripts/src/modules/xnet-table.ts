@@ -83,7 +83,7 @@ export class XNetTable {
         value: TStruct[TKey]
     ) {
         if (!IsServer()) return;
-        let key_name = tostring(key);
+        const key_name = tostring(key);
         this._data[tname] ??= {};
         value = value ?? ({} as TStruct[TKey]);
         this._data[tname][key_name] = value;
@@ -109,7 +109,7 @@ export class XNetTable {
     ) {
         if (!IsServer()) return;
 
-        let key_name = tostring(key);
+        const key_name = tostring(key);
         this._player_data[playerId] ??= {};
         this._player_data[playerId]![tname] ??= {};
         value = value ?? ({} as TStruct[TKey]);
@@ -185,7 +185,7 @@ export class XNetTable {
     }
 
     private _insertDataToQueue(data: string | XNetTableObject, playerId?: PlayerID, negatively?: boolean) {
-        let size = get_table_size(data);
+        const size = get_table_size(data);
         // 一般是先发先到，但是如果是消极的推送，那么就是后发先到
         if (negatively) {
             this._data_queue.unshift({
@@ -204,22 +204,22 @@ export class XNetTable {
 
     private _prepareDataChunks(tname: string, key: string, value?: any): string[] {
         // 将数据json化之后分割成小块来准备发送
-        let data = this._encodeTable({
+        const data = this._encodeTable({
             table: tname,
             key,
             value,
         });
-        let chunks: string[] = [];
-        let chunk_size = this.MTU - 2;
+        const chunks: string[] = [];
+        const chunk_size = this.MTU - 2;
 
         // 如果数据需要分割，那么他们将会拥有同样的unique_id
         // 另外会有第二个参数（index），用来标记这个数据是第几个chunk
         // 第三个参数则是这个chunk的大小
-        let unique_id = DoUniqueString('');
-        let data_length = string.len(data);
+        const unique_id = DoUniqueString('');
+        const data_length = string.len(data);
 
         if (data_length > chunk_size) {
-            let chunk_count = Math.ceil(data_length / chunk_size);
+            const chunk_count = Math.ceil(data_length / chunk_size);
             for (let i = 0; i < chunk_count; i++) {
                 let chunk = data.substring(i * chunk_size, (i + 1) * chunk_size);
                 print(string.len(chunk));
@@ -243,23 +243,23 @@ export class XNetTable {
     // 监听玩家的重新连接事件
     // 如果有玩家重连，那么把所有需要发送给他的数据都再发一遍给他
     private _onPlayerConnectFull(keys: GameEventProvidedProperties & GameEventDeclarations[`player_connect_full`]) {
-        let playerId = keys.PlayerID;
-        let player = PlayerResource.GetPlayer(playerId);
+        const playerId = keys.PlayerID;
+        const player = PlayerResource.GetPlayer(playerId);
         if (player == null) return;
 
         // 发送所有的全局共享数据
-        for (let tname in this._data) {
-            for (let key in this._data[tname]) {
+        for (const tname in this._data) {
+            for (const key in this._data[tname]) {
                 // @ts-expect-error
                 this._appendUpdateRequest(playerId, tname, key, this._data[tname][key]);
             }
         }
         // 发送所有这个玩家独享的数据
         if (this._player_data[playerId] == null) return;
-        for (let tname in this._player_data[playerId]) {
-            let table = this._player_data[playerId]![tname];
+        for (const tname in this._player_data[playerId]) {
+            const table = this._player_data[playerId]![tname];
             if (table == null) continue;
-            for (let key in table) {
+            for (const key in table) {
                 // @ts-expect-error
                 this._appendUpdateRequest(playerId, tname, key, table[key]);
             }
@@ -276,7 +276,7 @@ export class XNetTable {
                     return FrameTime();
                 }
 
-                let data = this._data_queue.shift();
+                const data = this._data_queue.shift();
                 if (data == null) {
                     // print(`数据已经发完了，进入等待状态`);
                     return FrameTime();
@@ -297,7 +297,7 @@ export class XNetTable {
                 // 否则发送给对应玩家
                 else {
                     // print(`给玩家${data.target}发送数据${data_str}`);
-                    let player = PlayerResource.GetPlayer(target);
+                    const player = PlayerResource.GetPlayer(target);
 
                     // 只有当玩家存在的时候才发给他
                     if (player != null && !player.IsNull()) {
