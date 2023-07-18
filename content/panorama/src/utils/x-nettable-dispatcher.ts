@@ -26,6 +26,7 @@ import 'panorama-polyfill-x/lib/console';
             } catch {
                 console.warn(`x_net_table dispatch error: ${content}`);
             }
+            return;
         }
 
         // 如果是分割成多次发送的数据
