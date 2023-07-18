@@ -4,6 +4,7 @@ declare interface XNetTableDefinations {
             data_1: string;
             data_2?: number;
             data_3?: boolean[];
+            data_t?: any;
         };
     };
     settings: {

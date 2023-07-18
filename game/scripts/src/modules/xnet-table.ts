@@ -1,11 +1,11 @@
 import { reloadable } from '../utils/tstl-utils';
 
 function get_table_size(t: any) {
-    // 如果是数字或者字符串，那么直接返回长度
-    if (type(t) !== `string`) {
+    // 如果不是table，那么直接返回长度
+    if (type(t) !== `table`) {
         return tostring(t).length;
     }
-    // 如果是表格，那么递归计算尺寸
+    // 如果是table，那么递归计算尺寸
     let size = 0;
     for (const [k, v] of pairs(t)) {
         size = size + get_table_size(k) + get_table_size(v);
@@ -38,7 +38,7 @@ declare type PartialRecord<K extends keyof any, T> = {
  * @license MIT
  */
 @reloadable
-export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetTableDefinations[TName], K extends keyof T> {
+export class XNetTable {
     constructor() {
         print(`[XNetTable] Activated`);
         this._startHeartbeat();
@@ -55,9 +55,9 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
     private MTU = 1024 * 12;
 
     // 所有玩家都共享的数据
-    private _data: PartialRecord<TName, PartialRecord<K, any>> = {};
+    private _data: PartialRecord<string, PartialRecord<string, any>> = {};
     // 某个玩家单独的数据，这个数据互相之间是保密的，不会发送到其他玩家的客户端
-    private _player_data: PartialRecord<PlayerID, PartialRecord<TName, PartialRecord<K, any>>> = {};
+    private _player_data: PartialRecord<PlayerID, PartialRecord<string, PartialRecord<string, any>>> = {};
 
     // 数据队列，用来存储所有待发送的数据
     private _data_queue: {
@@ -72,19 +72,23 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
      * 设置所有玩家共享的数据
      *
      * @param {TName} tname
-     * @param {K} key
-     * @param {T[K]} value
+     * @param {TKey} key
+     * @param {T[TKey]} value
      * @return {*}
      * @memberof XNetTable
      */
-    SetTableValue(tname: TName, key: K, value: T[K]) {
+    SetTableValue<TName extends keyof XNetTableDefinations, TStruct extends XNetTableDefinations[TName], TKey extends keyof TStruct>(
+        tname: TName,
+        key: TKey,
+        value: TStruct[TKey]
+    ) {
         if (!IsServer()) return;
-
-        let k = tostring(key) as K;
+        let key_name = tostring(key);
         this._data[tname] ??= {};
-        value = value ?? ({} as T[K]);
-        this._data[tname][k] = value;
-        this._appendUpdateRequest(undefined, tname, k, value);
+        value = value ?? ({} as TStruct[TKey]);
+        this._data[tname][key_name] = value;
+        // @ts-expect-error
+        this._appendUpdateRequest(undefined, tname, key_name, value);
     }
 
     /**
@@ -92,20 +96,26 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
      *
      * @param {PlayerID} playerId
      * @param {TName} tname
-     * @param {K} key
-     * @param {T[K]} value
+     * @param {TKey} key
+     * @param {T[TKey]} value
      * @return {*}
      * @memberof XNetTable
      */
-    SetPlayerTableValue(playerId: PlayerID, tname: TName, key: K, value: T[K]) {
+    SetPlayerTableValue<TName extends keyof XNetTableDefinations, TStruct extends XNetTableDefinations[TName], TKey extends keyof TStruct>(
+        playerId: PlayerID,
+        tname: TName,
+        key: TKey,
+        value: TStruct[TKey]
+    ) {
         if (!IsServer()) return;
 
-        let k = tostring(key) as K;
+        let key_name = tostring(key);
         this._player_data[playerId] ??= {};
         this._player_data[playerId]![tname] ??= {};
-        value = value ?? ({} as T[K]);
-        this._player_data[playerId]![tname][k] = value;
-        this._appendUpdateRequest(playerId, tname, k, value);
+        value = value ?? ({} as TStruct[TKey]);
+        this._player_data[playerId]![tname][key_name] = value;
+        // @ts-expect-error
+        this._appendUpdateRequest(playerId, tname, key_name, value);
     }
 
     /**
@@ -125,11 +135,16 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
      * @private
      * @param {(PlayerID | undefined)} playerId
      * @param {TName} tname
-     * @param {K} key
-     * @param {T[K]} value
+     * @param {TKey} key
+     * @param {T[TKey]} value
      * @memberof XNetTable
      */
-    private _appendUpdateRequest(playerId: PlayerID | undefined, tname: TName, key: K, value: T[K]) {
+    private _appendUpdateRequest<TName extends keyof XNetTableDefinations, TStruct extends XNetTableDefinations[TName], TKey extends keyof TStruct>(
+        playerId: PlayerID | undefined,
+        tname: TName,
+        key: TKey,
+        value: TStruct[TKey]
+    ) {
         const k = tostring(key);
 
         // 判断value的大小，如果过小，那么直接使用object发送
