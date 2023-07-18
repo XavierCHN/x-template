@@ -69,13 +69,12 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
     }[] = [];
 
     /**
-     * 设置网表数据
-     * 这个数据是共享的，所有玩家都看得到
+     * 设置所有玩家共享的数据
      *
-     * @template TName
-     * @param {TName} tname 表名，需要在 x-net-table.ts 的 `XNetTableDefinations` 里面定义
-     * @param {XNetTableDefinations[TName]} value 表的数值
-     * @returns
+     * @param {TName} tname
+     * @param {K} key
+     * @param {T[K]} value
+     * @return {*}
      * @memberof XNetTable
      */
     SetTableValue(tname: TName, key: K, value: T[K]) {
@@ -88,6 +87,16 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
         this._appendUpdateRequest(undefined, tname, k, value);
     }
 
+    /**
+     * 设置某个玩家单独的数据
+     *
+     * @param {PlayerID} playerId
+     * @param {TName} tname
+     * @param {K} key
+     * @param {T[K]} value
+     * @return {*}
+     * @memberof XNetTable
+     */
     SetPlayerTableValue(playerId: PlayerID, tname: TName, key: K, value: T[K]) {
         if (!IsServer()) return;
 
@@ -99,8 +108,27 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
         this._appendUpdateRequest(playerId, tname, k, value);
     }
 
+    /**
+     * 某个表的更新时间记录，用以判断某个网表是否同一帧内更新了多次
+     *
+     * @private
+     * @type {Record<string, number>}
+     * @memberof XNetTable
+     */
     private _last_update_time_mark: Record<string, number> = {};
 
+    /**
+     * 添加一个更新请求，对于比较小的更新请求，那么直接发送，对于比较大的更新请求
+     * 则使用json序列化后，再分割成MTU的大小发送
+     * 如果是同一帧内多次更新，那么会报错
+     *
+     * @private
+     * @param {(PlayerID | undefined)} playerId
+     * @param {TName} tname
+     * @param {K} key
+     * @param {T[K]} value
+     * @memberof XNetTable
+     */
     private _appendUpdateRequest(playerId: PlayerID | undefined, tname: TName, key: K, value: T[K]) {
         const k = tostring(key);
 
@@ -171,7 +199,6 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
         let unique_id = DoUniqueString('');
         let data_length = string.len(data);
 
-        // 如果数据过长，那么将他分割成小块再发送，避免因为一次发送数据过大的事件导致卡顿
         if (data_length > chunk_size) {
             let chunk_count = Math.ceil(data_length / chunk_size);
             for (let i = 0; i < chunk_count; i++) {
