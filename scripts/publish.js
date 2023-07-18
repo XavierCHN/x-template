@@ -33,7 +33,7 @@ const { launchDota2 } = require('./launchDota2');
 
     const getPublishPath = source => source.replace(/^game/, 'publish');
 
-    let stats = {}; // stastics file count of copy, ignore and encrypted
+    const stats = {}; // stastics file count of copy, ignore and encrypted
     const walker = walk.walk('game');
     walker
         .on('file', (root, fileStats, next) => {

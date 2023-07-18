@@ -94,7 +94,7 @@ export function isEqual(prev: any, next: any): boolean {
                 if (!isEqual(prev[i], next[i])) return false;
             }
         } else {
-            for (let key in prev) {
+            for (const key in prev) {
                 if (!isEqual(prev[key], next[key])) return false;
             }
         }

@@ -8,7 +8,7 @@ try {
 }
 
 /** 要加密的项目列表 */
-let encrypt_files = [
+const encrypt_files = [
     '**/*.lua',
     '!game/scripts/vscripts/lualib_bundle.lua',
     '!game/scripts/vscripts/addon_init.lua',
@@ -21,7 +21,7 @@ let encrypt_files = [
 ];
 
 /** 发布时要排除的文件列表 */
-let exclude_files = [
+const exclude_files = [
     'game/scripts/src/**/*.*', // 不输出源码
     '**/*.ts',
     '**/*.bin',

@@ -13,10 +13,10 @@ export class Debug {
         ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
     }
     OnPlayerChat(keys: GameEventProvidedProperties & PlayerChatEvent): void {
-        let strs = keys.text.split(' ');
-        let cmd = strs[0];
-        let args = strs.slice(1);
-        let steamid = PlayerResource.GetSteamAccountID(keys.playerid);
+        const strs = keys.text.split(' ');
+        const cmd = strs[0];
+        const args = strs.slice(1);
+        const steamid = PlayerResource.GetSteamAccountID(keys.playerid);
 
         if (cmd === '-debug') {
             if (this.OnlineDebugWhiteList.includes(steamid)) {

@@ -6,8 +6,8 @@ const { launchDota2 } = require('./launchDota2');
     let addon_name;
     let map_name;
 
-    let script = process.env.npm_lifecycle_script ?? process.env.npm_package_scripts_launch;
-    let params = script.match(/"(?:\\?[\S\s])*?"/g);
+    const script = process.env.npm_lifecycle_script ?? process.env.npm_package_scripts_launch;
+    const params = script.match(/"(?:\\?[\S\s])*?"/g);
     if (params != null && params.length > 0) {
         if (params.length == 1) {
             map_name = params[0].replace(/"/g, '');
@@ -18,7 +18,7 @@ const { launchDota2 } = require('./launchDota2');
     }
 
     if (process.env.npm_config_argv != null) {
-        let argv = JSON.parse(process.env.npm_config_argv);
+        const argv = JSON.parse(process.env.npm_config_argv);
         if (argv.original != null && argv.original.length > 0) {
             let args = argv.original.slice(1);
             if (args[0] == `launch`) {

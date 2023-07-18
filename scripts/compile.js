@@ -32,7 +32,7 @@ const { stdin: input, stdout: output } = require('process');
         answer => {
             const subdirs = answer.split(' ');
 
-            let args = [];
+            const args = [];
             args.push(`"${resourceCompilerPath}"`);
             args.push(`-game "${gamePath}"`);
             args.push(`-verbose`);
@@ -55,7 +55,7 @@ const { stdin: input, stdout: output } = require('process');
                     return;
                 }
 
-                let c = args.concat([
+                const c = args.concat([
                     `-i "${path.join(
                         addonContent,
                         dir,

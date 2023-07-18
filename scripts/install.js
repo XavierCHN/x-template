@@ -5,7 +5,7 @@ const rimraf = require('rimraf');
 const { getDotaPath } = require('./utils');
 
 (async () => {
-    let addon_name = require('./addon.config.js').addon_name; // 直接从addon.config.js中读取项目名称
+    const addon_name = require('./addon.config.js').addon_name; // 直接从addon.config.js中读取项目名称
 
     if (process.platform !== 'win32') {
         console.log('This script runs on windows only, Addon Linking is skipped.');

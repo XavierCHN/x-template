@@ -74,7 +74,7 @@ export function useXNetTableKey<TABLE_NAME extends keyof XNetTableDefinations, T
 ): T[KEY] {
     GameUI.CustomUIConfig().__x_nettable_cache__ ??= {};
     GameUI.CustomUIConfig().__x_nettable_cache__[table_name] ??= {};
-    let current_value = GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key]; // 这个cache的set在dispatcher.ts进行
+    const current_value = GameUI.CustomUIConfig().__x_nettable_cache__[<string>table_name][<string>key]; // 这个cache的set在dispatcher.ts进行
 
     const [value, setValue] = useStateIfMounted<T[KEY]>(current_value ?? fail_safe_value);
 

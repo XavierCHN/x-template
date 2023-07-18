@@ -8,7 +8,7 @@
  * */
 export class fs {
     public static request(method: 'PUT' | 'GET' | 'POST', url: string) {
-        let request = CreateHTTPRequestScriptVM(method, `http://localhost:10384${url}`);
+        const request = CreateHTTPRequestScriptVM(method, `http://localhost:10384${url}`);
         return request;
     }
     public static dir(path: string): Promise<string[]> {
