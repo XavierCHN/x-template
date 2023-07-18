@@ -81,7 +81,7 @@ export class XNetTable {
         tname: TName,
         key: TKey,
         value: TStruct[TKey]
-    ) {
+    ): void {
         if (!IsServer()) return;
         const key_name = tostring(key);
         this._data[tname] ??= {};
@@ -106,7 +106,7 @@ export class XNetTable {
         tname: TName,
         key: TKey,
         value: TStruct[TKey]
-    ) {
+    ): void {
         if (!IsServer()) return;
 
         const key_name = tostring(key);
@@ -128,7 +128,7 @@ export class XNetTable {
     private _last_update_time_mark: Record<string, number> = {};
 
     /**
-     * 添加一个更新请求，对于比较小的更新请求，那么直接发送，对于比较大的更新请求
+     * 添加一个更新请求，对于比较小的更新请求直接发送，对于比较大的更新请求
      * 则使用json序列化后，再分割成MTU的大小发送
      * 如果是同一帧内多次更新，那么会报错
      *
@@ -164,7 +164,7 @@ export class XNetTable {
         // 避免使用官方的事件直接发送的结果和JSON序列化后再反序列化之后的结果不一致
         // @fixme
 
-        // 用以判断过小的数据，如果数据太小，直接推入发送队列
+        // 如果数据太小，直接推入发送队列
         if (size < this.MTU) {
             this._data_queue.push({
                 target: playerId,
@@ -176,7 +176,7 @@ export class XNetTable {
                 },
             });
         } else {
-            // 对于过大的数据，那么进行拆分
+            // 如果数据过大，那么拆分成块之后再推入发送队列
             const data = this._prepareDataChunks(tname, k, value);
             for (let i = 0; i < data.length; i++) {
                 this._insertDataToQueue(data[i], playerId);
