@@ -183,12 +183,12 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
         }
     }
 
-    private _prepareDataChunks(tname: string, key: string | number, value?: any): string[] {
+    private _prepareDataChunks(tname: string, key: string, value?: any): string[] {
         // 将数据json化之后分割成小块来准备发送
-        let data = json.encode({
+        let data = this._encodeTable({
             table: tname,
-            key: key,
-            value: value,
+            key,
+            value,
         });
         let chunks: string[] = [];
         let chunk_size = this.MTU - 2;
@@ -215,6 +215,10 @@ export class XNetTable<TName extends keyof XNetTableDefinations, T extends XNetT
             chunks.push(data);
         }
         return chunks;
+    }
+
+    private _encodeTable(t: XNetTableDataJSON): string {
+        return json.encode(t);
     }
 
     // 监听玩家的重新连接事件

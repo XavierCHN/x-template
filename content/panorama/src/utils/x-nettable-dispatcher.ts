@@ -16,8 +16,17 @@ import 'panorama-polyfill-x/lib/console';
             return;
         }
 
-        // 只要是以string形式发送的数据，那么都是以#分割的
-        // 后端之后prePareDataChunks函数使用到了json化，因此此处不需要做额外的判断
+        // 如果字符串不是以#开头的，那么直接反序列化之后dispatch
+        // 避免因为lua判断大小和json判断大小直接出现问题
+        // 导致出错
+        if (content.charAt(0) != '#') {
+            try {
+                let _table_object = JSON.parse(content) as XNetTableDataJSON;
+                dispatch(_table_object.table, _table_object.key, _table_object.value);
+            } catch {
+                console.warn(`x_net_table dispatch error: ${content}`);
+            }
+        }
 
         // 如果是分割成多次发送的数据
         // 那么将他放到缓存中去，直到数据都接收完毕
