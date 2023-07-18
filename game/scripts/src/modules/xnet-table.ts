@@ -184,16 +184,18 @@ export class XNetTable {
         }
     }
 
-    private _insertDataToQueue(data: string | XNetTableObject, playerId?: PlayerID, negatively?: boolean) {
+    private _insertDataToQueue(data: string | XNetTableObject, playerId?: PlayerID, positively?: boolean) {
         const size = get_table_size(data);
         // 一般是先发先到，但是如果是消极的推送，那么就是后发先到
-        if (negatively) {
+        if (positively) {
+            // 如果你有使用抢占式更新的需求，那么可以自己改造这个类来实现
             this._data_queue.unshift({
                 target: playerId,
                 data_length: size,
                 data: data,
             });
         } else {
+            // 默认只使用这个推送到队列尾部的方式
             this._data_queue.push({
                 target: playerId,
                 data_length: size,
