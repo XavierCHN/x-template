@@ -16,41 +16,33 @@ import 'panorama-polyfill-x/lib/console';
             return;
         }
 
-        // 如果数据不以#开头，那么说明是一次发送过来的
-        // 使用JSON.parse解析数据，并dispatch
-        if (content.charAt(0) != '#') {
+        // 只要是以string形式发送的数据，那么都是以#分割的
+        // 后端之后prePareDataChunks函数使用到了json化，因此此处不需要做额外的判断
+
+        // 如果是分割成多次发送的数据
+        // 那么将他放到缓存中去，直到数据都接收完毕
+        // 如果接收完毕了，那么合并数据再dispatch
+        let defs = content.split('#');
+        let unique_id = defs[1];
+        let data_count = parseInt(defs[2]);
+        let chunk_index = parseInt(defs[3]);
+        // 有时候数据里面可能含有#，那么需要将剩下的数据拼接起来
+        let chunk_data = defs.slice(4).join('#');
+        GameUI.CustomUIConfig().__x_nettable_chunks_cache__ ??= {};
+        GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id] ??= {};
+        GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id][chunk_index] = chunk_data;
+        if (Object.values(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id]).length >= data_count) {
+            // 将所有的数据按顺序拼接
+            let res = Object.entries(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
+                .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
+                .map(v => v[1])
+                .join('');
+
             try {
-                let data = JSON.parse(content) as XNetTableDataJSON;
+                let data = JSON.parse(res) as XNetTableDataJSON;
                 dispatch(data.table, data.key, data.value);
             } catch {
-                console.warn(`x_net_table dispatch error: ${content}`);
-            }
-        } else {
-            // 如果是分割成多次发送的数据
-            // 那么将他放到缓存中去，直到数据都接收完毕
-            // 如果接收完毕了，那么合并数据再dispatch
-            let defs = content.split('#');
-            let unique_id = defs[1];
-            let data_count = parseInt(defs[2]);
-            let chunk_index = parseInt(defs[3]);
-            // 有时候数据里面可能含有#，那么需要将剩下的数据拼接起来
-            let chunk_data = defs.slice(4).join('#');
-            GameUI.CustomUIConfig().__x_nettable_chunks_cache__ ??= {};
-            GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id] ??= {};
-            GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id][chunk_index] = chunk_data;
-            if (Object.values(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id]).length >= data_count) {
-                // 将所有的数据按顺序拼接
-                let res = Object.entries(GameUI.CustomUIConfig().__x_nettable_chunks_cache__[unique_id])
-                    .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
-                    .map(v => v[1])
-                    .join('');
-
-                try {
-                    let data = JSON.parse(res) as XNetTableDataJSON;
-                    dispatch(data.table, data.key, data.value);
-                } catch {
-                    console.warn(`x_net_table dispatch error: ${res}`);
-                }
+                console.warn(`x_net_table dispatch error: ${res}`);
             }
         }
     });
