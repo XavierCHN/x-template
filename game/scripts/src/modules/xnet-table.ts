@@ -160,6 +160,10 @@ export class XNetTable {
         }
         this._last_update_time_mark[mark_name] = now;
 
+        // @TODO, 判断value的数据类型，如果是一个哈希表，那么需要进行特殊处理
+        // 避免使用官方的事件直接发送的结果和JSON序列化后再反序列化之后的结果不一致
+        // @fixme
+
         // 用以判断过小的数据，如果数据太小，直接推入发送队列
         if (size < this.MTU) {
             this._data_queue.push({
