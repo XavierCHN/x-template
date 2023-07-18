@@ -15,6 +15,7 @@ export class BaseModifier {
     ): InstanceType<T> {
         return target.AddNewModifier(caster, ability, this.name, modifierTable) as unknown as InstanceType<T>;
     }
+
     public static find_on<T extends typeof BaseModifier>(this: T, target: CDOTA_BaseNPC): InstanceType<T> {
         return target.FindModifierByName(this.name) as unknown as InstanceType<T>;
     }

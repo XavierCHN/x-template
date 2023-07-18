@@ -11,6 +11,7 @@ export class fs {
         const request = CreateHTTPRequestScriptVM(method, `http://localhost:10384${url}`);
         return request;
     }
+
     public static dir(path: string): Promise<string[]> {
         return new Promise((resolve, reject) => {
             fs.request('GET', path).Send(result => {
@@ -22,6 +23,7 @@ export class fs {
             });
         });
     }
+
     public static read(path: string): Promise<string> {
         return new Promise((resolve, reject) => {
             fs.request('GET', path).Send(result => {
@@ -33,6 +35,7 @@ export class fs {
             });
         });
     }
+
     public static write(path: string, content: string): Promise<void> {
         return new Promise((resolve, reject) => {
             const request = fs.request('PUT', path);
@@ -46,6 +49,7 @@ export class fs {
             });
         });
     }
+
     public static mkdir(path: string): Promise<void> {
         return new Promise((resolve, reject) => {
             fs.request('POST', path).Send(result => {
