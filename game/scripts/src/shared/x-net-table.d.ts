@@ -1,4 +1,4 @@
-declare interface XNetTableDefinations {
+declare interface XNetTableDefinitions {
     test_table: {
         test_key: {
             data_1: string;

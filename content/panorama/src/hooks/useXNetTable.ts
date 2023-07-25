@@ -15,9 +15,9 @@ import useStateIfMounted from './useStateIfMounted';
  * @template K
  * @param {T} table_name
  * @param {K} key
- * @param {(data: XNetTableDefinations[T][K]) => void} callback
+ * @param {(data: XNetTableDefinitions[T][K]) => void} callback
  */
-export function useXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinations, T extends XNetTableDefinations[TABLE_NAME], KEY extends keyof T>(
+export function useXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinitions, T extends XNetTableDefinitions[TABLE_NAME], KEY extends keyof T>(
     table_name: TABLE_NAME,
     key: KEY,
     callback: (data: T[KEY]) => void
@@ -44,9 +44,9 @@ export function useXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinations,
  * @template K
  * @param {T} table_name
  * @param {K} key
- * @param {(data: XNetTableDefinations[T][K]) => void} callback
+ * @param {(data: XNetTableDefinitions[T][K]) => void} callback
  */
-export function onXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinations, T extends XNetTableDefinations[TABLE_NAME], KEY extends keyof T>(
+export function onXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinitions, T extends XNetTableDefinitions[TABLE_NAME], KEY extends keyof T>(
     table_name: TABLE_NAME,
     key: KEY,
     callback: (data: T[KEY]) => void
@@ -65,9 +65,9 @@ export function onXNetTableEvent<TABLE_NAME extends keyof XNetTableDefinations, 
  * @template KEY
  * @param {T} table_name 表名
  * @param {KEY} key 表键
- * @param {XNetTableDefinations[T][KEY]} fail_safe_value 如果网表中不含有该值，那么返回该值，此项必须是为了避免react渲染出错
+ * @param {XNetTableDefinitions[T][KEY]} fail_safe_value 如果网表中不含有该值，那么返回该值，此项必须是为了避免react渲染出错
  */
-export function useXNetTableKey<TABLE_NAME extends keyof XNetTableDefinations, T extends XNetTableDefinations[TABLE_NAME], KEY extends keyof T>(
+export function useXNetTableKey<TABLE_NAME extends keyof XNetTableDefinitions, T extends XNetTableDefinitions[TABLE_NAME], KEY extends keyof T>(
     table_name: TABLE_NAME,
     key: KEY,
     fail_safe_value: T[KEY]
