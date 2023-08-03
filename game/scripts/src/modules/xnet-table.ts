@@ -77,7 +77,7 @@ export class XNetTable {
      * @return {*}
      * @memberof XNetTable
      */
-    SetTableValue<TName extends keyof XNetTableDefinations, TStruct extends XNetTableDefinations[TName], TKey extends keyof TStruct>(
+    SetTableValue<TName extends keyof XNetTableDefinitions, TStruct extends XNetTableDefinitions[TName], TKey extends keyof TStruct>(
         tname: TName,
         key: TKey,
         value: TStruct[TKey]
@@ -101,7 +101,7 @@ export class XNetTable {
      * @return {*}
      * @memberof XNetTable
      */
-    SetPlayerTableValue<TName extends keyof XNetTableDefinations, TStruct extends XNetTableDefinations[TName], TKey extends keyof TStruct>(
+    SetPlayerTableValue<TName extends keyof XNetTableDefinitions, TStruct extends XNetTableDefinitions[TName], TKey extends keyof TStruct>(
         playerId: PlayerID,
         tname: TName,
         key: TKey,
@@ -139,7 +139,7 @@ export class XNetTable {
      * @param {T[TKey]} value
      * @memberof XNetTable
      */
-    private _appendUpdateRequest<TName extends keyof XNetTableDefinations, TStruct extends XNetTableDefinations[TName], TKey extends keyof TStruct>(
+    private _appendUpdateRequest<TName extends keyof XNetTableDefinitions, TStruct extends XNetTableDefinitions[TName], TKey extends keyof TStruct>(
         playerId: PlayerID | undefined,
         tname: TName,
         key: TKey,
