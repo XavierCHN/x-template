@@ -1,62 +1,58 @@
-# X-Template
+# X-Шаблон
 
-Шаблон разработки игры Chavier's Dota2
+![Лицензия: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Версия](https://img.shields.io/github/release/XavierCHN/x-template.svg)]() Шаблон разработки пользовательских игр для Dota 2 от Завьера (переведено на английский с помощью [chatgpt](https://chat.openai.com/))
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg) [![Version](https://img.shields.io/github/release/XavierCHN/x-template.svg)]()
+### Предварительные требования
 
-### Предыдущие условия
+Если вы хотите использовать этот шаблон, помимо владения инструментами разработки Valve, вам также необходимо изучить
 
-Если вы хотите использовать этот шаблон, в дополнение к освоению инструмента разработки V, вам также нужно учиться дополнительным
-
-1. `typescript`, `javascript` Синтаксис
-2. `react` Базовые знания
-3. `node.js`Базовые знания
-4. Учиться[react-panorama](https://github.com/ark120202/react-panorama)
-5. Учиться[TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
-6. Узнать о `DOTA2 Typescript API`，Заканчивать`npm install`Вы можете просмотреть`node_modules/dota-lua-types`с участием`node_modules/panorama-types`
-
--   Конечно, использование сильных типов языка требует, у вас есть лучший спецификация кода и объявление записи. :wink:
--   Однако также можно улучшить свою эффективность кода.
+1. синтаксис `typescript`, `javascript`
+2. основы `react`
+3. основы `node.js`
+4. изучить [react-panorama](https://github.com/ark120202/react-panorama)
+5. изучить [TypeScriptToLua](https://github.com/TypeScriptToLua/TypeScriptToLua)
+6. ознакомиться с `DOTA2 Typescript API`, вы можете посмотреть `node_modules/dota-lua-types` и `node_modules/panorama-types`, когда закончите выполнение `yarn`.
 
 ### Поддерживаемые функции
 
-1. 将`excels`Содержание папки становится kv Файл и положить его`game/scripts/npc`папка
-2. 将`localization`Содержание папки генерирует соответствующий язык языка и положить его`game/resources`папка
-3. 将`game/scripts/npc`文件夹的内容同步到`content/panorama/scripts/keyvalues.js`
-4. Фронтальный`content/panorama/src`С бэкэндом`game/scripts/src`Папка используется для записи источника реагирования пользовательского интерфейса и исходный код Game Logic TS.
+1. преобразование файлов xlsx, xls kv в файл kv и помещение его в `game/scripts/npc`,
+2. преобразование `addon.csv` в `addon_*.txt`, (вы также можете обратно преобразовать их в `addon.csv`),
+3. преобразование файлов kv в файлы json, чтобы вы могли получать данные kv в интерфейсе Panorama,
+4. использование TypeScript для написания игровой логики и интерфейса Panorama в `content/panorama/src` и `game/scripts/src`.
 
-### Поддерживаемые инструкции
+- пожалуйста, проверьте `gulpfile.ts` для получения дополнительной информации.
 
-1. «Запуск NPM RUN [[ADDON_NAME] MAP_NAME]` Запустите dota2, два параметра являются необязательными параметрами, если «Addon_Name предоставляется, то загрузите указанный дополнительный адрес (элемент по умолчанию), предоставить« MAP_NAME ». Автоматически загрузить соответствующее имя карты ( Если Addon_Name не предоставляется, текущий аддон загружен по умолчанию)
-2. NPM RUN DEV` Введите режим Dev, выполнит синхронный KV к JS, генерирую локализацию, Excel до KV и т. Д.
-3. `NPM RUD PROD` Выполните операцию публикации` Dota_developer`] Выпуск устанавливается).
+### Поддерживаемые команды
 
-### Шаги для использования
+1. `yarn launch [[addon_name] map_name]` запускает Dota 2, все параметры необязательны, если указано `addon_name`, то будет загружен указанный аддон (по умолчанию загружается этот проект), если указано `map_name`, то автоматически будет загружено соответствующее имя карты (если `addon_name` не указан, то по умолчанию будет загружен текущий аддон)
+2. `yarn dev` вход в режим разработки для компиляции и отслеживания изменений файлов ts.
+3. `yarn prod` для выполнения операции `publish`, автоматически создает папку `publish` и автоматически создает ссылку на папку `dota_addons/you_addon_name_publish`, затем вы можете выбрать эту папку для публикации (вы можете установить некоторые настройки для публикации в `package.json -> dota_developer`, чтобы задать некоторые настройки для публикации).
+4. `yarn compile` для компиляции исходного содержимого
 
-1. [Нажмите на этот элемент в качестве шаблона, чтобы создать свой собственный проект](https://github.com/XavierCHN/x-template/generate)или [fork Этот проект](https://github.com/XavierCHN/x-template/fork)
-2. Установите `Node.js`, запрос выше узла V14.10.1 ~~ Поскольку на этой версии нет теста ~~
-3. Сгенерированный клон или проект Fork
-4. Откройте `package.json`, поверните` имя`, чтобы изменить имя, которое вам нравится
-5. Выполните «NPM INSTALL», он должен автоматически ссылаться на автоматическую ссылку.
-6. `NPM запустить dev`, начните свое развитие
-7. 
-### Содержание папки
+### Использование
 
-- Содержимое будет и `dota 2 beta / content / dota_addons / your_addon_name`
-- игра и `dota 2 beta / game / dota_addons / your_addon_name` синхронное обновление
-- Shared используется для записи `Panorama TS и` и` TSTL`, как` custom_net_tables и т. Д.
-- Excels, используемые для написания таблиц KV
-- Локализация используется для написания различных локализованных текстов
-- Скрипты Все виды сценариев узла для выполнения различных вспомогательных функций
+1. [нажмите "Use this project as a template" для создания своего проекта](https://github.com/XavierCHN/x-template/generate) или [форкните этот проект](https://github.com/XavierCHN/x-template/fork)
+2. установите `node.js`, требуется версия Node не ниже 14.10.1 ~~ так как более старшие версии не тестировались ~~
+3. клонируйте созданный проект или форк
+4. откройте `package.json` и измените `name` на предпочитаемое имя
+5. выполните `yarn` для установки зависимостей, это должно автоматически создать ссылку на папки `content` и `game` в вашем каталоге `dota 2 beta/dota_addons/your_preferred_name` (если возникнут проблемы с разрешениями, попробуйте перезапустить)
+6. выполните `yarn dev` и начните разработку
 
-### Другая работа
+### Содержание
 
-1. Если вам нужно шифровать, пожалуйста, измените его сами.`scripts/publish.js`
-2. Добро пожаловать`issues`
-3. Добро пожаловать в свой свой вклад
+-   `content` синхронизирован с `dota 2 beta/content/dota_addons/your_addon_name`
+-   `game` синхронизирован с `dota 2 beta/game/dota_addons/your_addon_name`
+-   `shared` для написания общих объявлений, используемых в `panorama` и `typescript-to-lua`, например, `custom net tables`
+-   `excels` для редактирования таблиц kv
+-   `localization` для написания локализационных файлов
+-   `scripts` содержит некоторые вспомогательные скрипты
 
-### Спасибо
+1. если вам нужна шифрование, посмотрите `scripts/publish.js`
+2. не стесняйтесь создавать `issues`
+3. вклад в развитие приветствуется
 
--   ModDota Community
--   [https://github.com/ark120202](https://github.com/ark120202) 开发的`react-panorama`和对 API 的维护
--   有部分代码来自 [https://github.com/MODDOTA/TypeScriptAddonTemplate](https://github.com/MODDOTA/TypeScriptAddonTemplate)
+### Благодарности
+
+-   Сообщество ModDota
+-   React-panorama разработан [https://github.com/ark120202](https://github.com/ark120202)
+-   Некоторый код взят из [https://github.com/MODDOTA/TypeScriptAddonTemplate](https://github.com/MODDOTA/TypeScriptAddonTemplate)
