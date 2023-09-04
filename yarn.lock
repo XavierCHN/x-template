@@ -1218,17 +1218,17 @@
   resolved "https://registry.npmmirror.com/@jsdevtools/ono/-/ono-7.1.3.tgz"
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
-"@moddota/dota-lua-types@^4.27.0":
-  version "4.27.0"
-  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.27.0.tgz#4f8e8ac4c55c020c11017366d9345390a9aa73ef"
-  integrity sha512-VlcpcxV4RMkhOf4WyDwsFUOGbPzE+qCiZFgcqO7+D4BzoMLQFCaKosTrpzOqNHynkEYH4YFjSoAVFxwa+dKVpw==
+"@moddota/dota-lua-types@^4.29.0":
+  version "4.29.0"
+  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.29.0.tgz#815c3493f75f6c0068515f7b61ce2c3294e38f40"
+  integrity sha512-HyaNVZ4Pv5gfDFBAVkahdJqnZSpUf8db5i3GnWDP5cX/vnYkT0/svjK7ypUKuP1ShuUgpTKh0ZJXNYKoeY+CaQ==
   dependencies:
     lua-types "^2.13.1"
 
-"@moddota/panorama-types@^1.27.0":
-  version "1.27.0"
-  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.27.0.tgz#73d1ec3f5ccbe3c43942c22388ab89d4c5574b74"
-  integrity sha512-4/0i0jk++EF8nP1/sEn3K/BpPs9+zfqbAQk/uAfZBWbrV/WAJdYV3RIWIMqt9dlvZnEQzf1LfpdTObnIlTNcKA==
+"@moddota/panorama-types@^1.29.1":
+  version "1.29.1"
+  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.29.1.tgz#4eab2cc55e074bb023d83ca656a9336cda795383"
+  integrity sha512-go3FkccUm3YkJ8fon2Ng4c7ntaA2Js0tTpWeMexDXHkU7t4Q0qSS95rDAUX17wBXlNU1iz9Ba3LSPoyjyH2O7Q==
   dependencies:
     tslib "^2.0.3"
 
@@ -5979,10 +5979,10 @@ react-is@^16.13.1, react-is@^16.8.1:
   resolved "https://registry.npm.taobao.org/react-is/download/react-is-16.13.1.tgz?cache=0&sync_timestamp=1598612864426&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Freact-is%2Fdownload%2Freact-is-16.13.1.tgz"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
 
-react-panorama-x@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmmirror.com/react-panorama-x/-/react-panorama-x-0.3.0.tgz"
-  integrity sha512-UH7HxUsrGhNClE40FAqovY7FbzkOUuBRP8Xy0+iw0WQIONOuSgHJTqlfAfBGN/WoFG6SyOuTtVs7DQfys/tdzQ==
+react-panorama-x@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmmirror.com/react-panorama-x/-/react-panorama-x-0.4.0.tgz#a74ee465c453911223319c1ce66ca59dd66e8a0c"
+  integrity sha512-q9x7SvDruaBdIRbLVNZfJodB0Z8exPYtIHiLNStZMAPW1vyTz5rg1CqNVXnpzF5FxKJ6hakMkXefyPnGS2uAow==
   dependencies:
     panorama-polyfill-x "^0.1.2"
 
