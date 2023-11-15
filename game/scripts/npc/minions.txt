@@ -7,7 +7,6 @@
 {
 
 	"npc_kv_generator_test" {
-		"Searchable" "1"
 		"Cost" "1"
 		"BaseClass" "npc_dota_creature"
 		"Model" "models/heroes/earthshaker/earthshaker.vmdl"
