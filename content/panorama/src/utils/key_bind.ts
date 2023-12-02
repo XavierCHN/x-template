@@ -17,7 +17,6 @@ function GetCommandName(name: string) {
 
 function GetKeyBind(name: string) {
     const contextPanel = $.GetContextPanel();
-    // @ts-ignore, waiting for panorama package update?
     $.CreatePanel('DOTAHotkey', contextPanel, '', { keybind: name });
     var keyElement = contextPanel.GetChild(contextPanel.GetChildCount() - 1)!;
     keyElement.DeleteAsync(0);
