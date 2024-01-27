@@ -6,13 +6,8 @@ import 'panorama-polyfill-x/lib/console';
         const content = received_object.data;
 
         // 如果数据不是string，那么直接dispatch
-        if (typeof content != 'string') {
-            emitLocalEvent('x_net_table', {
-                // 这个解包看似没必要，但是为了安全性，还是写一下比较好
-                table_name: content.table_name,
-                key: content.key,
-                content: content.content,
-            });
+        if (typeof content != 'string' && content.table_name != null) {
+            dispatch(content.table_name, content.key, content.content);
             return;
         }
 
