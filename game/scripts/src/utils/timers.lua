@@ -281,7 +281,7 @@ function Timers:CreateTimer(arg1, arg2, context)
 	timerHeap:Insert(timer)
 
 	if timer.name == nil then
-		timer = DoUniqueString('timer')
+		timer.name = DoUniqueString('timer')
 	end
 
 	return timer.name
