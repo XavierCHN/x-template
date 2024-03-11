@@ -11,6 +11,10 @@ import 'panorama-polyfill-x/lib/console';
             return;
         }
 
+        if (typeof content != 'string') {
+            throw new Error(`x_net_table data type error: ${typeof content}`);
+        }
+
         // 如果字符串不是以#开头的，那么直接反序列化之后dispatch
         // 避免因为lua判断大小和json判断大小直接出现问题
         // 导致出错
