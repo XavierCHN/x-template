@@ -12,6 +12,6 @@ export function LoopByTimer(callback: (times?: number) => void | number, times?:
         if (repeatTimes == 0) {
             return;
         }
-        if (newInterval != null && newInterval >= 0) return newInterval;
+        if (newInterval && newInterval >= 0) return newInterval;
     });
 }

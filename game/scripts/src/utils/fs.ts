@@ -1,5 +1,11 @@
 /**
  * a custom fs to read/write files via http request
+ * please ensure your file server is running
+ * see @ gulpfile.ts @task start_file_server
+ * 一个使用本地http请求读写文件的fs
+ * 请确保你的文件服务器正在运行
+ * 参见 @ gulpfile.ts @task start_file_server
+ *
  * @example
  *    fs.read('./game/scripts/src/addon_game_mode.ts').then(content => {
  *        print(content);
