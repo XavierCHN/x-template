@@ -26,7 +26,7 @@
         "@babel/preset-react": "^7.16.5",
         "@inquirer/prompts": "^2.1.1",
         "@moddota/dota-lua-types": "^4.29.0",
-        "@moddota/panorama-types": "^1.29.1",
+        "@moddota/panorama-types": "^1.32.0",
         "@types/events": "^3.0.0",
         "@types/fs-extra": "^9.0.13",
         "@types/gulp": "^4.0.9",
