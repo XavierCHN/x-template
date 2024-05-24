@@ -1218,17 +1218,17 @@
   resolved "https://registry.npmmirror.com/@jsdevtools/ono/-/ono-7.1.3.tgz"
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
-"@moddota/dota-lua-types@^4.29.0":
-  version "4.30.0"
-  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.30.0.tgz#2770086f919c61ab696ce0dc1cb4b14610cb01bc"
-  integrity sha512-v5OnOdMUpR+FOEdpgu9TZ+bEPSMvIZxp8lbiCI0SWDxk7fZZngG+nrC1JSUpdG9Q7tp7jP88f4U4WbWqpUIIRA==
+"@moddota/dota-lua-types@^4.32.0":
+  version "4.32.0"
+  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.32.0.tgz#135611d22e6585d36ac3cf40ec585650c62be0da"
+  integrity sha512-F7Afb8H4XRhFJRUGRMEe477zvLR4+d6eF/GNPpsy3zWZW/TFNH/vC3qBpfjXEZixMOycYKXSdHin4v+L5yj3mg==
   dependencies:
     lua-types "^2.13.1"
 
-"@moddota/panorama-types@^1.29.1":
-  version "1.30.0"
-  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.30.0.tgz#b90a95873aff14455013c76b9e2116da4bcd7e15"
-  integrity sha512-/1X21DtdzOazR4RZT4vmsVXcXvT7BfmrdEPgWroMV3B8pparfHWTS6ORw2Yko8ea3WIe2u1a8KWehxEXh0ekxw==
+"@moddota/panorama-types@^1.33.0":
+  version "1.33.0"
+  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.33.0.tgz#de7ada3d208a838f85d9decf6b6f09a6333c067a"
+  integrity sha512-DrrwlCP4itENFYFtrWrFs2yBaOHR4GCwOxpPGdiFPEf3xstEkMmjemzwY6Fr8Il2L4/hfNP1JOzWRtzjuNuvoQ==
   dependencies:
     tslib "^2.0.3"
 
