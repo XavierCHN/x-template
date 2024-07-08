@@ -1218,10 +1218,10 @@
   resolved "https://registry.npmmirror.com/@jsdevtools/ono/-/ono-7.1.3.tgz"
   integrity sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==
 
-"@moddota/dota-lua-types@^4.32.0":
-  version "4.32.0"
-  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.32.0.tgz#135611d22e6585d36ac3cf40ec585650c62be0da"
-  integrity sha512-F7Afb8H4XRhFJRUGRMEe477zvLR4+d6eF/GNPpsy3zWZW/TFNH/vC3qBpfjXEZixMOycYKXSdHin4v+L5yj3mg==
+"@moddota/dota-lua-types@^4.34.1":
+  version "4.34.1"
+  resolved "https://registry.npmmirror.com/@moddota/dota-lua-types/-/dota-lua-types-4.34.1.tgz#7c9685c6b1e9df71a8c2d6650725b486aede95c9"
+  integrity sha512-S72wqi1RRo8Tju15jz3NfcwmnOFpzQ6qaHFcLFrlok/G8yR4EJ7eceFJJ+kIJOw5VoE5U6+G7ScBC36IAVQ7gA==
   dependencies:
     lua-types "^2.13.1"
 
