@@ -4019,10 +4019,10 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@1.1.17:
-  version "1.1.17"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.1.17.tgz#2df018258bb7ecac2d8b0d8c9ea8346ae3cff7b5"
-  integrity sha512-HmmMBInsL8QTPS4T69gqenhYG6c8vCYa1x3J4lW1UtdrOGinprsNRBiuA0CC9VyiQwI1WN5ugxg0+2wA4TJ/6w==
+gulp-dotax@^1.1.19:
+  version "1.1.19"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.1.19.tgz#c7b106c9591286441439c59ee5ade1bae977766a"
+  integrity sha512-vl3+1m9S9RNNgHC/KOk+60HVS2LsBjIqJgfljy/WDU+KzujjyzH2BzAmJU0njKTTd6Ml+ctzAyVkiGGoZldYig==
   dependencies:
     cli-color "^2.0.3"
     easy-keyvalues "1.0.12"
