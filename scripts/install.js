@@ -4,8 +4,40 @@ const path = require('path');
 const rimraf = require('rimraf');
 const { getDotaPath } = require('./utils');
 
-(async () => {
+/**
+ * create symbolic link from game/scripts/src/shared to content/panorama/src/shared
+ */
+const linkSharedDirectory = () => {
+    const sharedSource = path.resolve(__dirname, '..', 'game', 'scripts', 'src', 'shared');
+    const sharedTargetPath = path.resolve(__dirname, '..', 'content', 'panorama', 'src', 'shared');
+    if (fs.existsSync(sharedSource)) {
+        if (fs.existsSync(sharedTargetPath)) {
+            const isCorrect = fs.lstatSync(sharedTargetPath).isSymbolicLink() && fs.realpathSync(sharedTargetPath) === sharedSource;
+            if (isCorrect) {
+                console.log(`Skipping '${sharedSource}' since it is already linked`);
+            } else {
+                fs.removeSync(sharedTargetPath);
+                fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
+                console.log(`Repaired broken link ${sharedSource} <==> ${sharedTargetPath}`);
+            }
+        } else {
+            fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
+            console.log(`Linked ${sharedSource} <==> ${sharedTargetPath}`);
+        }
+    } else {
+        console.log(`Could not find '${sharedSource}', shared script linking is skipped`);
+    }
+};
+
+/**
+ * create symbolic link from game to dota 2 beta/game/dota_addons/addon_name
+ *
+ * @return {*}
+ */
+const linkDotaAddons = async () => {
     const addon_name = require('./addon.config.js').addon_name; // 直接从addon.config.js中读取项目名称
+
+    // create symbolic link from game/scripts/src/shared to content/panorama/src/shared
 
     if (process.platform !== 'win32') {
         console.log('This script runs on windows only, Addon Linking is skipped.');
@@ -48,28 +80,11 @@ const { getDotaPath } = require('./utils');
             console.log(`Linked ${sourcePath} <==> ${targetPath}`);
         }
     }
+};
 
-    // create symbolic link from game/scripts/src/shared to content/panorama/src/shared
-    // shared source should be inside dota 2 beta since valve did not support symlink in addon
-    const sharedSource = path.join(dotaPath, 'game', 'dota_addons', addon_name, 'scripts', 'src', 'shared');
-    const sharedTargetPath = path.resolve(__dirname, '..', 'content', 'panorama', 'src', 'shared');
-    if (fs.existsSync(sharedSource)) {
-        if (fs.existsSync(sharedTargetPath)) {
-            const isCorrect = fs.lstatSync(sharedTargetPath).isSymbolicLink() && fs.realpathSync(sharedTargetPath) === sharedSource;
-            if (isCorrect) {
-                console.log(`Skipping '${sharedSource}' since it is already linked`);
-            } else {
-                fs.removeSync(sharedTargetPath);
-                fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
-                console.log(`Repaired broken link ${sharedSource} <==> ${sharedTargetPath}`);
-            }
-        } else {
-            fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
-            console.log(`Linked ${sharedSource} <==> ${sharedTargetPath}`);
-        }
-    } else {
-        console.log(`Could not find '${sharedSource}', shared script linking is skipped`);
-    }
+(async () => {
+    linkSharedDirectory();
+    linkDotaAddons();
 })().catch(error => {
     console.error(error);
     process.exit(1);
