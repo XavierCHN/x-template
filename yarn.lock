@@ -3984,7 +3984,7 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@^1.1.19:
+gulp-dotax@^1.2.2:
   version "1.2.2"
   resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.2.2.tgz#411d254a44b52fb2ed86c3eab189943aec3c3858"
   integrity sha512-oPmogfNS4niEQZ75ZE2pUPbrVDEsnSJk3TnBeG9K1eNBzWjBOyMYt58Zj7GUFanJnmcBYwwRrL/yU9HMjYw2zg==
