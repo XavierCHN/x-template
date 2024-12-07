@@ -104,6 +104,7 @@ module.exports = {
             ],
         }),
         // use ignore plugin to ignore less files changes
+        // they are watched and compiled in gulpfile.ts
         new WatchIgnorePlugin({ paths: [/\.less$/] }),
     ],
 };
