@@ -83,8 +83,8 @@ const linkDotaAddons = async () => {
 };
 
 (async () => {
+    await linkDotaAddons();
     linkSharedDirectory();
-    linkDotaAddons();
 })().catch(error => {
     console.error(error);
     process.exit(1);
