@@ -49,8 +49,9 @@ const { getDotaPath } = require('./utils');
         }
     }
 
-    // create symbolic link from game/scripts/src/shared to content/panorama/src/shared
-    // shared source should be inside dota 2 beta since valve did not support symlink in addon
+    // 为什么一定要用这样的顺序写，是因为Valve不支持在addon中使用符号链接
+    // 所以我们符号链接的源必须是在dota 2 beta/game/scripts/src/shared
+    // 所以shared linking必须在最后写
     const sharedSource = path.join(dotaPath, 'game', 'dota_addons', addon_name, 'scripts', 'src', 'shared');
     const sharedTargetPath = path.resolve(__dirname, '..', 'content', 'panorama', 'src', 'shared');
     if (fs.existsSync(sharedSource)) {
