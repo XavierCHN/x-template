@@ -29,6 +29,7 @@ const sheet_2_kv =
                         // 所有支持的参数请按住 Ctrl 点击 sheetToKV 查看，以下其他 API 也是如此
                         sheetsIgnore: '^__.*|^Sheet[1-3]$', // 忽略以两个下划线开头的sheet 和 默认生成的 Sheet1 Sheet2 Sheet3 等
                         indent: `	`, // 自定义缩进
+                        keyRowNumber: 2, // 自定义键值对的键所在的行数
                         addonCSVPath: `${paths.game_resource}/kv_generated.csv`, // 本地化文件路径，用以将 excel 文件中的 #Loc{}输出到addon.csv文件中去
                     })
                 )
