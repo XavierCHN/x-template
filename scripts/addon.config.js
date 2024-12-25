@@ -1,5 +1,8 @@
-/** 项目名称 */
-let addon_name = 'x_template'; // 必须为字母开头，而且只能包含小写字母、数字和下划线
+/** 
+ * 项目名称 
+ * 必须为字母开头，而且只能包含小写字母、数字和下划线
+ */
+let addon_name = 'x_template';
 
 try {
     addon_name = require('./.test/addon_name');
@@ -7,7 +10,11 @@ try {
     //do nothing
 }
 
-/** 要加密的项目列表 */
+/** 
+ * 要加密的项目列表 
+ * 建议需要双端运行的modifier, ability代码等不加密
+ * 避免出现运行时错误或者泄漏加密秘钥
+ */
 const encrypt_files = [
     '**/*.lua',
     '!game/scripts/vscripts/lualib_bundle.lua',
@@ -20,7 +27,7 @@ const encrypt_files = [
     '!game/scripts/vscripts/utils/aeslua/**/*.lua',
 ];
 
-/** 发布时要排除的文件列表 */
+/** 发布时要排除的文件列表，他们不会被复制到发布的game文件夹 */
 const exclude_files = [
     'game/scripts/src/**/*.*', // 不输出源码
     '**/*.json',
