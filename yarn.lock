@@ -3984,10 +3984,10 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@^1.2.4:
-  version "1.2.4"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.2.4.tgz#45bb03ca64ecd9cbd9814a1a96f71358ffd995b6"
-  integrity sha512-fEnlSQ+Na0ZNc2kBGaYWtGoAwcamA4gom0KP2zJpTMBXN5ROgUfUa3qcFGX+4Yu6UICudCiOPlL+5YJqKyCQsw==
+gulp-dotax@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.2.5.tgz#7a17c5defa230df41f3101491f0f8678d1f7ef00"
+  integrity sha512-9o6WzkX5QA5HYeztOD2LbcowFYB3TVFkNVo+9TGeTI+4OptVOYRWB9boYZOoOpbOYv+nSiYFgmGHyBN5ZC67eQ==
   dependencies:
     cli-color "^2.0.3"
     easy-keyvalues "^1.2.7"
