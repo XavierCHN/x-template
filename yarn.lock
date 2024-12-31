@@ -7166,10 +7166,10 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-to-lua@^1.27.1:
-  version "1.27.1"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.27.1.tgz#fe704cf4d48267853682d20b77d1d7126079b6a1"
-  integrity sha512-9MTMIyeFkl5i/eOUtVkqzW6w2SA4Sy3K+p9cJX06Y9IP7b2kKnuZH7Vkva9rCR96eVPsBqfPysLBT+mdS5Y21Q==
+typescript-to-lua@^1.29.0:
+  version "1.29.0"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.29.0.tgz#96d25cdc7885a518f17577261fb9d06ed467d78a"
+  integrity sha512-OogrPOD3s5zbkgfEkD+nyxwPpWmDCpWuBWYTg6C55weIV1Z8sOu4zy85qWgQFnjSPy7G6nLuwtxdJHt/zNOH0A==
   dependencies:
     "@typescript-to-lua/language-extensions" "1.19.0"
     enhanced-resolve "5.8.2"
