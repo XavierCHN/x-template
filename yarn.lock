@@ -7166,10 +7166,10 @@ typedarray@^0.0.6:
   resolved "https://registry.npmmirror.com/typedarray/-/typedarray-0.0.6.tgz"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript-to-lua@^1.29.0:
-  version "1.29.0"
-  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.29.0.tgz#96d25cdc7885a518f17577261fb9d06ed467d78a"
-  integrity sha512-OogrPOD3s5zbkgfEkD+nyxwPpWmDCpWuBWYTg6C55weIV1Z8sOu4zy85qWgQFnjSPy7G6nLuwtxdJHt/zNOH0A==
+typescript-to-lua@^1.31.0:
+  version "1.31.0"
+  resolved "https://registry.npmmirror.com/typescript-to-lua/-/typescript-to-lua-1.31.0.tgz#197bfb45400f70a7825dea317bbda622740290dc"
+  integrity sha512-hbHso6C1g2sKZkwI2J9wUij4PUyBF/Hw0tpZOHtaBOa8CcJXXYvdlmh7dJ34bKgwiBzbc7KalPLX1D8a1WjYQA==
   dependencies:
     "@typescript-to-lua/language-extensions" "1.19.0"
     enhanced-resolve "5.8.2"
@@ -7177,10 +7177,10 @@ typescript-to-lua@^1.29.0:
     resolve "^1.15.1"
     source-map "^0.7.3"
 
-typescript@~5.6.2:
-  version "5.6.3"
-  resolved "https://registry.npmmirror.com/typescript/-/typescript-5.6.3.tgz#5f3449e31c9d94febb17de03cc081dd56d81db5b"
-  integrity sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==
+typescript@~5.8.2:
+  version "5.8.2"
+  resolved "https://registry.npmmirror.com/typescript/-/typescript-5.8.2.tgz#8170b3702f74b79db2e5a96207c15e65807999e4"
+  integrity sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==
 
 uglify-js@^3.1.4:
   version "3.16.1"
