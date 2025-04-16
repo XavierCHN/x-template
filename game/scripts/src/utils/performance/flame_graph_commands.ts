@@ -5,13 +5,13 @@
 import { GetFlameGraphProfiler } from './flame_graph_profiler';
 
 export class FlameGraphCommands {
-    private static instance: FlameGraphCommands;
-    private profiler = GetFlameGraphProfiler();
-    private recordingState = 0; // 0: 未开始, 1: 开始, 2: 暂停
-    private recordingTime = 0; // 记录时间（秒）
-    private timerHandle: string | null = null;
+    static instance: FlameGraphCommands;
+    profiler = GetFlameGraphProfiler();
+    recordingState = 0; // 0: 未开始, 1: 开始, 2: 暂停
+    recordingTime = 0; // 记录时间（秒）
+    timerHandle: string | null = null;
 
-    private constructor() {
+    constructor() {
         this.registerCommands();
         this.registerUIEvents();
         this.updateDebugState();
@@ -20,7 +20,7 @@ export class FlameGraphCommands {
     /**
      * 获取单例实例
      */
-    public static getInstance(): FlameGraphCommands {
+    static getInstance(): FlameGraphCommands {
         if (!FlameGraphCommands.instance) {
             FlameGraphCommands.instance = new FlameGraphCommands();
         }
@@ -30,7 +30,7 @@ export class FlameGraphCommands {
     /**
      * 注册聊天命令
      */
-    private registerCommands(): void {
+    registerCommands(): void {
         ListenToGameEvent('player_chat', event => this.handleChatCommand(event), undefined);
         print('[FlameGraphCommands] 已注册性能分析命令');
     }
@@ -38,17 +38,17 @@ export class FlameGraphCommands {
     /**
      * 注册UI事件
      */
-    private registerUIEvents(): void {
-        CustomGameEventManager.RegisterListener('performance_start', (_, event) => this.handleStart(event));
-        CustomGameEventManager.RegisterListener('performance_stop', (_, event) => this.handleStop(event));
-        CustomGameEventManager.RegisterListener('performance_paused', (_, event) => this.handlePaused(event));
+    registerUIEvents(): void {
+        CustomGameEventManager.RegisterListener('performance_start', _ => this.handleStart());
+        CustomGameEventManager.RegisterListener('performance_stop', _ => this.handleStop());
+        CustomGameEventManager.RegisterListener('performance_paused', _ => this.handlePaused());
         print('[FlameGraphCommands] 已注册性能分析UI事件');
     }
 
     /**
      * 更新调试状态到网表
      */
-    private updateDebugState(): void {
+    updateDebugState(): void {
         CustomNetTables.SetTableValue('performance_debug', 'debug_state', {
             state: this.recordingState,
             time: this.recordingTime,
@@ -58,7 +58,7 @@ export class FlameGraphCommands {
     /**
      * 处理开始
      */
-    private handleStart(event: any): void {
+    handleStart(): void {
         // 开始记录
         if (this.recordingState === 0) {
             this.startRecording();
@@ -68,7 +68,7 @@ export class FlameGraphCommands {
     /**
      * 处理停止按钮事件
      */
-    private handleStop(event: any): void {
+    handleStop(): void {
         if (this.recordingState === 0) return;
         this.stopRecording();
     }
@@ -76,7 +76,7 @@ export class FlameGraphCommands {
     /**
      * 处理暂停按钮事件
      */
-    private handlePaused(event: any): void {
+    handlePaused(): void {
         if (this.recordingState === 1) {
             // 开始 -> 暂停
             this.pauseRecording();
@@ -89,7 +89,7 @@ export class FlameGraphCommands {
     /**
      * 开始记录
      */
-    private startRecording(): void {
+    startRecording(): void {
         this.recordingState = 1;
         this.recordingTime = 0;
         this.profiler.startRecording(0); // 持续记录
@@ -109,7 +109,7 @@ export class FlameGraphCommands {
     /**
      * 暂停记录
      */
-    private pauseRecording(): void {
+    pauseRecording(): void {
         this.recordingState = 2;
         this.profiler.pauseRecording();
         this.updateDebugState();
@@ -119,7 +119,7 @@ export class FlameGraphCommands {
     /**
      * 恢复记录
      */
-    private resumeRecording(): void {
+    resumeRecording(): void {
         this.recordingState = 1;
         this.profiler.resumeRecording();
         this.updateDebugState();
@@ -129,7 +129,7 @@ export class FlameGraphCommands {
     /**
      * 停止记录
      */
-    private stopRecording(): void {
+    stopRecording(): void {
         this.recordingState = 0;
         this.profiler.stopRecording();
 
@@ -145,7 +145,7 @@ export class FlameGraphCommands {
     /**
      * 处理聊天命令
      */
-    private handleChatCommand(event: GameEventProvidedProperties & PlayerChatEvent): void {
+    handleChatCommand(event: GameEventProvidedProperties & PlayerChatEvent): void {
         const text = event.text;
         const playerID = event.playerid;
 
@@ -185,7 +185,7 @@ export class FlameGraphCommands {
     /**
      * 发送帮助信息
      */
-    private sendHelpMessage(playerID: PlayerID): void {
+    sendHelpMessage(playerID: PlayerID): void {
         const message =
             '火焰图性能分析命令:\n' +
             '-flamegraph start [持续时间] - 开始记录性能数据\n' +
@@ -199,7 +199,7 @@ export class FlameGraphCommands {
     /**
      * 向玩家发送消息
      */
-    private sendMessageToPlayer(playerID: PlayerID, message: string): void {
+    sendMessageToPlayer(playerID: PlayerID, message: string): void {
         const player = PlayerResource.GetPlayer(playerID);
         if (player) {
             CustomGameEventManager.Send_ServerToPlayer(player, 'game_msg_tip', { msg: message } as never);

@@ -1,6 +1,6 @@
 import { reloadable } from '../utils/tstl-utils';
-import { InitFlameGraphCommands } from '../utils/performance/flame_graph_commands';
-import { ProfileClass, Profile } from '../utils/performance/flame_graph_profiler';
+
+import { FlameGraphProfilerTests } from '../utils/performance/flame_graph_profiler_test';
 
 @reloadable
 export class Debug {
@@ -13,6 +13,9 @@ export class Debug {
     constructor() {
         // 工具模式下开启调试
         this.DebugEnabled = IsInToolsMode();
+
+        //CPU性能测试用例
+        new FlameGraphProfilerTests();
 
         // 注册聊天指令
         ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
@@ -46,62 +49,5 @@ export class Debug {
             const key = GetDedicatedServerKeyV2(version);
             Say(HeroList.GetHero(0), `${version}: ${key}`, true);
         }
-        if (cmd === 'test') {
-            this.Test();
-        }
-        if (cmd === 'test2') {
-            //初始化Cpu性能检测
-            InitFlameGraphCommands();
-            // 注册测试类
-            new Debug_Test();
-            print('初始化完成');
-        }
-        if (cmd === '-r') {
-            SendToConsole('clear'); // 清空控制台
-            SendToConsole('restart'); // 重启游戏
-            print('-r 命令restart重启游戏!');
-        }
-        if (cmd === '-s') {
-            SendToConsole('script_reload');
-            print('-r 命令script_reload!重载脚本!');
-        }
-    }
-
-    //检测指定函数
-    @Profile()
-    Test() {
-        for (let i = 0; i < 100000; i++) {
-            math.random(0, 10000);
-        }
-    }
-}
-
-//检测类
-@ProfileClass
-class Debug_Test {
-    constructor() {
-        Timers.CreateTimer(() => {
-            this.Test();
-            for (let i = 0; i < 10000; i++) {
-                this.Test2();
-            }
-            return 0.2;
-        });
-    }
-
-    Test() {
-        for (let i = 0; i < 10000; i++) {
-            math.random(0, 10000);
-            math.random(0, 10000);
-            // math.random(0, 10000);
-            // math.random(0, 10000);
-        }
-    }
-
-    Test2() {
-        math.random(0, 10000);
-        math.random(0, 10000);
-        // math.random(0, 10000);
-        // math.random(0, 10000);
     }
 }

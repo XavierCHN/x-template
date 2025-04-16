@@ -11,7 +11,7 @@
  */
 
 const get_time = GetSystemTimeMS;
-
+const sync_time = 5;
 interface ProfileNode {
     name: string;
     startTime: number;
@@ -37,7 +37,7 @@ export class FlameGraphProfiler {
     private startTime: number = 0; // 记录开始时间
     private endTime: number = 0; // 记录结束时间
     private Timerid: string;
-    private maxNode = 20;
+    private maxNode = 1;
     private testObj: Test;
 
     private constructor() {
@@ -118,14 +118,14 @@ export class FlameGraphProfiler {
                 return null;
             });
         } else {
-            this.Timerid = Timers.CreateTimer(10, () => {
+            this.Timerid = Timers.CreateTimer(sync_time, () => {
                 if (!this.isRecording) return;
                 const rootNodeChildren = this.transformNode(this.rootNode);
                 rootNodeChildren.totalTime = this.getTotalTime(rootNodeChildren);
                 rootNodeChildren.rate = Math.round((rootNodeChildren.totalTime / (get_time() - this.startTime)) * 10000 * this.maxNode);
                 this.syncToNetTable(rootNodeChildren);
                 print(`[FlameGraphProfiler] 性能诊断运行中..`);
-                return 60;
+                return sync_time;
             });
         }
     }
@@ -355,15 +355,15 @@ const emptyClassDecorator = (target: any) => {
     return target;
 };
 
+// 导出装饰器
+export const Profile = FlameGraphProfiler.profile;
+export const ProfileClass = FlameGraphProfiler.profileClass;
+
 //用以测试平均时间偏移量的类
 class Test {
     @Profile()
     time_offet_test() {}
 }
-
-// 导出装饰器
-export const Profile = FlameGraphProfiler.profile;
-export const ProfileClass = FlameGraphProfiler.profileClass;
 
 //导出空装饰器,关闭性能检测,
 // export const Profile = emptyDecorator;
