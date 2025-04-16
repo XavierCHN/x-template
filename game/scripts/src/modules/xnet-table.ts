@@ -51,8 +51,8 @@ export class XNetTable {
     }
 
     // 最大传输单元，这个其实取决于服务器的带宽，不建议太大
-    // 经过测试，比较好的数值是12KB
-    private MTU = 1024 * 12;
+    // 经过测试，比较好的数值是64KB
+    private MTU = 1024 * 64;
 
     // 所有玩家都共享的数据
     private _data: PartialRecord<string, PartialRecord<string, any>> = {};
@@ -224,7 +224,7 @@ export class XNetTable {
             const chunk_count = Math.ceil(data_length / chunk_size);
             for (let i = 0; i < chunk_count; i++) {
                 let chunk = data.substring(i * chunk_size, (i + 1) * chunk_size);
-                print(string.len(chunk));
+                // print(string.len(chunk));
                 // 如果是分割后的数据，那么会有#作为头部标记
                 // 数据格式 #unique_id#chunk_count#index#chunk
                 chunk = `#${unique_id}#${chunk_count}#${i}#${chunk}`;
