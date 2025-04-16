@@ -5,6 +5,9 @@
 let addon_name = 'x_template';
 
 try {
+    // 在 template 开发模式下，如果你要临时修改 addon_name，
+    // 请在 scripts/.test/addon_name.js 中使用 module.exports 导出一个字符串
+    // 该文件不会被提交到 git 仓库
     addon_name = require('./.test/addon_name');
 } catch (e) {
     //do nothing
