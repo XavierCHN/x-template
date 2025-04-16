@@ -42,6 +42,7 @@ Xavier 的 dota2 自定义游戏开发模板
 3. 使用`react`来开发UI可以更好地管理你的代码，而无需掌握`xml`的写法。
 4. 帮助解决了V社的工具中诸如`UI无法读取KV文件`，`UI图片不会自动编译`等问题。
 5. 加密发布代码的支持，可以帮助你保护一些关键代码。
+6. 新增了火焰图性能分析工具支持，请查看 [火焰图性能分析模块使用说明](https://github.com/XavierCHN/x-template/blob/master/game/scripts/src/utils/performance/flame_graph_profiler.md)。
 
 ### 支持的功能
 
