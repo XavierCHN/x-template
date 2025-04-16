@@ -1,5 +1,6 @@
 import 'panorama-polyfill-x/lib/console';
 import 'panorama-polyfill-x/lib/timers';
+import { FlameGraph } from './flame_graph/flame_graph';
 
 import { useMemo, type FC } from 'react';
 import { render } from 'react-panorama-x';
@@ -13,6 +14,15 @@ const Test: FC = () => {
     }, [string_data])
 };
 
-render(<Test />, $.GetContextPanel());
+const Root: FC = () => {
+    return (
+        <>
+            <FlameGraph />
+            <Test />
+        </>
+    );
+};
+
+render(<Root />, $.GetContextPanel());
 
 console.log(`Hello, world!`);

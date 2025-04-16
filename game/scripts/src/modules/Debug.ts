@@ -1,5 +1,7 @@
 import { reloadable } from '../utils/tstl-utils';
 
+import { FlameGraphProfilerTests } from '../utils/performance/flame_graph_profiler_test';
+
 @reloadable
 export class Debug {
     DebugEnabled = false;
@@ -11,6 +13,11 @@ export class Debug {
     constructor() {
         // 工具模式下开启调试
         this.DebugEnabled = IsInToolsMode();
+
+        //CPU性能测试用例
+        new FlameGraphProfilerTests();
+
+        // 注册聊天指令
         ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
     }
 
