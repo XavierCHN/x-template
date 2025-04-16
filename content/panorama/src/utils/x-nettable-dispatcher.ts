@@ -75,30 +75,41 @@ declare global {
 }
 
 /**
- * 比较网表的前值和后值是否一致
- * 如果不一致的话，返回false, 否则返回true
- * TODO，这个比对算法应该还是需要进一步优化的
+ * 比较两个值是否深度相等
+ * 支持基本类型、对象、数组、Map 和 Set，同时处理循环引用
  *
- * @param {*} prev
- * @param {*} next
+ * @param prev 前一个值
+ * @param next 后一个值
+ * @param visited 用于记录已经访问过的对象，避免循环引用
  */
-export function isEqual(prev: any, next: any): boolean {
-    if (typeof prev != typeof next) return false;
+export function isEqual(prev: any, next: any, visited = new WeakMap()): boolean {
+    // 处理基本类型和 null
+    if (prev === next) return true;
+    if (typeof prev !== 'object' || prev === null || typeof next !== 'object' || next === null) {
+        return prev === next;
+    }
 
-    if (typeof prev == 'object') {
-        if (prev == null) return next == null;
-        if (Array.isArray(prev)) {
-            if (prev.length != next.length) return false;
-            for (let i = 0; i < prev.length; i++) {
-                if (!isEqual(prev[i], next[i])) return false;
-            }
-        } else {
-            for (const key in prev) {
-                if (!isEqual(prev[key], next[key])) return false;
-            }
+    // 处理循环引用
+    if (visited.has(prev)) {
+        return visited.get(prev) === next;
+    }
+    visited.set(prev, next);
+
+    // 处理数组
+    if (Array.isArray(prev)) {
+        if (!Array.isArray(next) || prev.length !== next.length) return false;
+        for (let i = 0; i < prev.length; i++) {
+            if (!isEqual(prev[i], next[i], visited)) return false;
         }
-    } else {
-        return prev == next;
+        return true;
+    }
+
+    // 处理普通对象
+    const prevKeys = Object.keys(prev);
+    const nextKeys = Object.keys(next);
+    if (prevKeys.length !== nextKeys.length) return false;
+    for (const key of prevKeys) {
+        if (!next.hasOwnProperty(key) || !isEqual(prev[key], next[key], visited)) return false;
     }
 
     return true;
