@@ -37,6 +37,16 @@ export class Debug {
         // commands that only work in debug mode below:
         if (!this.DebugEnabled) return;
 
+        if (cmd === '-r') {
+            SendToConsole('restart'); // 重启游戏
+            print('-r 命令restart重启游戏!');
+        }
+
+        if (cmd === '-s') {
+            SendToConsole('script_reload');
+            print('-r 命令script_reload!重载脚本!');
+        }
+
         // 其他的测试指令写在下面
         if (cmd === 'get_key_v3') {
             const version = args[0];

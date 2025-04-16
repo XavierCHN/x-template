@@ -154,15 +154,6 @@ export class FlameGraphProfilerTests {
         const cmd = strs[0];
         const args = strs.slice(1);
 
-        if (cmd === '-r') {
-            SendToConsole('clear'); // 清空控制台
-            SendToConsole('restart'); // 重启游戏
-            print('-r 命令restart重启游戏!');
-        }
-        if (cmd === '-s') {
-            SendToConsole('script_reload');
-            print('-r 命令script_reload!重载脚本!');
-        }
         if (cmd === '-test') {
             FlameGraphCommands.getInstance().handleStart();
             new Debug_Test();
