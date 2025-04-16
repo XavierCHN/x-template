@@ -4,6 +4,5 @@
     [
         "hero_list",
         "game_timer",
-        "performance_debug",
     ]
 }

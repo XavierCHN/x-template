@@ -14,6 +14,13 @@ declare interface XNetTableDefinitions {
 
 declare interface BasicSettings {}
 
+// 专门为性能调试模块增加的表
+declare interface XNetTableDefinitions {
+    performance_debug: {
+        [key: string]: any;
+    };
+}
+
 // 以下是库内部使用的，勿动
 declare interface CustomGameEventDeclarations {
     x_net_table: {

@@ -7,17 +7,16 @@ import { render } from 'react-panorama-x';
 import { useXNetTableKey } from '../hooks/useXNetTable';
 
 const Test: FC = () => {
-    const data = useXNetTableKey(`test_table`, `test_key`, { data_1: `unknown` });
-    const string_data = JSON.stringify(data);
-    return useMemo(() => {
-       return <Label text={string_data} /> 
-    }, [string_data])
+    return <Label text="Hello, world!" />;
 };
 
 const Root: FC = () => {
     return (
         <>
-            <FlameGraph />
+            {
+                // 如果在工具模式下显示火焰图
+                Game.IsInToolsMode() && <FlameGraph />
+            }
             <Test />
         </>
     );

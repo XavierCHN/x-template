@@ -17,7 +17,4 @@ declare interface CustomNetTableDeclarations {
         key_1: number;
         key_2: string;
     };
-    performance_debug: {
-        [key: string]: any;
-    };
 }

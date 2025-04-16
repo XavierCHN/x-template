@@ -49,7 +49,7 @@ export class FlameGraphCommands {
      * 更新调试状态到网表
      */
     updateDebugState(): void {
-        CustomNetTables.SetTableValue('performance_debug', 'debug_state', {
+        GameRules.XNetTable.SetTableValue('performance_debug', 'debug_state', {
             state: this.recordingState,
             time: this.recordingTime,
         });

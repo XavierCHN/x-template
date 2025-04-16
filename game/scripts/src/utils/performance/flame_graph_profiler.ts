@@ -333,8 +333,8 @@ export class FlameGraphProfiler {
     }
 
     // 同步当前调用栈信息到网表，用于可视化
-    public syncToNetTable(rootNodeChildren): void {
-        CustomNetTables.SetTableValue('performance_debug', 'debug_data', rootNodeChildren);
+    public syncToNetTable(rootNodeChildren: any): void {
+        GameRules.XNetTable.SetTableValue(`performance_debug`, `debug_data`, rootNodeChildren);
     }
 }
 

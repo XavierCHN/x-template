@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
 import { useNetTableKey } from 'react-panorama-x';
 import DraggableWindow from '../draggable_window/index';
+import { useXNetTableKey } from '../../hooks/useXNetTable';
 
 //获取字符串中是否包含另一个字符串
 const containsString = (str1: string, str2: string) => {
@@ -67,7 +68,7 @@ export const FlameGraph: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const inputRef = useRef<any>();
     // 获取性能数据
-    const performance_debug = useNetTableKey('performance_debug', 'debug_data');
+    const performance_debug = useXNetTableKey('performance_debug', 'debug_data', null);
     $.Msg(performance_debug);
     // 转换数据为可视化格式
     const visualData = useMemo(() => {
@@ -183,7 +184,7 @@ export const FlameGraph: React.FC = () => {
         const [time, setTime] = useState(0);
         //当前检测总时间
         //state:0:未开始,1:开始,2:暂停 time:12 //单位秒
-        const performance_state = useNetTableKey('performance_debug', 'debug_state'); //{time:0,state:0,sync_interval:0}
+        const performance_state = useXNetTableKey('performance_debug', 'debug_state', null); //{time:0,state:0,sync_interval:0}
         const onStart = () => {
             if (performance_state?.state == 2) {
                 GameEvents.SendCustomGameEventToServer('performance_paused', {} as never);
