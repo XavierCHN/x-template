@@ -2,7 +2,7 @@
  * 项目名称
  * 必须为字母开头，而且只能包含小写字母、数字和下划线
  */
-let addon_name = 'x_template_test';
+let addon_name = 'x_template';
 
 try {
     addon_name = require('./.test/addon_name');
