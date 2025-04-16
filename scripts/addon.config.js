@@ -1,8 +1,8 @@
-/** 
- * 项目名称 
+/**
+ * 项目名称
  * 必须为字母开头，而且只能包含小写字母、数字和下划线
  */
-let addon_name = 'x_template';
+let addon_name = 'x_template_test';
 
 try {
     addon_name = require('./.test/addon_name');
@@ -10,8 +10,8 @@ try {
     //do nothing
 }
 
-/** 
- * 要加密的项目列表 
+/**
+ * 要加密的项目列表
  * 建议需要双端运行的modifier, ability代码等不加密
  * 避免出现运行时错误或者泄漏加密秘钥
  */
