@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
-import { useNetTableKey } from 'react-panorama-x';
+import { useGameEvent, useNetTableKey } from 'react-panorama-x';
 import DraggableWindow from '../draggable_window/index';
 import { useXNetTableKey } from '../../hooks/useXNetTable';
+import useToggle from '../../hooks/useToggle';
 
 //获取字符串中是否包含另一个字符串
 const containsString = (str1: string, str2: string) => {
@@ -62,7 +63,7 @@ const getRandomColor = (name: string): string => {
 };
 
 export const FlameGraph: React.FC = () => {
-    const [visible, setVisible] = useState(true);
+    const [visible, toggleVisible, setVisible] = useToggle(false);
     const panelRef = useRef<Panel | null>(null);
     const [zoomStack, setZoomStack] = useState<VisualNode[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -89,6 +90,15 @@ export const FlameGraph: React.FC = () => {
         }
         return visualData;
     }, [visualData, zoomStack]);
+
+    // 监听游戏事件，显示/隐藏火焰图窗口
+    useGameEvent(
+        `performance_toggle_flamegraph`,
+        () => {
+            toggleVisible();
+        },
+        []
+    );
 
     const SetSearchTextDebounced = (p: TextEntry) => {
         setSearchTerm(p.text);

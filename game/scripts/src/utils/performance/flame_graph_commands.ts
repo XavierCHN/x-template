@@ -175,11 +175,22 @@ export class FlameGraphCommands {
                     this.sendMessageToPlayer(playerID, `开始持续记录性能数据`);
 
                 case 'help':
-                default:
                     this.sendHelpMessage(playerID);
+                default:
+                    this.toggleFlameGraph(playerID);
                     break;
             }
         }
+    }
+
+    /**
+     * 切换火焰图显示
+     * @param playerID 玩家ID
+     */
+    toggleFlameGraph(playerID: PlayerID): void {
+        const player = PlayerResource.GetPlayer(playerID);
+        if (!player) return;
+        CustomGameEventManager.Send_ServerToPlayer<{}>(player, 'performance_toggle_flamegraph', {});
     }
 
     /**
@@ -202,7 +213,7 @@ export class FlameGraphCommands {
     sendMessageToPlayer(playerID: PlayerID, message: string): void {
         const player = PlayerResource.GetPlayer(playerID);
         if (player) {
-            CustomGameEventManager.Send_ServerToPlayer(player, 'game_msg_tip', { msg: message } as never);
+            CustomGameEventManager.Send_ServerToPlayer<{ msg: string }>(player, 'game_msg_tip', { msg: message });
         }
     }
 }
