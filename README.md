@@ -1,21 +1,15 @@
-
-
-#### [Russian lang](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
-#### <a href="#x-template">中文说明</a>
-#### <a href="#x-template-1">English Readme</a>
-
-### [简单的视频教程（中文） a starter video tutorial (Chinese)](https://www.bilibili.com/video/BV1de4y1s7kw/?vd_source=9bc3eaf21f82a00973f08ff2dbcfd356)
-
-视频录制的比较早，目前已经转换为`yarn`作为npm包管理工具，请自行将视频中的`npm`改为`yarn`
-
 # X-Template
+
+### <a href="#x-template">中文说明</a> | <a href="#x-template-1">English Readme</a>  | [Русское описание](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
+
 
 Xavier 的 dota2 自定义游戏开发模板
 
-### 使用步骤
+## 使用步骤
+[简单的视频教程（中文） a starter video tutorial (Chinese)](https://www.bilibili.com/video/BV1de4y1s7kw/?vd_source=9bc3eaf21f82a00973f08ff2dbcfd356)
 
-#### 新建项目
 
+### 新建项目
 1. [点击使用本项目作为模板生成你自己的项目](https://github.com/XavierCHN/x-template/generate)或者 [fork 本项目](https://github.com/XavierCHN/x-template/fork)
 2. 安装`node.js`，目前的要求是`>16.0.0`
 3. clone 你使用模板生成的或者 fork 的项目
@@ -23,21 +17,11 @@ Xavier 的 dota2 自定义游戏开发模板
 5. 打开`scripts/addon.config.js`，将`addon_name`修改为你的项目名称
 6. 执行`yarn install`安装依赖，他应该会自动 link`content`,`game`文件夹到你的`dota 2 beta/dota_addons` (如果碰到权限问题，请关闭代码编辑器后使用控制台来执行`yarn`，或者重启一下电脑再试，如果碰到安装错误，可以尝试使用[npmmirror镜像](https://npmmirror.com/)，或者直接执行`yarn config set registry https://registry.npmmirror.com`再执行`yarn install`)
 7. `yarn dev`，开始你的开发
-8. 如果你要启动你的项目，你可以使用指令`yarn launch map_name`启动游戏并载入地图，或者使用`yarn launch`只是启动工具而不载入地图，之后再在控制台使用指令载入地图。
+8. **如果你要启动你的项目，你可以使用指令`yarn launch map_name`启动游戏并载入地图，或者使用`yarn launch`只是启动工具而不载入地图，之后再在控制台使用指令载入地图。**
 
-#### 从已有的项目迁移
-
-流程同新建项目，只不过在5后插入一个
-
-6. 将原有项目的content和game文件夹覆盖到本项目中的 content 和 game 文件夹
-
-* 当然，你需要处理好原有的内容的 `.gitignore`，因为本项目默认不追踪 `content/panorama/layout/` 目录 和 `game/scripts/vscripts/` 目录的变更
-    * 如果后端要混合使用lua和ts，请将lua代码复制到src文件夹，为了可以有代码提示，你需要自己写一个 `*.d.ts` 文件来提供类型声明，如果要使用 `import` 语句，请对lua脚本进行适当的修改，可以参考对 `game/scripts/src/utils/timers.lua`的改造及他对应的 `d.ts` 文件
-    * 如果前端要混合使用xml和react，请对应修改 `webpack.dev.js`，主要是要删去 `PanoramaManifestPlugin` 部分，来自己编辑 `custom_ui_manifest.xml`，更推荐的做法是将 传统 panorama 写法的代码放到 src 文件夹，之后使用 webpack 共同打包
 
 ### 使用这个模板的好处
-
-1. 可以使用更为`现代`的语言来进行开发，也就是`typescript`，而不是用`lua`和`javascript`，等于可以少学一门语言。
+1. 可以使用更为`现代`的语言([typescript](https://www.typescriptlang.org/))来进行开发，且保持前后端使用一样的语言
 2. 使用表格工具来填写并管理你的`kv`文件，而无需掌握他们的结构。
 3. 使用`react`来开发UI可以更好地管理你的代码，而无需掌握`xml`的写法。
 4. 帮助解决了V社的工具中诸如`UI无法读取KV文件`，`UI图片不会自动编译`等问题。
@@ -45,8 +29,6 @@ Xavier 的 dota2 自定义游戏开发模板
 6. 新增了火焰图性能分析工具支持，请查看 [火焰图性能分析模块使用说明](https://github.com/XavierCHN/x-template/blob/master/game/scripts/src/utils/performance/flame_graph_profiler.md)。
 
 ### 支持的功能
-
-
 1. 前端的`content/panorama/src`与后端的`game/scripts/src`文件夹分别用来写用户界面 react 源码和游戏逻辑的 ts 源代码
 2. 将你的 excel 文件变成 kv 文件并放到`game/scripts/npc`文件夹，同时在panorama和scripts文件夹生成与每个kv文件对应的json文件，这样你的ts代码可以很方便地获取kv数据
 3. 将 `addon.csv` 变成 `addon_*.txt`，(也可以把 `addon_*.txt` 变成 `addon.csv`)
@@ -54,9 +36,9 @@ Xavier 的 dota2 自定义游戏开发模板
 
 ### 支持的指令
 
-1. `yarn launch [[addon_name] map_name]` 启动 dota2，两个参数为可选参数，如果提供了`addon_name`那么会载入指定的 addon（默认该项目），提供了`map_name`则会自动载入对应的地图名（若未提供 addon_name 则默认载入当前 addon）
-2. `yarn dev` 进入 dev 模式，将会执行`将后端的ts代码编译成lua代码、使用webpack打包前端代码、同步KV到js，生成localization，Excel转KV等操作`，正常来说，每次开发你需要保持yarn dev的运行状态
-3. `yarn prod` 执行`发布`操作，将会自动生成`publish`文件夹并自动 link 到`dota_addons/you_addon_name_publish`文件夹，之后你可以选择这个文件夹发布（可以在`package.json -> dota_developer`中对发布进行一些设置）。
+1. **推荐使用`yarn launch [[addon_name] map_name]`直接启动项目进行开发**
+2. `yarn dev` 进入 dev 模式，将会执行编译操作，在开发时请保持编译状态
+3. `yarn prod` 执行`发布`或者`加密发布`操作
 ##### PS. 加密发布流程
 
 将 scripts/addon.config.js 里面的 `encrypt_files` 变量根据你的需要修改，哪些文件加密，哪些不加密（解密脚本，入口文件不能加密，客户端会使用到的技能和Modifier代码建议也不加密，不要尝试通过将密钥发送给客户端这样的操作来加密客户端脚本，因为别人可以通过读内存等等方法获取到密钥）
@@ -69,7 +51,7 @@ key的获取方法：不加密上传一次，去获取KEY,要注意，获取KEY�
 
 确认一切运行正确后，执行 `yarn prod` 来完成正式发布加密流程
 
-执行`yarn launch your_addon_name_publish`来启动加密后的图，之后执行上传操作（注意，这个时候本地的publish是不能正常运行的，因为密钥只有服务器上有，因此直接上传即可）
+执行`yarn launch [your_addon_name]_publish`来启动加密后的图，之后执行上传操作（注意，这个时候本地的publish是不能正常运行的，因为密钥只有服务器上有，因此直接上传即可）
 
 * 注意：要使用加密功能，需要安装 [Lua 命令行程序](http://luabinaries.sourceforge.net/)（如果未安装会提示未找到lua命令）
 
