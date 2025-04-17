@@ -8,7 +8,6 @@
 import React from 'react';
 import qrcodegen from './third-party/qrcodegen';
 import type { PanelAttributes } from 'react-panorama-x';
-import type { UICanvasPanel } from './types/UICanvas';
 
 type Modules = ReturnType<qrcodegen.QrCode['getModules']>;
 type Excavation = { x: number; y: number; w: number; h: number };
@@ -146,7 +145,7 @@ function useQRCode({
             margin,
             numCells,
         };
-    }, [qrcode, size, includeMargin, marginSize]);
+    }, [qrcode, includeMargin, marginSize]);
 
     return {
         qrcode,
@@ -171,11 +170,11 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
     } = props;
     const { style, ...otherProps } = extraProps;
 
-    const _canvas = React.useRef<UICanvasPanel | null>(null);
+    const _canvas = React.useRef<Panel | null>(null);
 
     // Set the local ref (_canvas) and also the forwarded ref from outside
     const setCanvasRef = React.useCallback(
-        (node: UICanvasPanel | null) => {
+        (node: Panel | null) => {
             _canvas.current = node;
             if (typeof forwardedRef === 'function') {
                 forwardedRef(node);
@@ -204,6 +203,7 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
 
             // ClearJS方法有bug，如果alpha不是0，会导致绘制错误
             // 因此我们移除了方法的bgColor支持
+            // @ts-expect-error
             canvas.ClearJS(`rgba(0, 0, 0, 0)`);
 
             const cellSize = size / numCells;
@@ -224,6 +224,7 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
             cellsToDraw.forEach(function (row, rdx) {
                 row.forEach(function (cell, cdx) {
                     if (cell) {
+                        // @ts-expect-error
                         canvas.DrawSoftLinePointsJS(
                             2,
                             [
