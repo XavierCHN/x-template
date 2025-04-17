@@ -1,3 +1,10 @@
+/**
+ * based on
+ * @license qrcode.react
+ * Copyright (c) Paul O'Shannessy
+ * SPDX-License-Identifier: ISC
+ */
+
 import React from 'react';
 import qrcodegen from './third-party/qrcodegen';
 import { PanelAttributes } from 'react-panorama-x';
