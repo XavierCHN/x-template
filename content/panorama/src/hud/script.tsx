@@ -5,8 +5,11 @@ import { FlameGraph } from './flame_graph/flame_graph';
 import { type FC } from 'react';
 import { render } from 'react-panorama-x';
 import { PanoramaQRCode } from '../utils/panorama-react-qrcode';
+import { useXNetTableKey } from '../hooks/useXNetTable';
 
 const Root: FC = () => {
+    const data = useXNetTableKey(`test_table`, `test_key`, { data_1: 'unknown' });
+    console.log(data);
     return (
         <>
             {
