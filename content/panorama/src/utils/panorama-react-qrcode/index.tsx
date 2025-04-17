@@ -111,14 +111,12 @@ function useQRCode({
     level,
     minVersion,
     marginSize,
-    size,
     boostLevel,
 }: {
     value: string | string[];
     level: ErrorCorrectionLevel;
     minVersion: number;
     marginSize?: number;
-    size: number;
     boostLevel?: boolean;
 }) {
     const qrcode = React.useMemo(() => {
@@ -182,7 +180,6 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         minVersion,
         boostLevel,
         marginSize,
-        size,
     });
 
     React.useEffect(() => {
