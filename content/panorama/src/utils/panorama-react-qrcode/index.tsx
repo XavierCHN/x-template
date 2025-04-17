@@ -160,8 +160,8 @@ function getImageSettings(
     const h = (imageSettings.height || defaultSize) * scale;
 
     // 把图片放在中心位置
-    const x = imageSettings.x == null ? cells.length / 2 - w / 2 + 1 : imageSettings.x * scale;
-    const y = imageSettings.y == null ? cells.length / 2 - h / 2 + 1 : imageSettings.y * scale;
+    const x = imageSettings.x == null ? cells.length / 2 - w / 2 : imageSettings.x * scale;
+    const y = imageSettings.y == null ? cells.length / 2 - h / 2 : imageSettings.y * scale;
 
     const opacity = imageSettings.opacity == null ? 1 : imageSettings.opacity;
 
@@ -329,13 +329,22 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
     let img = null;
     if (imgSrc != null) {
       const cellSize = size / numCells;
+      const {
+        x = 0,
+        y = 0,
+        w = 0,
+        h = 0,
+      } = calculatedImageSettings || {};
       const imageStyle = {
         flowChildren: 'none',
-        marginTop: (calculatedImageSettings?.x || 0 + margin) * cellSize + 'px',
-        marginLeft: (calculatedImageSettings?.y || 0 + margin) * cellSize + 'px',
-        width: (calculatedImageSettings?.w || 0 + 2) * cellSize + 'px',
-        height: (calculatedImageSettings?.h || 0 + 2) * cellSize + 'px',
+        opacity: `${calculatedImageSettings?.opacity || 1}`,
+        marginLeft: `${x * cellSize}px`,
+        marginTop: `${y * cellSize}px`,
+        width: w * cellSize + 'px',
+        height: h * cellSize + 'px',
       }
+
+      console.log(calculatedImageSettings)
 
       img = (
           <Image
@@ -343,7 +352,7 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
               key={imgSrc}
               style={imageStyle}
               onload={() => {
-                  setIsImageLoaded(true);
+                setIsImageLoaded(true);
               }}
               ref={_image}
           />
