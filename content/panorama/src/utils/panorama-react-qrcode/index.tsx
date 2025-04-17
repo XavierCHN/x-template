@@ -40,23 +40,11 @@ type QRProps = {
      */
     level?: ErrorCorrectionLevel;
     /**
-     * 二维码的背景颜色
-     * @see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
-     * @defaultValue #FFFFFF
-     */
-    // bgColor?: string;
-    /**
      * 二维码的前景颜色
      * @see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
      * @defaultValue #000000
      */
     fgColor?: string;
-    /**
-     * 是否包含边距
-     * @deprecated Use `marginSize` instead.
-     * @defaultValue false
-     */
-    includeMargin?: boolean;
     /**
      * 边距的大小
      * @defaultValue 0
@@ -93,10 +81,8 @@ interface CanvasPanel extends Panel {
 const DEFAULT_SIZE = 128;
 const DEFAULT_LEVEL: ErrorCorrectionLevel = 'L';
 const DEFAULT_FGCOLOR = '#000000';
-const DEFAULT_INCLUDEMARGIN = false;
 const DEFAULT_MINVERSION = 1;
 
-const SPEC_MARGIN_SIZE = 4;
 const DEFAULT_MARGIN_SIZE = 1;
 
 function excavateModules(modules: Modules, excavation: Excavation): Modules {
@@ -113,18 +99,17 @@ function excavateModules(modules: Modules, excavation: Excavation): Modules {
     });
 }
 
-function getMarginSize(includeMargin: boolean, marginSize?: number): number {
+function getMarginSize(marginSize?: number): number {
     if (marginSize != null) {
         return Math.max(Math.floor(marginSize), 0);
     }
-    return includeMargin ? SPEC_MARGIN_SIZE : DEFAULT_MARGIN_SIZE;
+    return DEFAULT_MARGIN_SIZE;
 }
 
 function useQRCode({
     value,
     level,
     minVersion,
-    includeMargin,
     marginSize,
     size,
     boostLevel,
@@ -132,7 +117,6 @@ function useQRCode({
     value: string | string[];
     level: ErrorCorrectionLevel;
     minVersion: number;
-    includeMargin: boolean;
     marginSize?: number;
     size: number;
     boostLevel?: boolean;
@@ -146,23 +130,20 @@ function useQRCode({
         return qrcodegen.QrCode.encodeSegments(segments, ERROR_LEVEL_MAP[level], minVersion, undefined, undefined, boostLevel);
     }, [value, level, minVersion, boostLevel]);
 
-    const { cells, margin, numCells } = React.useMemo(() => {
+    const memoizedResult = React.useMemo(() => {
         const cells = qrcode.getModules();
-
-        const margin = getMarginSize(includeMargin, marginSize);
+        const margin = getMarginSize(marginSize);
         const numCells = cells.length + margin * 2;
         return {
             cells,
             margin,
             numCells,
         };
-    }, [qrcode, includeMargin, marginSize]);
+    }, [qrcode, marginSize]);
 
     return {
         qrcode,
-        margin,
-        cells,
-        numCells,
+        ...memoizedResult,
     };
 }
 
@@ -172,7 +153,6 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         size = DEFAULT_SIZE,
         level = DEFAULT_LEVEL,
         fgColor = DEFAULT_FGCOLOR,
-        includeMargin = DEFAULT_INCLUDEMARGIN,
         minVersion = DEFAULT_MINVERSION,
         boostLevel,
         marginSize,
@@ -201,7 +181,6 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         level,
         minVersion,
         boostLevel,
-        includeMargin,
         marginSize,
         size,
     });
@@ -250,9 +229,9 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
                 });
             });
         }
-    });
+    }, [_canvas, size, numCells, cells, excavate, fgColor, margin]);
 
-    const canvasStyle = { height: `${size}px`, width: `${size}px`, ...style };
+    const canvasStyle = React.useMemo(() => ({ height: `${size}px`, width: `${size}px`, ...style }), [size, style]);
 
     return (
         <>
