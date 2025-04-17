@@ -337,8 +337,6 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         height: (calculatedImageSettings?.h || 0 + 2) * cellSize + 'px',
       }
 
-      console.log(imageStyle)
-
       img = (
           <Image
               src={imgSrc}
