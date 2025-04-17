@@ -18,7 +18,7 @@ const Root: FC = () => {
                 <PanoramaQRCode
                     value={`https://github.com/XavierCHN/x-template`}
                     size={256}
-                    excavate={6}
+                    excavate={8}
                     style={{ horizontalAlign: `center`, verticalAlign: `center`, backgroundColor: `#ffffff` }}
                 >
                     <Image
