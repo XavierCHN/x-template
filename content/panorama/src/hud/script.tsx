@@ -1,6 +1,6 @@
 import 'panorama-polyfill-x/lib/console';
 import 'panorama-polyfill-x/lib/timers';
-import { FlameGraph } from './flame_graph/flame_graph';
+import { FlameGraph } from '../utils/flame_graph/flame_graph';
 
 import { type FC } from 'react';
 import { render } from 'react-panorama-x';
