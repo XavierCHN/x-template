@@ -7,8 +7,8 @@
 
 import React from 'react';
 import qrcodegen from './third-party/qrcodegen';
-import { PanelAttributes } from 'react-panorama-x';
-import { UICanvasPanel } from './types/UICanvas';
+import type { PanelAttributes } from 'react-panorama-x';
+import type { UICanvasPanel } from './types/UICanvas';
 
 type Modules = ReturnType<qrcodegen.QrCode['getModules']>;
 type Excavation = { x: number; y: number; w: number; h: number };
@@ -167,10 +167,10 @@ function getImageSettings(
 
     let excavation = null;
     if (imageSettings.excavate) {
-        let floorX = Math.floor(x);
-        let floorY = Math.floor(y);
-        let ceilW = Math.ceil(w + x - floorX);
-        let ceilH = Math.ceil(h + y - floorY);
+        const floorX = Math.floor(x);
+        const floorY = Math.floor(y);
+        const ceilW = Math.ceil(w + x - floorX);
+        const ceilH = Math.ceil(h + y - floorY);
         excavation = { x: floorX, y: floorY, w: ceilW, h: ceilH };
     }
 
@@ -203,7 +203,7 @@ function useQRCode({
     size: number;
     boostLevel?: boolean;
 }) {
-    let qrcode = React.useMemo(() => {
+    const qrcode = React.useMemo(() => {
         const values = Array.isArray(value) ? value : [value];
         const segments = values.reduce<qrcodegen.QrSegment[]>((accum, v) => {
             accum.push(...qrcodegen.QrSegment.makeSegments(v));
@@ -213,7 +213,7 @@ function useQRCode({
     }, [value, level, minVersion, boostLevel]);
 
     const { cells, margin, numCells, calculatedImageSettings } = React.useMemo(() => {
-        let cells = qrcode.getModules();
+        const cells = qrcode.getModules();
 
         const margin = getMarginSize(includeMargin, marginSize);
         const numCells = cells.length + margin * 2;
@@ -285,7 +285,7 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         // with the current state.
         if (_canvas.current != null) {
             const canvas = _canvas.current;
-            canvas.ClearJS(bgColor);
+            canvas.ClearJS('rgba(0,0,0,0');
 
             const cellSize = size / numCells;
 
@@ -328,39 +328,34 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
 
     let img = null;
     if (imgSrc != null) {
-      const cellSize = size / numCells;
-      const {
-        x = 0,
-        y = 0,
-        w = 0,
-        h = 0,
-      } = calculatedImageSettings || {};
-      const imageStyle = {
-        flowChildren: 'none',
-        opacity: `${calculatedImageSettings?.opacity || 1}`,
-        marginLeft: `${x * cellSize}px`,
-        marginTop: `${y * cellSize}px`,
-        width: w * cellSize + 'px',
-        height: h * cellSize + 'px',
-      }
+        const cellSize = size / numCells;
+        const { x = 0, y = 0, w = 0, h = 0 } = calculatedImageSettings || {};
+        const imageStyle = {
+            flowChildren: 'none',
+            opacity: `${calculatedImageSettings?.opacity || 1}`,
+            marginLeft: `${x * cellSize}px`,
+            marginTop: `${y * cellSize}px`,
+            width: w * cellSize + 'px',
+            height: h * cellSize + 'px',
+        };
 
-      console.log(calculatedImageSettings)
+        console.log(calculatedImageSettings);
 
-      img = (
-          <Image
-              src={imgSrc}
-              key={imgSrc}
-              style={imageStyle}
-              onload={() => {
-                setIsImageLoaded(true);
-              }}
-              ref={_image}
-          />
-      );
+        img = (
+            <Image
+                src={imgSrc}
+                key={imgSrc}
+                style={imageStyle}
+                onload={() => {
+                    setIsImageLoaded(true);
+                }}
+                ref={_image}
+            />
+        );
     }
     return (
         <>
-            <GenericPanel type="UICanvas" style={canvasStyle} height={size} width={size} ref={setCanvasRef} {...otherProps} />
+            <GenericPanel type="UICanvas" style={canvasStyle} ref={setCanvasRef} {...otherProps} />
             {img}
         </>
     );
