@@ -14,7 +14,7 @@ const Root: FC = () => {
                 Game.IsInToolsMode() && <FlameGraph />
             }
             {
-                // 显示一个二维码
+                // 显示一个二维码作为范例
                 <PanoramaQRCode
                     value={`https://github.com/XavierCHN/x-template`}
                     size={128}
