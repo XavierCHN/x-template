@@ -79,6 +79,17 @@ type QRProps = {
     excavate?: number;
 };
 
+interface CanvasPanel extends Panel {
+    ClearJS(color: string): void;
+    DrawSoftLinePointsJS(
+        count: number,
+        points: [x1: number, y1: number, x2: number, y2: number],
+        width: number,
+        unknown: number,
+        color: string
+    ): void;
+}
+
 const DEFAULT_SIZE = 128;
 const DEFAULT_LEVEL: ErrorCorrectionLevel = 'L';
 const DEFAULT_FGCOLOR = '#000000';
@@ -170,11 +181,11 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
     } = props;
     const { style, ...otherProps } = extraProps;
 
-    const _canvas = React.useRef<Panel | null>(null);
+    const _canvas = React.useRef<CanvasPanel | null>(null);
 
     // Set the local ref (_canvas) and also the forwarded ref from outside
     const setCanvasRef = React.useCallback(
-        (node: Panel | null) => {
+        (node: CanvasPanel | null) => {
             _canvas.current = node;
             if (typeof forwardedRef === 'function') {
                 forwardedRef(node);
@@ -203,7 +214,6 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
 
             // ClearJS方法有bug，如果alpha不是0，会导致绘制错误
             // 因此我们移除了方法的bgColor支持
-            // @ts-expect-error
             canvas.ClearJS(`rgba(0, 0, 0, 0)`);
 
             const cellSize = size / numCells;
@@ -224,7 +234,6 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
             cellsToDraw.forEach(function (row, rdx) {
                 row.forEach(function (cell, cdx) {
                     if (cell) {
-                        // @ts-expect-error
                         canvas.DrawSoftLinePointsJS(
                             2,
                             [
