@@ -17,13 +17,20 @@ const Root: FC = () => {
                 // 显示一个二维码
                 <PanoramaQRCode
                     value={`https://github.com/XavierCHN/x-template`}
-                    size={256}
+                    size={128}
                     excavate={8}
-                    style={{ horizontalAlign: `center`, verticalAlign: `center`, backgroundColor: `#ffffff` }}
+                    style={{
+                        horizontalAlign: `right`,
+                        verticalAlign: `bottom`,
+                        marginBottom: `400px`,
+                        marginRight: `100px`,
+                        backgroundColor: `#ffffff`,
+                        opacity: `0.6`,
+                    }}
                 >
                     <Image
                         src="file://{images}/logos/dota_logo_bright.psd"
-                        style={{ width: `64px`, height: `64px`, horizontalAlign: `center`, verticalAlign: `center` }}
+                        style={{ width: `32px`, height: `32px`, horizontalAlign: `center`, verticalAlign: `center` }}
                     />
                 </PanoramaQRCode>
             }
