@@ -5,7 +5,6 @@ import { FlameGraph } from './flame_graph/flame_graph';
 import { type FC } from 'react';
 import { render } from 'react-panorama-x';
 import { PanoramaQRCode } from '../utils/panorama-react-qrcode';
-import type { UICanvasPanel } from '../utils/panorama-react-qrcode/types/UICanvas';
 
 const Root: FC = () => {
     return (
@@ -16,7 +15,17 @@ const Root: FC = () => {
             }
             {
                 // 显示一个二维码
-                // <PanoramaQRCode value={`https://github.com/XavierCHN/x-template`} size={256} />
+                <PanoramaQRCode
+                    value={`https://github.com/XavierCHN/x-template`}
+                    size={256}
+                    excavate={6}
+                    style={{ horizontalAlign: `center`, verticalAlign: `center`, backgroundColor: `#ffffff` }}
+                >
+                    <Image
+                        src="file://{images}/logos/dota_logo_bright.psd"
+                        style={{ width: `64px`, height: `64px`, horizontalAlign: `center`, verticalAlign: `center` }}
+                    />
+                </PanoramaQRCode>
             }
         </>
     );

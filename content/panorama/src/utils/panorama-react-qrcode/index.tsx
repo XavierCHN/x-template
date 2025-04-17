@@ -25,38 +25,6 @@ const ERROR_LEVEL_MAP: ERROR_LEVEL_MAPPED_TYPE = {
     H: qrcodegen.QrCode.Ecc.HIGH,
 } as const;
 
-type ImageSettings = {
-    /**
-     * 需要嵌入二维码的图片路径
-     */
-    src: string;
-    /**
-     * 图片的x坐标
-     */
-    x?: number;
-    /**
-     * 图片的y坐标
-     */
-    y?: number;
-    /**
-     * 图片的高度
-     */
-    height: number;
-    /**
-     * 图片的宽度
-     */
-    width: number;
-    /**
-     * 是否 excavate，意味着在图片周围的单元格会使用背景颜色绘制而不是前景颜色
-     */
-    excavate: boolean;
-    /**
-     * 图片的透明度
-     * @defaultValue 1
-     */
-    opacity?: number;
-};
-
 type QRProps = {
     /**
      * 二维码中使用的数据，例如链接地址等
@@ -77,7 +45,7 @@ type QRProps = {
      * @see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
      * @defaultValue #FFFFFF
      */
-    bgColor?: string;
+    // bgColor?: string;
     /**
      * 二维码的前景颜色
      * @see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
@@ -107,14 +75,13 @@ type QRProps = {
      */
     boostLevel?: boolean;
     /**
-     * 插入的图片设置
+     * 中间空出的部分大小，以cell为单位
      */
-    imageSettings?: ImageSettings;
+    excavate?: number;
 };
 
 const DEFAULT_SIZE = 128;
 const DEFAULT_LEVEL: ErrorCorrectionLevel = 'L';
-const DEFAULT_BGCOLOR = '#FFFFFF';
 const DEFAULT_FGCOLOR = '#000000';
 const DEFAULT_INCLUDEMARGIN = false;
 const DEFAULT_MINVERSION = 1;
@@ -136,47 +103,6 @@ function excavateModules(modules: Modules, excavation: Excavation): Modules {
     });
 }
 
-function getImageSettings(
-    cells: Modules,
-    size: number,
-    margin: number,
-    imageSettings?: ImageSettings
-): null | {
-    x: number;
-    y: number;
-    h: number;
-    w: number;
-    excavation: Excavation | null;
-    opacity: number;
-} {
-    if (imageSettings == null) {
-        return null;
-    }
-    const numCells = cells.length + margin * 2;
-    const defaultSize = Math.floor(size);
-    const scale = numCells / size;
-
-    const w = (imageSettings.width || defaultSize) * scale;
-    const h = (imageSettings.height || defaultSize) * scale;
-
-    // 把图片放在中心位置
-    const x = imageSettings.x == null ? cells.length / 2 - w / 2 : imageSettings.x * scale;
-    const y = imageSettings.y == null ? cells.length / 2 - h / 2 : imageSettings.y * scale;
-
-    const opacity = imageSettings.opacity == null ? 1 : imageSettings.opacity;
-
-    let excavation = null;
-    if (imageSettings.excavate) {
-        const floorX = Math.floor(x);
-        const floorY = Math.floor(y);
-        const ceilW = Math.ceil(w + x - floorX);
-        const ceilH = Math.ceil(h + y - floorY);
-        excavation = { x: floorX, y: floorY, w: ceilW, h: ceilH };
-    }
-
-    return { x, y, h, w, excavation, opacity };
-}
-
 function getMarginSize(includeMargin: boolean, marginSize?: number): number {
     if (marginSize != null) {
         return Math.max(Math.floor(marginSize), 0);
@@ -190,7 +116,6 @@ function useQRCode({
     minVersion,
     includeMargin,
     marginSize,
-    imageSettings,
     size,
     boostLevel,
 }: {
@@ -199,7 +124,6 @@ function useQRCode({
     minVersion: number;
     includeMargin: boolean;
     marginSize?: number;
-    imageSettings?: ImageSettings;
     size: number;
     boostLevel?: boolean;
 }) {
@@ -212,26 +136,23 @@ function useQRCode({
         return qrcodegen.QrCode.encodeSegments(segments, ERROR_LEVEL_MAP[level], minVersion, undefined, undefined, boostLevel);
     }, [value, level, minVersion, boostLevel]);
 
-    const { cells, margin, numCells, calculatedImageSettings } = React.useMemo(() => {
+    const { cells, margin, numCells } = React.useMemo(() => {
         const cells = qrcode.getModules();
 
         const margin = getMarginSize(includeMargin, marginSize);
         const numCells = cells.length + margin * 2;
-        const calculatedImageSettings = getImageSettings(cells, size, margin, imageSettings);
         return {
             cells,
             margin,
             numCells,
-            calculatedImageSettings,
         };
-    }, [qrcode, size, imageSettings, includeMargin, marginSize]);
+    }, [qrcode, size, includeMargin, marginSize]);
 
     return {
         qrcode,
         margin,
         cells,
         numCells,
-        calculatedImageSettings,
     };
 }
 
@@ -240,19 +161,17 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         value,
         size = DEFAULT_SIZE,
         level = DEFAULT_LEVEL,
-        bgColor = DEFAULT_BGCOLOR,
         fgColor = DEFAULT_FGCOLOR,
         includeMargin = DEFAULT_INCLUDEMARGIN,
         minVersion = DEFAULT_MINVERSION,
         boostLevel,
         marginSize,
-        imageSettings,
+        excavate = 0,
         ...extraProps
     } = props;
     const { style, ...otherProps } = extraProps;
-    const imgSrc = imageSettings?.src;
+
     const _canvas = React.useRef<UICanvasPanel | null>(null);
-    const _image = React.useRef<ImagePanel>(null);
 
     // Set the local ref (_canvas) and also the forwarded ref from outside
     const setCanvasRef = React.useCallback(
@@ -267,16 +186,13 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         [forwardedRef]
     );
 
-    const [isImgLoaded, setIsImageLoaded] = React.useState(false);
-
-    const { margin, cells, numCells, calculatedImageSettings } = useQRCode({
+    const { margin, cells, numCells } = useQRCode({
         value,
         level,
         minVersion,
         boostLevel,
         includeMargin,
         marginSize,
-        imageSettings,
         size,
     });
 
@@ -285,18 +201,24 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         // with the current state.
         if (_canvas.current != null) {
             const canvas = _canvas.current;
-            canvas.ClearJS('rgba(0,0,0,0');
+
+            // ClearJS方法有bug，如果alpha不是0，会导致绘制错误
+            // 因此我们移除了方法的bgColor支持
+            canvas.ClearJS(`rgba(0, 0, 0, 0)`);
 
             const cellSize = size / numCells;
 
             let cellsToDraw = cells;
-            const image = _image.current;
-            const haveImageToRender = calculatedImageSettings != null && image !== null && imageSettings?.width != 0 && imageSettings?.height != 0;
 
-            if (haveImageToRender) {
-                if (calculatedImageSettings.excavation != null) {
-                    cellsToDraw = excavateModules(cells, calculatedImageSettings.excavation);
-                }
+            // 计算需要避让的部分
+            if (excavate > 0) {
+                const excavation = {
+                    x: Math.floor(numCells / 2 - excavate / 2),
+                    y: Math.floor(numCells / 2 - excavate / 2),
+                    w: excavate,
+                    h: excavate,
+                };
+                cellsToDraw = excavateModules(cells, excavation);
             }
 
             cellsToDraw.forEach(function (row, rdx) {
@@ -320,43 +242,11 @@ export const PanoramaQRCode = React.forwardRef<Panel, PanelAttributes & QRProps>
         }
     });
 
-    React.useEffect(() => {
-        setIsImageLoaded(false);
-    }, [imgSrc]);
-
     const canvasStyle = { height: `${size}px`, width: `${size}px`, ...style };
 
-    let img = null;
-    if (imgSrc != null) {
-        const cellSize = size / numCells;
-        const { x = 0, y = 0, w = 0, h = 0 } = calculatedImageSettings || {};
-        const imageStyle = {
-            flowChildren: 'none',
-            opacity: `${calculatedImageSettings?.opacity || 1}`,
-            marginLeft: `${x * cellSize}px`,
-            marginTop: `${y * cellSize}px`,
-            width: w * cellSize + 'px',
-            height: h * cellSize + 'px',
-        };
-
-        console.log(calculatedImageSettings);
-
-        img = (
-            <Image
-                src={imgSrc}
-                key={imgSrc}
-                style={imageStyle}
-                onload={() => {
-                    setIsImageLoaded(true);
-                }}
-                ref={_image}
-            />
-        );
-    }
     return (
         <>
             <GenericPanel type="UICanvas" style={canvasStyle} ref={setCanvasRef} {...otherProps} />
-            {img}
         </>
     );
 });

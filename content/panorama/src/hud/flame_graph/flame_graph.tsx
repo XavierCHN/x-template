@@ -70,7 +70,6 @@ export const FlameGraph: React.FC = () => {
     const inputRef = useRef<any>();
     // 获取性能数据
     const performance_debug = useXNetTableKey('performance_debug', 'debug_data', null);
-    $.Msg(performance_debug);
     // 转换数据为可视化格式
     const visualData = useMemo(() => {
         if (!performance_debug) return null;
@@ -78,7 +77,6 @@ export const FlameGraph: React.FC = () => {
             const data = typeof performance_debug === 'string' ? JSON.parse(performance_debug) : performance_debug;
             return transformData(data);
         } catch (e) {
-            $.Msg('Error parsing performance data:', e);
             return null;
         }
     }, [performance_debug]);
