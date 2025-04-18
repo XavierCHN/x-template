@@ -5,6 +5,8 @@ import { FlameGraphProfilerTests } from '../utils/performance/flame_graph_profil
 @reloadable
 export class Debug {
     DebugEnabled = false;
+    private _chatListener: EventListenerID;
+
     // 在线测试白名单
     OnlineDebugWhiteList = [
         86815341, // Xavier
@@ -12,13 +14,26 @@ export class Debug {
 
     constructor() {
         // 工具模式下开启调试
-        this.DebugEnabled = IsInToolsMode();
+        if (IsInToolsMode()) {
+            this._toggleDebugMode(true);
+        }
+    }
 
-        //CPU性能测试用例
-        new FlameGraphProfilerTests();
-
-        // 注册聊天指令
-        ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
+    private _toggleDebugMode(on?: boolean) {
+        if (on === undefined) {
+            this.DebugEnabled = !this.DebugEnabled;
+        }
+        if (this.DebugEnabled) {
+            print('Debug mode enabled!');
+            new FlameGraphProfilerTests();
+            this._chatListener = ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
+        } else {
+            print('Debug mode disabled!');
+            if (this._chatListener) {
+                StopListeningToGameEvent(this._chatListener);
+                this._chatListener = undefined;
+            }
+        }
     }
 
     OnPlayerChat(keys: GameEventProvidedProperties & PlayerChatEvent): void {
@@ -29,7 +44,7 @@ export class Debug {
 
         if (cmd === '-debug') {
             if (this.OnlineDebugWhiteList.includes(steamid)) {
-                this.DebugEnabled = !this.DebugEnabled;
+                this._toggleDebugMode();
             }
         }
 
