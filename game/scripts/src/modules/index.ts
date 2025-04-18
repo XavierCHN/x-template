@@ -1,6 +1,6 @@
 import { Debug } from './Debug';
 import { GameConfig } from './GameConfig';
-import { XNetTable } from './xnet-table';
+import { XNetTable } from '../utils/xnet-table';
 
 declare global {
     interface CDOTAGameRules {

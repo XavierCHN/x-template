@@ -1,4 +1,4 @@
-import { reloadable } from '../utils/tstl-utils';
+import { reloadable } from '../tstl-utils';
 
 function get_table_size(t: any) {
     // 如果不是table，那么直接返回长度
