@@ -22,6 +22,8 @@ export class Debug {
     private _toggleDebugMode(on?: boolean) {
         if (on === undefined) {
             this.DebugEnabled = !this.DebugEnabled;
+        } else {
+            this.DebugEnabled = on;
         }
         if (this.DebugEnabled) {
             print('Debug mode enabled!');
