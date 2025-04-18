@@ -4,7 +4,7 @@ import { FlameGraph } from '../utils/flame_graph/flame_graph';
 
 import { type FC } from 'react';
 import { render } from 'react-panorama-x';
-import { PanoramaQRCode } from '../utils/panorama-react-qrcode';
+import { PanoramaQRCode } from '../utils/react-panorama-qrcode';
 import { useXNetTableKey } from '../hooks/useXNetTable';
 
 const Root: FC = () => {
