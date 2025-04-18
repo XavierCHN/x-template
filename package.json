@@ -18,7 +18,7 @@
         "dev:vscripts": "tstl --project game/scripts/tsconfig.json --watch",
         "compile": "node scripts/compile.js",
         "jssync": "gulp jssync",
-        "api": "openapi --input scripts/server_api.json --output game/scripts/src/server --exportCore false && node scripts/clean_api.js"
+        "api": "openapi --input scripts/server_api.json --output game/scripts/src/server --exportCore false"
     },
     "devDependencies": {
         "@babel/core": "^7.16.5",
