@@ -1,14 +1,6 @@
-// 这些事件的参数尚未经过测试，待测试完成后将会被提交到TypescriptDeclarations仓库中
-
 declare type PanelEventDefinition<Args extends any[] = []> = (panel: Panel, ...args: Args) => void;
-declare type EventDefinition<Args extends any[] = []> = (...args: Args) => void;
-declare type EventParams<T> = T extends EventDefinition<infer Args> | PanelEventDefinition<inferArgs>
-    ? Args
-    : T extends (panel: Panel, ...args: infer P) => void
-    ? P
-    : T extends (...args: infer P) => void
-    ? P
-    : never;
+declare type EventDefinition<Args extends any[] = []> = (this: void, ...args: Args) => void;
+declare type EventParams<T> = T extends EventDefinition<infer Args> ? Args : never;
 
 /**
  *

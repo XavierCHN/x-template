@@ -6,11 +6,18 @@
     height: 100%;
 }
 
-@keyframes my_test {
-    0% {
-        transform: translateX(0);
+.QRCode {
+    horizontal-align: right;
+    vertical-align: bottom;
+    margin-bottom: 400px;
+    margin-right: 100px;
+    background-color: #ffffff;
+    opacity: 0.6;
+
+    &:hover {
+        opacity: 1; 
     }
-    100% {
-        transform: translateX(100%);
+    &:active {
+        opacity: 0.8;
     }
 }
