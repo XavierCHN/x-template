@@ -69,6 +69,8 @@ Xavier 的 dota2 自定义游戏开发模板
   - 请尝试关闭代码编辑器后，使用控制台来执行`yarn install`，或者重启一下电脑再试
 - 因为网络问题导致安装错误怎么办？
   - 可以尝试使用[npmmirror镜像](https://npmmirror.com/)，或者直接执行`yarn config set registry https://registry.npmmirror.com`再执行`yarn install`
+- 如何在保持 `yarn dev` 状态下再执行其他指令？
+  - 在 `vscode` 中，你可以使用**ctrl+shift+5**来同时打开多个**terminal**终端
 - 有没有相关的教程？
   - TODO：制作相关教程
 
