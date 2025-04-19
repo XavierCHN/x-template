@@ -47,7 +47,7 @@ type QRProps = {
     fgColor?: string;
     /**
      * 边距的大小
-     * @defaultValue 0
+     * @defaultValue 1
      */
     marginSize?: number;
     /**
