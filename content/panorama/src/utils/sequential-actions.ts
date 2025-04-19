@@ -1,5 +1,3 @@
-// 此文件中的代码尚未经过测试，慎用！
-
 import type { DotaEventHandlers } from './DotaEventHandlers';
 import { Lerp, RemapValClamped } from './util';
 
@@ -68,6 +66,11 @@ class RunSequentialActions implements ISequenceAction {
 
     constructor(actions: ISequenceAction[] = []) {
         this.actions = actions;
+    }
+
+    add(...action: ISequenceAction[]): RunSequentialActions {
+        this.actions.push(...action);
+        return this;
     }
 
     start(): void {
@@ -379,8 +382,6 @@ class RunFunctionAction extends BaseAction {
         return false;
     }
 }
-
-type EventParams<T> = T extends (panel: Panel, ...args: infer P) => void ? P : never;
 
 /**
  * Action that calls $.DispatchEvent.
