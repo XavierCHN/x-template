@@ -1,7 +1,7 @@
 # X-Template
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-### [简体中文](https://github.com/XavierCHN/x-template) |  [English Readme](https://github.com/XavierCHN/x-template/blob/master/README.ENG.MD)   | [Русское описание](https://github.com/XavierCHN/x-template/blob/master/README.RU.MD)
+### [简体中文](https://github.com/XavierCHN/x-template?tab=readme-ov-file#x-template) |  [English Readme](https://github.com/XavierCHN/x-template/blob/master/README.ENG.MD)   | [Русское описание](https://github.com/XavierCHN/x-template/blob/master/README.RU.MD)
 
 Xavier's Dota 2 Custom Game Development Template
 
