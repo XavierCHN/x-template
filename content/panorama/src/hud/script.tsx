@@ -4,16 +4,16 @@ import 'panorama-polyfill-x/lib/timers';
 import { type FC } from 'react';
 import { render } from 'react-panorama-x';
 import { PanoramaQRCode } from '../utils/react-panorama-qrcode';
-import { DispatchEventAction, RunSequentialActions, RunSingleAction, WaitAction } from '../utils/sequential-actions';
+import { DispatchEventAction, FunctionAction, RunSequentialActions, RunSingleAction, WaitAction } from '../utils/sequential-actions';
 import React from 'react';
 
 const Root: FC = () => {
     const url = `https://github.com/XavierCHN/x-template`;
     const go = React.useCallback(() => {
-        const action = new DispatchEventAction(`ExternalBrowserGoToURL`, url);
-        const wait = new WaitAction(1);
+        const wait = new WaitAction(0.2);
         const showTextTooltip = new DispatchEventAction(`DOTAShowTextTooltip`, $(`#QRCode`), `正在打开链接`);
         const hideTextTooltip = new DispatchEventAction(`DOTAHideTextTooltip`, $(`#QRCode`));
+        const action = new FunctionAction(() => PlayUISoundScript('DotaSOS.TestBeep'));
         RunSequentialActions([showTextTooltip, wait, hideTextTooltip, wait, action]);
     }, [url]);
 

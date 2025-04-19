@@ -851,11 +851,11 @@ declare global {
     interface DollarStatic {
         DispatchEvent(eventName: string, ...args: any[]): void;
     }
+    function PlayUISoundScript(sSound: string): number;
+    function StopUISoundScript(nGuid: number): void;
+    function IsUISoundScriptPlaying(nGuid: number): boolean;
+    function SetDuckingUIMusic(pPanel: Panel, bDucking: boolean): void;
 }
-declare function PlayUISoundScript(sSound: string): number;
-declare function StopUISoundScript(nGuid: number): void;
-declare function IsUISoundScriptPlaying(nGuid: number): boolean;
-declare function SetDuckingUIMusic(pPanel: Panel, bDucking: boolean): void;
 
 export {
     RunSingleAction,
@@ -864,7 +864,6 @@ export {
     RunLoopingActions,
     RunStaggeredActions,
     RunUntilSingleActionFinishedAction,
-    UpdateSingleActionUntilFinished,
     BaseAction,
     SequentialActions,
     ParallelActions,
