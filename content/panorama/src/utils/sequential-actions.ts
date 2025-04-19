@@ -55,21 +55,21 @@ class BaseAction implements ISequenceAction {
     finish(): void {}
 }
 
+function RunSequentialActions(actions: ISequenceAction[]): void {
+    const sequence = new SequentialActions(actions);
+    RunSingleAction(sequence);
+}
+
 /**
  * Action to run a group of other actions in sequence
  */
-class RunSequentialActions implements ISequenceAction {
+class SequentialActions implements ISequenceAction {
     actions: ISequenceAction[];
     currentActionIndex = 0;
     currentActionStarted = false;
 
     constructor(actions: ISequenceAction[] = []) {
         this.actions = actions;
-    }
-
-    add(...action: ISequenceAction[]): RunSequentialActions {
-        this.actions.push(...action);
-        return this;
     }
 
     start(): void {
@@ -114,10 +114,15 @@ class RunSequentialActions implements ISequenceAction {
     }
 }
 
+function RunParallelActions(actions: ISequenceAction[]): void {
+    const parallel = new ParallelActions(actions);
+    RunSingleAction(parallel);
+}
+
 /**
  * Action to run multiple actions all at once. The action is complete once all sub actions are done.
  */
-class RunParallelActions implements ISequenceAction {
+class ParallelActions implements ISequenceAction {
     actions: ISequenceAction[];
     actionsFinished: boolean[] = [];
 
@@ -156,10 +161,15 @@ class RunParallelActions implements ISequenceAction {
     }
 }
 
+function RunLoopingActions(actions: ISequenceAction[]): void {
+    const looping = new LoopingActions(actions);
+    RunSingleAction(looping);
+}
+
 /**
  * Action to run actions looping infinitely until finish is called.
  */
-class RunLoopingActions implements ISequenceAction {
+class LoopingActions implements ISequenceAction {
     actions: ISequenceAction[];
     currentActionIndex = 0;
     currentActionStarted = false;
@@ -229,13 +239,18 @@ class WaitAction implements ISequenceAction {
     finish(): void {}
 }
 
+function RunStaggeredActions(staggerSeconds: number, actions: ISequenceAction[]): void {
+    const staggered = new StaggeredActions(staggerSeconds, actions);
+    RunSingleAction(staggered);
+}
+
 /**
  * Action to run multiple actions in parallel, but with a slight stagger start between each of them.
  */
-class RunStaggeredActions implements ISequenceAction {
+class StaggeredActions implements ISequenceAction {
     staggerSeconds: number;
     actions: ISequenceAction[];
-    par!: RunParallelActions;
+    par!: ParallelActions;
 
     constructor(staggerSeconds: number, actions: ISequenceAction[] = []) {
         this.staggerSeconds = staggerSeconds;
@@ -247,10 +262,10 @@ class RunStaggeredActions implements ISequenceAction {
             if (index === 0) {
                 return action;
             }
-            return new RunSequentialActions([new WaitAction(index * this.staggerSeconds), action]);
+            return new SequentialActions([new WaitAction(index * this.staggerSeconds), action]);
         });
 
-        this.par = new RunParallelActions(parallelActions);
+        this.par = new ParallelActions(parallelActions);
         this.par.start();
     }
 
@@ -263,11 +278,16 @@ class RunStaggeredActions implements ISequenceAction {
     }
 }
 
+function RunUntilSingleActionFinishedAction(continueOtherActions: boolean, actions: ISequenceAction[]): void {
+    const untilSingleActionFinished = new UntilSingleActionFinishedAction(continueOtherActions, actions);
+    RunSingleAction(untilSingleActionFinished);
+}
+
 /**
  * Runs a set of actions but stops as soon as any of them are finished.
  * `continueOtherActions` is a bool that determines whether to continue ticking the remaining actions, or whether to just finish them immediately.
  */
-class RunUntilSingleActionFinishedAction {
+class UntilSingleActionFinishedAction {
     continueOtherActions: boolean;
     actions: ISequenceAction[];
     actionsFinished: boolean[] = [];
@@ -340,7 +360,7 @@ class ActionWithTimeout implements ISequenceAction {
     action: ISequenceAction;
     timeoutDuration: number;
     continueAfterTimeout: boolean;
-    allAction!: RunUntilSingleActionFinishedAction;
+    allAction!: UntilSingleActionFinishedAction;
 
     constructor(action: ISequenceAction, timeoutDuration: number, continueAfterTimeout?: boolean) {
         this.action = action;
@@ -349,7 +369,7 @@ class ActionWithTimeout implements ISequenceAction {
     }
 
     start(): void {
-        this.allAction = new RunUntilSingleActionFinishedAction(this.continueAfterTimeout, [this.action, new WaitAction(this.timeoutDuration)]);
+        this.allAction = new UntilSingleActionFinishedAction(this.continueAfterTimeout, [this.action, new WaitAction(this.timeoutDuration)]);
         this.allAction.start();
     }
 
@@ -366,7 +386,7 @@ class ActionWithTimeout implements ISequenceAction {
  * Action that simply runs a passed in function.
  * You may include extra arguments and they will be passed to the called function.
  */
-class RunFunctionAction extends BaseAction {
+class FunctionAction extends BaseAction {
     f: Function;
     argsArray: any[];
 
@@ -386,7 +406,7 @@ class RunFunctionAction extends BaseAction {
  * Action that calls $.DispatchEvent.
  * You may include extra arguments and they will be passed to event.
  */
-class DispatchEventAction<E extends keyof DotaEventHandlers> extends RunFunctionAction {
+class DispatchEventAction<E extends keyof DotaEventHandlers> extends FunctionAction {
     constructor(public eventName: E, ...argsArray: EventParams<DotaEventHandlers[E]>) {
         super(() => $.DispatchEvent(eventName, ...argsArray));
     }
@@ -414,14 +434,14 @@ class WaitForEventAction extends BaseAction {
 }
 
 /** Action to print a debug message */
-class PrintAction extends RunFunctionAction {
+class PrintAction extends FunctionAction {
     constructor(public msg: string) {
         super(() => $.Msg(this.msg));
     }
 }
 
 /** Action to add a class to a panel */
-class AddClassAction extends RunFunctionAction {
+class AddClassAction extends FunctionAction {
     constructor(panel: Panel | null | undefined, panelClass: string) {
         super(() => {
             if (panel != null) panel.AddClass(panelClass);
@@ -430,7 +450,7 @@ class AddClassAction extends RunFunctionAction {
 }
 
 /** Action to remove a class from a panel */
-class RemoveClassAction extends RunFunctionAction {
+class RemoveClassAction extends FunctionAction {
     constructor(panel: Panel | null | undefined, panelClass: string) {
         super(() => {
             if (panel != null) panel.RemoveClass(panelClass);
@@ -439,7 +459,7 @@ class RemoveClassAction extends RunFunctionAction {
 }
 
 /** Switch a class on a panel */
-class SwitchClassAction extends RunFunctionAction {
+class SwitchClassAction extends FunctionAction {
     constructor(panel: Panel | null | undefined, panelSlot: string, panelClass: string) {
         super(() => {
             if (panel != null) panel.SwitchClass(panelSlot, panelClass);
@@ -448,7 +468,7 @@ class SwitchClassAction extends RunFunctionAction {
 }
 
 /** Action to trigger a class on a panel */
-class TriggerClassAction extends RunFunctionAction {
+class TriggerClassAction extends FunctionAction {
     constructor(panel: Panel | null | undefined, panelClass: string) {
         super(() => {
             if (panel != null) panel.TriggerClass(panelClass);
@@ -466,7 +486,7 @@ class WaitForClassAction extends WaitForConditionAction {
 }
 
 /** Action to set an integer dialog variable */
-class SetDialogVariableIntAction extends RunFunctionAction {
+class SetDialogVariableIntAction extends FunctionAction {
     constructor(panel: Panel | null | undefined, dialogVariable: string, value: number) {
         super(() => {
             if (panel != null) panel.SetDialogVariableInt(dialogVariable, value);
@@ -503,7 +523,7 @@ class AnimateDialogVariableIntAction implements ISequenceAction {
 }
 
 /** Action to set a string dialog variable */
-class SetDialogVariableStringAction extends RunFunctionAction {
+class SetDialogVariableStringAction extends FunctionAction {
     constructor(panel: Panel | null | undefined, dialogVariable: string, value: string) {
         super(() => {
             if (panel != null && panel.IsValid()) panel.SetDialogVariable(dialogVariable, value);
@@ -512,7 +532,7 @@ class SetDialogVariableStringAction extends RunFunctionAction {
 }
 
 /** Action to set a progress bar's value */
-class SetProgressBarValueAction extends RunFunctionAction {
+class SetProgressBarValueAction extends FunctionAction {
     constructor(progressBar: ProgressBar, value: number) {
         super(() => (progressBar.value = value));
     }
@@ -544,7 +564,7 @@ class AnimateProgressBarAction implements ISequenceAction {
 }
 
 /** Action to set a progress bar with middle's upper and lower values */
-class SetProgressBarWithMiddleValueAction extends RunFunctionAction {
+class SetProgressBarWithMiddleValueAction extends FunctionAction {
     constructor(progressBar: ProgressBarWithMiddle, upperValue: number, lowerValue: number) {
         super(() => {
             progressBar.uppervalue = upperValue;
@@ -584,34 +604,34 @@ function PlaySoundEffect(soundName: string): void {
 }
 
 /** Action to play a sound effect */
-class PlaySoundEffectAction extends RunFunctionAction {
+class PlaySoundEffectAction extends FunctionAction {
     constructor(soundName: string) {
         super(() => PlaySoundEffect(soundName));
     }
 }
 
-class PlaySoundAction extends RunFunctionAction {
+class PlaySoundAction extends FunctionAction {
     constructor(soundName: string) {
         super(() => PlayUISoundScript(soundName));
     }
 }
 
-class PlaySoundForDurationAction extends RunSequentialActions {
+class PlaySoundForDurationAction extends SequentialActions {
     private soundEventGuid = 0;
     constructor(public soundName: string, public duration: number) {
         super([
-            new RunFunctionAction(() => (this.soundEventGuid = PlayUISoundScript(soundName))),
+            new FunctionAction(() => (this.soundEventGuid = PlayUISoundScript(soundName))),
             new WaitAction(duration),
-            new RunFunctionAction(() => StopUISoundScript(this.soundEventGuid)),
+            new FunctionAction(() => StopUISoundScript(this.soundEventGuid)),
         ]);
     }
 }
 
-class PlaySoundUntilFinishedAction extends RunSequentialActions {
+class PlaySoundUntilFinishedAction extends SequentialActions {
     private soundEventGuid = 0;
     constructor(public soundName: string) {
         super([
-            new RunFunctionAction(() => (this.soundEventGuid = PlayUISoundScript(soundName))),
+            new FunctionAction(() => (this.soundEventGuid = PlayUISoundScript(soundName))),
             new WaitForConditionAction(() => !IsUISoundScriptPlaying(this.soundEventGuid)),
         ]);
     }
@@ -685,11 +705,11 @@ class GuardedAction implements ISequenceAction {
     }
 }
 
-class PlayMovieAction extends RunSequentialActions {
+class PlayMovieAction extends SequentialActions {
     constructor(moviePanel: MoviePanel) {
         let isMovieFinished = false;
         $.RegisterEventHandler('MoviePlayerPlaybackEnded', moviePanel, () => (isMovieFinished = true));
-        super([new RunFunctionAction(() => moviePanel.Play()), new WaitForConditionAction(() => isMovieFinished)]);
+        super([new FunctionAction(() => moviePanel.Play()), new WaitForConditionAction(() => isMovieFinished)]);
     }
 }
 
@@ -749,7 +769,7 @@ class LerpDepthOfFieldAction extends LerpAction {
 }
 
 /** Action to fire entity input on a scene panel */
-class FireEntityInputAction extends RunFunctionAction {
+class FireEntityInputAction extends FunctionAction {
     constructor(scenePanel: ScenePanel, entityName: string, entityInput: string, entityInputValue: string | number) {
         super(() => {
             scenePanel.FireEntityInput(entityName, entityInput, entityInputValue.toString());
@@ -793,7 +813,7 @@ class AnimateEntityInputAction implements ISequenceAction {
 }
 
 /** Starts ducking all UI music. Quack */
-class StartDuckingUIMusicAction extends RunFunctionAction {
+class StartDuckingUIMusicAction extends FunctionAction {
     constructor(panel: Panel) {
         super(() => {
             SetDuckingUIMusic(panel, true);
@@ -802,7 +822,7 @@ class StartDuckingUIMusicAction extends RunFunctionAction {
 }
 
 /** Stops ducking all UI music. Quack */
-class StopDuckingUIMusicAction extends RunFunctionAction {
+class StopDuckingUIMusicAction extends FunctionAction {
     constructor(panel: Panel) {
         super(() => {
             SetDuckingUIMusic(panel, false);
@@ -813,7 +833,7 @@ class StopDuckingUIMusicAction extends RunFunctionAction {
 const g_trackedSoundEvents: number[] = [];
 /** Helper action that keeps track of any sounds that are playing.
  *  Call `StopAllTrackedSounds` when the page is closing to stop them. */
-class PlayAndTrackSoundAction extends RunFunctionAction {
+class PlayAndTrackSoundAction extends FunctionAction {
     constructor(soundName: string) {
         super(() => g_trackedSoundEvents.push(PlayUISoundScript(soundName)));
     }
@@ -839,18 +859,23 @@ declare function SetDuckingUIMusic(pPanel: Panel, bDucking: boolean): void;
 
 export {
     RunSingleAction,
-    UpdateSingleActionUntilFinished,
-    BaseAction,
     RunSequentialActions,
     RunParallelActions,
     RunLoopingActions,
-    WaitAction,
     RunStaggeredActions,
     RunUntilSingleActionFinishedAction,
+    UpdateSingleActionUntilFinished,
+    BaseAction,
+    SequentialActions,
+    ParallelActions,
+    LoopingActions,
+    WaitAction,
+    StaggeredActions,
+    UntilSingleActionFinishedAction,
     WaitForConditionAction,
     WaitOneFrameAction,
     ActionWithTimeout,
-    RunFunctionAction,
+    FunctionAction,
     DispatchEventAction,
     WaitForEventAction,
     PrintAction,
