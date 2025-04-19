@@ -1,4 +1,3 @@
-import type { DotaEventHandlers } from './DotaEventHandlers';
 import { Lerp, RemapValClamped } from './util';
 
 /**

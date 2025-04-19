@@ -2,11 +2,14 @@
 
 declare type PanelEventDefinition<Args extends any[] = []> = (panel: Panel, ...args: Args) => void;
 declare type EventDefinition<Args extends any[] = []> = (...args: Args) => void;
-declare type EventParams<T extends EventDefinition | PanelEventDefinition> = T extends PanelEventDefinition<infer Args>
+declare type EventParams<T> = T extends EventDefinition<infer Args> | PanelEventDefinition<inferArgs>
     ? Args
-    : T extends EventDefinition<infer Args>
-    ? Args
+    : T extends (panel: Panel, ...args: infer P) => void
+    ? P
+    : T extends (...args: infer P) => void
+    ? P
     : never;
+
 /**
  *
  * 这个部分没有开源，因此我们手动完成
@@ -104,7 +107,7 @@ declare interface PanoramaEventHandlers {
     PlaySoundEffect: EventDefinition<[string]>;
     UIShowCustomLayoutTooltip: PanelEventDefinition<[Panel, string, string, string]>;
 }
-export declare interface DotaEventHandlers extends PanoramaEventHandlers {
+declare interface DotaEventHandlers extends PanoramaEventHandlers {
     DOTAScenePanelSceneLoaded: PanelEventDefinition;
     DOTAScenePanelSceneUnloaded: PanelEventDefinition;
     DOTAScenePanelCameraLerpFinished: PanelEventDefinition;
