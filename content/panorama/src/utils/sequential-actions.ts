@@ -1,6 +1,6 @@
 // 此文件中的代码尚未经过测试，慎用！
 
-import { DotaEventHandlers } from './DotaEventHandlers';
+import type { DotaEventHandlers } from './DotaEventHandlers';
 import { Lerp, RemapValClamped } from './util';
 
 /**
@@ -46,8 +46,8 @@ function UpdateSingleActionUntilFinished(action: ISequenceAction): void {
     callback();
 }
 
-/** 
- * Empty sequence action implementation useful for creating new actions that only implement a few of the functions 
+/**
+ * Empty sequence action implementation useful for creating new actions that only implement a few of the functions
  */
 class BaseAction implements ISequenceAction {
     start(): void {}
