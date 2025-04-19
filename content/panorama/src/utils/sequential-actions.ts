@@ -407,7 +407,7 @@ class FunctionAction extends BaseAction {
  * You may include extra arguments and they will be passed to event.
  */
 class DispatchEventAction<E extends keyof DotaEventHandlers> extends FunctionAction {
-    constructor(public eventName: E, ...argsArray: EventParams<DotaEventHandlers[E]>) {
+    constructor(public eventName: E, ...argsArray: PanoramaEventParams<DotaEventHandlers[E]>) {
         super(() => $.DispatchEvent(eventName, ...argsArray));
     }
 }
