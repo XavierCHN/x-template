@@ -1,7 +1,7 @@
 # X-Template
 
 ![Лицензия: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-### <a href="#x-template">Китайский README</a> | <a href="#x-template-1">Английский README</a> | [Русское описание](https://github.com/XavierCHN/x-template/blob/master/readme_rus.md)
+### <a href="#x-template">Китайский README</a> | [English Readme](https://github.com/XavierCHN/x-template/blob/master/README.ENG.MD) | [Русское описание](https://github.com/XavierCHN/x-template/blob/master/README.RU.MD)
 
 Пользовательский шаблон разработки игр Dota 2 от Xavier
 
