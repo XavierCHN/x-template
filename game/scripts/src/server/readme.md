@@ -10,3 +10,7 @@
 3. 选择导出所有接口，并将其储存为 `scripts/server_api.json`
 4. 可自定义文件路径，修改package.json中 `yarn api` 指令即可
 5. 运行指令 `yarn api` 来生成所有的API接口
+
+## 服务器配置方法
+- 请到 `game\scripts\src\server\core\OpenAPI.ts` 中配置服务器相关参数
+- 注意里面的 `ONLINE_TEST_MODE` 字段，该字段不需要在代码中进行任何处理，此全局变量会由 `prod` 脚本生成并注入到lua全局环境，具体注入方法请[查阅代码](https://github.com/XavierCHN/x-template/blob/master/scripts/publish.js#L72)
