@@ -17,7 +17,7 @@ Xavier 的 dota2 自定义游戏开发模板
 4. 安装好 [vscode](https://code.visualstudio.com/download)，使用vscode打开clone的文件夹
 5. 打开 `scripts/addon.config.js`，将 `addon_name` 修改为你想要使用的项目名称
 6. 执行 `yarn install`安装依赖
-7. 执行 `yarn dev` 开始你的
+7. 执行 `yarn dev` 开始你的开发
 8. **你可以使用指令`yarn launch map_name` 快速启动测试，或者使用 `yarn launch` 指令只启动工具**
 
 
