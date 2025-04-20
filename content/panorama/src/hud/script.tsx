@@ -10,11 +10,12 @@ import React from 'react';
 const Root: FC = () => {
     const url = `https://github.com/XavierCHN/x-template`;
     const go = React.useCallback(() => {
-        const wait = new WaitAction(0.2);
+        const wait = new WaitAction(0.5);
         const showTextTooltip = new DispatchEventAction(`DOTAShowTextTooltip`, $(`#QRCode`), `正在打开链接`);
         const hideTextTooltip = new DispatchEventAction(`DOTAHideTextTooltip`, $(`#QRCode`));
-        const action = new FunctionAction(() => PlayUISoundScript('DotaSOS.TestBeep'));
-        RunSequentialActions([showTextTooltip, wait, hideTextTooltip, wait, action]);
+        const playSound = new FunctionAction(() => PlayUISoundScript('DotaSOS.TestBeep'));
+        const gotoUrl = new DispatchEventAction(`ExternalBrowserGoToURL`, url);
+        RunSequentialActions([showTextTooltip, wait, hideTextTooltip, wait, playSound, gotoUrl]);
     }, [url]);
 
     return (
