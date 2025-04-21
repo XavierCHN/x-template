@@ -58,9 +58,7 @@ export class crystal_nova_x extends BaseAbility {
             ApplyDamage(damageTable); // 应用伤害
 
             // 施加debuff
-            modifier_crystal_nova_x_debuff.apply(enemy, caster, this, {
-                Duration: duration,
-            });
+            modifier_crystal_nova_x_debuff.apply(enemy, caster, this, {});
         });
 
         // 增加视野
@@ -91,10 +89,6 @@ export class crystal_nova_x extends BaseAbility {
     }
 }
 
-interface IModifierCrystalNovaXProps {
-    Duration: number;
-}
-
 @registerModifier()
 export class modifier_crystal_nova_x_debuff extends BaseModifier {
     private attackspeed_slow: number = 0;
@@ -111,14 +105,14 @@ export class modifier_crystal_nova_x_debuff extends BaseModifier {
         return true;
     }
 
-    OnCreated(params: IModifierCrystalNovaXProps): void {
+    OnCreated(params: object): void {
         this.attackspeed_slow = this.GetAbility().GetSpecialValueFor('attackspeed_slow');
         this.movespeed_slow = this.GetAbility().GetSpecialValueFor('movespeed_slow');
         const duration = this.GetAbility().GetSpecialValueFor('duration');
         this.SetDuration(duration, true); // 设置持续时间，不刷新
     }
 
-    OnRefresh(params: IModifierCrystalNovaXProps): void {
+    OnRefresh(params: object): void {
         this.OnCreated(params);
     }
 
