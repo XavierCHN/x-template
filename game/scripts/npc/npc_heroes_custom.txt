@@ -8,7 +8,7 @@
         // "DisableWearables"	        "1" // 禁用饰品
 
         "Ability1"                  "crystal_nova_x"        
-        "Ability2"                  "generic_hidden"        
+        "Ability2"                  "counter_helix_x"        
         "Ability3"                  "generic_hidden"            
         "Ability4"                  "generic_hidden"
         "Ability5"                  "generic_hidden"
@@ -75,7 +75,7 @@
 
         // Status
         //-------------------------------------------------------------------------------------------------------------
-        "StatusHealth"      "100"
+        "StatusHealth"      "100000"
         "StatusMana"        "1000"
         "StatusManaRegen"   "0"
         "StatusHealthRegen" "0"

@@ -26,4 +26,19 @@
 		"AbilityCastRange" "700"
 		"AbilityCastPoint" "0.3000"
 	}
+	"counter_helix_x" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "examples/abilities/counter_helix_x.lua"
+		"AbilityValues" {
+			"damage" "75 110 145 180"
+			"radius" "275"
+			"hit_count" "7 6 5 4"
+		}
+		"MaxLevel" "4"
+		"AbilityTextureName" "axe_counter_helix"
+		"Precache" {
+	"soundfile"	"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
+	"particle"	"particles/units/heroes/hero_axe/axe_counterhelix_ad.vpcf"
+}
+	}
 }
