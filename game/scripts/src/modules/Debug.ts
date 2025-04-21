@@ -76,5 +76,16 @@ export class Debug {
             const key = GetDedicatedServerKeyV2(version);
             Say(HeroList.GetHero(0), `${version}: ${key}`, true);
         }
+
+        // 测试技能范例使用
+        const cmdHero = PlayerResource.GetPlayer(keys.playerid).GetAssignedHero();
+        if (cmd === '-a') {
+            const abilityName = args[0];
+            const ability = cmdHero.AddAbility(abilityName);
+            if (ability) {
+                ability.SetLevel(1);
+            }
+            cmdHero.SetAbilityPoints(3);
+        }
     }
 }

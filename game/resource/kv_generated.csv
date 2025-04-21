@@ -1,3 +1,9 @@
 ﻿Tokens,SChinese,English
-ability_test,测试技能,
-ability_test_Description,测试技能的描述,
+dota_tooltip_ability_crystal_nova_x,冰霜新星,
+dota_tooltip_ability_crystal_nova_x_Description,召唤具有破坏性的冰爆，降低目标区域内的敌人的移动速度。,
+dota_tooltip_ability_crystal_nova_x_aoe_radius,持续时间,
+dota_tooltip_ability_crystal_nova_x_movespeed_slow,范围,
+dota_tooltip_ability_crystal_nova_x_attackspeed_slow,移动速度降低,
+dota_tooltip_ability_crystal_nova_x_vision_duration,攻击速度降低,
+dota_tooltip_ability_crystal_nova_x_vision_radius,视野持续时间,
+dota_tooltip_ability_crystal_nova_x_nova_damage,视野范围,
