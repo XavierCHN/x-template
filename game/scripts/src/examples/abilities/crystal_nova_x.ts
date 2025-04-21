@@ -30,6 +30,7 @@ export class crystal_nova_x extends BaseAbility {
         const radius = this.GetAOERadius();
         const visionRadius = this.GetSpecialValueFor('vision_radius');
         const visionDuration = this.GetSpecialValueFor('vision_duration');
+        const duration = this.GetSpecialValueFor('duration');
 
         // 查找目标点范围内的敌人
         const enemies = FindUnitsInRadius(
@@ -57,7 +58,9 @@ export class crystal_nova_x extends BaseAbility {
             ApplyDamage(damageTable); // 应用伤害
 
             // 施加debuff
-            modifier_crystal_nova_x_debuff.apply(enemy, caster, this, {});
+            modifier_crystal_nova_x_debuff.apply(enemy, caster, this, {
+                Duration: duration,
+            });
         });
 
         // 增加视野
@@ -88,6 +91,10 @@ export class crystal_nova_x extends BaseAbility {
     }
 }
 
+interface IModifierCrystalNovaXProps {
+    Duration: number;
+}
+
 @registerModifier()
 export class modifier_crystal_nova_x_debuff extends BaseModifier {
     private attackspeed_slow: number = 0;
@@ -104,14 +111,14 @@ export class modifier_crystal_nova_x_debuff extends BaseModifier {
         return true;
     }
 
-    OnCreated(params: object): void {
+    OnCreated(params: IModifierCrystalNovaXProps): void {
         this.attackspeed_slow = this.GetAbility().GetSpecialValueFor('attackspeed_slow');
         this.movespeed_slow = this.GetAbility().GetSpecialValueFor('movespeed_slow');
         const duration = this.GetAbility().GetSpecialValueFor('duration');
         this.SetDuration(duration, true); // 设置持续时间，不刷新
     }
 
-    OnRefresh(params: object): void {
+    OnRefresh(params: IModifierCrystalNovaXProps): void {
         this.OnCreated(params);
     }
 

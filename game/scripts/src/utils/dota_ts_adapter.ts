@@ -5,13 +5,22 @@ export interface BaseItem extends CDOTA_Item_Lua {}
 export class BaseItem {}
 
 export interface BaseModifier extends CDOTA_Modifier_Lua {}
+
+/** apply方法的参数需要保持和modifier的OnCreated方法的参数一致 */
+/** the parameters of the apply method need to be consistent with the parameters of the OnCreated method of the modifier. */
+type InstanceTypeOnCreatedParameters<T extends typeof BaseModifier> = T extends abstract new (...args: any) => infer R
+    ? R extends { OnCreated: (arg: infer P) => any }
+        ? P
+        : never
+    : never;
+
 export class BaseModifier {
-    public static apply<T extends typeof BaseModifier>(
+    public static apply<T extends typeof BaseModifier, Args extends InstanceTypeOnCreatedParameters<T>>(
         this: T,
         target: CDOTA_BaseNPC,
         caster?: CDOTA_BaseNPC,
         ability?: CDOTABaseAbility,
-        modifierTable?: object
+        modifierTable?: Args
     ): InstanceType<T> {
         return target.AddNewModifier(caster, ability, this.name, modifierTable) as unknown as InstanceType<T>;
     }
