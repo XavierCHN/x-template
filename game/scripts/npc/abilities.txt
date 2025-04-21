@@ -22,6 +22,7 @@
 		"AbilityManaCost" "100 120 140 160"
 		"AbilityTextureName" "crystal_maiden_crystal_nova"
 		"AbilityType" "DOTA_ABILITY_TYPE_BASIC"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
 		"AbilityBehavior" "DOTA_ABILITY_BEHAVIOR_POINT | DOTA_ABILITY_BEHAVIOR_AOE"
 		"AbilityCastRange" "700"
 		"AbilityCastPoint" "0.3000"
@@ -36,9 +37,31 @@
 		}
 		"MaxLevel" "4"
 		"AbilityTextureName" "axe_counter_helix"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_PURE"
 		"Precache" {
 	"soundfile"	"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
 	"particle"	"particles/units/heroes/hero_axe/axe_counterhelix_ad.vpcf"
 }
+	}
+	"tiny_toss_x" {
+		"BaseClass" "ability_lua"
+		"ScriptFile" "examples/abilities/tiny_toss_x.lua"
+		"AbilityValues" {
+			"duration" "1.1"
+			"grab_radius" "275"
+			"radius" "275"
+			"bonus_damage_pct" "30 60 90"
+			"toss_damage" "200 250 300 350"
+		}
+		"MaxLevel" "4"
+		"AbilityCooldown" "10"
+		"AbilityManaCost" "70"
+		"AbilityTextureName" "tiny_toss"
+		"AbilityUnitDamageType" "DAMAGE_TYPE_MAGICAL"
+		"AbilityCastRange" "1200"
+		"AbilityCastPoint" "0"
+		"Precache" {
+            "particle"  "particles/units/heroes/hero_tiny/tiny_toss_blur.vpcf"
+		}
 	}
 }

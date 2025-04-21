@@ -105,15 +105,15 @@ export class modifier_crystal_nova_x_debuff extends BaseModifier {
         return true;
     }
 
-    OnCreated(params: object): void {
+    OnCreated(): void {
         this.attackspeed_slow = this.GetAbility().GetSpecialValueFor('attackspeed_slow');
         this.movespeed_slow = this.GetAbility().GetSpecialValueFor('movespeed_slow');
         const duration = this.GetAbility().GetSpecialValueFor('duration');
         this.SetDuration(duration, true); // 设置持续时间，不刷新
     }
 
-    OnRefresh(params: object): void {
-        this.OnCreated(params);
+    OnRefresh(): void {
+        this.OnCreated();
     }
 
     /**

@@ -9,7 +9,7 @@
 
         "Ability1"                  "crystal_nova_x"        
         "Ability2"                  "counter_helix_x"        
-        "Ability3"                  "generic_hidden"            
+        "Ability3"                  "tiny_toss_x"            
         "Ability4"                  "generic_hidden"
         "Ability5"                  "generic_hidden"
         "Ability6"                  "generic_hidden"
