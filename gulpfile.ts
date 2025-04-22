@@ -82,14 +82,6 @@ const csv_to_localization =
     };
 
 /**
- * @description 将现有的 addon_*.txt 文件转换为 addon.csv 文件，这个 task 是为了使这个task适配你原有的开发方式，如果是重新开发，则无需运行这个task
- * @description Convert addon_*.txt file to addon.csv file, this task is for adapting your original development method, if you are re-developing, you don't need to run this task
- */
-const localization_2_csv = () => {
-    return dotax.localsToCSV(`${paths.game_resource}/addon_*.txt`, `${paths.game_resource}/addon.csv`);
-};
-
-/**
  * 将panorama/images目录下的jpg,png,psd文件集合到 dest 目录中的 image_precache.css文件中
  * 使用这个 task ，你可以在 game setup 阶段的时候，将所有的图片都编译而不用自己写
  */
@@ -128,31 +120,6 @@ const compile_less =
             return compileLess();
         }
     };
-
-/**
- * start a file sserver to save/read files
- */
-const fsServer = require('./scripts/fs');
-const p = process.cwd();
-const start_file_server = (callback: Function) => {
-    const server = fsServer(p);
-
-    server.on('file', (name: string) => {
-        console.log('file: ' + name);
-    });
-    server.on('directory', (name: string) => {
-        console.log('directory: ' + name);
-    });
-
-    server.listen(10384, () => {
-        console.log('file server listening on port 10384');
-        callback();
-    });
-};
-
-gulp.task('start_file_server', start_file_server);
-
-gulp.task('localization_2_csv', localization_2_csv);
 
 gulp.task(`create_image_precache`, create_image_precache());
 gulp.task('create_image_precache:watch', create_image_precache(true));
