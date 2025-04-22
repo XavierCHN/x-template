@@ -17,6 +17,7 @@ export class Debug {
         if (IsInToolsMode()) {
             this._toggleDebugMode(true);
         }
+        this._chatListener = ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
     }
 
     private _toggleDebugMode(on?: boolean) {
@@ -28,13 +29,8 @@ export class Debug {
         if (this.DebugEnabled) {
             print('Debug mode enabled!');
             new FlameGraphProfilerTests();
-            this._chatListener = ListenToGameEvent(`player_chat`, keys => this.OnPlayerChat(keys), this);
         } else {
             print('Debug mode disabled!');
-            if (this._chatListener) {
-                StopListeningToGameEvent(this._chatListener);
-                this._chatListener = undefined;
-            }
         }
     }
 
@@ -75,17 +71,6 @@ export class Debug {
             const version = args[0];
             const key = GetDedicatedServerKeyV2(version);
             Say(HeroList.GetHero(0), `${version}: ${key}`, true);
-        }
-
-        // 测试技能范例使用
-        const cmdHero = PlayerResource.GetPlayer(keys.playerid).GetAssignedHero();
-        if (cmd === '-a') {
-            const abilityName = args[0];
-            const ability = cmdHero.AddAbility(abilityName);
-            if (ability) {
-                ability.SetLevel(1);
-            }
-            cmdHero.SetAbilityPoints(3);
         }
     }
 }
