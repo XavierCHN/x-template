@@ -11,7 +11,9 @@ let addon_name: string = 'x_template';
  * 要加密的项目列表
  * 建议需要双端运行的modifier, ability代码等不加密
  * 避免出现运行时错误或者泄漏加密秘钥
- *
+ * 当然你也可以选择修改这部分加密代码，做到服务器端使用真正的密码加密，客户端相关的代码用“伪密码”加密
+ * 然后悄悄地把解密代码放在某个神奇的地方，但是这里作为模板项目就不演示了，大家就自行研究吧！
+ * 还是建议把核心代码保护住就好，技能代码之类的放出来供提升社区水平也是不错的
  */
 const encrypt_files: string[] = [
     // 加密所有lua文件
@@ -23,10 +25,7 @@ const encrypt_files: string[] = [
     '!game/scripts/vscripts/addon_game_mode_client.lua',
 
     // 不加密解密所需代码
-    '!game/scripts/vscripts/utils/index.lua',
-    '!game/scripts/vscripts/utils/decrypt.lua',
-    '!game/scripts/vscripts/utils/aeslua.lua',
-    '!game/scripts/vscripts/utils/aeslua/**/*.lua',
+    '!game/scripts/vscripts/utils/**/*.lua',
 
     // 范例代码（包含技能和modifier）需要双端运行，这里也不加密
     '!game/scripts/vscripts/examples/**/*.lua',
