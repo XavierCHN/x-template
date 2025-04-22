@@ -15,7 +15,7 @@ English translated with [DeepSeek](https://www.deepseek.com/)
 2. Install [Node.js](https://nodejs.org)
 3. `git clone` your own project
 4. Install [VSCode](https://code.visualstudio.com/download) and open the cloned folder with VSCode
-5. Open `scripts/addon.config.js`, modify `addon_name` to your project name
+5. Open `scripts/addon.config.ts`, modify `addon_name` to your project name
 6. Run `yarn install` to install dependencies
 7. Run `yarn dev` to start development
 8. **Use `yarn launch map_name` to quickly launch tests, or `yarn launch` to only launch tools**;

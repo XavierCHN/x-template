@@ -1283,6 +1283,11 @@
   resolved "https://registry.npmmirror.com/@tsconfig/node16/-/node16-1.0.3.tgz"
   integrity sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==
 
+"@types/cli-color@^2.0.6":
+  version "2.0.6"
+  resolved "https://registry.npmmirror.com/@types/cli-color/-/cli-color-2.0.6.tgz#becc4b0c8509bbc938e7c3b2b7a0a8dd64691d08"
+  integrity sha512-uLK0/0dOYdkX8hNsezpYh1gc8eerbhf9bOKZ3e24sP67703mw9S14/yW6mSTatiaKO9v+mU/a1EVy4rOXXeZTA==
+
 "@types/eslint-scope@^3.7.3":
   version "3.7.3"
   resolved "https://registry.npmmirror.com/@types/eslint-scope/-/eslint-scope-3.7.3.tgz"
@@ -3637,11 +3642,6 @@ for-own@^1.0.0:
   dependencies:
     for-in "^1.0.1"
 
-foreachasync@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmmirror.com/foreachasync/download/foreachasync-3.0.0.tgz"
-  integrity sha1-VQKYfchxS+M5IJfzLgBxyd7gfPY=
-
 fork-ts-checker-webpack-plugin@^6.5.3:
   version "6.5.3"
   resolved "https://registry.npmmirror.com/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-6.5.3.tgz#eda2eff6e22476a2688d10661688c47f611b37f3"
@@ -5327,8 +5327,8 @@ now-and-later@^2.0.0:
 
 npm-run-all@^4.1.5:
   version "4.1.5"
-  resolved "https://registry.npmmirror.com/npm-run-all/download/npm-run-all-4.1.5.tgz?cache=0&sync_timestamp=1632765002442&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fnpm-run-all%2Fdownload%2Fnpm-run-all-4.1.5.tgz"
-  integrity sha1-BEdiAqFe4OLiFAgIYb/xKlHZj7o=
+  resolved "https://registry.npmmirror.com/npm-run-all/-/npm-run-all-4.1.5.tgz#04476202a15ee0e2e214080861bff12a51d98fba"
+  integrity sha512-Oo82gJDAVcaMdi3nuoKFavkIHBRVqQ1qvMb+9LHk/cF4P6B2m8aP04hGf7oL6wZ9BuGwX1onlLhpuoofSyoQDQ==
   dependencies:
     ansi-styles "^3.2.1"
     chalk "^2.4.1"
@@ -7411,13 +7411,6 @@ vinyl@^2.0.0, vinyl@^2.2.1:
     cloneable-readable "^1.0.0"
     remove-trailing-separator "^1.0.1"
     replace-ext "^1.0.0"
-
-walk@^2.3.14:
-  version "2.3.14"
-  resolved "https://registry.npmmirror.com/walk/download/walk-2.3.14.tgz"
-  integrity sha1-YOyGMc/SMnauHnNjzhHWJkUuHvM=
-  dependencies:
-    foreachasync "^3.0.0"
 
 watchpack@^2.3.1:
   version "2.4.0"

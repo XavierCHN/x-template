@@ -15,7 +15,7 @@
 2. Установить [Node.js](https://nodejs.org)
 3. Выполнить `git clone` вашего проекта
 4. Установить [VSCode](https://code.visualstudio.com/download) и открыть папку проекта
-5. Открыть `scripts/addon.config.js`, изменить `addon_name` на название вашего проекта
+5. Открыть `scripts/addon.config.ts`, изменить `addon_name` на название вашего проекта
 6. Выполнить `yarn install` для установки зависимостей
 7. Выполнить `yarn dev` для запуска разработки
 8. **Используйте `yarn launch map_name` для быстрого тестирования или `yarn launch` для запуска только инструментов**

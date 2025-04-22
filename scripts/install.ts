@@ -1,12 +1,10 @@
-const assert = require('assert');
-const fs = require('fs-extra');
-const path = require('path');
-const rimraf = require('rimraf');
-const { getDotaPath } = require('./utils');
+import assert from 'assert';
+import fs from 'fs-extra';
+import path from 'path';
+import getDotaPath from './getDotaPath';
+import config from './addon.config';
 
 (async () => {
-    const addon_name = require('./addon.config.js').addon_name; // 直接从addon.config.js中读取项目名称
-
     if (process.platform !== 'win32') {
         console.log('This script runs on windows only, Addon Linking is skipped.');
         return;
@@ -25,7 +23,7 @@ const { getDotaPath } = require('./utils');
         const targetRoot = path.join(dotaPath, directoryName, 'dota_addons');
         assert(fs.existsSync(targetRoot), `Could not find '${targetRoot}'`);
 
-        const targetPath = path.join(dotaPath, directoryName, 'dota_addons', addon_name);
+        const targetPath = path.join(dotaPath, directoryName, 'dota_addons', config.addon_name);
         if (fs.existsSync(targetPath)) {
             const isCorrect = fs.lstatSync(sourcePath).isSymbolicLink() && fs.realpathSync(sourcePath) === targetPath;
             if (isCorrect) {
@@ -35,12 +33,15 @@ const { getDotaPath } = require('./utils');
                 // 移除目标文件夹的所有内容，
                 console.log(`'${targetPath}' is already linked to another directory, removing`);
                 fs.chmodSync(targetPath, '0755');
-                rimraf(targetPath, () => {
+                try {
+                    await fs.remove(targetPath);
                     console.log('removed target path');
                     fs.moveSync(sourcePath, targetPath);
                     fs.symlinkSync(targetPath, sourcePath, 'junction');
                     console.log(`Repaired broken link ${sourcePath} <==> ${targetPath}`);
-                });
+                } catch (error) {
+                    console.error('Failed to remove target path:', error);
+                }
             }
         } else {
             fs.moveSync(sourcePath, targetPath);
@@ -49,10 +50,7 @@ const { getDotaPath } = require('./utils');
         }
     }
 
-    // 为什么一定要用这样的顺序写，是因为Valve不支持在addon中使用符号链接
-    // 所以我们符号链接的源必须是在dota 2 beta/game/scripts/src/shared
-    // 所以shared linking必须在最后写
-    const sharedSource = path.join(dotaPath, 'game', 'dota_addons', addon_name, 'scripts', 'src', 'shared');
+    const sharedSource = path.join(dotaPath, 'game', 'dota_addons', config.addon_name, 'scripts', 'src', 'shared');
     const sharedTargetPath = path.resolve(__dirname, '..', 'content', 'panorama', 'src', 'shared');
     if (fs.existsSync(sharedSource)) {
         if (fs.existsSync(sharedTargetPath)) {
@@ -71,7 +69,7 @@ const { getDotaPath } = require('./utils');
     } else {
         console.log(`Could not find '${sharedSource}', shared script linking is skipped`);
     }
-})().catch(error => {
+})().catch((error: Error) => {
     console.error(error);
     process.exit(1);
 });
