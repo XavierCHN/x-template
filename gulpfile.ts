@@ -63,43 +63,6 @@ const kv_2_js =
     };
 
 /**
- * @description 从 kv 文件中提取所有需要的本地化词条，你可以使用 customPrefix 和 customSuffix 之类的参数来指定自己的前缀和后缀
- * @description Extract all description from kv file, you can use customPrefix and customSuffix to specify your prefix and suffix
- */
-const kv_to_local = () => () => {
-    return gulp.src(`${paths.kv}/**/*.{kv,txt}`).pipe(
-        dotax.kvToLocalsCSV(`${paths.game_resource}/addon.csv`, {
-            // customPrefix: (key, data, path) => {
-            //     if (data.BaseClass && /ability_/.test(data.BaseClass)) {
-            //         if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
-            //             return 'dota_tooltip_ability_combo_';
-            //         } else if (data.ScriptFile && /^/.test(data.ScriptFile)) {
-            //             return 'dota_tooltip_ability_chess_ability_';
-            //         } else {
-            //             return 'dota_tooltip_ability_';
-            //         }
-            //     }
-            //     return '';
-            // },
-            // customSuffix: (key, data, path) => {
-            //     let suffix = [''];
-            //     if (data.ScriptFile && data.ScriptFile.startsWith('abilities/combos/')) {
-            //         suffix = ['_description'];
-            //         let maxLevel = data.MaxLevel;
-            //         if (maxLevel) {
-            //             suffix = suffix.concat(
-            //                 Array.from({ length: maxLevel }, (_, i) => `_level${i + 1}`)
-            //             );
-            //         }
-            //     }
-            //     return suffix;
-            // },
-            // exportAbilityValues: false,
-        })
-    );
-};
-
-/**
  * @description 将 resource/*.csv 中的本地化文本转换为 addon_*.txt 文件
  * @description Convert resource/*.csv local text to addon_*.txt file
  *
@@ -213,5 +176,4 @@ gulp.task(
 );
 gulp.task('build', gulp.series('predev'));
 gulp.task('jssync', gulp.series('sheet_2_kv', 'kv_2_js'));
-gulp.task('kv_to_local', kv_to_local());
 gulp.task('prod', gulp.series('predev'));
