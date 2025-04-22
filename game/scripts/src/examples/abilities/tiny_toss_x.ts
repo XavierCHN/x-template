@@ -34,7 +34,7 @@ export class tiny_toss_x extends BaseAbility {
     }
 
     /** 必须有可以投掷的目标才可以施法 */
-    OnAbilityPhaseStart(): boolean {
+    override OnAbilityPhaseStart(): boolean {
         if (!IsServer()) return;
         return this.FindTossTarget() != null;
     }
@@ -56,7 +56,7 @@ export class tiny_toss_x extends BaseAbility {
         return behavior;
     }
 
-    OnSpellStart(): void {
+    override OnSpellStart(): void {
         if (!IsServer()) return;
         const target = this.GetCursorTarget();
         const victim = this.FindTossTarget();
@@ -81,21 +81,21 @@ export class tiny_toss_x extends BaseAbility {
         });
     }
 
-    CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
+    override CastFilterResultTarget(target: CDOTA_BaseNPC): UnitFilterResult {
         if (this.GetCaster() == target) {
             return UnitFilterResult.FAIL_CUSTOM;
         }
         return UnitFilterResult.SUCCESS;
     }
 
-    GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
+    override GetCustomCastErrorTarget(target: CDOTA_BaseNPC): string {
         if (this.GetCaster() == target) {
             return '#dota_hud_error_cant_cast_on_self';
         }
         return '';
     }
 
-    GetAOERadius(): number {
+    override GetAOERadius(): number {
         return this.GetSpecialValueFor('radius');
     }
 }
@@ -125,7 +125,7 @@ export class modifier_tiny_toss_x extends BaseModifierMotionBoth {
     maxSpeed: number;
     start_position: Vector;
 
-    OnCreated(params: IModifierTinyTossXParams): void {
+    override OnCreated(params: IModifierTinyTossXParams): void {
         this.caster = this.GetCaster();
         this.parent = this.GetParent();
         this.ability = this.GetAbility()! as tiny_toss_x;
@@ -206,16 +206,16 @@ export class modifier_tiny_toss_x extends BaseModifierMotionBoth {
         EmitSoundOn(`Hero_Tiny.Toss.Target`, this.parent);
     }
 
-    OnDestroy(): void {
+    override OnDestroy(): void {
         if (!IsServer()) return;
         this.GetParent().RemoveHorizontalMotionController(this);
     }
 
-    CheckState() {
+    override CheckState() {
         return { [ModifierState.STUNNED]: true };
     }
 
-    UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
+    override UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number): void {
         if (!IsServer()) return;
         const target = this.target_position;
         const parent = this.parent.GetOrigin();
@@ -234,32 +234,32 @@ export class modifier_tiny_toss_x extends BaseModifierMotionBoth {
         me.SetOrigin(pos);
     }
 
-    OnHorizontalMotionInterrupted() {
+    override OnHorizontalMotionInterrupted() {
         if (!IsServer()) return;
         this.Destroy();
     }
 
-    GetEffectName() {
+    override GetEffectName() {
         return 'particles/units/heroes/hero_tiny/tiny_toss_blur.vpcf';
     }
 
-    GetEffectAttachType() {
+    override GetEffectAttachType() {
         return ParticleAttachment.ABSORIGIN_FOLLOW;
     }
 
-    IsHidden() {
+    override IsHidden() {
         return true;
     }
 
-    IsDebuff() {
+    override IsDebuff() {
         return this.GetCaster()!.GetTeamNumber() != this.GetParent().GetTeamNumber();
     }
 
-    IsStunDebuff() {
+    override IsStunDebuff() {
         return true;
     }
 
-    IsPurgable() {
+    override IsPurgable() {
         return true;
     }
 }

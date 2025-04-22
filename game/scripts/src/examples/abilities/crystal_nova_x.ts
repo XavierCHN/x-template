@@ -14,15 +14,15 @@ export class crystal_nova_x extends BaseAbility {
      * 这个在KV表里也有配置，但是其实在表里不配置也可以
      * 这里的设定会覆盖表中的设定
      */
-    GetBehavior(): AbilityBehavior | Uint64 {
+    override GetBehavior(): AbilityBehavior | Uint64 {
         return AbilityBehavior.POINT + AbilityBehavior.AOE;
     }
 
-    GetAOERadius(): number {
+    override GetAOERadius(): number {
         return this.GetSpecialValueFor('aoe_radius');
     }
 
-    OnSpellStart() {
+    override OnSpellStart() {
         const caster = this.GetCaster();
         const point = this.GetCursorPosition();
         // 获取技能数据
@@ -82,7 +82,7 @@ export class crystal_nova_x extends BaseAbility {
         EmitSoundOnLocationWithCaster(point, sound, this.GetCaster());
     }
 
-    Precache(context: CScriptPrecacheContext): void {
+    override Precache(context: CScriptPrecacheContext): void {
         PrecacheResource('particle', `particles/units/heroes/hero_crystalmaiden/maiden_crystal_nova.vpcf`, context);
         PrecacheResource('particle', `particles/generic_gameplay/generic_slowed_cold.vpcf`, context);
         PrecacheResource('soundfile', `soundevents/game_sounds_heroes/game_sounds_crystal.vsndevts`, context);
@@ -93,26 +93,26 @@ export class crystal_nova_x extends BaseAbility {
 export class modifier_crystal_nova_x_debuff extends BaseModifier {
     private attackspeed_slow: number = 0;
     private movespeed_slow: number = 0;
-    IsHidden(): boolean {
+    override IsHidden(): boolean {
         return false;
     }
 
-    IsDebuff(): boolean {
+    override IsDebuff(): boolean {
         return true;
     }
 
-    IsPurgable(): boolean {
+    override IsPurgable(): boolean {
         return true;
     }
 
-    OnCreated(): void {
+    override OnCreated(): void {
         this.attackspeed_slow = this.GetAbility().GetSpecialValueFor('attackspeed_slow');
         this.movespeed_slow = this.GetAbility().GetSpecialValueFor('movespeed_slow');
         const duration = this.GetAbility().GetSpecialValueFor('duration');
         this.SetDuration(duration, true); // 设置持续时间，不刷新
     }
 
-    OnRefresh(): void {
+    override OnRefresh(): void {
         this.OnCreated();
     }
 
@@ -122,24 +122,24 @@ export class modifier_crystal_nova_x_debuff extends BaseModifier {
      * 1. 攻击速度降低
      * 2. 移动速度降低
      */
-    DeclareFunctions(): ModifierFunction[] {
+    override DeclareFunctions(): ModifierFunction[] {
         return [ModifierFunction.ATTACKSPEED_BONUS_CONSTANT, ModifierFunction.MOVESPEED_BONUS_PERCENTAGE];
     }
 
-    GetModifierAttackSpeedBonus_Constant(): number {
+    override GetModifierAttackSpeedBonus_Constant(): number {
         return this.attackspeed_slow;
     }
 
-    GetModifierMoveSpeedBonus_Percentage(): number {
+    override GetModifierMoveSpeedBonus_Percentage(): number {
         return this.movespeed_slow;
     }
 
     // 效果状态
-    GetEffectName(): string {
+    override GetEffectName(): string {
         return `particles/generic_gameplay/generic_slowed_cold.vpcf`;
     }
 
-    GetEffectAttachType(): ParticleAttachment {
+    override GetEffectAttachType(): ParticleAttachment {
         return ParticleAttachment.ABSORIGIN_FOLLOW;
     }
 }

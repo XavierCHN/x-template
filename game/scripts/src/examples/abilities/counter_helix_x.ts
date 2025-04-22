@@ -26,15 +26,15 @@ export class modifier_counter_helix_x extends BaseModifier {
     private hits: number = 0;
     private damageTable: ApplyDamageOptions;
 
-    IsHidden(): boolean {
+    override IsHidden(): boolean {
         return false;
     }
 
-    IsPurgable(): boolean {
+    override IsPurgable(): boolean {
         return false;
     }
 
-    OnCreated(params: object): void {
+    override OnCreated(params: object): void {
         this.radius = this.GetAbility().GetSpecialValueFor('radius');
         this.hit_count = this.GetAbility().GetSpecialValueFor('hit_count');
         const damage = this.GetAbility().GetSpecialValueFor('damage');
@@ -53,7 +53,7 @@ export class modifier_counter_helix_x extends BaseModifier {
     }
 
     // 技能升级的时候会刷新modifier，这里我们需要重新设置技能的伤害和攻击计数
-    OnRefresh(params: object): void {
+    override OnRefresh(params: object): void {
         if (!IsServer()) return;
         const damage = this.GetAbility().GetSpecialValueFor('damage');
         this.damageTable.damage = damage;
@@ -65,11 +65,11 @@ export class modifier_counter_helix_x extends BaseModifier {
      * 这里我们需要做的是受到攻击的效果，所以我们注册了ON_ATTACK_LANDED事件
      * 这样在回调里面我们再做受到攻击进行反击螺旋的效果
      */
-    DeclareFunctions(): ModifierFunction[] {
+    override DeclareFunctions(): ModifierFunction[] {
         return [ModifierFunction.ON_ATTACK_LANDED];
     }
 
-    OnAttackLanded(event: ModifierAttackEvent): void {
+    override OnAttackLanded(event: ModifierAttackEvent): void {
         if (!IsServer()) return;
 
         // 这里要做许多的判定，这是因为这个事件会在所有的受到攻击（不管攻击者和目标是谁）都会触发

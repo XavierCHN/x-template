@@ -41,18 +41,18 @@ export class modifier_generic_arc extends BaseModifierMotionBoth {
     private const2: number = 0;
     private endCallback: (interrupted: boolean) => void = () => {};
 
-    OnCreated(kv: IGenericArcProps) {
+    override OnCreated(kv: IGenericArcProps) {
         if (!IsServer()) return;
         this.interrupted = false;
         this.SetJumpParameters(kv);
         this.Jump();
     }
 
-    OnRefresh(kv: any) {
+    override OnRefresh(kv: any) {
         this.OnCreated(kv);
     }
 
-    OnDestroy() {
+    override OnDestroy() {
         if (!IsServer()) return;
         const pos = this.GetParent().GetOrigin();
         this.GetParent().RemoveHorizontalMotionController(this);
@@ -61,22 +61,22 @@ export class modifier_generic_arc extends BaseModifierMotionBoth {
         if (this.endCallback) this.endCallback(this.interrupted);
     }
 
-    DecalareFunctions() {
+    override DeclareFunctions() {
         const funcs = [ModifierFunction.DISABLE_TURNING];
         if (this.GetStackCount() > 0) funcs.push(ModifierFunction.OVERRIDE_ANIMATION);
         return funcs;
     }
 
-    GetModifierDisableTurning() {
+    override GetModifierDisableTurning() {
         if (!this.isForward) return 0;
         return 1;
     }
 
-    GetOverrideAnimation() {
+    override GetOverrideAnimation() {
         return this.GetStackCount();
     }
 
-    CheckState() {
+    override CheckState() {
         return {
             [ModifierState.STUNNED]: this.isStun || false,
             [ModifierState.COMMAND_RESTRICTED]: this.isRestricted || false,
@@ -84,13 +84,13 @@ export class modifier_generic_arc extends BaseModifierMotionBoth {
         };
     }
 
-    UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number) {
+    override UpdateHorizontalMotion(me: CDOTA_BaseNPC, dt: number) {
         if (this.fix_duration && this.GetElapsedTime() >= this.duration) return;
         const pos = (me.GetOrigin() + this.direction * this.speed * dt) as Vector;
         me.SetOrigin(pos);
     }
 
-    UpdateVerticalMotion(me: CDOTA_BaseNPC, dt: number) {
+    override UpdateVerticalMotion(me: CDOTA_BaseNPC, dt: number) {
         if (this.fix_duration && this.GetElapsedTime() >= this.duration) return;
         const pos = me.GetOrigin();
         const time = this.GetElapsedTime();
@@ -108,12 +108,12 @@ export class modifier_generic_arc extends BaseModifierMotionBoth {
         }
     }
 
-    OnHorizontalMotionInterrupted() {
+    override OnHorizontalMotionInterrupted() {
         this.interrupted = true;
         this.Destroy();
     }
 
-    OnVerticalMotionInterrupted() {
+    override OnVerticalMotionInterrupted() {
         this.interrupted = true;
         this.Destroy();
     }
@@ -223,23 +223,23 @@ export class modifier_generic_arc extends BaseModifierMotionBoth {
         this.endCallback = func;
     }
 
-    IsHidden() {
+    override IsHidden() {
         return true;
     }
 
-    IsDebuff() {
+    override IsDebuff() {
         return false;
     }
 
-    IsStunDebuff() {
+    override IsStunDebuff() {
         return false;
     }
 
-    IsPurgable() {
+    override IsPurgable() {
         return true;
     }
 
-    GetAttributes() {
+    override GetAttributes() {
         return ModifierAttribute.MULTIPLE;
     }
 }
