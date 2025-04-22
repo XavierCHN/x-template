@@ -11,17 +11,25 @@ let addon_name: string = 'x_template';
  * 要加密的项目列表
  * 建议需要双端运行的modifier, ability代码等不加密
  * 避免出现运行时错误或者泄漏加密秘钥
+ *
  */
 const encrypt_files: string[] = [
+    // 加密所有lua文件
     '**/*.lua',
+    // 不加密这几个必须不加密的
     '!game/scripts/vscripts/lualib_bundle.lua',
     '!game/scripts/vscripts/addon_init.lua',
     '!game/scripts/vscripts/addon_game_mode.lua',
     '!game/scripts/vscripts/addon_game_mode_client.lua',
+
+    // 不加密解密所需代码
     '!game/scripts/vscripts/utils/index.lua',
     '!game/scripts/vscripts/utils/decrypt.lua',
     '!game/scripts/vscripts/utils/aeslua.lua',
     '!game/scripts/vscripts/utils/aeslua/**/*.lua',
+
+    // 范例代码（包含技能和modifier）需要双端运行，这里也不加密
+    '!game/scripts/vscripts/examples/**/*.lua',
 ];
 
 /** 发布时要排除的文件列表，他们不会被复制到发布的game文件夹 */
