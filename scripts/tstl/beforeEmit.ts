@@ -1,7 +1,7 @@
 import type * as ts from 'typescript';
 import type * as tstl from 'typescript-to-lua';
 
-import { addon_name } from '../addon.config';
+import { addon_name } from '../addon.config.js';
 
 const plugin: tstl.Plugin = {
     beforeEmit(program: ts.Program, options: tstl.CompilerOptions, emitHost: tstl.EmitHost, result: tstl.EmitFile[]) {
