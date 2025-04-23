@@ -29,7 +29,7 @@ if not IsServer() then
     -- 当然，你这里也可以将这个方法修改为“不安全的做法”
     -- 请自行深入研究以避免暴露密钥（自己找一个“藏密钥”的方法吧~）
     GameRules.XDecrypt = function(code, ...)
-        error(debug.traceback('请不要加密此文件的代码，因为客户端没有安全可用的密钥\n请到addon.config.ts中将此文件排除加密'))
+        error(debug.traceback('请不要加密引用此方法的文件，因为客户端没有安全可用的密钥\n请检查报错并到addon.config.ts中将对应文件排除加密'))
     end
 else
     -- 服务器端的解密方法    
