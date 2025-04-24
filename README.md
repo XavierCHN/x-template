@@ -22,7 +22,7 @@ Xavier 的 dota2 自定义游戏开发模板
 
 
 ### 使用这个模板的好处
-1. 可以使用更为`现代`的语言([typescript](https://www.typescriptlang.org/))来进行开发，且前后端钧使用 `typescript` 开发
+1. 可以使用更为`现代`的语言([typescript](https://www.typescriptlang.org/))来进行开发，且前后端均使用 `typescript` 开发
 2. 使用表格工具来填写并管理你的 `kv` 文件
 3. 使用`react`来开发UI可以更好地管理你的代码，而无需掌握`xml`的写法。
 4. 帮助解决了V社的工具中诸如`UI无法读取KV文件`，`UI图片不会自动编译`等问题。
