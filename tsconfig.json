@@ -1,19 +1,14 @@
 {
-    "compilerOptions": {
-        "target": "es2017",
-        "module": "commonjs",
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "rootDir": "./",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "baseUrl": ".",
-        "paths": {
-            "*": ["node_modules/*"]
+    "files": [],
+    "references": [
+        {
+            "path": "tsconfig.main.json"
+        },
+        {
+            "path": "tsconfig.vscripts.json"
+        },
+        {
+            "path": "tsconfig.panorama..json"
         }
-    },
-    "include": ["scripts/**/*.ts"],
-    "exclude": ["node_modules", "dist", "content", "game"]
+    ]
 }

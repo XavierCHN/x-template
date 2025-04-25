@@ -16,7 +16,7 @@
         "strictPropertyInitialization": false,
         "strict": false
     },
-    "include": ["src"],
+    "include": ["game/scripts/src"],
     "tstl": {
         "luaTarget": "JIT",
         "sourceMapTraceback": true,

@@ -1,5 +1,5 @@
 {
-    "include": ["src"],
+    "include": ["content/panorama/src"],
     "compilerOptions": {
         "target": "es2017",
         "lib": ["es2017"],
