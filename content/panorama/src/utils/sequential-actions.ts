@@ -406,26 +406,26 @@ class FunctionAction extends BaseAction {
  * Action that calls $.DispatchEvent.
  * You may include extra arguments and they will be passed to event.
  */
-class DispatchEventAction<E extends keyof DotaEventHandlers> extends FunctionAction {
-    constructor(public eventName: E, ...argsArray: PanoramaEventParams<DotaEventHandlers[E]>) {
-        super(() => $.DispatchEvent(eventName, ...argsArray));
+class DispatchEventAction<E extends PanoramaEventName> extends FunctionAction {
+    constructor(public eventName: E, ...argsArray: PanoramaEventParams<PanoramaEvent[E]>) {
+        super(() => $.DispatchEvent(eventName as string, '', ...argsArray));
     }
 }
 
 /** Action that waits for a specific event type to be fired on the given panel. */
 class WaitForEventAction extends BaseAction {
     panel: Panel;
-    eventName: keyof DotaEventHandlers;
+    eventName: PanoramaEventName;
     receievedEvent = false;
 
-    constructor(panel: Panel, eventName: keyof DotaEventHandlers) {
+    constructor(panel: Panel, eventName: PanoramaEventName) {
         super();
         this.panel = panel;
         this.eventName = eventName;
     }
 
     start(): void {
-        $.RegisterEventHandler(this.eventName, this.panel, () => (this.receievedEvent = true));
+        $.RegisterEventHandler(this.eventName as string, this.panel, () => (this.receievedEvent = true));
     }
 
     update(): boolean {
@@ -849,8 +849,9 @@ declare global {
         FireEntityInput(entityName: string, inputName: string, value: string | number): void;
     }
     interface DollarStatic {
-        DispatchEvent(eventName: string, ...args: any[]): void;
+        DispatchEvent<E extends PanoramaEventName>(eventName: E, ...args: PanoramaEventParams<PanoramaEvent[E]>): void;
     }
+
     function PlayUISoundScript(sSound: string): number;
     function StopUISoundScript(nGuid: number): void;
     function IsUISoundScriptPlaying(nGuid: number): boolean;
