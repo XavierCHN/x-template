@@ -1,2 +1,1 @@
-#base "items_list_1.txt"
-#base "items_list_2.txt"
+#base "items_list.txt"
