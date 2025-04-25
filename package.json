@@ -70,6 +70,7 @@
         "steam-game-path": "^2.0.1",
         "terser-webpack-plugin": "^5.3.4",
         "ts-loader": "^8.1.0",
+        "ts-node": "^10.9.2",
         "tsx": "^4.19.3",
         "typescript": "~5.8.2",
         "typescript-to-lua": "^1.31.0",
