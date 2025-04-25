@@ -249,6 +249,9 @@ declare interface PanoramaEvent {
     DOTAShowReferencePage(xmlPath: string): void;
     DOTAShowReferencePageStyled(xmlPath: string, styleClass: string): void;
     DOTAHUDShopOpened(shopType: DOTA_SHOP_TYPE, opened: boolean): void;
+    DOTAHUDToggleScoreboard(): void;
+    DOTAHUDShowScoreboard(): void;
+    DOTAHUDHideScoreboard(): void;
 
     /** ========================================================== */
     /**                 UNDOCUMENTED BUT USEFUL                    */
@@ -275,6 +278,8 @@ declare interface PanoramaEvent {
     /** Hide custom layout tooltip */
     UIHideCustomLayoutTooltip(panel: PanelBase, toolipId: string): void;
 
+    UIShowCustomLayoutPopup(id: string, xmlPath: string): void;
+
     /** Click the disconnect icon */
     DOTAHUDGameDisconnect(): void;
 
@@ -286,6 +291,9 @@ declare interface PanoramaEvent {
 
     /** Popup button is clicked */
     UIPopupButtonClicked(panel: PanelBase): void;
+
+    /** Fire a game event clientside? */
+    FireCustomGameEvent_Str(eventName: string, data: string | number): void;
 }
 
 declare type PanoramaEventName = keyof PanoramaEvent;
