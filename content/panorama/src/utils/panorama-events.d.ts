@@ -248,6 +248,7 @@ declare interface PanoramaEvent {
     DOTAScenePanelDumpState(): void;
     DOTAShowReferencePage(xmlPath: string): void;
     DOTAShowReferencePageStyled(xmlPath: string, styleClass: string): void;
+    DOTAHUDShopOpened(shopType: DOTA_SHOP_TYPE, opened: boolean): void;
 
     /** ========================================================== */
     /**                 UNDOCUMENTED BUT USEFUL                    */
