@@ -3,14 +3,10 @@
  */
 
 declare global {
-    interface ICustomKeys {
-        space: 'SPACE';
-    }
-
     interface CustomUIConfig {
-        KeyState: Partial<Record<ICustomKeys[keyof ICustomKeys], boolean>>;
-        KeyDownCallback: Partial<Record<ICustomKeys[keyof ICustomKeys], Function>>;
-        KeyUpCallback: Partial<Record<ICustomKeys[keyof ICustomKeys], Function>>;
+        KeyState: Partial<Record<string, boolean>>;
+        KeyDownCallback: Partial<Record<string, Function>>;
+        KeyUpCallback: Partial<Record<string, Function>>;
         KeyCallbackID: number;
     }
 }
@@ -19,9 +15,9 @@ GameUI.CustomUIConfig().KeyState = {};
 GameUI.CustomUIConfig().KeyDownCallback = {};
 GameUI.CustomUIConfig().KeyUpCallback = {};
 
-export function registerCustomKey(k: ICustomKeys[keyof ICustomKeys]) {
+export function registerCustomKey(keyName: string) {
     const c = GameUI.CustomUIConfig();
-    const key = k;
+    const key = keyName;
     const command = `On${key}${Date.now()}`;
     Game.CreateCustomKeyBind(key, `+${command}`);
     Game.AddCommand(
