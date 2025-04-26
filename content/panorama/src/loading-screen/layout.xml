@@ -4,6 +4,9 @@
     </scripts>
     <styles>
         <include src="./styles.less" />
+
+        <!-- 在这里引入css资源，让所有的图片资源可以被引擎发现、编译并在ts代码中使用 -->
+        <include src="../../image_precache0.css" />
     </styles>
     <Panel class="root" hittest="false" />
 </root>
