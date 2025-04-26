@@ -406,19 +406,19 @@ class FunctionAction extends BaseAction {
  * Action that calls $.DispatchEvent.
  * You may include extra arguments and they will be passed to event.
  */
-class DispatchEventAction<E extends PanoramaEventName> extends FunctionAction {
-    constructor(public eventName: E, ...argsArray: PanoramaEventParams<PanoramaEvent[E]>) {
-        super(() => $.DispatchEvent(eventName as string, '', ...argsArray));
+class DispatchEventAction<E extends PanoramaEvents.PanoramaEventName> extends FunctionAction {
+    constructor(public eventName: E, ...argsArray: PanoramaEvents.InferPanoramaEventParams<E, any[]>) {
+        super(() => $.DispatchEvent(eventName as string, ...argsArray));
     }
 }
 
 /** Action that waits for a specific event type to be fired on the given panel. */
 class WaitForEventAction extends BaseAction {
     panel: Panel;
-    eventName: PanoramaEventName;
+    eventName: PanoramaEvents.PanoramaEventName;
     receievedEvent = false;
 
-    constructor(panel: Panel, eventName: PanoramaEventName) {
+    constructor(panel: Panel, eventName: PanoramaEvents.PanoramaEventName) {
         super();
         this.panel = panel;
         this.eventName = eventName;
@@ -844,12 +844,43 @@ class PlayAndTrackSoundAction extends FunctionAction {
     }
 }
 
+declare namespace PanoramaEvents {
+    type PanoramaEventName = keyof PanoramaEvent;
+    type InferPanoramaEventParams<T extends string, TUntyped> = T extends PanoramaEventName
+        ? PanoramaEvent[T] extends (...args: infer P) => void
+            ? P | [PanelBase, ...P]
+            : TUntyped
+        : TUntyped;
+    type InferPanoramaCallback<T extends string> = T extends PanoramaEventName
+        ? PanoramaEvent[T] extends (...args: infer P) => void
+            ? (...args: P) => void
+            : (...args: any[]) => void
+        : (...args: any[]) => void;
+}
+
 declare global {
     interface ScenePanel extends Panel {
         FireEntityInput(entityName: string, inputName: string, value: string | number): void;
     }
     interface DollarStatic {
-        DispatchEvent<E extends PanoramaEventName>(eventName: E, ...args: PanoramaEventParams<PanoramaEvent[E]>): void;
+        DispatchEvent<E extends PanoramaEvents.PanoramaEventName | string>(
+            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
+            ...args: PanoramaEvents.InferPanoramaEventParams<E, any[]>
+        ): void;
+        DispatchEventAsync<E extends PanoramaEvents.PanoramaEventName | string>(
+            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
+            ...args: PanoramaEvents.InferPanoramaEventParams<E, any[]>
+        ): void;
+        RegisterEventHandler<E extends PanoramaEvents.PanoramaEventName | string>(
+            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
+            panel: PanelBase | string,
+            callback: PanoramaEvents.InferPanoramaCallback<E>
+        ): void;
+        RegisterForUnhandledEvent<E extends PanoramaEvents.PanoramaEventName | string>(
+            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
+            callback: PanoramaEvents.InferPanoramaCallback<E>
+        ): UnhandledEventListenerID;
+        UnregisterForUnhandledEvent(event: string, handle: UnhandledEventListenerID): void;
     }
 
     function PlayUISoundScript(sSound: string): number;
