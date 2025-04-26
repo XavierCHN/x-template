@@ -1,6 +1,9 @@
 import 'panorama-polyfill-x/lib/console';
 import 'panorama-polyfill-x/lib/timers';
 
+/** 隐藏一些默认的UI元素 */
+import '../utils/hide-default-hud';
+
 import { type FC } from 'react';
 import { render } from 'react-panorama-x';
 import { PanoramaQRCode } from '../utils/react-panorama-qrcode';
