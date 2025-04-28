@@ -761,7 +761,6 @@ function copyTables(destination: any, keysTable: any, valuesTable?: any): any {
         setmetatable(destination, mt);
     }
     for (const [k, v] of pairs(keysTable)) {
-        print(k);
         if (type(v) == 'table') {
             destination[k] = copyTables({}, v, valuesTable[v]);
         } else {
