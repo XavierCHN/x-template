@@ -1,7 +1,5 @@
 import { reloadable } from '../utils/tstl-utils';
 
-import { FlameGraphProfilerTests } from '../utils/performance/flame_graph_profiler_test';
-
 @reloadable
 export class Debug {
     DebugEnabled = false;
@@ -28,7 +26,6 @@ export class Debug {
         }
         if (this.DebugEnabled) {
             print('Debug mode enabled!');
-            new FlameGraphProfilerTests();
         } else {
             print('Debug mode disabled!');
         }
