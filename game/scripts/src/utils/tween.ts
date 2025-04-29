@@ -27,6 +27,31 @@
     MIT LICENSE
 
     Modified to TypescriptToLua version by XavierCHN @2025.04.28
+
+
+    @example
+    ```Typescript
+    import { tween } from './utils/tween';
+
+    const pos = { x: 0, y: 0 };
+    const end = { x: 100, y: 100 };
+    const duration = 1;
+    const myTween = tween(duration, pos, end, 'outQuad')
+    let now = GameRules.GetGameTime();
+    Timers.CreateTimer(() => {
+        let newTime = GameRules.GetGameTime();
+        let deltaTime = newTime - now;
+        now = newTime;
+        const finished = myTween.update(deltaTime);
+        if (finished) {
+            print('Tween finished!');
+            return null;
+        } else {
+            print(pos.x, pos.y);
+            return 0.033;
+        }
+    });
+    ```
  */
 
 const pow = math.pow,
