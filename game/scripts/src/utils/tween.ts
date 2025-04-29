@@ -533,6 +533,25 @@ namespace EasingFunctions {
         return inElastic(t * 2 - d, b + c / 2, c / 2, d, a, p);
     }
 
+    /**
+     * 来自小丑牌的弹性缓动效果
+     * fuck 数学太差了，小丑牌的弹性缓动效果怎么那么好
+     * 不知道是不是小丑牌原创
+     * 总归目前为止据我所知 © LocalThunk
+     *
+     * @export
+     * @param {number} t 当前时间
+     * @param {number} b 初始值
+     * @param {number} c 变化量
+     * @param {number} d 总时长
+     * @return {number} 计算后的当前值
+     */
+    export function elasticBalatro(t: number, b: number, c: number, d: number): number {
+        let p = (d - t) / d;
+        p = -pow(2, 10 * p - 10) * sin(((p * 10 - 10.75) * (2 * pi)) / 3);
+        return p * b + (1 - p) * (b + c);
+    }
+
     // back
     /**
      * 回退缓动进入函数
@@ -811,8 +830,8 @@ class Tween<T extends object> {
     }
 }
 
-type EasingFunctionName = keyof typeof EasingFunctions;
-type EasingFunction = (t: number, b: number, c: number, d: number) => number;
+export type EasingFunctionName = keyof typeof EasingFunctions;
+export type EasingFunction = (t: number, b: number, c: number, d: number) => number;
 
 export function tween<T extends object>(duration: number, subject: T, target: Partial<T>, easing: EasingFunctionName | EasingFunction = 'linear') {
     const easingFunction = getEasingFunction(easing);
