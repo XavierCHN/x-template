@@ -50,25 +50,25 @@ import config from './addon.config';
         }
     }
 
-    const sharedSource = path.join(dotaPath, 'game', 'dota_addons', config.addon_name, 'scripts', 'src', 'shared');
-    const sharedTargetPath = path.resolve(__dirname, '..', 'content', 'panorama', 'src', 'shared');
-    if (fs.existsSync(sharedSource)) {
-        if (fs.existsSync(sharedTargetPath)) {
-            const isCorrect = fs.lstatSync(sharedTargetPath).isSymbolicLink() && fs.realpathSync(sharedTargetPath) === sharedSource;
-            if (isCorrect) {
-                console.log(`Skipping '${sharedSource}' since it is already linked`);
-            } else {
-                fs.removeSync(sharedTargetPath);
-                fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
-                console.log(`Repaired broken link ${sharedSource} <==> ${sharedTargetPath}`);
-            }
-        } else {
-            fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
-            console.log(`Linked ${sharedSource} <==> ${sharedTargetPath}`);
-        }
-    } else {
-        console.log(`Could not find '${sharedSource}', shared script linking is skipped`);
-    }
+    // const sharedSource = path.join(dotaPath, 'game', 'dota_addons', config.addon_name, 'scripts', 'src', 'shared');
+    // const sharedTargetPath = path.resolve(__dirname, '..', 'content', 'panorama', 'src', 'shared');
+    // if (fs.existsSync(sharedSource)) {
+    //     if (fs.existsSync(sharedTargetPath)) {
+    //         const isCorrect = fs.lstatSync(sharedTargetPath).isSymbolicLink() && fs.realpathSync(sharedTargetPath) === sharedSource;
+    //         if (isCorrect) {
+    //             console.log(`Skipping '${sharedSource}' since it is already linked`);
+    //         } else {
+    //             fs.removeSync(sharedTargetPath);
+    //             fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
+    //             console.log(`Repaired broken link ${sharedSource} <==> ${sharedTargetPath}`);
+    //         }
+    //     } else {
+    //         fs.symlinkSync(sharedSource, sharedTargetPath, 'junction');
+    //         console.log(`Linked ${sharedSource} <==> ${sharedTargetPath}`);
+    //     }
+    // } else {
+    //     console.log(`Could not find '${sharedSource}', shared script linking is skipped`);
+    // }
 })().catch((error: Error) => {
     console.error(error);
     process.exit(1);

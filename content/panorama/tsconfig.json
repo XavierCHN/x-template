@@ -1,5 +1,5 @@
 {
-    "include": ["src"],
+    "include": ["src", "../../shared"],
     "compilerOptions": {
         "target": "es2017",
         "lib": ["es2017"],
