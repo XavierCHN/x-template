@@ -15,5 +15,5 @@
         }
     },
     "include": ["scripts/**/*.ts"],
-    "exclude": ["node_modules", "dist", "content", "game"]
+    "exclude": ["node_modules", "dist", "content", "game", "shared"]
 }
