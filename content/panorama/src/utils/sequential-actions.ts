@@ -844,45 +844,10 @@ class PlayAndTrackSoundAction extends FunctionAction {
     }
 }
 
-declare namespace PanoramaEvents {
-    type PanoramaEventName = keyof PanoramaEvent;
-    type InferPanoramaEventParams<T extends string, TUntyped> = T extends PanoramaEventName
-        ? PanoramaEvent[T] extends (...args: infer P) => void
-            ? P | [PanelBase, ...P]
-            : TUntyped
-        : TUntyped;
-    type InferPanoramaCallback<T extends string> = T extends PanoramaEventName
-        ? PanoramaEvent[T] extends (...args: infer P) => void
-            ? (...args: P) => void
-            : (...args: any[]) => void
-        : (...args: any[]) => void;
-}
-
 declare global {
     interface ScenePanel extends Panel {
         FireEntityInput(entityName: string, inputName: string, value: string | number): void;
     }
-    interface DollarStatic {
-        DispatchEvent<E extends PanoramaEvents.PanoramaEventName | string>(
-            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
-            ...args: PanoramaEvents.InferPanoramaEventParams<E, any[]>
-        ): void;
-        DispatchEventAsync<E extends PanoramaEvents.PanoramaEventName | string>(
-            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
-            ...args: PanoramaEvents.InferPanoramaEventParams<E, any[]>
-        ): void;
-        RegisterEventHandler<E extends PanoramaEvents.PanoramaEventName | string>(
-            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
-            panel: PanelBase | string,
-            callback: PanoramaEvents.InferPanoramaCallback<E>
-        ): void;
-        RegisterForUnhandledEvent<E extends PanoramaEvents.PanoramaEventName | string>(
-            eventName: E extends PanoramaEvents.PanoramaEventName ? E : string,
-            callback: PanoramaEvents.InferPanoramaCallback<E>
-        ): UnhandledEventListenerID;
-        UnregisterForUnhandledEvent(event: string, handle: UnhandledEventListenerID): void;
-    }
-
     function PlayUISoundScript(sSound: string): number;
     function StopUISoundScript(nGuid: number): void;
     function IsUISoundScriptPlaying(nGuid: number): boolean;
