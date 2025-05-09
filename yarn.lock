@@ -1350,10 +1350,10 @@
   dependencies:
     lua-types "^2.13.1"
 
-"@moddota/panorama-types@^1.35.0":
-  version "1.35.0"
-  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.35.0.tgz#a9539d723638889125a2f68523e3f8da2bd67ada"
-  integrity sha512-PAF9vTqhIJnUyV2Nx9DNONlF7AwOVIyWbWjUcoAlK4Qg7y8qJOuE0QSSytpdmoD4rwTByZK/BLO5Qi2sHOCROQ==
+"@moddota/panorama-types@^1.37.0":
+  version "1.37.0"
+  resolved "https://registry.npmmirror.com/@moddota/panorama-types/-/panorama-types-1.37.0.tgz#710ac1e9abcbaafe7b6e32cb4b815ec7b93d083d"
+  integrity sha512-Bz87DguFV3tRpFXPKm5bbAPMpLkZTSfBtliSDem5rDlleF2AM7QziQ6Wx8ha5TvgcUuWeFu3jXb8gcfM044VTg==
   dependencies:
     tslib "^2.0.3"
 
