@@ -10,3 +10,5 @@ if (IsServer()) {
 
 // rename SHA and make it global
 globalThis.SHA = require('sha');
+
+globalThis.LibDeflate = require('libs/deflate');
