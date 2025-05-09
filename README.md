@@ -71,6 +71,8 @@ Xavier 的 dota2 自定义游戏开发模板
   - 可以尝试使用[npmmirror镜像](https://npmmirror.com/)，或者直接执行`yarn config set registry https://registry.npmmirror.com`再执行`yarn install`
 - 如何在保持 `yarn dev` 状态下再执行其他指令？
   - 在 `vscode` 中，你可以使用**ctrl+shift+5**来同时打开多个**terminal**终端
+- 如何获取加密所需的秘钥？
+  - 你可以使用本项目提供的 Debug 代码指令，先不加密上传，使用 `get_key_v3 [version]` 指令获取秘钥，之后再加密上传覆盖，具体的实现请 [查阅代码](https://github.com/XavierCHN/x-template/blob/master/game/scripts/src/modules/Debug.ts#L32-L38)
 - 有没有相关的教程？
   - TODO：制作相关教程
 
