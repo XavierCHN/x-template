@@ -129,4 +129,24 @@ declare namespace LibDeflate {
      * @throws 如果 `strlen` 与 `preset` 的长度不匹配，或者 `adler32` 与 `preset` 的 Adler-32 校验和不匹配，则会抛出错误。
      */
     function CreateDictionary(preset: string, strlen: number, adler32: number): CompressDictionary;
+
+    /**
+     * 将字符串编码为可打印格式。<br>
+     * 此函数借鉴了 WeakAuras2 的实现，由 LibDeflate 的作者重写。<br>
+     * 编码后的字符串长度将比原始字符串长 25%。不过，编码字符串的每个字节都将是 64 个可打印 ASCII 字符之一，
+     * 这些字符更易于复制、粘贴和显示。（26 个小写字母、26 个大写字母、10 个数字、左括号或右括号）
+     * @param {string} str 待编码的字符串。
+     * @returns {string} 编码后的字符串。
+     */
+    function EncodeForPrint(input: string): string;
+
+    /**
+     * 解码由 `LibDeflate.EncodeForPrint` 生成的可打印字符串。
+     * 在解码前，会移除 `str` 前后的控制字符或空格，因此如果 `str` 是用户复制粘贴而来且带有前后空格时，使用起来会更方便。
+     * 如果字符串包含任何无法由 `LibDeflate.EncodeForPrint` 生成的字符，解码将会失败。
+     * 也就是说，如果字符串包含的字符不是 26 个小写字母、26 个大写字母、10 个数字、左括号或右括号中的任何一个，解码就会失败。
+     * @param {string} str 待解码的字符串。
+     * @returns {string | undefined} 解码成功时返回解码后的字符串，失败时返回 `undefined`。
+     */
+    function DecodeForPrint(input: string): string;
 }
