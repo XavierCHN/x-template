@@ -44,6 +44,8 @@ export function setKeyUpCallback(keyName: string, callback: Function) {
 
 /**
  * 按下某个键，按下的时候触发回调
+ * 记得使用 React.useCallback 包裹回调函数
+ *
  * @export
  * @param {CustomKeys} keyName
  * @param {Function} callback
@@ -61,6 +63,7 @@ export function useKeyDown(keyName: string, callback: Function) {
 
 /**
  * 按下某个键，松开的时候触发回调
+ * 记得使用 React.useCallback 包裹回调函数
  *
  * @export
  * @param {string} keyName
