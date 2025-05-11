@@ -44,10 +44,10 @@ const exclude_files: string[] = [
 /** 本地测试（工具模式）密钥，一般不需要修改 */
 const encryptDedicatedServerKeyTest: string = `Invalid_NotOnDedicatedServer`;
 
-/** 测试发布（测试图）密钥，运行 yarn prod 必须，获取方法请参考 https://github.com/XavierCHN/fetch-keys */
+/** 测试发布（测试图）密钥，运行 yarn prod 必须，获取方法请查看 Debug.ts 中的 get_key_v3 指令 */
 const encryptDedicatedServerKeyRelease_Test: string = `这里需要填入测试图的密钥 GetDedicatedServerKeyV3('version') 的结果`;
 
-/** 正式发布（正式图）密钥，运行 yarn prod 必须，获取方法请参考 https://github.com/XavierCHN/fetch-keys */
+/** 正式发布（正式图）密钥，运行 yarn prod 必须，获取方法请查看 Debug.ts 中的 get_key_v3 指令 */
 const encryptDedicatedServerKeyRelease: string = `这里需要填入正式的发布密钥 GetDedicatedServerKeyV3('version') 的结果`;
 
 /** 验证配置是否合法 */
