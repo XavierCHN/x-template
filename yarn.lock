@@ -6144,10 +6144,10 @@ react-is@^16.13.1, react-is@^16.8.1:
   resolved "https://registry.npmmirror.com/react-is/download/react-is-16.13.1.tgz?cache=0&sync_timestamp=1598612864426&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Freact-is%2Fdownload%2Freact-is-16.13.1.tgz"
   integrity sha1-eJcppNw23imZ3BVt1sHZwYzqVqQ=
 
-react-panorama-x@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.npmmirror.com/react-panorama-x/-/react-panorama-x-0.4.0.tgz#a74ee465c453911223319c1ce66ca59dd66e8a0c"
-  integrity sha512-q9x7SvDruaBdIRbLVNZfJodB0Z8exPYtIHiLNStZMAPW1vyTz5rg1CqNVXnpzF5FxKJ6hakMkXefyPnGS2uAow==
+react-panorama-x@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/react-panorama-x/-/react-panorama-x-0.5.0.tgz#31377b70dd4d6f10662f36c78d2560dcda5ecd17"
+  integrity sha512-4MGXz7qq8LEAl5E8Vzo7N8S+tFHczr86RCmEfIHKZppS/cyzxCpZntCG93DZpZ5EInmH7FFsEjxHHqtUyOJ2XA==
   dependencies:
     panorama-polyfill-x "^0.1.2"
 
