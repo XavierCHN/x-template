@@ -41,3 +41,6 @@ content/panorama/src/shared
 
 #ignore local test scripts
 scripts/.test
+
+# Steam thumbnail cache
+game/tools_thumbnail_cache.sqlite3
