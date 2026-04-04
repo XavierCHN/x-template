@@ -64,18 +64,23 @@ function callExpressionVisitor(node: ts.CallExpression, context: tstl.Transforma
     // 参数2: filePath（如果用户没有提供，自动注入）
     // 参数3: env（如果用户没有提供，自动注入 getfenv(1)）
 
-    // 如果用户没有提供 name，插入 nil
+    // TSTL 编译的箭头函数会自动添加 ____ 参数（用于 this）
+    // 所以我们需要在参数列表开头插入一个 nil 来占位
     if (transformedArguments.length === 0) {
-        transformedArguments.push(lua.createNilLiteral());
+        transformedArguments.push(lua.createNilLiteral()); // ____ 占位
+        transformedArguments.push(lua.createNilLiteral()); // name
+    } else if (transformedArguments.length === 1) {
+        // 用户提供了 name，需要插入 ____ 占位
+        transformedArguments.unshift(lua.createNilLiteral());
     }
 
     // 如果用户没有提供 filePath，注入文件路径
-    if (transformedArguments.length < 2) {
+    if (transformedArguments.length < 3) {
         transformedArguments.push(lua.createStringLiteral(relativePath));
     }
 
     // 如果用户没有提供 env，注入 getfenv(1)
-    if (transformedArguments.length < 3) {
+    if (transformedArguments.length < 4) {
         transformedArguments.push(createGetfenvLuaCall(node));
     }
 
