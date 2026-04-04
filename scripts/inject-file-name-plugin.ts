@@ -17,13 +17,6 @@ function isRegisterCall(node: ts.Node): boolean {
 }
 
 /**
- * 创建文件路径参数节点
- */
-function createFilePathArgument(filePath: string): ts.StringLiteral {
-    return ts.factory.createStringLiteral(filePath);
-}
-
-/**
  * 创建 Lua 的 getfenv(1) 调用表达式
  */
 function createGetfenvLuaCall(tsOriginal: ts.Node): lua.CallExpression {
@@ -66,16 +59,23 @@ function callExpressionVisitor(node: ts.CallExpression, context: tstl.Transforma
     // 转换原始的参数
     const transformedArguments = node.arguments.map(arg => context.transformExpression(arg));
 
-    // 参数1: name（如果用户提供了就保留，否则保持 nil）
+    // 确保参数列表有正确的长度：
+    // 参数1: name（如果用户提供了就保留，否则为 nil）
     // 参数2: filePath（如果用户没有提供，自动注入）
+    // 参数3: env（如果用户没有提供，自动注入 getfenv(1)）
+
+    // 如果用户没有提供 name，插入 nil
+    if (transformedArguments.length === 0) {
+        transformedArguments.push(lua.createNilLiteral());
+    }
+
+    // 如果用户没有提供 filePath，注入文件路径
     if (transformedArguments.length < 2) {
-        // 用户没有提供 filePath，注入文件路径
         transformedArguments.push(lua.createStringLiteral(relativePath));
     }
 
-    // 参数3: env（如果用户没有提供，自动注入 getfenv(1)）
+    // 如果用户没有提供 env，注入 getfenv(1)
     if (transformedArguments.length < 3) {
-        // 用户没有提供 env，注入 getfenv(1)
         transformedArguments.push(createGetfenvLuaCall(node));
     }
 
