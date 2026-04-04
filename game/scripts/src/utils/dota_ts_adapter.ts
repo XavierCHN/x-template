@@ -123,7 +123,11 @@ function getFileScope(): [any, string] {
     if (typeof getfenv === 'function' && __TS__fileRegistry) {
         let level = 1;
         while (level < 20) {
-            const env = getfenv(level);
+            // 使用 pcall 保护 getfenv 调用，避免 level 超出调用栈深度时报错
+            const [success, env] = pcall(getfenv, level);
+            if (!success || env == null) {
+                break;
+            }
             if (env && env !== _G) {
                 const envKey = tostring(env);
                 const fileName = __TS__fileRegistry[envKey];
