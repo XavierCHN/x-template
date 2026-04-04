@@ -1,5 +1,13 @@
 TIMERS_VERSION = "1.08"
 
+-- 兼容 debug.traceback 不可用的情况
+local function errorHandler(err)
+    if debug and debug.traceback then
+        return debug.traceback(err)
+    end
+    return tostring(err)
+end
+
 --[[
 	1.06 modified by Celireor (now uses binary heap priority queue instead of iteration to determine timer of shortest duration)
 	DO NOT MODIFY A REALTIME TIMER TO USE GAMETIME OR VICE VERSA MIDWAY WITHOUT FIRST REMOVING AND RE-ADDING THE TIMER
@@ -152,7 +160,7 @@ function Timers:Think()
 	local nextTickCallbacks = table.merge({}, Timers.nextTickCallbacks)
 	Timers.nextTickCallbacks = {}
 	for _, cb in ipairs(nextTickCallbacks) do
-		local status, result = xpcall(cb, debug.traceback)
+		local status, result = xpcall(cb, errorHandler)
 		if not status then
 			Timers:HandleEventError(result)
 		end
@@ -190,9 +198,9 @@ function Timers:ExecuteTimers(timerList, now)
 		-- Run the callback
 		local status, timerResult
 		if currentTimer.context then
-			status, timerResult = xpcall(function() return currentTimer.callback(currentTimer.context, currentTimer) end, debug.traceback)
+			status, timerResult = xpcall(function() return currentTimer.callback(currentTimer.context, currentTimer) end, errorHandler)
 		else
-			status, timerResult = xpcall(function() return currentTimer.callback(currentTimer) end, debug.traceback)
+			status, timerResult = xpcall(function() return currentTimer.callback(currentTimer) end, errorHandler)
 		end
 
 		Timers.runningTimer = nil

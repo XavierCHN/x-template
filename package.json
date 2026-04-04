@@ -10,7 +10,7 @@
         "prod": "tsx scripts/prepublish.ts && run-s prod:gulp prod:panorama prod:vscripts && tsx scripts/publish.ts",
         "prod:gulp": "gulp prod",
         "prod:panorama": "node --preserve-symlinks node_modules/webpack/bin/webpack.js --config content/panorama/webpack.prod.js && gulp compile_less",
-        "prod:vscripts": "tstl --project game/scripts/tsconfig.json",
+        "prod:vscripts": "tstl --project game/scripts/tsconfig.prod.json",
         "predev": "tsx scripts/install.ts && gulp predev",
         "dev": "run-p dev:gulp dev:panorama dev:vscripts",
         "dev:gulp": "gulp dev",

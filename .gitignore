@@ -44,3 +44,4 @@ scripts/.test
 
 # Steam thumbnail cache
 game/tools_thumbnail_cache.sqlite3
+game/tools_thumbnail_cache.sqlite3-*

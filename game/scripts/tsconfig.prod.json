@@ -1,0 +1,10 @@
+{
+    "extends": "./tsconfig.json",
+    "tstl": {
+        "luaTarget": "JIT",
+        "sourceMapTraceback": false,
+        "luaPlugins": [
+            { "name": "../../scripts/inject-file-name-plugin.js" }
+        ]
+    }
+}
