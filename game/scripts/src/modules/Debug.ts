@@ -9,6 +9,7 @@ const DebugCallbacks: Record<string, { desc: string; func: DebugCallbackFunction
     ['-help']: {
         desc: '显示所有的测试指令',
         func: () => {
+            if (!IsInToolsMode()) return;
             print('所有的测试指令:');
             for (const [cmd, { desc }] of Object.entries(DebugCallbacks)) {
                 print(`${cmd}: ${desc}`);
@@ -18,20 +19,23 @@ const DebugCallbacks: Record<string, { desc: string; func: DebugCallbackFunction
     ['-s']: {
         desc: '重载脚本',
         func: () => {
-            SendToConsole('script_reload');
-            print('-r 命令script_reload!重载脚本!');
+            if (!IsInToolsMode()) return;
+            SendToServerConsole('script_reload');
+            print('-s 命令script_reload!重载脚本!');
         },
     },
     ['-r']: {
         desc: '重启游戏',
         func: () => {
-            SendToConsole('restart'); // 重启游戏
+            if (!IsInToolsMode()) return;
+            SendToServerConsole('restart'); // 重启游戏
             print('-r 命令restart重启游戏!');
         },
     },
     ['get_key_v3']: {
         desc: '获取v3版本的key',
         func: (hero, ...args: string[]) => {
+            if (!IsInToolsMode()) return;
             const version = args[0];
             const key = GetDedicatedServerKeyV3(version);
             Say(hero, `${version}: ${key}`, true);
@@ -40,6 +44,7 @@ const DebugCallbacks: Record<string, { desc: string; func: DebugCallbackFunction
     ['get_key_v2']: {
         desc: '获取v2版本的key， get_key_v2 version',
         func: (hero, ...args: string[]) => {
+            if (!IsInToolsMode()) return;
             const version = args[0];
             const key = GetDedicatedServerKeyV2(version);
             Say(hero, `${version}: ${key}`, true);
@@ -48,6 +53,7 @@ const DebugCallbacks: Record<string, { desc: string; func: DebugCallbackFunction
     ['-tween']: {
         desc: '测试Tween',
         func: (hero, ...args: string[]) => {
+            if (!IsInToolsMode()) return;
             FindClearSpaceForUnit(hero, hero.GetAbsOrigin(), true);
             const source = { scale: 1 };
             const target = { scale: 3 };
