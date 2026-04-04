@@ -124,7 +124,7 @@ function getFileScope(): [any, string] {
         let level = 1;
         while (level < 20) {
             // 使用 pcall 保护 getfenv 调用，避免 level 超出调用栈深度时报错
-            const [success, env] = pcall(getfenv, level);
+            const [success, env] = pcall((l: number) => getfenv(l), level);
             if (!success || env == null) {
                 break;
             }
