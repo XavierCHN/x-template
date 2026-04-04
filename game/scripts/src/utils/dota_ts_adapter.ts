@@ -48,11 +48,9 @@ setmetatable(BaseAbility.prototype, { __index: CDOTA_Ability_Lua ?? C_DOTA_Abili
 setmetatable(BaseItem.prototype, { __index: CDOTA_Item_Lua ?? C_DOTA_Item_Lua });
 setmetatable(BaseModifier.prototype, { __index: CDOTA_Modifier_Lua });
 
-// 声明全局文件注册表，用于存储环境到文件名的映射
-// 由 inject-file-name-plugin 在编译时注入代码填充
-declare let __TS__fileRegistry: Record<string, string>;
 
-export const registerAbility = (name?: string) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
+
+export const registerAbility = (name?: string, filePath?: string, env?: any) => (ability: new () => CDOTA_Ability_Lua | CDOTA_Item_Lua) => {
     if (name !== undefined) {
         // @ts-ignore
         ability.name = name;
@@ -60,14 +58,15 @@ export const registerAbility = (name?: string) => (ability: new () => CDOTA_Abil
         name = ability.name;
     }
 
-    const [env] = getFileScope();
+    // 如果没有提供 env，使用 _G 作为回退
+    const targetEnv = env ?? _G;
 
-    env[name] = {};
+    targetEnv[name] = {};
 
-    toDotaClassInstance(env[name], ability);
+    toDotaClassInstance(targetEnv[name], ability);
 
-    const originalSpawn = (env[name] as CDOTA_Ability_Lua).Spawn;
-    env[name].Spawn = function () {
+    const originalSpawn = (targetEnv[name] as CDOTA_Ability_Lua).Spawn;
+    targetEnv[name].Spawn = function () {
         this.____constructor();
         if (originalSpawn) {
             originalSpawn.call(this);
@@ -75,7 +74,7 @@ export const registerAbility = (name?: string) => (ability: new () => CDOTA_Abil
     };
 };
 
-export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Modifier_Lua) => {
+export const registerModifier = (name?: string, filePath?: string, env?: any) => (modifier: new () => CDOTA_Modifier_Lua) => {
     if (name !== undefined) {
         // @ts-ignore
         modifier.name = name;
@@ -83,15 +82,17 @@ export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Mo
         name = modifier.name;
     }
 
-    const [env, source] = getFileScope();
-    const [fileName] = string.gsub(source, '.*scripts[\\/]vscripts[\\/]', '');
+    // 如果没有提供 env，使用 _G 作为回退
+    const targetEnv = env ?? _G;
+    // 如果用户提供了 filePath，使用它；否则使用空字符串（tstl 插件会自动注入）
+    const fileName = filePath ?? '';
 
-    env[name] = {};
+    targetEnv[name] = {};
 
-    toDotaClassInstance(env[name], modifier);
+    toDotaClassInstance(targetEnv[name], modifier);
 
-    const originalOnCreated = (env[name] as CDOTA_Modifier_Lua).OnCreated;
-    env[name].OnCreated = function (parameters: any) {
+    const originalOnCreated = (targetEnv[name] as CDOTA_Modifier_Lua).OnCreated;
+    targetEnv[name].OnCreated = function (parameters: any) {
         this.____constructor();
         if (originalOnCreated) {
             originalOnCreated.call(this, parameters);
@@ -117,31 +118,6 @@ export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Mo
 
     LinkLuaModifier(name, fileName, type);
 };
-
-function getFileScope(): [any, string] {
-    // 通过 getfenv 获取调用者的环境，然后从注册表中查找对应的文件名
-    if (typeof getfenv === 'function' && __TS__fileRegistry) {
-        let level = 1;
-        while (level < 20) {
-            // 使用 pcall 保护 getfenv 调用，避免 level 超出调用栈深度时报错
-            const [success, env] = pcall((l: number) => getfenv(l), level);
-            if (!success || env == null) {
-                break;
-            }
-            if (env && env !== _G) {
-                const envKey = tostring(env);
-                const fileName = __TS__fileRegistry[envKey];
-                if (fileName) {
-                    return [env, fileName];
-                }
-            }
-            level += 1;
-        }
-    }
-
-    // 如果以上方法都失败，返回全局环境和空字符串
-    return [_G, ''];
-}
 
 function toDotaClassInstance(instance: any, table: new () => any) {
     let { prototype } = table;
