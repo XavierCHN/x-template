@@ -14,7 +14,7 @@ function afterPrint(
         const srcIndex = normalized.indexOf('/src/');
         let relativePath: string;
         if (srcIndex !== -1) {
-            relativePath = normalized.substring(srcIndex + 5);
+            relativePath = normalized.substring(srcIndex + 5); // 去掉 /src/
         } else {
             const parts = normalized.split('/');
             relativePath = parts[parts.length - 1];

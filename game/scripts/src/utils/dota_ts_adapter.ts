@@ -118,32 +118,7 @@ export const registerModifier = (name?: string) => (modifier: new () => CDOTA_Mo
     LinkLuaModifier(name, fileName, type);
 };
 
-function clearTable(table: object) {
-    for (const key in table) {
-        delete (table as any)[key];
-    }
-}
-
 function getFileScope(): [any, string] {
-    // 首先尝试使用 debug 库（如果可用）
-    if (debug && type(debug) === 'table' && debug.getinfo) {
-        let level = 1;
-        while (level < 20) {
-            const info = debug.getinfo(level, 'S');
-            if (
-                info &&
-                info.what === 'main' &&
-                info.source &&
-                info.source.startsWith('@')
-            ) {
-                const env = typeof getfenv === 'function' ? getfenv(level) : _G;
-                return [env, info.source];
-            }
-            level += 1;
-        }
-    }
-
-    // 如果 debug 库不可用，使用全局文件注册表
     // 通过 getfenv 获取调用者的环境，然后从注册表中查找对应的文件名
     if (typeof getfenv === 'function' && __TS__fileRegistry) {
         let level = 1;
@@ -153,7 +128,7 @@ function getFileScope(): [any, string] {
                 const envKey = tostring(env);
                 const fileName = __TS__fileRegistry[envKey];
                 if (fileName) {
-                    return [env, '@' + fileName];
+                    return [env, fileName];
                 }
             }
             level += 1;

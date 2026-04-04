@@ -2,9 +2,9 @@ TIMERS_VERSION = "1.08"
 
 -- 兼容 debug.traceback 不可用的情况
 local function errorHandler(err)
-    if debug and debug.traceback then
-        return debug.traceback(err)
-    end
+    -- if debug and debug.traceback then
+    --     return debug.traceback(err)
+    -- end
     return tostring(err)
 end
 
