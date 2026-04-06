@@ -40,6 +40,28 @@
 3. `yarn prod` - Сборка для релиза (с опциональным шифрованием)
 4. `yarn api` - Генерация клиентов API из `scripts/server_api.json` (Swagger 3.0) в `game/scripts/src/server/services`
 
+### Процесс публикации
+
+```bash
+# 1. Убедитесь, что ключи публикации настроены (см. Конфигурация)
+
+# 2. Выполните публикацию
+yarn prod
+
+# Процесс публикации автоматически выполняет:
+# - gulp predev (Excel → KV → JSON, CSV → локализация, предварительное кэширование изображений)
+# - Сборку Webpack для production (минимизация)
+# - Компиляцию TSTL для production
+# - Шифрование кода (согласно конфигурации encrypt_files)
+# - Копирование в директорию публикации
+```
+
+### Директория публикации
+
+Опубликованные файлы выводятся в `dota 2 beta/game/dota_addons/{addon_name}_publish/`, готовые для загрузки в Мастерскую Dota 2.
+
+Используйте `yarn launch {addon_name}_publish` для прямого запуска инструментов Мастерской для загрузки.
+
 ### Структура каталогов
 - `content` синхронизируется с `dota 2 beta/content/dota_addons/your_addon_name`
 - `game` синхронизируется с `dota 2 beta/game/dota_addons/your_addon_name`

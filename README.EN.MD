@@ -40,6 +40,28 @@ English translated with [DeepSeek](https://www.deepseek.com/)
 3. `yarn prod` - Build for production (with optional encryption)
 4. `yarn api` - Generate API clients from `scripts/server_api.json` (Swagger 3.0 spec) to `game/scripts/src/server/services`
 
+### Publish Process
+
+```bash
+# 1. Ensure publish keys are configured (see Configuration)
+
+# 2. Execute publish
+yarn prod
+
+# Publish process automatically performs:
+# - gulp predev (Excel → KV → JSON, CSV → localization, image precache)
+# - Production Webpack build (minified)
+# - TSTL production compilation
+# - Code encryption (per encrypt_files config)
+# - Copy to publish directory
+```
+
+### Publish Directory
+
+Published files are output to `dota 2 beta/game/dota_addons/{addon_name}_publish/`, ready for uploading to Dota 2 Workshop.
+
+Use `yarn launch {addon_name}_publish` to directly launch the Workshop tools for uploading.
+
 ### Directory Structure
 - `content` syncs with `dota 2 beta/content/dota_addons/your_addon_name`
 - `game` syncs with `dota 2 beta/game/dota_addons/your_addon_name`
