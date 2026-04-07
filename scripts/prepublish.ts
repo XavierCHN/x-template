@@ -6,6 +6,12 @@ import config from './addon.config';
 (async () => {
     const publishSource = path.resolve(__dirname, '..', 'publish');
     const dotaPath = await getDotaPath();
+
+    if (dotaPath === undefined) {
+        console.log('No Dota 2 installation found. Unable to publish addon, exiting...');
+        return;
+    }
+
     const addon_name = config.addon_name;
     const publishTargetDirectory = path.join(dotaPath, 'game', 'dota_addons', addon_name + '_publish');
 
