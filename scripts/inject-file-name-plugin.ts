@@ -1,6 +1,6 @@
 import * as ts from 'typescript';
 import * as tstl from 'typescript-to-lua';
-import * as lua from 'typescript-to-lua/dist/LuaAST';
+import * as lua from 'typescript-to-lua/dist/LuaAST.js';
 
 /**
  * 检查节点是否是 registerModifier 或 registerAbility 的调用
