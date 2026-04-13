@@ -30,17 +30,45 @@ import config from './addon.config';
                 console.log(`Skipping '${sourcePath}' since it is already linked`);
                 continue;
             } else {
-                // 移除目标文件夹的所有内容，
-                console.log(`'${targetPath}' is already linked to another directory, removing`);
-                fs.chmodSync(targetPath, '0755');
+                console.log(`'${targetPath}' is already linked to another directory, repairing...`);
+
+                const backupPath = `${sourcePath}.backup.${Date.now()}`;
+                let backupCreated = false;
+
                 try {
+                    fs.chmodSync(targetPath, '0755');
+
+                    fs.moveSync(sourcePath, backupPath);
+                    backupCreated = true;
+                    console.log(`Created backup at '${backupPath}'`);
+
                     await fs.remove(targetPath);
-                    console.log('removed target path');
-                    fs.moveSync(sourcePath, targetPath);
+                    console.log('Removed old target path');
+
+                    fs.moveSync(backupPath, targetPath);
+                    console.log('Moved backup to target path');
+
                     fs.symlinkSync(targetPath, sourcePath, 'junction');
                     console.log(`Repaired broken link ${sourcePath} <==> ${targetPath}`);
                 } catch (error) {
-                    console.error('Failed to remove target path:', error);
+                    console.error('Failed to repair link:', error);
+
+                    if (backupCreated && fs.existsSync(backupPath)) {
+                        try {
+                            if (!fs.existsSync(sourcePath)) {
+                                fs.moveSync(backupPath, sourcePath);
+                                console.log(`Restored '${sourcePath}' from backup`);
+                            } else {
+                                await fs.remove(backupPath);
+                                console.log(`Cleaned up backup at '${backupPath}'`);
+                            }
+                        } catch (restoreError) {
+                            console.error(`CRITICAL: Failed to restore backup from '${backupPath}':`, restoreError);
+                            console.error(`Please manually restore your data from '${backupPath}' to '${sourcePath}'`);
+                        }
+                    }
+
+                    throw error;
                 }
             }
         } else {
