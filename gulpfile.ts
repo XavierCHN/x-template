@@ -31,6 +31,8 @@ const sheet_2_kv =
                         indent: `	`, // 自定义缩进
                         keyRowNumber: 2, // 自定义键值对的键所在的行数
                         addonCSVPath: `${paths.game_resource}/kv_generated.csv`, // 本地化文件路径，用以将 excel 文件中的 #Loc{}输出到addon.csv文件中去
+                        // for more options, please check readme.md of gulp-dotax
+                        // 其他参数请查看 readme.md 中的 sheetToKV 函数
                     })
                 )
                 .pipe(gulp.dest(paths.kv));

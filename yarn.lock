@@ -3929,6 +3929,18 @@ glob-watcher@^5.0.3:
     normalize-path "^3.0.0"
     object.defaults "^1.1.0"
 
+glob@7.1.1:
+  version "7.1.1"
+  resolved "https://registry.npmmirror.com/glob/-/glob-7.1.1.tgz#805211df04faaf1c63a3600306cdf5ade50b2ec8"
+  integrity sha512-mRyN/EsN2SyNhKWykF3eEGhDpeNplMWaW18Bmh76tnOqk5TbELAVwFAYOCmKVssOYFrYvvLMguiA+NXO3ZTuVA==
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.2"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
 glob@^7.1.1, glob@^7.1.3:
   version "7.1.6"
   resolved "https://registry.npmmirror.com/glob/download/glob-7.1.6.tgz"
@@ -4048,14 +4060,15 @@ gulp-cli@^2.2.0:
     v8flags "^3.2.0"
     yargs "^7.1.0"
 
-gulp-dotax@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.2.5.tgz#7a17c5defa230df41f3101491f0f8678d1f7ef00"
-  integrity sha512-9o6WzkX5QA5HYeztOD2LbcowFYB3TVFkNVo+9TGeTI+4OptVOYRWB9boYZOoOpbOYv+nSiYFgmGHyBN5ZC67eQ==
+gulp-dotax@1.3.3:
+  version "1.3.3"
+  resolved "https://registry.npmmirror.com/gulp-dotax/-/gulp-dotax-1.3.3.tgz#d28c1a0ffa6a2a7f72cd3cb0e978cf6f30394899"
+  integrity sha512-cHOKSakaK2iHbwq6wb/vN4QJ/jqwfNUrJFVRwYpsN+QNHM7JRQ6HEC0S3t+m4upg1Cd9GSYoFuNN3x3Q814B2g==
   dependencies:
     cli-color "^2.0.3"
     easy-keyvalues "^1.2.7"
     fs-extra "^10.1.0"
+    glob "7.1.1"
     gulp "^4.0.2"
     keyvalues-node "0.0.2"
     lodash "^4.17.21"
@@ -5165,6 +5178,13 @@ mime@^1.4.1:
   version "1.6.0"
   resolved "https://registry.npmmirror.com/mime/download/mime-1.6.0.tgz?cache=0&sync_timestamp=1610756267429&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fmime%2Fdownload%2Fmime-1.6.0.tgz"
   integrity sha1-Ms2eXGRVO9WNGaVor0Uqz/BJgbE=
+
+minimatch@^3.0.2:
+  version "3.1.5"
+  resolved "https://registry.npmmirror.com/minimatch/-/minimatch-3.1.5.tgz#580c88f8d5445f2bd6aa8f3cadefa0de79fbd69e"
+  integrity sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==
+  dependencies:
+    brace-expansion "^1.1.7"
 
 minimatch@^3.0.4:
   version "3.0.4"
